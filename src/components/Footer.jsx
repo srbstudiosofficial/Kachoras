@@ -13,7 +13,7 @@ import {
 import { COMPANY_INFO, CORE_CATEGORIES } from '../data/mockData';
 import KachorasLogo from './KachorasLogo';
 
-export default function Footer({ onOpenQuoteModal, onOpenAdminModal }) {
+export default function Footer({ onOpenQuoteModal }) {
   return (
     <footer className="bg-[#12161F] text-white border-t border-[#232938]">
       
@@ -127,14 +127,7 @@ export default function Footer({ onOpenQuoteModal, onOpenAdminModal }) {
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-1">
             <span>Dubai, United Arab Emirates</span>
             <span>•</span>
-            <span>DET License #578964</span>
-            <span>•</span>
-            <button
-              onClick={onOpenAdminModal}
-              className="text-white/40 hover:text-[#C59B27] transition underline cursor-pointer"
-            >
-              Owner Portal
-            </button>
+            <span>Government of Dubai DET License #578964</span>
           </div>
         </div>
 

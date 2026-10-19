@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import VisionMissionSection from './components/VisionMissionSection';
@@ -18,6 +18,50 @@ export default function App() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quoteInitialData, setQuoteInitialData] = useState(null);
   const [adminModalOpen, setAdminModalOpen] = useState(false);
+
+  // Secret Link Listener: Trigger admin portal via URL link (#admin, #owner, #portal, or ?admin)
+  useEffect(() => {
+    const checkAdminTrigger = () => {
+      const hash = (window.location.hash || '').toLowerCase();
+      const search = (window.location.search || '').toLowerCase();
+      if (
+        hash === '#admin' || 
+        hash === '#owner' || 
+        hash === '#portal' || 
+        search.includes('admin') || 
+        search.includes('portal')
+      ) {
+        setAdminModalOpen(true);
+      }
+    };
+
+    checkAdminTrigger();
+    window.addEventListener('hashchange', checkAdminTrigger);
+    window.addEventListener('popstate', checkAdminTrigger);
+
+    // Optional owner secret keyboard shortcut (Ctrl + Shift + A)
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        setAdminModalOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('hashchange', checkAdminTrigger);
+      window.removeEventListener('popstate', checkAdminTrigger);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  const handleCloseAdminModal = () => {
+    setAdminModalOpen(false);
+    const hash = (window.location.hash || '').toLowerCase();
+    if (hash === '#admin' || hash === '#owner' || hash === '#portal') {
+      history.replaceState(null, document.title, window.location.pathname + window.location.search);
+    }
+  };
 
   const handleOpenQuoteModal = (initialData = null) => {
     setQuoteInitialData(initialData);
@@ -58,7 +102,6 @@ export default function App() {
         {/* Track Record & Live Project Pipeline (Upcoming & Completed) */}
         <ProjectsSection 
           onOpenQuoteModal={handleOpenQuoteModal} 
-          onOpenAdminModal={() => setAdminModalOpen(true)}
         />
 
         {/* Dubai Municipality Civic Contracts Showcase */}
@@ -77,7 +120,6 @@ export default function App() {
       {/* Imperial Mahogany & Bronze Footer */}
       <Footer 
         onOpenQuoteModal={() => handleOpenQuoteModal()} 
-        onOpenAdminModal={() => setAdminModalOpen(true)}
       />
 
       {/* Interactive RFP / Proposal Modal */}
@@ -87,10 +129,10 @@ export default function App() {
         initialData={quoteInitialData}
       />
 
-      {/* Owner Portal / Admin Project Management Modal */}
+      {/* Owner Portal / Admin Project Management Modal (Hidden, accessible only via link #admin or ?admin) */}
       <AdminProjectModal
         isOpen={adminModalOpen}
-        onClose={() => setAdminModalOpen(false)}
+        onClose={handleCloseAdminModal}
       />
 
       {/* Floating Action Buttons for Mobile */}

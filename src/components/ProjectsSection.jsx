@@ -7,13 +7,12 @@ import {
   CheckCircle2, 
   ShieldCheck, 
   ArrowRight, 
-  Lock, 
   Layers,
   Sparkles
 } from 'lucide-react';
 import { getAllProjects } from '../services/projectService';
 
-export default function ProjectsSection({ onOpenQuoteModal, onOpenAdminModal }) {
+export default function ProjectsSection({ onOpenQuoteModal }) {
   const [projects, setProjects] = useState([]);
   const [filter, setFilter] = useState('all'); // 'all' | 'upcoming' | 'ongoing' | 'completed'
 
@@ -45,30 +44,17 @@ export default function ProjectsSection({ onOpenQuoteModal, onOpenAdminModal }) 
     <section id="portfolio" className="py-24 bg-[#F5F2EB] relative border-t border-[#E5DED3]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Section Header & Admin Trigger */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="max-w-3xl space-y-3">
-            <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
-              Contracting Portfolio • Future Pipeline
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
-              Projects & Upcoming Works
-            </h2>
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-              Explore our track record of Dubai Municipality approved G+1 villas, active majlis construction sites, and upcoming pipeline developments across the UAE.
-            </p>
-          </div>
-
-          {/* Owner Portal Upload Button */}
-          <button
-            onClick={onOpenAdminModal}
-            className="self-start md:self-end px-4 py-2.5 bg-white hover:bg-[#FAF8F5] text-slate-800 rounded-xl border border-[#E5DED3] hover:border-[#7A2E16] text-xs font-bold transition shadow-sm flex items-center gap-2 group cursor-pointer shrink-0"
-          >
-            <div className="w-5 h-5 rounded-full bg-[#7A2E16]/10 text-[#7A2E16] flex items-center justify-center group-hover:bg-[#7A2E16] group-hover:text-white transition">
-              <Lock className="w-3 h-3" />
-            </div>
-            <span>Owner Portal • Upload Projects</span>
-          </button>
+        {/* Section Header */}
+        <div className="max-w-3xl mb-12 space-y-3">
+          <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
+            Contracting Portfolio • Future Pipeline
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
+            Projects & Upcoming Works
+          </h2>
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            Explore our track record of Dubai Municipality approved G+1 villas, active majlis construction sites, and upcoming pipeline developments across the UAE.
+          </p>
         </div>
 
         {/* Filter Navigation Tabs */}
