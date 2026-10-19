@@ -26,7 +26,6 @@ export default function Navbar({ onOpenQuoteModal }) {
   const navLinks = [
     { label: "Overview", href: "#vision" },
     { label: "Disciplines", href: "#services" },
-    { label: "Portfolio", href: "#portfolio" },
     { label: "Municipal", href: "#municipal" },
     { label: "License", href: "#license" },
     { label: "Location", href: "#location" }

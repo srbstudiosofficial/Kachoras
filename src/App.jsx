@@ -4,7 +4,6 @@ import Hero from './components/Hero';
 import VisionMissionSection from './components/VisionMissionSection';
 import CategoriesWheel from './components/CategoriesWheel';
 import MunicipalSection from './components/MunicipalSection';
-import Portfolio from './components/Portfolio';
 import TradeLicenseSection from './components/TradeLicenseSection';
 import OfficeMapSection from './components/OfficeMapSection';
 import ContactSection from './components/ContactSection';
@@ -27,13 +26,6 @@ export default function App() {
       category: serviceName,
       budget: 'AED 1.5M - AED 5M',
       notes: `Proposal request initiated for: ${serviceName}`
-    });
-  };
-
-  const handleInquireSimilarProject = (projectName) => {
-    handleOpenQuoteModal({
-      category: 'Building Contracting (G+1 Villa / Majlis)',
-      notes: `Inquiry inspired by completed project: ${projectName}`
     });
   };
 
@@ -62,11 +54,6 @@ export default function App() {
 
         {/* Dubai Municipality Civic Contracts Showcase */}
         <MunicipalSection />
-
-        {/* 2024-2025 Projects Portfolio (Completed Villas, Municipal, Active Sites) */}
-        <Portfolio 
-          onInquireSimilar={handleInquireSimilarProject} 
-        />
 
         {/* Official Commercial Trade License & Dubai Municipality G+1 Verification */}
         <TradeLicenseSection />

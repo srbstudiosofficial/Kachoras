@@ -95,10 +95,10 @@ export default function Hero({ onOpenQuoteModal }) {
               </button>
 
               <a
-                href="#portfolio"
+                href="#services"
                 className="px-6 py-3.5 bg-white hover:bg-[#F4EFE6] text-slate-800 font-bold text-xs uppercase tracking-wider rounded-xl border border-[#E5DED3] transition flex items-center gap-2"
               >
-                <span>View Portfolio</span>
+                <span>Explore Disciplines</span>
               </a>
 
               <a

@@ -97,7 +97,7 @@ export default function Footer({ onOpenQuoteModal }) {
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#C59B27]">Navigation</h4>
             <ul className="space-y-2 text-white/60">
               <li><a href="#vision" className="hover:text-white transition">Corporate Vision & Values</a></li>
-              <li><a href="#portfolio" className="hover:text-white transition">Selected Works Portfolio</a></li>
+              <li><a href="#services" className="hover:text-white transition">Contracting Disciplines</a></li>
               <li><a href="#municipal" className="hover:text-white transition">Dubai Municipality Contracts</a></li>
               <li><a href="#license" className="hover:text-white transition">Trade License Verification</a></li>
               <li><a href="#location" className="hover:text-white transition">Al Qusais Facility Map</a></li>
