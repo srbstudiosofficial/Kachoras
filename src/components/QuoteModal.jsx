@@ -10,7 +10,9 @@ import {
   DollarSign, 
   FileText, 
   Sparkles, 
-  ShieldCheck 
+  ShieldCheck,
+  Mail,
+  MessageSquare 
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 
@@ -60,7 +62,21 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const randomNum = Math.floor(1000 + Math.random() * 9000);
-    setReferenceId(`KCH-${randomNum}-RFQ`);
+    const ref = `KCH-${randomNum}-RFQ`;
+    setReferenceId(ref);
+
+    try {
+      const quotes = JSON.parse(localStorage.getItem('kachoras_quotes') || '[]');
+      quotes.push({
+        referenceId: ref,
+        ...formData,
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem('kachoras_quotes', JSON.stringify(quotes));
+    } catch (err) {
+      console.warn('Storage warning:', err);
+    }
+
     setIsSubmitted(true);
   };
 
@@ -86,23 +102,23 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
         </button>
 
         {isSubmitted ? (
-          <div className="text-center py-8 space-y-5">
+          <div className="text-center py-6 space-y-5">
             <div className="w-16 h-16 bg-emerald-500/10 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
               <CheckCircle2 className="w-8 h-8" />
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1">
               <span className="text-xs uppercase font-bold tracking-widest text-emerald-700">Tender Protocol Generated</span>
               <h3 className="text-2xl sm:text-3xl font-black text-[#1E293B] font-display">
                 Kachoras RFQ Dispatched
               </h3>
               <p className="text-sm text-[#475569] max-w-md mx-auto leading-relaxed">
-                Your inquiry has been assigned to our Project Management and Engineering team in Al Qusais, Dubai.
+                Your preliminary RFQ has been logged. Send this protocol directly to our engineering desk for immediate review:
               </p>
             </div>
 
             {/* Ticket Card */}
-            <div className="bg-[#FBF9F5] border border-[#E5DED3] p-5 rounded-xl max-w-md mx-auto text-left space-y-2.5 text-xs">
+            <div className="bg-[#FBF9F5] border border-[#E5DED3] p-5 rounded-xl max-w-md mx-auto text-left space-y-2 text-xs">
               <div className="flex justify-between items-center text-[#64748B] border-b border-[#E5DED3] pb-2">
                 <span>Protocol Reference:</span>
                 <strong className="text-[#7A2E16] font-mono text-sm font-black">{referenceId}</strong>
@@ -121,12 +137,37 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
               </div>
             </div>
 
-            <div className="pt-4 flex justify-center gap-3">
+            {/* Instant Communication Actions */}
+            <div className="grid sm:grid-cols-2 gap-3 max-w-md mx-auto pt-2">
+              <a
+                href={`https://wa.me/971555585079?text=${encodeURIComponent(
+                  `*KACHORAS RFQ SUBMISSION [${referenceId}]*\n• Client: ${formData.name || 'Client'}\n• Phone: ${formData.phone || 'N/A'}\n• Discipline: ${formData.category}\n• Area: ${formData.sqft} sq.ft\n• Budget: ${formData.budget}\n• Timeline: ${formData.timeline}\n• Location: ${formData.location} ${formData.plotNo ? `(Plot: ${formData.plotNo})` : ''}\n• Drawings: ${formData.hasBlueprints}\n• Notes: ${formData.notes || 'None'}`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Send to WhatsApp</span>
+              </a>
+
+              <a
+                href={`mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(`Kachoras RFQ Proposal [${referenceId}] - ${formData.name || 'Client'}`)}&body=${encodeURIComponent(
+                  `Dear Kachoras Estimating Team,\n\nPlease find my official RFQ protocol:\n\nReference: ${referenceId}\nClient: ${formData.name}\nPhone: ${formData.phone}\nDiscipline: ${formData.category}\nEstimated Area: ${formData.sqft} sq.ft\nBudget: ${formData.budget}\nTimeline: ${formData.timeline}\nLocation: ${formData.location}\nPlot No: ${formData.plotNo || 'N/A'}\nDrawings Status: ${formData.hasBlueprints}\nAdditional Notes: ${formData.notes || 'N/A'}\n\nBest regards,\n${formData.name}`
+                )}`}
+                className="flex items-center justify-center gap-2 py-3 px-4 bg-[#7A2E16] hover:bg-[#5C200E] text-white font-bold text-xs rounded-xl shadow-md transition"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Email Official Desk</span>
+              </a>
+            </div>
+
+            <div className="pt-2 flex justify-center">
               <button
                 onClick={handleResetAndClose}
-                className="px-8 py-3 bg-[#7A2E16] hover:bg-[#5C200E] text-white font-bold text-sm rounded-xl shadow-lg transition"
+                className="text-xs font-bold text-[#64748B] hover:text-[#1E293B] underline transition"
               >
-                Done
+                Close & Return to Portal
               </button>
             </div>
           </div>

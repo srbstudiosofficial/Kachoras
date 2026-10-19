@@ -56,12 +56,16 @@ export default function ArchitecturalVisual({
       {/* 1. Photorealistic View Mode */}
       {viewMode === 'photo' && (
         <div className="relative w-full h-full overflow-hidden">
-          <img 
-            src={imageSrc} 
-            alt={plotNo ? `Plot ${plotNo} Project in ${location}` : 'Kachoras Dubai Contracting Project'} 
-            className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
-            loading="lazy"
-          />
+          <picture className="w-full h-full">
+            <source srcSet={imageSrc.replace(/\.jpg$/, '.webp')} type="image/webp" />
+            <img 
+              src={imageSrc} 
+              alt={plotNo ? `Plot ${plotNo} Project in ${location}` : 'Kachoras Dubai Contracting Project'} 
+              className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
           {/* Ambient Luxury Dark Vignette for Text Readability */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0E0907]/90 via-[#0E0907]/20 to-transparent pointer-events-none" />
           

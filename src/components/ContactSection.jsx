@@ -32,10 +32,23 @@ export default function ContactSection() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    try {
+      const existing = JSON.parse(localStorage.getItem('kachoras_inquiries') || '[]');
+      existing.push({
+        ...formData,
+        attachedFile,
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem('kachoras_inquiries', JSON.stringify(existing));
+    } catch (err) {
+      console.warn('Storage warning:', err);
+    }
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 1000);
+    }, 600);
   };
 
   const handleFakeFileUpload = (e) => {
@@ -124,7 +137,7 @@ export default function ContactSection() {
               {/* Direct WhatsApp Callout */}
               <div className="pt-2">
                 <a
-                  href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project%20in%20Dubai.`}
+                  href={`https://wa.me/971555585079?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project%20in%20Dubai.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition"
@@ -175,15 +188,44 @@ export default function ContactSection() {
           {/* Right Column: RFP & Bid Request Form (7 cols) */}
           <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 shadow-sm">
             {isSubmitted ? (
-              <div className="text-center py-16 space-y-4">
+              <div className="text-center py-12 px-4 space-y-5">
                 <div className="w-16 h-16 bg-emerald-500/10 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-black text-[#1E293B] font-display">Tender / RFP Transmitted!</h3>
-                <p className="text-sm text-[#475569] max-w-md mx-auto leading-relaxed">
-                  Thank you, <strong className="text-[#1E293B]">{formData.name}</strong>. Your project inquiry has been received at <strong className="text-[#7A2E16]">{COMPANY_INFO.email}</strong>. General Manager Jose K. George and our estimating engineers will respond promptly.
+                <div className="space-y-1">
+                  <span className="text-xs font-bold uppercase tracking-widest text-emerald-700">Inquiry Logged Successfully</span>
+                  <h3 className="text-2xl font-black text-[#1E293B] font-display">Tender / RFP Transmitted!</h3>
+                </div>
+                <p className="text-sm text-[#475569] max-w-lg mx-auto leading-relaxed">
+                  Thank you, <strong className="text-[#1E293B]">{formData.name}</strong>. Your project details have been recorded. You can also connect directly with our engineering desk right now:
                 </p>
-                <div className="pt-4">
+
+                {/* Instant Dispatch Actions */}
+                <div className="grid sm:grid-cols-2 gap-3 max-w-md mx-auto pt-2">
+                  <a
+                    href={`https://wa.me/971555585079?text=${encodeURIComponent(
+                      `*NEW KACHORAS PROJECT INQUIRY*\n• Client: ${formData.name}\n• Phone: ${formData.phone}\n• Email: ${formData.email}\n• Service: ${formData.serviceType}\n• Plot/Area: ${formData.plotNo || 'Dubai'}\n• Budget: ${formData.budgetRange}\n• Scope: ${formData.message || 'Consultation request'}${attachedFile ? `\n• Drawing: ${attachedFile}` : ''}`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Send via WhatsApp (+971 55 5585079)</span>
+                  </a>
+
+                  <a
+                    href={`mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(`RFP Tender: ${formData.serviceType} - ${formData.name}`)}&body=${encodeURIComponent(
+                      `Dear Kachoras Estimating Team,\n\nI would like to submit a project inquiry:\n\n• Name: ${formData.name}\n• Phone: ${formData.phone}\n• Email: ${formData.email}\n• Service: ${formData.serviceType}\n• Plot/Location: ${formData.plotNo || 'Dubai'}\n• Budget Range: ${formData.budgetRange}\n• Scope Details: ${formData.message || 'N/A'}\n${attachedFile ? `• Attached Document: ${attachedFile}\n` : ''}\nBest regards,\n${formData.name}`
+                    )}`}
+                    className="flex items-center justify-center gap-2 py-3 px-4 bg-[#7A2E16] hover:bg-[#5C200E] text-white font-bold text-xs rounded-xl shadow-md transition"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>Send via Email Desk</span>
+                  </a>
+                </div>
+
+                <div className="pt-4 border-t border-[#E5DED3]">
                   <button
                     onClick={() => {
                       setIsSubmitted(false);
@@ -200,7 +242,7 @@ export default function ContactSection() {
                       });
                       setAttachedFile(null);
                     }}
-                    className="px-6 py-3 bg-[#7A2E16] hover:bg-[#5C200E] text-white font-bold text-xs rounded-xl shadow-md transition"
+                    className="text-xs font-bold text-[#64748B] hover:text-[#1E293B] underline transition"
                   >
                     Submit Another Inquiry
                   </button>

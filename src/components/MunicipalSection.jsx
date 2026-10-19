@@ -38,11 +38,16 @@ export default function MunicipalSection() {
         {/* Feature Split Banner: Civic Building Render & Credentials */}
         <div className="mb-14 bg-white border border-[#E5DED3] rounded-3xl overflow-hidden shadow-luxury grid lg:grid-cols-12 items-center">
           <div className="lg:col-span-6 relative h-72 sm:h-84 lg:h-full min-h-[300px] overflow-hidden group">
-            <img 
-              src="./assets/civic.jpg" 
-              alt="Dubai Municipality Civic Project Specimen" 
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
+            <picture className="w-full h-full">
+              <source srcSet="./assets/civic.webp" type="image/webp" />
+              <img 
+                src="./assets/civic.jpg" 
+                alt="Dubai Municipality Civic Project Specimen" 
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div className="absolute inset-0 bg-gradient-to-t from-[#0E0907]/80 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white text-xs">
               <span className="bg-emerald-600/90 backdrop-blur-md px-3 py-1 rounded-full font-bold uppercase text-[10px] tracking-wider flex items-center gap-1.5">
