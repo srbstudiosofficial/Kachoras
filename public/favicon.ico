@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <!-- Deep Mahogany Obsidian Shield Gradient -->
+    <radialGradient id="favBg" cx="35%" cy="30%" r="85%">
+      <stop offset="0%" stop-color="#6E1F0B" />
+      <stop offset="55%" stop-color="#340E05" />
+      <stop offset="100%" stop-color="#14171F" />
+    </radialGradient>
+
+    <!-- Brushed Champagne Gold Facet Light -->
+    <linearGradient id="favGoldLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8DC" />
+      <stop offset="50%" stop-color="#ECC666" />
+      <stop offset="100%" stop-color="#C59B27" />
+    </linearGradient>
+
+    <!-- Midtone Gold Facet -->
+    <linearGradient id="favGoldMid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ECC666" />
+      <stop offset="60%" stop-color="#B88A1E" />
+      <stop offset="100%" stop-color="#7A580E" />
+    </linearGradient>
+
+    <!-- Shadow Facet -->
+    <linearGradient id="favGoldShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8F6813" />
+      <stop offset="60%" stop-color="#4D3505" />
+      <stop offset="100%" stop-color="#261902" />
+    </linearGradient>
+
+    <!-- Outer Rim Gold -->
+    <linearGradient id="favRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0BE" />
+      <stop offset="50%" stop-color="#C59B27" />
+      <stop offset="100%" stop-color="#8C6514" />
+    </linearGradient>
+  </defs>
+
+  <!-- Solid Rounded Shield -->
+  <rect x="2" y="2" width="96" height="96" rx="24" fill="url(#favBg)" stroke="url(#favRim)" stroke-width="3" />
+
+  <!-- Monogram: Bold Faceted Architectural "K" -->
+  <!-- Left Vertical Structural Column -->
+  <polygon points="22,18 33,14 33,50 22,50" fill="url(#favGoldLight)" />
+  <polygon points="33,14 44,18 44,50 33,50" fill="url(#favGoldMid)" />
+  <polygon points="22,50 33,50 33,86 22,82" fill="url(#favGoldMid)" />
+  <polygon points="33,50 44,50 44,82 33,86" fill="url(#favGoldShadow)" />
+
+  <!-- Upper Cantilever Arm -->
+  <polygon points="44,45 61,30 78,15 82,21 52,51" fill="url(#favGoldLight)" />
+  <polygon points="52,51 82,21 86,28 56,58" fill="url(#favGoldShadow)" />
+  <polygon points="78,15 86,28 82,21" fill="url(#favGoldMid)" />
+
+  <!-- Lower Diagonal Strut -->
+  <polygon points="46,53 55,47 83,75 74,85" fill="url(#favGoldMid)" />
+  <polygon points="46,53 74,85 63,85 39,58" fill="url(#favGoldShadow)" />
+
+  <!-- Central Keystone Nexus -->
+  <polygon points="38,50 46,42 54,50 46,58" fill="url(#favGoldLight)" stroke="#FFF8DC" stroke-width="0.75" />
+
+  <!-- Polished Architectural Bevel Ridges -->
+  <line x1="33" y1="14" x2="33" y2="86" stroke="#FFF8DC" stroke-width="1.2" opacity="0.8" />
+  <polyline points="22,18 33,14 44,18" fill="none" stroke="url(#favRim)" stroke-width="1.5" />
+  <polyline points="22,82 33,86 44,82" fill="none" stroke="url(#favRim)" stroke-width="1.5" />
+</svg>
