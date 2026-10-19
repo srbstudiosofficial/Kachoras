@@ -10,22 +10,35 @@ import {
   Layers,
   Sparkles
 } from 'lucide-react';
-import { getAllProjects } from '../services/projectService';
+import { getAllProjects, fetchServerProjects } from '../services/projectService';
 
 export default function ProjectsSection({ onOpenQuoteModal }) {
   const [projects, setProjects] = useState([]);
   const [filter, setFilter] = useState('all'); // 'all' | 'upcoming' | 'ongoing' | 'completed'
 
-  const loadProjects = () => {
-    setProjects(getAllProjects());
+  const loadProjects = async () => {
+    const local = getAllProjects();
+    setProjects(local);
+
+    try {
+      const live = await fetchServerProjects();
+      if (live && Array.isArray(live) && live.length > 0) {
+        setProjects(live);
+      }
+    } catch (err) {
+      // Retain local state
+    }
   };
 
   useEffect(() => {
     loadProjects();
-    // Listen for custom project update events if any
-    const handleStorageChange = () => loadProjects();
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    const handleUpdate = () => loadProjects();
+    window.addEventListener('storage', handleUpdate);
+    window.addEventListener('kachoras_projects_updated', handleUpdate);
+    return () => {
+      window.removeEventListener('storage', handleUpdate);
+      window.removeEventListener('kachoras_projects_updated', handleUpdate);
+    };
   }, []);
 
   const filteredProjects = projects.filter(p => {

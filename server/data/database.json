@@ -1,0 +1,112 @@
+{
+  "projects": [
+    {
+      "id": "P-101",
+      "title": "Luxury G+1 Contemporary Villa & Majlis Annex",
+      "category": "Building Contracting",
+      "status": "upcoming",
+      "timeline": "Commencing Q4 2026",
+      "year": "2026",
+      "location": "Nad Al Sheba 1, Dubai",
+      "plotNo": "6142891",
+      "client": "Private UAE National Client",
+      "consultant": "Croquis Engineering Consultancy",
+      "scope": "Turnkey luxury residential compound featuring G+1 main residence, standalone heritage majlis block, subterranean mechanical pump room, and structural boundary enclosure.",
+      "image": "./assets/villa.jpg",
+      "createdAt": "2026-10-19T22:01:49.327Z"
+    },
+    {
+      "id": "P-102",
+      "title": "Thermal-Break Architectural Curtain Wall Fitout",
+      "category": "Aluminium & Glass Fabrication",
+      "status": "upcoming",
+      "timeline": "Tender Phase — Q4 2026",
+      "year": "2026",
+      "location": "Al Qusais Industrial Area 2, Dubai",
+      "plotNo": "2418902",
+      "client": "Commercial Development Partner",
+      "consultant": "Gulf Engineering Consultants",
+      "scope": "Fabrication and structural fixing of 1,200 sq.m of double-glazed thermal-break aluminium curtain walling engineered at Al Qusais B-25 facility.",
+      "image": "./assets/aluminium.jpg",
+      "createdAt": "2026-10-19T22:01:49.328Z"
+    },
+    {
+      "id": "P-103",
+      "title": "Proposed Majlis Block & Structural Remodel",
+      "category": "Building Contracting",
+      "status": "ongoing",
+      "timeline": "Superstructure Pours & MEP Rough-ins",
+      "year": "2026",
+      "location": "Al Barsha South First, Dubai",
+      "plotNo": "6716536",
+      "client": "Maha Ebrahim Mohammad Hassan Alblooshi",
+      "consultant": "Al Manhal Engineering Consultants",
+      "scope": "Reinforced concrete ground structure, custom gypsum ceiling rough-ins, and high-efficiency ducted HVAC network.",
+      "image": "./assets/majlis.jpg",
+      "createdAt": "2026-10-19T22:01:49.328Z"
+    },
+    {
+      "id": "P-104",
+      "title": "Municipal Veterinary Clinical Facilities & Civic Chambers",
+      "category": "Dubai Civic & Maintenance",
+      "status": "completed",
+      "timeline": "Handed Over & DM Certified",
+      "year": "2025",
+      "location": "Hatta Civic Sector, Dubai",
+      "plotNo": "8912682",
+      "client": "Dubai Municipality",
+      "consultant": "DM General Maintenance Department",
+      "scope": "Turnkey clinical fitout, medical plumbing, anti-bacterial sanitary wall finishes, and underground hydraulic valve control conduits.",
+      "image": "./assets/civic.jpg",
+      "createdAt": "2026-10-19T22:01:49.328Z"
+    },
+    {
+      "id": "P-105",
+      "title": "G+1 Luxury Villa & Integrated Service Block",
+      "category": "Building Contracting",
+      "status": "completed",
+      "timeline": "Final Municipality Handover Complete",
+      "year": "2025",
+      "location": "Wadi Al Shabak, Dubai",
+      "plotNo": "4317233",
+      "client": "Mr. Khalifa Sebil Almas Khamis Salmin",
+      "consultant": "Croquis Engineering Consultancy",
+      "scope": "Complete civil structure, substructure soil compaction, DEWA electrical substation connection, and thermal aluminium fenestration.",
+      "image": "./assets/villa_arabic.jpg",
+      "createdAt": "2026-10-19T22:01:49.328Z"
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "LEAD-1792447394330",
+      "referenceId": "KCH-5469-RFQ",
+      "name": "Automated Test Client",
+      "company": "Apex Test Co",
+      "email": "test@apex.ae",
+      "phone": "+971500000000",
+      "location": "Dubai, UAE",
+      "plotNo": "",
+      "serviceType": "General Contracting",
+      "budgetRange": "",
+      "message": "Dynamic database test inquiry verification",
+      "attachedFile": null,
+      "status": "new",
+      "timestamp": "2026-10-19T22:03:14.330Z"
+    },
+    {
+      "id": "LEAD-101",
+      "referenceId": "KCH-7842-RFQ",
+      "name": "Sultan Al Suwaidi",
+      "company": "Private Villa Owner",
+      "email": "sultan.suwaidi@example.ae",
+      "phone": "+971 50 442 8192",
+      "location": "Nad Al Sheba 2, Dubai",
+      "plotNo": "6149821",
+      "serviceType": "Building Contracting (G+1 Villa / Majlis)",
+      "budgetRange": "AED 2,500,000 – AED 4,000,000",
+      "message": "We have consultant approved architectural drawings for a 6,500 sq.ft G+1 contemporary villa and detached majlis block. Seeking contractor tender pricing and municipal mobilization schedule.",
+      "timestamp": "2026-10-19T18:01:49.328Z",
+      "status": "new"
+    }
+  ]
+}

@@ -38,7 +38,12 @@ import {
   updateAdminPasskey, 
   compressImageFile,
   getStoredFirebaseConfig,
-  saveStoredFirebaseConfig
+  saveStoredFirebaseConfig,
+  fetchServerProjects,
+  addProjectToServer,
+  updateProjectOnServer,
+  deleteProjectOnServer,
+  checkServerHealth
 } from '../services/projectService';
 import {
   getStoredInquiries,
@@ -46,7 +51,10 @@ import {
   deleteInquiry,
   exportInquiriesToCSV,
   getEmailConfig,
-  saveEmailConfig
+  saveEmailConfig,
+  fetchServerInquiries,
+  updateInquiryStatusOnServer,
+  deleteInquiryOnServer
 } from '../services/inquiryService';
 
 const CATEGORY_OPTIONS = [
@@ -94,6 +102,8 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   const [isCompressing, setIsCompressing] = useState(false);
   const [formSuccessMessage, setFormSuccessMessage] = useState('');
   const fileInputRef = useRef(null);
+  const [selectedPhotoFile, setSelectedPhotoFile] = useState(null);
+  const [serverOnline, setServerOnline] = useState(false);
 
   const [newPasskey, setNewPasskey] = useState('');
   const [settingsNotice, setSettingsNotice] = useState('');
@@ -104,33 +114,54 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   const [inquiryFilter, setInquiryFilter] = useState('all'); // 'all' | 'new' | 'contacted' | 'archived'
 
   // Load inquiries
-  const refreshInquiriesList = () => {
+  const refreshInquiriesList = async () => {
     setInquiries(getStoredInquiries());
+    try {
+      const live = await fetchServerInquiries();
+      if (live && Array.isArray(live)) {
+        setInquiries(live);
+      }
+    } catch (err) {
+      // Keep local
+    }
   };
 
-  const handleStatusChange = (id, newStatus) => {
-    const updated = updateInquiryStatus(id, newStatus);
+  const handleStatusChange = async (id, newStatus) => {
+    const updated = await updateInquiryStatusOnServer(id, newStatus);
     setInquiries(updated);
   };
 
-  const handleDeleteInquiry = (id) => {
+  const handleDeleteInquiry = async (id) => {
     if (window.confirm('Are you sure you want to delete this lead record?')) {
-      const updated = deleteInquiry(id);
+      const updated = await deleteInquiryOnServer(id);
       setInquiries(updated);
     }
   };
 
   // Load projects on open or tab change
-  const refreshProjectsList = () => {
-    const list = getAllProjects();
-    setProjects(list);
+  const refreshProjectsList = async () => {
+    const local = getAllProjects();
+    setProjects(local);
+    try {
+      const live = await fetchServerProjects();
+      if (live && Array.isArray(live) && live.length > 0) {
+        setProjects(live);
+        if (onProjectsChanged) {
+          onProjectsChanged(live);
+        }
+        return;
+      }
+    } catch (err) {
+      // Keep local
+    }
     if (onProjectsChanged) {
-      onProjectsChanged(list);
+      onProjectsChanged(local);
     }
   };
 
   useEffect(() => {
     if (isOpen) {
+      checkServerHealth().then(res => setServerOnline(res.online));
       // Check if session remember token is active
       const sessionAuth = sessionStorage.getItem('kachoras_admin_session');
       if (sessionAuth === 'true') {
@@ -153,6 +184,8 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
       setAuthError('');
       setPasskeyInput('');
       refreshProjectsList();
+      refreshInquiriesList();
+      checkServerHealth().then(res => setServerOnline(res.online));
     } else {
       setAuthError('Invalid master passkey. (Default: kachoras2006)');
     }
@@ -167,6 +200,8 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   const handleFileSelect = async (e) => {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
+
+    setSelectedPhotoFile(file);
 
     try {
       setIsCompressing(true);
@@ -195,6 +230,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
       image: './assets/villa.jpg'
     });
     setImagePreview('./assets/villa.jpg');
+    setSelectedPhotoFile(null);
     setEditingProjectId(null);
     setFormSuccessMessage('');
   };
@@ -215,33 +251,38 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
       image: project.image || './assets/villa.jpg'
     });
     setImagePreview(project.image || './assets/villa.jpg');
+    setSelectedPhotoFile(null);
     setActiveTab('add');
     setFormSuccessMessage('');
   };
 
-  const handleDeleteClick = (id) => {
+  const handleDeleteClick = async (id) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
-      deleteProject(id);
-      refreshProjectsList();
+      await deleteProjectOnServer(id);
+      await refreshProjectsList();
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (!formData.title.trim()) {
       alert('Please enter a project title');
       return;
     }
 
-    if (editingProjectId) {
-      updateProject(editingProjectId, formData);
-      setFormSuccessMessage('Project successfully updated!');
-    } else {
-      addProject(formData);
-      setFormSuccessMessage('New project successfully added & published!');
+    try {
+      if (editingProjectId) {
+        await updateProjectOnServer(editingProjectId, formData);
+        setFormSuccessMessage('Project successfully updated in database!');
+      } else {
+        await addProjectToServer(formData, selectedPhotoFile);
+        setFormSuccessMessage('New project successfully saved to live server database!');
+      }
+    } catch (err) {
+      console.warn('Project save notice:', err);
     }
 
-    refreshProjectsList();
+    await refreshProjectsList();
     setTimeout(() => {
       handleResetForm();
       setActiveTab('list');
@@ -298,6 +339,16 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-400/20 text-[#C59B27] border border-[#C59B27]/30 uppercase">
                   Project Manager
                 </span>
+                {serverOnline ? (
+                  <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Live DB Connected
+                  </span>
+                ) : (
+                  <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/10 text-white/60">
+                    Local DB Mode
+                  </span>
+                )}
               </div>
               <p className="text-xs text-white/60">Upload upcoming tenders and finished projects directly</p>
             </div>

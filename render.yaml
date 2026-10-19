@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: kachoras-electromechanical
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_PASSKEY
+        value: kachoras2006

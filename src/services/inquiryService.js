@@ -67,10 +67,14 @@ export function saveStoredInquiries(inquiries) {
   }
 }
 
+const STORAGE_KEY_AUTH = 'kachoras_admin_auth_v1';
+const DEFAULT_PASSKEY = 'kachoras2006';
+
 /**
  * Submit a new inquiry from Contact Form or Quote Modal
- * 1. Saves to internal Owner Portal Inbox
- * 2. Attempts email dispatch to kachorasdubai@gmail.com
+ * 1. Posts to Live Dynamic Server (/api/inquiries)
+ * 2. Saves to internal Owner Portal Inbox
+ * 3. Attempts email dispatch to kachorasdubai@gmail.com
  */
 export async function submitInquiry(payload) {
   const randomNum = Math.floor(1000 + Math.random() * 9000);
@@ -93,12 +97,44 @@ export async function submitInquiry(payload) {
     status: "new"
   };
 
-  // 1. Save to portal inbox
+  // 1. Attempt Live Server API Post
+  try {
+    const res = await fetch('/api/inquiries', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newInquiry)
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.inquiry) {
+        const existing = getStoredInquiries();
+        saveStoredInquiries([data.inquiry, ...existing.filter(i => i.id !== data.inquiry.id)]);
+        window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
+        
+        // Background email dispatch
+        sendEmailNotification(data.inquiry).catch(err => console.warn('Email notice:', err));
+
+        return {
+          success: true,
+          referenceId: data.referenceId || ref,
+          inquiry: data.inquiry
+        };
+      }
+    }
+  } catch (err) {
+    console.info('Live server unavailable, proceeding with local offline lead capture:', err);
+  }
+
+  // 2. Offline / Local fallback: Save to portal inbox
   const existing = getStoredInquiries();
   const updated = [newInquiry, ...existing];
   saveStoredInquiries(updated);
+  window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
 
-  // 2. Dispatch email to company inbox (kachorasdubai@gmail.com)
+  // 3. Dispatch email to company inbox (kachorasdubai@gmail.com)
   try {
     await sendEmailNotification(newInquiry);
   } catch (err) {
@@ -230,4 +266,87 @@ export function saveEmailConfig(config) {
   } else {
     localStorage.setItem(STORAGE_KEY_EMAIL_CONFIG, JSON.stringify(config));
   }
+}
+
+/**
+ * Live Dynamic Server Endpoints for Lead Management
+ */
+
+export async function fetchServerInquiries() {
+  const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
+
+  try {
+    const res = await fetch('/api/admin/inquiries', {
+      headers: {
+        'x-admin-passkey': passkey
+      }
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        saveStoredInquiries(data);
+        return data;
+      }
+    }
+  } catch (err) {
+    console.info('Live inquiries endpoint unreachable, using offline store.');
+  }
+
+  return getStoredInquiries();
+}
+
+export async function updateInquiryStatusOnServer(id, newStatus) {
+  const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
+
+  try {
+    const res = await fetch(`/api/admin/inquiries/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-passkey': passkey
+      },
+      body: JSON.stringify({ status: newStatus })
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.inquiry) {
+        updateInquiryStatus(id, newStatus);
+        window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
+        return getStoredInquiries();
+      }
+    }
+  } catch (err) {
+    console.warn('Server inquiry status update failed, updating locally:', err);
+  }
+
+  const updated = updateInquiryStatus(id, newStatus);
+  window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
+  return updated;
+}
+
+export async function deleteInquiryOnServer(id) {
+  const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
+
+  try {
+    const res = await fetch(`/api/admin/inquiries/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'x-admin-passkey': passkey
+      }
+    });
+
+    if (res.ok) {
+      const updated = deleteInquiry(id);
+      window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
+      return updated;
+    }
+  } catch (err) {
+    console.warn('Server inquiry deletion failed, removing locally:', err);
+  }
+
+  const updated = deleteInquiry(id);
+  window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
+  return updated;
 }

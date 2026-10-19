@@ -5,10 +5,20 @@ export default defineConfig({
   plugins: [react()],
   base: './',
   server: {
-    port: 3000,
+    port: 5173,
     open: false,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      },
+      '/uploads': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      }
+    },
     watch: {
-      ignored: ['**/*.pdf', '**/dist/**']
+      ignored: ['**/*.pdf', '**/dist/**', '**/server/data/**', '**/uploads/**']
     }
   },
   build: {

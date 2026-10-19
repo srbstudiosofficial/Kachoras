@@ -288,3 +288,155 @@ export function saveStoredFirebaseConfig(config) {
     localStorage.setItem(STORAGE_KEY_FIREBASE, JSON.stringify(config));
   }
 }
+
+/**
+ * Live Dynamic Server Endpoints & Synchronization
+ */
+
+export async function checkServerHealth() {
+  try {
+    const res = await fetch('/api/health');
+    if (res.ok) {
+      const data = await res.json();
+      return { online: true, data };
+    }
+  } catch (err) {
+    // Offline or server not yet running
+  }
+  return { online: false };
+}
+
+export async function fetchServerProjects() {
+  try {
+    const res = await fetch('/api/projects');
+    if (res.ok) {
+      const liveList = await res.json();
+      if (Array.isArray(liveList) && liveList.length > 0) {
+        return liveList;
+      }
+    }
+  } catch (err) {
+    console.info('Live server unreachable, using local storage.');
+  }
+  return getAllProjects();
+}
+
+export async function addProjectToServer(formData, photoFile) {
+  const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
+
+  try {
+    if (photoFile instanceof File) {
+      const body = new FormData();
+      Object.keys(formData).forEach(key => {
+        if (key !== 'image') {
+          body.append(key, formData[key] || '');
+        }
+      });
+      body.append('photo', photoFile);
+
+      const res = await fetch('/api/admin/projects', {
+        method: 'POST',
+        headers: {
+          'x-admin-passkey': passkey
+        },
+        body
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.project) {
+          const local = getLocalProjects();
+          saveLocalProjects([data.project, ...local.filter(p => p.id !== data.project.id)]);
+          window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+          return data.project;
+        }
+      }
+    } else {
+      const res = await fetch('/api/admin/projects', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-passkey': passkey
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.project) {
+          const local = getLocalProjects();
+          saveLocalProjects([data.project, ...local.filter(p => p.id !== data.project.id)]);
+          window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+          return data.project;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Server project creation failed, using offline fallback:', err);
+  }
+
+  // Fallback to local storage
+  const fallbackProject = addProject(formData);
+  window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+  return fallbackProject;
+}
+
+export async function updateProjectOnServer(id, formData) {
+  const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
+
+  try {
+    const res = await fetch(`/api/admin/projects/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-passkey': passkey
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data.project) {
+        const existing = getLocalProjects();
+        const idx = existing.findIndex(p => p.id === id);
+        if (idx !== -1) {
+          existing[idx] = data.project;
+          saveLocalProjects(existing);
+        }
+        window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+        return data.project;
+      }
+    }
+  } catch (err) {
+    console.warn('Server project update failed, using offline fallback:', err);
+  }
+
+  const updated = updateProject(id, formData);
+  window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+  return updated;
+}
+
+export async function deleteProjectOnServer(id) {
+  const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
+
+  try {
+    const res = await fetch(`/api/admin/projects/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'x-admin-passkey': passkey
+      }
+    });
+
+    if (res.ok) {
+      deleteProject(id);
+      window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+      return true;
+    }
+  } catch (err) {
+    console.warn('Server project delete failed, using offline fallback:', err);
+  }
+
+  deleteProject(id);
+  window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+  return true;
+}
