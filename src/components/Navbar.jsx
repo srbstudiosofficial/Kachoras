@@ -30,7 +30,6 @@ export default function Navbar({ onOpenQuoteModal }) {
     { label: "Categories", href: "#services" },
     { label: "Project Portfolio", href: "#portfolio", badge: "20 Yrs" },
     { label: "Dubai Municipality", href: "#municipal" },
-    { label: "Staff Directory", href: "#team" },
     { label: "Trade License", href: "#license" },
     { label: "AED Estimator", href: "#estimator" },
     { label: "Location Map", href: "#location" }

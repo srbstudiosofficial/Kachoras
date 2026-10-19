@@ -7,7 +7,6 @@ import MunicipalSection from './components/MunicipalSection';
 import CostEstimator from './components/CostEstimator';
 import Portfolio from './components/Portfolio';
 import TradeLicenseSection from './components/TradeLicenseSection';
-import StaffSection from './components/StaffSection';
 import OfficeMapSection from './components/OfficeMapSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
@@ -81,9 +80,6 @@ export default function App() {
 
         {/* Official Commercial Trade License & Dubai Municipality G+1 Verification */}
         <TradeLicenseSection />
-
-        {/* Key Technical Personnel & Engineering Leadership Directory */}
-        <StaffSection />
 
         {/* Warehouse B-25 Al Qusais Office & Access Map */}
         <OfficeMapSection />

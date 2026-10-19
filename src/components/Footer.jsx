@@ -118,7 +118,6 @@ export default function Footer({ onOpenQuoteModal }) {
               <li><a href="#municipal" className="hover:text-white transition">Dubai Municipality Projects</a></li>
               <li><a href="#portfolio" className="hover:text-white transition">Active Projects In Hand</a></li>
               <li><a href="#license" className="hover:text-white transition">Official Trade License</a></li>
-              <li><a href="#team" className="hover:text-white transition">11 Key Technical Staff</a></li>
               <li><a href="#estimator" className="hover:text-white transition">Dubai Villa Cost Estimator</a></li>
               <li><a href="#location" className="hover:text-white transition">Al Qusais Warehouse Map</a></li>
             </ul>

@@ -274,8 +274,8 @@ export default function Hero({ onOpenQuoteModal }) {
                 <div className="text-[10px] text-slate-500 font-semibold">Compliance</div>
               </div>
               <div className="bg-white border border-[#E5DED3] p-2.5 rounded-xl shadow-sm">
-                <div className="text-lg font-black text-slate-800 font-display">11+</div>
-                <div className="text-[10px] text-slate-500 font-semibold">Staff Leads</div>
+                <div className="text-lg font-black text-slate-800 font-display">380+</div>
+                <div className="text-[10px] text-slate-500 font-semibold">Completed</div>
               </div>
             </div>
 
