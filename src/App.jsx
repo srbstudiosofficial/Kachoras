@@ -9,12 +9,15 @@ import OfficeMapSection from './components/OfficeMapSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import QuoteModal from './components/QuoteModal';
+import ProjectsSection from './components/ProjectsSection';
+import AdminProjectModal from './components/AdminProjectModal';
 import { Phone, MessageSquare } from 'lucide-react';
 import { COMPANY_INFO } from './data/mockData';
 
 export default function App() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quoteInitialData, setQuoteInitialData] = useState(null);
+  const [adminModalOpen, setAdminModalOpen] = useState(false);
 
   const handleOpenQuoteModal = (initialData = null) => {
     setQuoteInitialData(initialData);
@@ -52,6 +55,12 @@ export default function App() {
           onSelectServiceForQuote={handleSelectServiceForQuote} 
         />
 
+        {/* Track Record & Live Project Pipeline (Upcoming & Completed) */}
+        <ProjectsSection 
+          onOpenQuoteModal={handleOpenQuoteModal} 
+          onOpenAdminModal={() => setAdminModalOpen(true)}
+        />
+
         {/* Dubai Municipality Civic Contracts Showcase */}
         <MunicipalSection />
 
@@ -68,6 +77,7 @@ export default function App() {
       {/* Imperial Mahogany & Bronze Footer */}
       <Footer 
         onOpenQuoteModal={() => handleOpenQuoteModal()} 
+        onOpenAdminModal={() => setAdminModalOpen(true)}
       />
 
       {/* Interactive RFP / Proposal Modal */}
@@ -75,6 +85,12 @@ export default function App() {
         isOpen={quoteModalOpen}
         onClose={() => setQuoteModalOpen(false)}
         initialData={quoteInitialData}
+      />
+
+      {/* Owner Portal / Admin Project Management Modal */}
+      <AdminProjectModal
+        isOpen={adminModalOpen}
+        onClose={() => setAdminModalOpen(false)}
       />
 
       {/* Floating Action Buttons for Mobile */}

@@ -13,7 +13,7 @@ import {
 import { COMPANY_INFO, CORE_CATEGORIES } from '../data/mockData';
 import KachorasLogo from './KachorasLogo';
 
-export default function Footer({ onOpenQuoteModal }) {
+export default function Footer({ onOpenQuoteModal, onOpenAdminModal }) {
   return (
     <footer className="bg-[#12161F] text-white border-t border-[#232938]">
       
@@ -98,6 +98,7 @@ export default function Footer({ onOpenQuoteModal }) {
             <ul className="space-y-2 text-white/60">
               <li><a href="#vision" className="hover:text-white transition">Corporate Vision & Values</a></li>
               <li><a href="#services" className="hover:text-white transition">Contracting Disciplines</a></li>
+              <li><a href="#portfolio" className="hover:text-white transition">Portfolio & Upcoming Works</a></li>
               <li><a href="#municipal" className="hover:text-white transition">Dubai Municipality Contracts</a></li>
               <li><a href="#license" className="hover:text-white transition">Trade License Verification</a></li>
               <li><a href="#location" className="hover:text-white transition">Al Qusais Facility Map</a></li>
@@ -126,7 +127,14 @@ export default function Footer({ onOpenQuoteModal }) {
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-1">
             <span>Dubai, United Arab Emirates</span>
             <span>•</span>
-            <span>Government of Dubai DET License #578964</span>
+            <span>DET License #578964</span>
+            <span>•</span>
+            <button
+              onClick={onOpenAdminModal}
+              className="text-white/40 hover:text-[#C59B27] transition underline cursor-pointer"
+            >
+              Owner Portal
+            </button>
           </div>
         </div>
 
