@@ -4,7 +4,6 @@ import {
   CheckCircle2, 
   ArrowRight, 
   ArrowLeft, 
-  Calculator, 
   Building2, 
   Calendar, 
   DollarSign, 

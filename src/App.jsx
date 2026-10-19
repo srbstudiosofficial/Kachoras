@@ -4,14 +4,13 @@ import Hero from './components/Hero';
 import VisionMissionSection from './components/VisionMissionSection';
 import CategoriesWheel from './components/CategoriesWheel';
 import MunicipalSection from './components/MunicipalSection';
-import CostEstimator from './components/CostEstimator';
 import Portfolio from './components/Portfolio';
 import TradeLicenseSection from './components/TradeLicenseSection';
 import OfficeMapSection from './components/OfficeMapSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import QuoteModal from './components/QuoteModal';
-import { Calculator, Phone, MessageSquare } from 'lucide-react';
+import { Phone, MessageSquare } from 'lucide-react';
 import { COMPANY_INFO } from './data/mockData';
 
 export default function App() {
@@ -21,10 +20,6 @@ export default function App() {
   const handleOpenQuoteModal = (initialData = null) => {
     setQuoteInitialData(initialData);
     setQuoteModalOpen(true);
-  };
-
-  const handleApplyEstimateToQuote = (estimateData) => {
-    handleOpenQuoteModal(estimateData);
   };
 
   const handleSelectServiceForQuote = (serviceName) => {
@@ -68,11 +63,6 @@ export default function App() {
         {/* Dubai Municipality Civic Contracts Showcase */}
         <MunicipalSection />
 
-        {/* Interactive Dubai Villa & MEP Cost Estimator (AED 2024-2025 Rates) */}
-        <CostEstimator 
-          onApplyEstimateToQuote={handleApplyEstimateToQuote} 
-        />
-
         {/* 2024-2025 Projects Portfolio (Completed Villas, Municipal, Active Sites) */}
         <Portfolio 
           onInquireSimilar={handleInquireSimilarProject} 
@@ -102,17 +92,6 @@ export default function App() {
 
       {/* Floating Action Buttons for Mobile */}
       <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-2.5 sm:hidden">
-        <button
-          onClick={() => {
-            const el = document.getElementById('estimator');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }}
-          className="w-12 h-12 rounded-full bg-white border border-[#E5DED3] text-[#7A2E16] flex items-center justify-center shadow-2xl active:scale-95 transition"
-          title="AED Calculator"
-        >
-          <Calculator className="w-5 h-5" />
-        </button>
-
         <a
           href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project%20in%20Dubai.`}
           target="_blank"

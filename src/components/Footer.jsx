@@ -100,7 +100,6 @@ export default function Footer({ onOpenQuoteModal }) {
               <li><a href="#portfolio" className="hover:text-white transition">Selected Works Portfolio</a></li>
               <li><a href="#municipal" className="hover:text-white transition">Dubai Municipality Contracts</a></li>
               <li><a href="#license" className="hover:text-white transition">Trade License Verification</a></li>
-              <li><a href="#estimator" className="hover:text-white transition">Feasibility & Budget Planner</a></li>
               <li><a href="#location" className="hover:text-white transition">Al Qusais Facility Map</a></li>
             </ul>
           </div>

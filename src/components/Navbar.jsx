@@ -29,7 +29,6 @@ export default function Navbar({ onOpenQuoteModal }) {
     { label: "Portfolio", href: "#portfolio" },
     { label: "Municipal", href: "#municipal" },
     { label: "License", href: "#license" },
-    { label: "Feasibility Planner", href: "#estimator" },
     { label: "Location", href: "#location" }
   ];
 
