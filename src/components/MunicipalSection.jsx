@@ -13,7 +13,7 @@ export default function MunicipalSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3">
+        <div className="max-w-3xl mb-16 space-y-3 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-emerald-800 block">
             Government Framework • Civic Infrastructure
           </span>
@@ -26,7 +26,7 @@ export default function MunicipalSection() {
         </div>
 
         {/* Feature Split Banner: Civic Building Render & Credentials */}
-        <div className="mb-14 bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-sm grid lg:grid-cols-12 items-center">
+        <div className="mb-14 bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 grid lg:grid-cols-12 items-center reveal-on-scroll reveal-init shimmer-trigger">
           <div className="lg:col-span-6 relative h-72 sm:h-80 lg:h-full min-h-[320px] overflow-hidden group">
             <picture className="w-full h-full block">
               <source srcSet="./assets/civic.webp" type="image/webp" />
@@ -75,10 +75,11 @@ export default function MunicipalSection() {
 
         {/* Dubai Municipality Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {DUBAI_MUNICIPALITY_PROJECTS.map((item) => (
+          {DUBAI_MUNICIPALITY_PROJECTS.map((item, idx) => (
             <div 
               key={item.id}
-              className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-sm hover:border-emerald-700 transition-all duration-300 group"
+              data-delay={idx * 150}
+              className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-sm hover:shadow-2xl hover:border-emerald-700 hover:-translate-y-2 transition-all duration-500 group reveal-on-scroll reveal-init shimmer-trigger"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between border-b border-[#F0EBE1] pb-3">

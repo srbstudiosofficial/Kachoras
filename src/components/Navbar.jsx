@@ -104,10 +104,10 @@ export default function Navbar({ onOpenQuoteModal }) {
           <div className="hidden md:flex items-center space-x-3">
             <button
               onClick={() => onOpenQuoteModal()}
-              className="flex items-center gap-2 text-xs font-bold bg-[#7A2E16] hover:bg-[#652310] text-white px-5 py-2.5 rounded-xl shadow-sm transition cursor-pointer"
+              className="flex items-center gap-2 text-xs font-bold bg-[#7A2E16] hover:bg-[#652310] text-white px-5 py-2.5 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer shimmer-trigger active:scale-95"
             >
               <span>Submit Tender / RFP</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#C59B27] group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
 

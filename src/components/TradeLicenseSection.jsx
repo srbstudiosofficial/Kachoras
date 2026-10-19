@@ -7,6 +7,7 @@ import {
   ExternalLink 
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function TradeLicenseSection() {
   return (
@@ -14,7 +15,7 @@ export default function TradeLicenseSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3">
+        <div className="max-w-3xl mb-16 space-y-3 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
             Regulatory Compliance & Registration
           </span>
@@ -30,7 +31,7 @@ export default function TradeLicenseSection() {
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Detailed Commercial License Record (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:border-[#7A2E16] transition-all duration-500 space-y-6 reveal-on-scroll reveal-left shimmer-trigger">
             
             {/* Header */}
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#F0EBE1] pb-5">
@@ -102,9 +103,9 @@ export default function TradeLicenseSection() {
           </div>
 
           {/* Institutional Accreditation Summary (5 cols) */}
-          <div className="lg:col-span-5 space-y-5 flex flex-col justify-between">
+          <div className="lg:col-span-5 space-y-5 flex flex-col justify-between reveal-on-scroll reveal-right">
             
-            <div className="bg-white border border-[#E5DED3] rounded-2xl p-7 shadow-sm space-y-4">
+            <div className="bg-white border border-[#E5DED3] rounded-2xl p-7 shadow-sm hover:shadow-2xl hover:border-[#C59B27] transition-all duration-500 space-y-4 shimmer-trigger">
               <span className="text-xs font-bold uppercase tracking-wider text-[#8B6D1B]">
                 Statutory Approvals
               </span>
@@ -118,12 +119,14 @@ export default function TradeLicenseSection() {
               </p>
 
               <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF] text-center">
-                  <div className="text-xl font-bold text-[#7A2E16] font-display">20+ Yrs</div>
+                <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF] text-center hover:bg-white transition">
+                  <div className="text-2xl font-bold text-[#7A2E16] font-display">
+                    <AnimatedCounter target={20} suffix="+ Yrs" duration={1700} />
+                  </div>
                   <div className="text-[10px] text-slate-500 font-medium mt-0.5">Continuous Standing</div>
                 </div>
-                <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF] text-center">
-                  <div className="text-xl font-bold text-emerald-800 font-display">G+1</div>
+                <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF] text-center hover:bg-white transition">
+                  <div className="text-2xl font-bold text-emerald-800 font-display">G+1</div>
                   <div className="text-[10px] text-slate-500 font-medium mt-0.5">Contractor License</div>
                 </div>
               </div>

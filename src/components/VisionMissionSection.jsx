@@ -7,7 +7,7 @@ export default function VisionMissionSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3">
+        <div className="max-w-3xl mb-16 space-y-3 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
             Institutional Values & Governance
           </span>
@@ -23,7 +23,7 @@ export default function VisionMissionSection() {
         <div className="grid md:grid-cols-2 gap-8 items-stretch">
           
           {/* Vision Column */}
-          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-[#E5DED3] shadow-sm flex flex-col justify-between space-y-6">
+          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-[#E5DED3] shadow-sm hover:shadow-2xl hover:border-[#7A2E16] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between space-y-6 reveal-on-scroll reveal-left">
             <div className="space-y-4">
               <div className="flex items-center justify-between border-b border-[#F0EBE1] pb-4">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#7A2E16]">
@@ -48,7 +48,7 @@ export default function VisionMissionSection() {
           </div>
 
           {/* Mission Column */}
-          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-[#E5DED3] shadow-sm flex flex-col justify-between space-y-6">
+          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-[#E5DED3] shadow-sm hover:shadow-2xl hover:border-[#C59B27] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between space-y-6 reveal-on-scroll reveal-right">
             <div className="space-y-4">
               <div className="flex items-center justify-between border-b border-[#F0EBE1] pb-4">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#8B6D1B]">

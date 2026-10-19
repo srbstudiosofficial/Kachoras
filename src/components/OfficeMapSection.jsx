@@ -18,7 +18,7 @@ export default function OfficeMapSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3">
+        <div className="max-w-3xl mb-16 space-y-3 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
             Headquarters & Fabrication Workshop
           </span>
@@ -34,7 +34,7 @@ export default function OfficeMapSection() {
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Interactive Google Map Embed (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#7A2E16] transition-all duration-500 flex flex-col justify-between reveal-on-scroll reveal-left">
             <div className="p-5 border-b border-[#F0EBE1] flex items-center justify-between">
               <div>
                 <h3 className="text-base font-bold text-[#14171F] font-display">
@@ -75,7 +75,7 @@ export default function OfficeMapSection() {
           </div>
 
           {/* Logistics & Access Coordinates (5 cols) */}
-          <div className="lg:col-span-5 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm flex flex-col justify-between">
+          <div className="lg:col-span-5 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#7A2E16] transition-all duration-500 flex flex-col justify-between reveal-on-scroll reveal-right">
             
             <div className="space-y-6">
               <div className="border-b border-[#F0EBE1] pb-4">

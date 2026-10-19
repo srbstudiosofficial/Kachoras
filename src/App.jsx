@@ -13,8 +13,11 @@ import ProjectsSection from './components/ProjectsSection';
 import AdminProjectModal from './components/AdminProjectModal';
 import { Phone, MessageSquare } from 'lucide-react';
 import { COMPANY_INFO } from './data/mockData';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 export default function App() {
+  useScrollReveal();
+
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quoteInitialData, setQuoteInitialData] = useState(null);
   const [adminModalOpen, setAdminModalOpen] = useState(false);

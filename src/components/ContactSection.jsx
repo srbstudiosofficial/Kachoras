@@ -70,7 +70,7 @@ export default function ContactSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3">
+        <div className="max-w-3xl mb-16 space-y-3 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
             Tenders & Technical Submissions
           </span>
@@ -85,9 +85,9 @@ export default function ContactSection() {
         <div className="grid lg:grid-cols-12 gap-10 items-start">
           
           {/* Left Column: Official Contact Card (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-6 reveal-on-scroll reveal-left">
             
-            <div className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm">
+            <div className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#7A2E16] transition-all duration-500">
               <h3 className="text-xl font-black text-[#1E293B] font-display border-b border-[#E5DED3] pb-4">
                 Corporate Office Details
               </h3>
@@ -193,7 +193,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right Column: RFP & Bid Request Form (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 shadow-sm">
+          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:border-[#7A2E16] transition-all duration-500 reveal-on-scroll reveal-right">
             {isSubmitted ? (
               <div className="text-center py-12 px-4 space-y-5">
                 <div className="w-16 h-16 bg-emerald-500/10 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">

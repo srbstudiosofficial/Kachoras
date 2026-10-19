@@ -58,7 +58,7 @@ export default function ProjectsSection({ onOpenQuoteModal }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-12 space-y-3">
+        <div className="max-w-3xl mb-12 space-y-3 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
             Contracting Portfolio • Future Pipeline
           </span>
@@ -71,12 +71,12 @@ export default function ProjectsSection({ onOpenQuoteModal }) {
         </div>
 
         {/* Filter Navigation Tabs */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 pb-2 border-b border-[#E5DED3]">
+        <div className="flex flex-wrap items-center gap-2 mb-10 pb-2 border-b border-[#E5DED3] reveal-on-scroll reveal-init delay-100">
           <button
             onClick={() => setFilter('all')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95 ${
               filter === 'all'
-                ? 'bg-[#14171F] text-white shadow-sm'
+                ? 'bg-[#14171F] text-white shadow-md'
                 : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#FAF8F5]'
             }`}
           >
@@ -86,22 +86,22 @@ export default function ProjectsSection({ onOpenQuoteModal }) {
 
           <button
             onClick={() => setFilter('upcoming')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95 ${
               filter === 'upcoming'
-                ? 'bg-indigo-700 text-white shadow-sm'
+                ? 'bg-indigo-700 text-white shadow-md'
                 : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#FAF8F5]'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-indigo-300" />
+            <Sparkles className="w-3.5 h-3.5 text-indigo-300 animate-spin-slow" />
             <span>Upcoming Tenders (2026)</span>
             <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-indigo-100 text-indigo-800">{counts.upcoming}</span>
           </button>
 
           <button
             onClick={() => setFilter('ongoing')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95 ${
               filter === 'ongoing'
-                ? 'bg-amber-700 text-white shadow-sm'
+                ? 'bg-amber-700 text-white shadow-md'
                 : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#FAF8F5]'
             }`}
           >
@@ -112,9 +112,9 @@ export default function ProjectsSection({ onOpenQuoteModal }) {
 
           <button
             onClick={() => setFilter('completed')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95 ${
               filter === 'completed'
-                ? 'bg-emerald-800 text-white shadow-sm'
+                ? 'bg-emerald-800 text-white shadow-md'
                 : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#FAF8F5]'
             }`}
           >
@@ -126,7 +126,7 @@ export default function ProjectsSection({ onOpenQuoteModal }) {
 
         {/* Dynamic Project Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((item) => {
+          {filteredProjects.map((item, idx) => {
             const isUpcoming = item.status === 'upcoming';
             const isOngoing = item.status === 'ongoing';
             
@@ -141,7 +141,8 @@ export default function ProjectsSection({ onOpenQuoteModal }) {
             return (
               <div
                 key={item.id}
-                className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-sm hover:shadow-luxury hover:border-[#7A2E16] transition-all duration-300 flex flex-col justify-between group"
+                data-delay={(idx % 6) * 120}
+                className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#7A2E16] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group reveal-on-scroll reveal-init shimmer-trigger"
               >
                 <div>
                   {/* Project Image */}

@@ -43,7 +43,7 @@ export default function CategoriesWheel({ onSelectServiceForQuote }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3">
+        <div className="max-w-3xl mb-16 space-y-3 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
             Capabilities & Contracting Scope
           </span>
@@ -62,7 +62,8 @@ export default function CategoriesWheel({ onSelectServiceForQuote }) {
             return (
               <div
                 key={cat.id}
-                className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-sm hover:shadow-luxury hover:border-[#7A2E16] transition-all duration-300 flex flex-col justify-between group"
+                data-delay={idx * 150}
+                className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#7A2E16] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group reveal-on-scroll reveal-init shimmer-trigger"
               >
                 <div>
                   {/* Discipline Photography */}
@@ -72,7 +73,7 @@ export default function CategoriesWheel({ onSelectServiceForQuote }) {
                       <img 
                         src={asset.image} 
                         alt={cat.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                         loading="lazy"
                         decoding="async"
                       />

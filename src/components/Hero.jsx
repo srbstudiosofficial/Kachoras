@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 import ArchitecturalVisual from './ArchitecturalVisual';
+import AnimatedCounter from './AnimatedCounter';
 
 const FEATURED_PROJECTS = [
   {
@@ -49,15 +50,18 @@ export default function Hero({ onOpenQuoteModal }) {
       {/* Subtle Architectural Grid */}
       <div className="absolute inset-0 bg-architect-grid opacity-50 pointer-events-none" />
       
-      {/* Ambient Warm Tonal Accents */}
-      <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-[#C59B27]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#7A2E16]/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Ambient Warm Tonal Accents with Pulse Glow Animations */}
+      <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-[#C59B27]/15 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+      <div className="absolute bottom-0 left-0 w-[450px] h-[450px] bg-[#7A2E16]/10 rounded-full blur-3xl pointer-events-none animate-float-reverse" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-8 w-full z-10">
         
-        {/* Subtle Corporate Accreditation Marker */}
-        <div className="mb-6 inline-flex flex-wrap items-center gap-2 sm:gap-2.5 px-3 py-1.5 sm:px-3.5 rounded-full bg-white border border-[#E5DED3] text-xs text-slate-700 shadow-sm max-w-full">
-          <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" />
+        {/* Corporate Accreditation Marker with Radar Pulse */}
+        <div className="mb-6 inline-flex flex-wrap items-center gap-2 sm:gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#E5DED3] text-xs text-slate-700 shadow-sm max-w-full animate-fade-in-down hover:border-[#7A2E16] transition-all">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-radar absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+          </span>
           <span className="text-[#7A2E16] font-bold text-[10px] sm:text-[11px] tracking-wide">
             Dubai Municipality Approved G+1 Contractor
           </span>
@@ -68,73 +72,85 @@ export default function Hero({ onOpenQuoteModal }) {
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* Left Column: Authoritative Editorial Copy (7 cols) */}
-          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
+          <div className="lg:col-span-7 space-y-6 sm:space-y-8 animate-fade-in-up">
             
             <div className="space-y-3 sm:space-y-4">
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] font-bold text-[#8B6D1B] block">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] font-bold text-[#8B6D1B] block animate-fade-in-up delay-100">
                 كاشوراس للمقاولات الكهروميكانيكية ش.ذ.م.م • Est. 2006
               </span>
 
-              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#14171F] font-display leading-[1.14]">
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#14171F] font-display leading-[1.14] animate-fade-in-up delay-200">
                 Precision Building & Electromechanical Contracting in Dubai
               </h1>
 
-              <p className="text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl font-normal leading-relaxed pt-1">
+              <p className="text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl font-normal leading-relaxed pt-1 animate-fade-in-up delay-300">
                 For over two decades, <strong>Kachoras Electromechanical Contracting LLC</strong> has delivered bespoke luxury G+1 villas, traditional Arabian majlis pavilions, municipal civic landmarks, and MEP infrastructure built to the highest statutory standards.
               </p>
             </div>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-2">
+            {/* CTAs with Shimmer Animation */}
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-2 animate-fade-in-up delay-400">
               <button
                 onClick={() => onOpenQuoteModal()}
-                className="px-6 sm:px-7 py-3.5 bg-[#7A2E16] hover:bg-[#652310] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition flex items-center justify-center gap-2.5 group cursor-pointer w-full sm:w-auto min-h-[46px] active:scale-95"
+                className="px-6 sm:px-7 py-3.5 bg-[#7A2E16] hover:bg-[#652310] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md hover:shadow-xl transition flex items-center justify-center gap-2.5 group cursor-pointer w-full sm:w-auto min-h-[46px] active:scale-95 shimmer-trigger hover:-translate-y-0.5"
               >
                 <span>Submit Tender / RFP</span>
-                <ArrowRight className="w-4 h-4 text-[#C59B27] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-[#C59B27] group-hover:translate-x-1.5 transition-transform" />
               </button>
 
               <a
                 href="#services"
-                className="px-6 py-3.5 bg-white hover:bg-[#F4EFE6] text-slate-800 font-bold text-xs uppercase tracking-wider rounded-xl border border-[#E5DED3] transition flex items-center justify-center gap-2 w-full sm:w-auto min-h-[46px] text-center active:scale-95"
+                className="px-6 py-3.5 bg-white hover:bg-[#F4EFE6] text-slate-800 font-bold text-xs uppercase tracking-wider rounded-xl border border-[#E5DED3] hover:border-[#7A2E16] transition flex items-center justify-center gap-2 w-full sm:w-auto min-h-[46px] text-center active:scale-95 hover:-translate-y-0.5 shadow-sm"
               >
                 <span>Explore Disciplines</span>
               </a>
 
               <a
                 href={`tel:${COMPANY_INFO.phone}`}
-                className="inline-flex items-center justify-center gap-2 text-xs font-semibold text-slate-600 hover:text-[#7A2E16] px-3 py-2 transition min-h-[40px]"
+                className="inline-flex items-center justify-center gap-2 text-xs font-semibold text-slate-600 hover:text-[#7A2E16] px-3 py-2 transition min-h-[40px] hover:scale-105"
               >
-                <Phone className="w-3.5 h-3.5 text-[#C59B27]" />
+                <Phone className="w-3.5 h-3.5 text-[#C59B27] animate-bounce" />
                 <span>{COMPANY_INFO.phone}</span>
               </a>
             </div>
 
-            {/* Distinguished Institutional Metrics */}
-            <div className="pt-4 border-t border-[#E5DED3] grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-left">
-              <div>
-                <div className="text-2xl font-bold text-[#14171F] font-display">20+</div>
+            {/* Distinguished Institutional Metrics with Dynamic Roll-Up Counters */}
+            <div className="pt-4 border-t border-[#E5DED3] grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-left animate-fade-in-up delay-500">
+              <div className="p-2.5 rounded-xl hover:bg-white/60 transition">
+                <div className="text-2xl sm:text-3xl font-bold text-[#14171F] font-display">
+                  <AnimatedCounter target={20} suffix="+" duration={1800} />
+                </div>
                 <div className="text-xs text-slate-500 font-medium mt-0.5">Years in Dubai</div>
               </div>
-              <div>
-                <div className="text-2xl font-bold text-[#7A2E16] font-display">G+1</div>
+              <div className="p-2.5 rounded-xl hover:bg-white/60 transition">
+                <div className="text-2xl sm:text-3xl font-bold text-[#7A2E16] font-display">G+1</div>
                 <div className="text-xs text-slate-500 font-medium mt-0.5">DM License Grade</div>
               </div>
-              <div>
-                <div className="text-2xl font-bold text-[#14171F] font-display">380+</div>
+              <div className="p-2.5 rounded-xl hover:bg-white/60 transition">
+                <div className="text-2xl sm:text-3xl font-bold text-[#14171F] font-display">
+                  <AnimatedCounter target={380} suffix="+" duration={2000} />
+                </div>
                 <div className="text-xs text-slate-500 font-medium mt-0.5">Completed Works</div>
               </div>
-              <div>
-                <div className="text-2xl font-bold text-emerald-700 font-display">100%</div>
+              <div className="p-2.5 rounded-xl hover:bg-white/60 transition">
+                <div className="text-2xl sm:text-3xl font-bold text-emerald-700 font-display">
+                  <AnimatedCounter target={100} suffix="%" duration={1600} />
+                </div>
                 <div className="text-xs text-slate-500 font-medium mt-0.5">DEWA Compliance</div>
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: Featured Architectural Project Showcase (5 cols) */}
-          <div className="lg:col-span-5">
-            <div className="bg-white rounded-2xl border border-[#E5DED3] p-3 shadow-luxury space-y-3">
+          {/* Right Column: Featured Architectural Project Showcase with Floating Motion */}
+          <div className="lg:col-span-5 animate-fade-in-right delay-200">
+            <div className="bg-white rounded-2xl border border-[#E5DED3] p-3 shadow-luxury space-y-3 animate-float-smooth hover:shadow-2xl transition-all relative group">
+              
+              {/* Floating Architectural 2006-2026 Stamp Badge */}
+              <div className="absolute -top-3 -right-3 z-30 bg-[#14171F] text-amber-300 border-2 border-[#C59B27] px-3 py-1 rounded-full text-[10px] font-bold tracking-widest shadow-xl flex items-center gap-1.5 animate-pulse-glow">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#C59B27]" />
+                <span>2006 – 2026</span>
+              </div>
               
               {/* Media Visual Container */}
               <div className="h-72 sm:h-80 rounded-xl overflow-hidden relative">
