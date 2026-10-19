@@ -24,7 +24,7 @@ export default function App() {
   const handleSelectServiceForQuote = (serviceName) => {
     handleOpenQuoteModal({
       category: serviceName,
-      budget: 'AED 1.5M - AED 5M',
+      budget: '',
       notes: `Proposal request initiated for: ${serviceName}`
     });
   };

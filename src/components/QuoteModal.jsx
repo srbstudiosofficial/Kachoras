@@ -21,7 +21,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
     category: 'Building Contracting (G+1 Villa / Majlis)',
     sqft: '6500',
     timeline: 'Immediate (Next 30-60 Days)',
-    budget: 'AED 1.5M - AED 5M',
+    budget: '',
     location: 'Dubai',
     plotNo: '',
     hasBlueprints: 'Yes, full stamped drawings',
@@ -273,13 +273,16 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-xs font-bold text-[#1E293B]">Estimated Budget (AED)</label>
+                      <label className="text-xs font-bold text-[#1E293B] flex items-center justify-between">
+                        <span>Estimated Budget (AED)</span>
+                        <span className="text-[10px] text-slate-400 font-normal">Optional / As per BOQ</span>
+                      </label>
                       <input
                         type="text"
-                        placeholder="e.g. AED 2,500,000"
+                        placeholder="e.g. As per BOQ or enter amount"
                         value={formData.budget}
                         onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
                       />
                     </div>
 

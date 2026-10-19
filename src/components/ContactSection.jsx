@@ -21,7 +21,7 @@ export default function ContactSection() {
     phone: '',
     plotNo: '',
     serviceType: 'Building Contracting (G+1 Villa / Majlis)',
-    budgetRange: 'AED 1.5M - AED 5M',
+    budgetRange: '',
     location: 'Dubai',
     message: ''
   });
@@ -235,7 +235,7 @@ export default function ContactSection() {
                         phone: '',
                         plotNo: '',
                         serviceType: 'Building Contracting (G+1 Villa / Majlis)',
-                        budgetRange: 'AED 1.5M - AED 5M',
+                        budgetRange: '',
                         location: 'Dubai',
                         message: ''
                       });
@@ -325,18 +325,17 @@ export default function ContactSection() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-[#1E293B]">Estimated Budget (AED)</label>
-                    <select
+                    <label className="text-xs font-bold text-[#1E293B] flex items-center justify-between">
+                      <span>Estimated Budget (AED)</span>
+                      <span className="text-[10px] text-slate-400 font-normal">Optional / As per BOQ</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. As per Consultant BOQ / Tender drawings"
                       value={formData.budgetRange}
                       onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-2.5 text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
-                    >
-                      <option value="Under AED 500k">Under AED 500,000</option>
-                      <option value="AED 500k - AED 1.5M">AED 500,000 – AED 1,500,000</option>
-                      <option value="AED 1.5M - AED 5M">AED 1,500,000 – AED 5,000,000</option>
-                      <option value="AED 5M - AED 15M">AED 5,000,000 – AED 15,000,000</option>
-                      <option value="AED 15M+">AED 15,000,000+ (Major Development)</option>
-                    </select>
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-2.5 text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                    />
                   </div>
                 </div>
 
