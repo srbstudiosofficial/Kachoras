@@ -61,17 +61,16 @@ export default function ContactSection() {
     <section id="contact" className="py-24 bg-[#FBF9F5] relative border-t border-[#E5DED3]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A2E16]/10 border border-[#7A2E16]/20 text-[#7A2E16] text-xs font-bold uppercase tracking-wider">
-            <Mail className="w-3.5 h-3.5" />
-            <span>Official Estimating & Bidding Desk</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#1E293B] tracking-tight font-display">
-            CONNECT WITH <span className="text-[#7A2E16]">KACHORAS DUBAI</span>
+        {/* Section Header */}
+        <div className="max-w-3xl mb-16 space-y-3">
+          <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
+            Tenders & Technical Submissions
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
+            Request an Official Tender Proposal
           </h2>
-          <p className="text-[#64748B] text-base sm:text-lg leading-relaxed">
-            Submit your plot drawings, villa floorplans, or MEP tenders for review by our engineering managers. Direct response within 24 business hours.
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            Submit your plot drawings, villa floorplans, or MEP scope for evaluation by our engineering managers in Al Qusais. Direct response provided within 24 business hours.
           </p>
         </div>
 

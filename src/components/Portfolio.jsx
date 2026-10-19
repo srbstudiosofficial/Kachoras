@@ -7,11 +7,9 @@ import {
   Maximize2, 
   ArrowUpRight, 
   X, 
-  CheckCircle2, 
+  Check, 
   User, 
-  Briefcase,
-  Layers,
-  Sparkles
+  Briefcase
 } from 'lucide-react';
 import { 
   COMPLETED_PROJECTS_VILLAS, 
@@ -46,42 +44,41 @@ export default function Portfolio({ onInquireSimilar }) {
     : allProjects.filter(p => p.sectionType === 'ongoing');
 
   return (
-    <section id="portfolio" className="py-24 bg-[#FBF9F5] relative border-t border-[#E5DED3]">
+    <section id="portfolio" className="py-24 bg-[#F5F2EB] relative border-t border-[#E5DED3]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#7A2E16]/10 border border-[#7A2E16]/30 text-[#7A2E16] text-xs font-bold uppercase tracking-wider">
-            <Building className="w-3.5 h-3.5 text-[#C59B27]" />
-            <span>Dubai Engineering Portfolio • 20-Year Legacy</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#111827] tracking-tight font-display">
-            COMPLETED LANDMARKS & ACTIVE SITES
+        {/* Section Header */}
+        <div className="max-w-3xl mb-14 space-y-3">
+          <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
+            Certified Projects & Track Record
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
+            Selected Works & Landmarks
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg">
-            Every project below represents certified civil construction and electromechanical works verified under Dubai Municipality regulations.
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            Every project represents certified civil construction and electromechanical works verified under Dubai Municipality G+1 regulations.
           </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-12">
+        {/* Minimalist Filter Tabs */}
+        <div className="flex flex-wrap items-center gap-2 mb-12">
           <button
             onClick={() => setActiveTab("all")}
-            className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm ${
+            className={`px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeTab === "all"
-                ? 'bg-[#7A2E16] text-white shadow-luxury scale-105 border border-[#C59B27]/40'
-                : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#F4EFE6]'
+                ? 'bg-[#14171F] text-white shadow-sm'
+                : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#EFE9DF]'
             }`}
           >
-            All Projects ({allProjects.length})
+            All Works ({allProjects.length})
           </button>
           
           <button
             onClick={() => setActiveTab("villas")}
-            className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm ${
+            className={`px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeTab === "villas"
-                ? 'bg-[#7A2E16] text-white shadow-luxury scale-105 border border-[#C59B27]/40'
-                : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#F4EFE6]'
+                ? 'bg-[#14171F] text-white shadow-sm'
+                : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#EFE9DF]'
             }`}
           >
             Private Luxury Villas ({COMPLETED_PROJECTS_VILLAS.length})
@@ -89,109 +86,93 @@ export default function Portfolio({ onInquireSimilar }) {
 
           <button
             onClick={() => setActiveTab("municipality")}
-            className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm ${
+            className={`px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer ${
               activeTab === "municipality"
-                ? 'bg-[#7A2E16] text-white shadow-luxury scale-105 border border-[#C59B27]/40'
-                : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#F4EFE6]'
+                ? 'bg-[#14171F] text-white shadow-sm'
+                : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#EFE9DF]'
             }`}
           >
-            Dubai Municipality Works ({DUBAI_MUNICIPALITY_PROJECTS.length})
+            Dubai Municipality Civic ({DUBAI_MUNICIPALITY_PROJECTS.length})
           </button>
 
           <button
             onClick={() => setActiveTab("ongoing")}
-            className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm ${
+            className={`px-4 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer ${
               activeTab === "ongoing"
-                ? 'bg-[#7A2E16] text-white shadow-luxury scale-105 border border-[#C59B27]/40'
-                : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#F4EFE6]'
+                ? 'bg-[#14171F] text-white shadow-sm'
+                : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#EFE9DF]'
             }`}
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Active Works in Progress ({ONGOING_PROJECTS.length})</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <span>Active Developments ({ONGOING_PROJECTS.length})</span>
           </button>
         </div>
 
         {/* Project Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((proj) => (
             <div
               key={proj.id}
               onClick={() => setActiveModalProject(proj)}
-              className="bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-luxury hover:border-[#7A2E16] transition-all duration-300 cursor-pointer group flex flex-col justify-between"
+              className="bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-sm hover:border-[#7A2E16] hover:shadow-luxury transition-all duration-300 cursor-pointer group flex flex-col justify-between"
             >
               <div>
-                {/* 100% Reliable Architectural Elevation Header */}
+                {/* Visual Header */}
                 <div className="relative h-52 overflow-hidden border-b border-[#E5DED3]">
                   <ArchitecturalVisual 
                     type={proj.visualType || proj.sectionType}
                     plotNo={proj.plotNo}
                     location={proj.location}
                     category={proj.type || proj.category}
-                    className="w-full h-full group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full"
                   />
 
-                  {/* Top Status & Plot Badges */}
-                  <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-20">
-                    <span className="bg-[#111827]/90 backdrop-blur-md border border-amber-500/40 px-2.5 py-1 rounded-full text-[11px] font-bold text-[#C59B27] font-mono shadow-md">
-                      Plot #{proj.plotNo}
-                    </span>
-                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-md ${
+                  {/* Status Indicator */}
+                  <div className="absolute top-3 right-3 z-20">
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
                       proj.status.includes('Completed') 
-                        ? 'bg-emerald-600 text-white' 
-                        : 'bg-[#7A2E16] text-white'
+                        ? 'bg-emerald-800/90 text-white' 
+                        : 'bg-[#7A2E16]/90 text-white'
                     }`}>
                       {proj.status.includes('Completed') ? 'Handed Over' : 'Active Site'}
-                    </span>
-                  </div>
-
-                  {/* Inspect CTA Hover */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 backdrop-blur-[1px] z-30">
-                    <span className="bg-[#7A2E16] text-white font-bold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5 shadow-xl border border-[#C59B27]/40">
-                      <span>View Specifications</span>
-                      <Maximize2 className="w-3.5 h-3.5 text-[#C59B27]" />
                     </span>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6 space-y-3.5">
+                <div className="p-6 space-y-3">
                   <div className="flex items-start justify-between gap-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#7A2E16] bg-[#7A2E16]/10 px-2.5 py-0.5 rounded-full">
-                      {proj.category || (proj.sectionType === 'municipality' ? 'Dubai Municipality Civic' : 'Private G+1 Villa')}
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A2E16] bg-[#7A2E16]/10 px-2 py-0.5 rounded">
+                      {proj.category || (proj.sectionType === 'municipality' ? 'Municipal Civic' : 'Private G+1 Villa')}
                     </span>
                     <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#7A2E16] transition-colors shrink-0" />
                   </div>
 
-                  <h3 className="text-base font-bold text-[#111827] group-hover:text-[#7A2E16] transition-colors font-display line-clamp-2 leading-snug">
+                  <h3 className="text-base font-bold text-[#14171F] group-hover:text-[#7A2E16] transition-colors font-display line-clamp-2 leading-snug">
                     {proj.projectDetails}
                   </h3>
 
-                  {/* Metadata Matrix */}
-                  <div className="space-y-2 pt-3 border-t border-[#F0EBE1] text-xs">
-                    <div className="flex items-center gap-2 text-slate-700">
-                      <User className="w-3.5 h-3.5 text-[#7A2E16] shrink-0" />
-                      <span className="truncate">Client: <strong className="text-slate-900">{proj.client}</strong></span>
+                  {/* Specifications */}
+                  <div className="space-y-1.5 pt-3 border-t border-[#F0EBE1] text-xs text-slate-600">
+                    <div className="flex items-center gap-2">
+                      <User className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <span className="truncate">Client: <strong className="text-slate-800 font-medium">{proj.client}</strong></span>
                     </div>
 
                     {proj.consultant && (
-                      <div className="flex items-center gap-2 text-slate-700">
-                        <Briefcase className="w-3.5 h-3.5 text-[#C59B27] shrink-0" />
-                        <span className="truncate">Consultant: <strong className="text-slate-900">{proj.consultant}</strong></span>
+                      <div className="flex items-center gap-2">
+                        <Briefcase className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                        <span className="truncate">Consultant: <strong className="text-slate-800 font-medium">{proj.consultant}</strong></span>
                       </div>
                     )}
-
-                    <div className="flex items-center gap-2 text-slate-700">
-                      <MapPin className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                      <span className="truncate">Location: <strong className="text-slate-900">{proj.location}</strong></span>
-                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Card Footer */}
-              <div className="px-6 py-3.5 bg-[#FAF7F2] border-t border-[#E5DED3] text-[11px] text-slate-500 flex justify-between items-center">
-                <span>Dubai Municipality Approved Project</span>
-                <span className="text-[#7A2E16] font-bold group-hover:underline">Inspect Details →</span>
+              <div className="px-6 py-3 bg-[#FAF8F5] border-t border-[#E5DED3] text-[11px] text-slate-500 flex justify-between items-center">
+                <span>Dubai Municipality Verified</span>
+                <span className="text-[#7A2E16] font-semibold group-hover:underline">View Specs →</span>
               </div>
             </div>
           ))}
@@ -199,10 +180,10 @@ export default function Portfolio({ onInquireSimilar }) {
 
       </div>
 
-      {/* Project Lightbox Modal */}
+      {/* Project Specifications Modal */}
       {activeModalProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white border border-[#E5DED3] max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl relative space-y-6 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white border border-[#E5DED3] max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl relative space-y-6 max-h-[90vh] overflow-y-auto">
             
             {/* Header Visual */}
             <div className="relative h-64 w-full border-b border-[#E5DED3]">
@@ -216,82 +197,98 @@ export default function Portfolio({ onInquireSimilar }) {
 
               <button
                 onClick={() => setActiveModalProject(null)}
-                className="absolute top-4 right-4 p-2 text-white bg-black/60 hover:bg-black/80 rounded-full border border-white/20 transition z-30"
+                className="absolute top-4 right-4 p-2 text-white bg-black/60 hover:bg-black/80 rounded-full border border-white/20 transition z-30 cursor-pointer"
+                aria-label="Close modal"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
-
-              <div className="absolute bottom-4 left-6 right-6 z-20">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#C59B27] bg-[#111827]/90 px-3 py-1 rounded-full border border-amber-500/40">
-                  {activeModalProject.status}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-black text-white mt-2 font-display">
-                  {activeModalProject.projectDetails}
-                </h3>
-              </div>
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 sm:p-8 space-y-5 pt-0">
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <div className="bg-[#FAF7F2] p-3 rounded-xl border border-[#E5DED3]">
-                  <div className="text-[11px] text-slate-500 uppercase font-semibold">Plot Number</div>
-                  <div className="text-sm font-bold text-[#7A2E16] font-mono mt-0.5">{activeModalProject.plotNo}</div>
-                </div>
+            <div className="p-6 sm:p-8 pt-0 space-y-5">
+              <div>
+                <span className="text-xs uppercase font-bold tracking-wider text-[#7A2E16]">
+                  {activeModalProject.category || 'Dubai Construction'}
+                </span>
+                <h3 className="text-2xl font-bold text-[#14171F] font-display mt-1">
+                  {activeModalProject.projectDetails}
+                </h3>
+              </div>
 
-                <div className="bg-[#FAF7F2] p-3 rounded-xl border border-[#E5DED3]">
-                  <div className="text-[11px] text-slate-500 uppercase font-semibold">Project Location</div>
-                  <div className="text-sm font-bold text-slate-900 mt-0.5">{activeModalProject.location}</div>
+              {/* Specifications Matrix */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-[#FAF8F5] p-4 rounded-xl border border-[#EFE9DF] text-xs">
+                <div>
+                  <span className="text-slate-400 block text-[10px] font-medium">Plot Number</span>
+                  <strong className="text-slate-800 font-mono">{activeModalProject.plotNo || 'N/A'}</strong>
                 </div>
-
-                <div className="bg-[#FAF7F2] p-3 rounded-xl border border-[#E5DED3]">
-                  <div className="text-[11px] text-slate-500 uppercase font-semibold">Execution Status</div>
-                  <div className="text-sm font-bold text-emerald-600 mt-0.5">{activeModalProject.status}</div>
+                <div>
+                  <span className="text-slate-400 block text-[10px] font-medium">District / Location</span>
+                  <strong className="text-slate-800">{activeModalProject.location || 'Dubai, UAE'}</strong>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-[10px] font-medium">Contractor Role</span>
+                  <strong className="text-[#7A2E16]">G+1 Main Contractor</strong>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-[10px] font-medium">Engineering Consultant</span>
+                  <strong className="text-slate-800">{activeModalProject.consultant || 'Field Supervision'}</strong>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-[10px] font-medium">Handover Status</span>
+                  <strong className="text-emerald-700">{activeModalProject.status}</strong>
+                </div>
+                <div>
+                  <span className="text-slate-400 block text-[10px] font-medium">Code Compliance</span>
+                  <strong className="text-slate-800">Dubai Municipality</strong>
                 </div>
               </div>
 
-              {/* Client & Consultant Info */}
-              <div className="bg-[#FAF7F2] p-4 rounded-xl border border-[#E5DED3] space-y-2 text-xs">
-                <div className="flex justify-between items-center text-slate-700">
-                  <span className="text-slate-500">Owner / Client:</span>
-                  <strong className="text-slate-900 text-sm">{activeModalProject.client}</strong>
+              {/* Scope Breakdown */}
+              <div className="space-y-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+                  Executed Engineering Disciplines
+                </h4>
+                <div className="grid sm:grid-cols-2 gap-2 text-xs text-slate-700">
+                  <div className="flex items-center gap-2 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#EFE9DF]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#7A2E16]" />
+                    <span>Reinforced Concrete & Civil Substructure</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#EFE9DF]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#7A2E16]" />
+                    <span>DEWA Electrical Substations & Load Distribution</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#EFE9DF]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#7A2E16]" />
+                    <span>Ducted HVAC & Ventilation Networks</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#EFE9DF]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#7A2E16]" />
+                    <span>Custom Aluminium & Architectural Glazing</span>
+                  </div>
                 </div>
-                {activeModalProject.consultant && (
-                  <div className="flex justify-between items-center text-slate-700 border-t border-[#E5DED3] pt-2">
-                    <span className="text-slate-500">Engineering Consultant:</span>
-                    <strong className="text-[#7A2E16]">{activeModalProject.consultant}</strong>
-                  </div>
-                )}
-                {activeModalProject.scope && (
-                  <div className="flex justify-between items-center text-slate-700 border-t border-[#E5DED3] pt-2">
-                    <span className="text-slate-500">Scope of Works:</span>
-                    <span className="text-slate-900 font-semibold">{activeModalProject.scope}</span>
-                  </div>
-                )}
               </div>
 
               {/* Actions */}
-              <div className="pt-4 border-t border-[#E5DED3] flex justify-end gap-3">
-                <button
-                  onClick={() => setActiveModalProject(null)}
-                  className="px-5 py-2.5 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-[#F4EFE6] rounded-xl border border-[#E5DED3]"
-                >
-                  Close
-                </button>
+              <div className="pt-3 border-t border-[#E5DED3] flex flex-wrap justify-between items-center gap-3">
                 <button
                   onClick={() => {
-                    const desc = activeModalProject.projectDetails;
                     setActiveModalProject(null);
-                    onInquireSimilar(desc);
+                    if (onInquireSimilar) onInquireSimilar(activeModalProject.projectDetails);
                   }}
-                  className="px-6 py-2.5 text-xs font-bold text-white bg-[#7A2E16] hover:bg-[#652310] rounded-xl shadow-md border border-[#C59B27]/40"
+                  className="px-5 py-2.5 bg-[#7A2E16] hover:bg-[#652310] text-white font-bold text-xs rounded-xl shadow-md transition cursor-pointer"
                 >
-                  Inquire for Similar Project →
+                  Inquire on Similar Project
+                </button>
+
+                <button
+                  onClick={() => setActiveModalProject(null)}
+                  className="text-xs font-semibold text-slate-500 hover:text-slate-800"
+                >
+                  Close Window
                 </button>
               </div>
 
             </div>
-
           </div>
         </div>
       )}
