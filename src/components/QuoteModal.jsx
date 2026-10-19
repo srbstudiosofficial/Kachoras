@@ -14,6 +14,7 @@ import {
   MessageSquare 
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
+import { submitInquiry } from '../services/inquiryService';
 
 export default function QuoteModal({ isOpen, onClose, initialData }) {
   const [step, setStep] = useState(1);
@@ -58,25 +59,28 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const randomNum = Math.floor(1000 + Math.random() * 9000);
-    const ref = `KCH-${randomNum}-RFQ`;
-    setReferenceId(ref);
-
     try {
-      const quotes = JSON.parse(localStorage.getItem('kachoras_quotes') || '[]');
-      quotes.push({
-        referenceId: ref,
-        ...formData,
-        timestamp: new Date().toISOString()
+      const res = await submitInquiry({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        plotNo: formData.plotNo,
+        serviceType: formData.category,
+        budgetRange: formData.budget,
+        location: formData.location || 'Dubai, UAE',
+        message: `${formData.sqft ? `Approx Area: ${formData.sqft} sq.ft. ` : ''}${formData.timeline ? `Timeline: ${formData.timeline}. ` : ''}${formData.hasBlueprints ? `Blueprints: ${formData.hasBlueprints}. ` : ''}${formData.notes || ''}`
       });
-      localStorage.setItem('kachoras_quotes', JSON.stringify(quotes));
+      setReferenceId(res.referenceId);
     } catch (err) {
-      console.warn('Storage warning:', err);
+      console.warn('Inquiry notice:', err);
+      const randomNum = Math.floor(1000 + Math.random() * 9000);
+      setReferenceId(`KCH-${randomNum}-RFQ`);
+    } finally {
+      setIsSubmitted(true);
     }
-
-    setIsSubmitted(true);
   };
 
   const handleResetAndClose = () => {

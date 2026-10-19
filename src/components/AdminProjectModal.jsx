@@ -18,7 +18,16 @@ import {
   ExternalLink,
   RefreshCw,
   Eye,
-  Check
+  Check,
+  Inbox,
+  Mail,
+  Phone,
+  MessageSquare,
+  Download,
+  MapPin,
+  Building,
+  User,
+  FileText
 } from 'lucide-react';
 import { 
   getAllProjects, 
@@ -31,6 +40,14 @@ import {
   getStoredFirebaseConfig,
   saveStoredFirebaseConfig
 } from '../services/projectService';
+import {
+  getStoredInquiries,
+  updateInquiryStatus,
+  deleteInquiry,
+  exportInquiriesToCSV,
+  getEmailConfig,
+  saveEmailConfig
+} from '../services/inquiryService';
 
 const CATEGORY_OPTIONS = [
   "Building Contracting",
@@ -78,10 +95,30 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   const [formSuccessMessage, setFormSuccessMessage] = useState('');
   const fileInputRef = useRef(null);
 
-  // Settings state
   const [newPasskey, setNewPasskey] = useState('');
   const [settingsNotice, setSettingsNotice] = useState('');
   const [firebaseConfigStr, setFirebaseConfigStr] = useState('');
+
+  // Inquiries & Leads state
+  const [inquiries, setInquiries] = useState([]);
+  const [inquiryFilter, setInquiryFilter] = useState('all'); // 'all' | 'new' | 'contacted' | 'archived'
+
+  // Load inquiries
+  const refreshInquiriesList = () => {
+    setInquiries(getStoredInquiries());
+  };
+
+  const handleStatusChange = (id, newStatus) => {
+    const updated = updateInquiryStatus(id, newStatus);
+    setInquiries(updated);
+  };
+
+  const handleDeleteInquiry = (id) => {
+    if (window.confirm('Are you sure you want to delete this lead record?')) {
+      const updated = deleteInquiry(id);
+      setInquiries(updated);
+    }
+  };
 
   // Load projects on open or tab change
   const refreshProjectsList = () => {
@@ -100,6 +137,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
         setIsAuthenticated(true);
       }
       refreshProjectsList();
+      refreshInquiriesList();
       const fbConfig = getStoredFirebaseConfig();
       if (fbConfig) {
         setFirebaseConfigStr(JSON.stringify(fbConfig, null, 2));
@@ -371,6 +409,21 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                   </button>
 
                   <button
+                    onClick={() => { setActiveTab('inquiries'); refreshInquiriesList(); }}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
+                      activeTab === 'inquiries'
+                        ? 'bg-[#7A2E16] text-white shadow'
+                        : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#FAF8F5]'
+                    }`}
+                  >
+                    <Inbox className="w-3.5 h-3.5 text-amber-200" />
+                    <span>Inquiries ({inquiries.length})</span>
+                    {inquiries.filter(i => i.status === 'new').length > 0 && (
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    )}
+                  </button>
+
+                  <button
                     onClick={() => setActiveTab('settings')}
                     className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 ${
                       activeTab === 'settings'
@@ -379,7 +432,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                     }`}
                   >
                     <Database className="w-3.5 h-3.5 text-[#C59B27]" />
-                    <span>Cloud Sync</span>
+                    <span>Settings & Cloud</span>
                   </button>
                 </div>
 
@@ -764,7 +817,233 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                 </div>
               )}
 
-              {/* TAB 3: Cloud Sync & Settings */}
+              {/* TAB: Client Inquiries & Tenders */}
+              {activeTab === 'inquiries' && (
+                <div className="space-y-5">
+                  {/* Inquiries Header */}
+                  <div className="bg-white rounded-2xl border border-[#E5DED3] p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <Inbox className="w-5 h-5 text-[#7A2E16]" />
+                        <h4 className="text-xl font-bold font-display text-[#14171F]">
+                          Client Tenders & Lead Inquiries
+                        </h4>
+                      </div>
+                      <p className="text-xs text-slate-500 mt-1">
+                        Forwarded automatically to <strong>kachorasdubai@gmail.com</strong> and archived in your executive portal.
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2 self-start sm:self-auto">
+                      <button
+                        onClick={exportInquiriesToCSV}
+                        className="px-3.5 py-2 bg-white hover:bg-slate-50 border border-[#E5DED3] text-slate-700 text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-sm cursor-pointer"
+                        title="Download Leads to CSV Spreadsheet"
+                      >
+                        <Download className="w-3.5 h-3.5 text-[#C59B27]" />
+                        <span>Export CSV / Excel</span>
+                      </button>
+
+                      <button
+                        onClick={refreshInquiriesList}
+                        className="p-2 bg-white hover:bg-slate-50 border border-[#E5DED3] text-slate-600 rounded-xl transition cursor-pointer"
+                        title="Refresh List"
+                      >
+                        <RefreshCw className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Filter Pills */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      onClick={() => setInquiryFilter('all')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+                        inquiryFilter === 'all'
+                          ? 'bg-[#14171F] text-white'
+                          : 'bg-white text-slate-600 border border-[#E5DED3] hover:bg-slate-50'
+                      }`}
+                    >
+                      All Inquiries ({inquiries.length})
+                    </button>
+                    <button
+                      onClick={() => setInquiryFilter('new')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+                        inquiryFilter === 'new'
+                          ? 'bg-emerald-700 text-white'
+                          : 'bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-50'
+                      }`}
+                    >
+                      <span>New Leads</span>
+                      <span className="font-mono text-[10px] bg-white/20 px-1 rounded">
+                        {inquiries.filter(i => i.status === 'new').length}
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => setInquiryFilter('contacted')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+                        inquiryFilter === 'contacted'
+                          ? 'bg-blue-700 text-white'
+                          : 'bg-white text-slate-600 border border-[#E5DED3] hover:bg-slate-50'
+                      }`}
+                    >
+                      Contacted ({inquiries.filter(i => i.status === 'contacted').length})
+                    </button>
+                    <button
+                      onClick={() => setInquiryFilter('archived')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+                        inquiryFilter === 'archived'
+                          ? 'bg-slate-700 text-white'
+                          : 'bg-white text-slate-600 border border-[#E5DED3] hover:bg-slate-50'
+                      }`}
+                    >
+                      Archived ({inquiries.filter(i => i.status === 'archived').length})
+                    </button>
+                  </div>
+
+                  {/* Inquiries Cards List */}
+                  <div className="space-y-3.5">
+                    {inquiries
+                      .filter(i => inquiryFilter === 'all' ? true : i.status === inquiryFilter)
+                      .map((lead) => {
+                        const statusConfig = 
+                          lead.status === 'new'
+                            ? { bg: 'bg-emerald-50 text-emerald-800 border-emerald-200', label: 'New Lead' }
+                            : lead.status === 'contacted'
+                            ? { bg: 'bg-blue-50 text-blue-800 border-blue-200', label: 'Contacted' }
+                            : { bg: 'bg-slate-100 text-slate-600 border-slate-200', label: 'Archived' };
+
+                        return (
+                          <div
+                            key={lead.id}
+                            className="bg-white rounded-2xl border border-[#E5DED3] p-5 sm:p-6 shadow-sm space-y-4 hover:border-[#7A2E16] transition"
+                          >
+                            {/* Card Header */}
+                            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#F0EBE1] pb-3.5">
+                              <div className="flex flex-wrap items-center gap-2.5">
+                                <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#FAF8F5] border border-[#E5DED3] text-[#7A2E16]">
+                                  {lead.referenceId}
+                                </span>
+                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${statusConfig.bg}`}>
+                                  {statusConfig.label}
+                                </span>
+                                <span className="text-[11px] text-slate-400">
+                                  {new Date(lead.timestamp).toLocaleString()}
+                                </span>
+                              </div>
+
+                              {/* Status Toggle Dropdown */}
+                              <div className="flex items-center gap-2">
+                                <select
+                                  value={lead.status}
+                                  onChange={(e) => handleStatusChange(lead.id, e.target.value)}
+                                  className="text-xs bg-[#FAF8F5] border border-[#E5DED3] rounded-lg px-2.5 py-1 text-slate-700 outline-none font-semibold cursor-pointer"
+                                >
+                                  <option value="new">Mark: New</option>
+                                  <option value="contacted">Mark: Contacted</option>
+                                  <option value="archived">Mark: Archived</option>
+                                </select>
+
+                                <button
+                                  onClick={() => handleDeleteInquiry(lead.id)}
+                                  className="p-1.5 rounded-lg border border-rose-200 text-rose-500 hover:bg-rose-50 transition cursor-pointer"
+                                  title="Delete record"
+                                >
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Client & Scope Matrix */}
+                            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+                              <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF]">
+                                <span className="text-slate-400 block text-[10px] uppercase font-semibold">Client / Company</span>
+                                <strong className="text-slate-900 block text-sm mt-0.5">{lead.name}</strong>
+                                {lead.company && <span className="text-slate-500 block text-[11px]">{lead.company}</span>}
+                              </div>
+
+                              <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF]">
+                                <span className="text-slate-400 block text-[10px] uppercase font-semibold">Discipline Requested</span>
+                                <strong className="text-[#7A2E16] block text-sm mt-0.5">{lead.serviceType}</strong>
+                                {lead.budgetRange && <span className="text-slate-600 block text-[11px]">Budget: {lead.budgetRange}</span>}
+                              </div>
+
+                              <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF]">
+                                <span className="text-slate-400 block text-[10px] uppercase font-semibold">Location / Plot</span>
+                                <strong className="text-slate-900 block text-sm mt-0.5">{lead.location}</strong>
+                                {lead.plotNo && <span className="text-emerald-800 font-mono block text-[11px]">Plot #{lead.plotNo}</span>}
+                              </div>
+                            </div>
+
+                            {/* Notes / Message */}
+                            {lead.message && (
+                              <div className="p-3.5 bg-[#FAF9F6] rounded-xl border border-[#EFE9DF] text-xs text-slate-700 leading-relaxed font-normal">
+                                <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Client Scope Notes:</span>
+                                {lead.message}
+                              </div>
+                            )}
+
+                            {lead.attachedFile && (
+                              <div className="text-xs text-[#7A2E16] font-semibold flex items-center gap-1.5">
+                                <FileText className="w-3.5 h-3.5" />
+                                <span>Attached Drawings / BOQ: {lead.attachedFile}</span>
+                              </div>
+                            )}
+
+                            {/* Direct Communication Buttons */}
+                            <div className="pt-2 flex flex-wrap items-center gap-2">
+                              {lead.phone && (
+                                <a
+                                  href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+                                    `Hello ${lead.name}, this is Jose K. George from Kachoras Electromechanical Contracting LLC Dubai regarding your project inquiry [Ref: ${lead.referenceId}].`
+                                  )}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm"
+                                >
+                                  <MessageSquare className="w-3.5 h-3.5" />
+                                  <span>WhatsApp Client</span>
+                                </a>
+                              )}
+
+                              {lead.phone && (
+                                <a
+                                  href={`tel:${lead.phone}`}
+                                  className="px-3.5 py-2 bg-[#14171F] hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5"
+                                >
+                                  <Phone className="w-3.5 h-3.5 text-[#C59B27]" />
+                                  <span>Call ({lead.phone})</span>
+                                </a>
+                              )}
+
+                              {lead.email && (
+                                <a
+                                  href={`mailto:${lead.email}?subject=${encodeURIComponent(`Kachoras Contracting Inquiry [Ref: ${lead.referenceId}]`)}`}
+                                  className="px-3.5 py-2 bg-white hover:bg-slate-50 border border-[#E5DED3] text-slate-800 rounded-xl text-xs font-bold transition flex items-center gap-1.5"
+                                >
+                                  <Mail className="w-3.5 h-3.5 text-[#7A2E16]" />
+                                  <span>Email Client</span>
+                                </a>
+                              )}
+                            </div>
+
+                          </div>
+                        );
+                      })}
+
+                    {inquiries.filter(i => inquiryFilter === 'all' ? true : i.status === inquiryFilter).length === 0 && (
+                      <div className="bg-white rounded-2xl border border-[#E5DED3] p-10 text-center space-y-2 text-slate-500">
+                        <Inbox className="w-8 h-8 text-slate-400 mx-auto" />
+                        <h5 className="font-bold text-slate-700 text-sm">No Inquiries In This Tab</h5>
+                        <p className="text-xs">Incoming tenders submitted by clients on the website will be listed here.</p>
+                      </div>
+                    )}
+                  </div>
+
+                </div>
+              )}
+
+              {/* TAB 4: Cloud Sync & Settings */}
               {activeTab === 'settings' && (
                 <div className="space-y-6">
                   {settingsNotice && (
@@ -842,6 +1121,36 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         </button>
                       </div>
                     </div>
+                  </div>
+
+                  {/* Email Forwarding Configuration Info */}
+                  <div className="bg-white rounded-2xl border border-[#E5DED3] p-6 shadow-sm space-y-4">
+                    <div className="border-b border-[#F0EBE1] pb-3">
+                      <div className="flex items-center gap-2">
+                        <Mail className="w-4 h-4 text-[#7A2E16]" />
+                        <h4 className="text-base font-bold font-display text-[#14171F]">
+                          Direct Email Lead Dispatch
+                        </h4>
+                      </div>
+                      <p className="text-xs text-slate-500 mt-1">
+                        Client submissions from the website contact transmittal form and 3-step cost estimator are dispatched in real-time.
+                      </p>
+                    </div>
+
+                    <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#EFE9DF] flex flex-wrap items-center justify-between gap-3">
+                      <div className="space-y-0.5">
+                        <span className="text-[10px] text-slate-400 uppercase font-bold">Primary Notification Email</span>
+                        <div className="font-mono text-sm font-bold text-[#7A2E16]">kachorasdubai@gmail.com</div>
+                      </div>
+                      <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                        <span>Active Dispatch</span>
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      Every tender RFP submitted by a client is simultaneously dispatched to <strong>kachorasdubai@gmail.com</strong> and archived in your <strong>Inquiries ({inquiries.length})</strong> tab for complete backup and record keeping.
+                    </p>
                   </div>
 
                 </div>

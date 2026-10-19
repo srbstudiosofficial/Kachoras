@@ -12,6 +12,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
+import { submitInquiry } from '../services/inquiryService';
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -28,27 +29,34 @@ export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [attachedFile, setAttachedFile] = useState(null);
+  const [submissionRef, setSubmissionRef] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const existing = JSON.parse(localStorage.getItem('kachoras_inquiries') || '[]');
-      existing.push({
-        ...formData,
-        attachedFile,
-        timestamp: new Date().toISOString()
+      const res = await submitInquiry({
+        name: formData.name,
+        company: formData.company,
+        email: formData.email,
+        phone: formData.phone,
+        plotNo: formData.plotNo,
+        serviceType: formData.serviceType,
+        budgetRange: formData.budgetRange,
+        location: formData.location,
+        message: formData.message,
+        attachedFile: attachedFile
       });
-      localStorage.setItem('kachoras_inquiries', JSON.stringify(existing));
+      if (res && res.referenceId) {
+        setSubmissionRef(res.referenceId);
+      }
     } catch (err) {
-      console.warn('Storage warning:', err);
-    }
-
-    setTimeout(() => {
+      console.warn('Submission notice:', err);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 600);
+    }
   };
 
   const handleFakeFileUpload = (e) => {
@@ -194,9 +202,14 @@ export default function ContactSection() {
                 <div className="space-y-1">
                   <span className="text-xs font-bold uppercase tracking-widest text-emerald-700">Inquiry Logged Successfully</span>
                   <h3 className="text-2xl font-black text-[#1E293B] font-display">Tender / RFP Transmitted!</h3>
+                  {submissionRef && (
+                    <div className="inline-block font-mono text-xs font-bold text-[#7A2E16] bg-[#FAF8F5] px-3 py-1 rounded-lg border border-[#EFE9DF] mt-1">
+                      Tracking Reference: {submissionRef}
+                    </div>
+                  )}
                 </div>
                 <p className="text-sm text-[#475569] max-w-lg mx-auto leading-relaxed">
-                  Thank you, <strong className="text-[#1E293B]">{formData.name}</strong>. Your project details have been recorded. You can also connect directly with our engineering desk right now:
+                  Thank you, <strong className="text-[#1E293B]">{formData.name}</strong>. Your project specifications have been dispatched to our estimating desk at <strong>kachorasdubai@gmail.com</strong> and logged into our engineering leads portal.
                 </p>
 
                 {/* Instant Dispatch Actions */}
