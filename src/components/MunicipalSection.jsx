@@ -39,7 +39,7 @@ export default function MunicipalSection() {
         <div className="mb-14 bg-white border border-[#E5DED3] rounded-3xl overflow-hidden shadow-luxury grid lg:grid-cols-12 items-center">
           <div className="lg:col-span-6 relative h-72 sm:h-84 lg:h-full min-h-[300px] overflow-hidden group">
             <img 
-              src="/assets/civic.jpg" 
+              src="./assets/civic.jpg" 
               alt="Dubai Municipality Civic Project Specimen" 
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
             />

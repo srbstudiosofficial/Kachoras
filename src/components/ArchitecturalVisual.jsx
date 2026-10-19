@@ -6,27 +6,27 @@ const getAssetForProject = (type = '', plotNo = '') => {
   const p = (plotNo || '').toString().toLowerCase();
 
   // Specialized disciplines
-  if (t.includes('majlis')) return '/assets/majlis.jpg';
-  if (t.includes('municipality') || t.includes('clinic') || t.includes('park') || t.includes('sculpture') || t.includes('chamber') || t.includes('graveyard')) return '/assets/civic.jpg';
-  if (t.includes('mep') || t.includes('electrical') || t.includes('hvac')) return '/assets/mep.jpg';
-  if (t.includes('aluminium') || t.includes('glass') || t.includes('metal')) return '/assets/aluminium.jpg';
+  if (t.includes('majlis')) return './assets/majlis.jpg';
+  if (t.includes('municipality') || t.includes('clinic') || t.includes('park') || t.includes('sculpture') || t.includes('chamber') || t.includes('graveyard')) return './assets/civic.jpg';
+  if (t.includes('mep') || t.includes('electrical') || t.includes('hvac')) return './assets/mep.jpg';
+  if (t.includes('aluminium') || t.includes('glass') || t.includes('metal')) return './assets/aluminium.jpg';
   
   // Specific villa plot mappings for diverse visuals across cards
-  if (p.includes('4317233')) return '/assets/villa.jpg';          // Wadi Al Shabak Villa 1
-  if (p.includes('4312137')) return '/assets/villa_stone.jpg';    // Wadi Al Shabak Villa 2 (Stone Facade)
-  if (p.includes('3760253')) return '/assets/villa_glass.jpg';    // Al Barsha Second (Cantilever Glass)
-  if (p.includes('4247036')) return '/assets/villa_arabic.jpg';   // Al Warqaa Villa (Contemporary Arabic)
-  if (p.includes('7113697')) return '/assets/villa_stone.jpg';    // Al Awir Villa
-  if (p.includes('6720582')) return '/assets/villa_annex.jpg';    // Al Barsha South Extension & Service Block
-  if (p.includes('2631376')) return '/assets/villa_annex.jpg';    // Al Mizhar Service Block
-  if (p.includes('3760283')) return '/assets/villa_glass.jpg';    // Al Barsha Second
-  if (p.includes('4164036')) return '/assets/villa_arabic.jpg';   // Nadd Al Hamar
-  if (p.includes('3670958')) return '/assets/majlis.jpg';         // Umm Al Sheif Majlis
-  if (p.includes('6716536')) return '/assets/majlis.jpg';         // Al Barsha South Majlis
-  if (p.includes('3761835')) return '/assets/majlis.jpg';         // Al Barsha Second Majlis
-  if (p.includes('325-262')) return '/assets/villa_stone.jpg';    // Al Mizhar Villa
+  if (p.includes('4317233')) return './assets/villa.jpg';          // Wadi Al Shabak Villa 1
+  if (p.includes('4312137')) return './assets/villa_stone.jpg';    // Wadi Al Shabak Villa 2 (Stone Facade)
+  if (p.includes('3760253')) return './assets/villa_glass.jpg';    // Al Barsha Second (Cantilever Glass)
+  if (p.includes('4247036')) return './assets/villa_arabic.jpg';   // Al Warqaa Villa (Contemporary Arabic)
+  if (p.includes('7113697')) return './assets/villa_stone.jpg';    // Al Awir Villa
+  if (p.includes('6720582')) return './assets/villa_annex.jpg';    // Al Barsha South Extension & Service Block
+  if (p.includes('2631376')) return './assets/villa_annex.jpg';    // Al Mizhar Service Block
+  if (p.includes('3760283')) return './assets/villa_glass.jpg';    // Al Barsha Second
+  if (p.includes('4164036')) return './assets/villa_arabic.jpg';   // Nadd Al Hamar
+  if (p.includes('3670958')) return './assets/majlis.jpg';         // Umm Al Sheif Majlis
+  if (p.includes('6716536')) return './assets/majlis.jpg';         // Al Barsha South Majlis
+  if (p.includes('3761835')) return './assets/majlis.jpg';         // Al Barsha Second Majlis
+  if (p.includes('325-262')) return './assets/villa_stone.jpg';    // Al Mizhar Villa
 
-  return '/assets/villa.jpg';
+  return './assets/villa.jpg';
 };
 
 export default function ArchitecturalVisual({ 
