@@ -255,7 +255,7 @@ export default function ContactSection() {
                 </div>
 
                 {/* Name & Contact */}
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-[#1E293B]">Client / Owner Name *</label>
                     <input
@@ -264,7 +264,7 @@ export default function ContactSection() {
                       placeholder="e.g. Mr. Khalifa Almas"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-2.5 text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
                     />
                   </div>
 
@@ -276,13 +276,13 @@ export default function ContactSection() {
                       placeholder="+971-5X-XXXXXXX"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-2.5 text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
                     />
                   </div>
                 </div>
 
                 {/* Email & Plot No */}
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-[#1E293B]">Email Address *</label>
                     <input
@@ -291,7 +291,7 @@ export default function ContactSection() {
                       placeholder="client@domain.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-2.5 text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
                     />
                   </div>
 
@@ -302,19 +302,19 @@ export default function ContactSection() {
                       placeholder="e.g. Plot No. 4317233, Al Barsha"
                       value={formData.plotNo}
                       onChange={(e) => setFormData({ ...formData, plotNo: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-2.5 text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
                     />
                   </div>
                 </div>
 
                 {/* Service Discipline & Budget */}
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-[#1E293B]">Service Category</label>
                     <select
                       value={formData.serviceType}
                       onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-2.5 text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
                     >
                       <option value="Building Contracting (G+1 Villa / Majlis)">Building Contracting (G+1 Villa / Majlis)</option>
                       <option value="MEP & HVAC Engineering">MEP & HVAC Engineering</option>
@@ -334,7 +334,7 @@ export default function ContactSection() {
                       placeholder="e.g. As per Consultant BOQ / Tender drawings"
                       value={formData.budgetRange}
                       onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-2.5 text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
                     />
                   </div>
                 </div>
@@ -347,7 +347,7 @@ export default function ContactSection() {
                     placeholder="Provide details about consultant (e.g. Croquis, Al Manhal), required ground breaking date, Majlis requirements, etc."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-2.5 text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                    className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
                   />
                 </div>
 

@@ -10,9 +10,9 @@ export default function KachorasLogo({
   const isLightText = variant === "light";
 
   return (
-    <div className={`flex items-center gap-3.5 select-none ${className}`}>
+    <div className={`flex items-center gap-2.5 sm:gap-3.5 select-none ${className}`}>
       {/* 3D Chamfered Architectural "K" Crest */}
-      <div className="relative w-11 h-11 shrink-0 group-hover:scale-105 transition-transform duration-300">
+      <div className="relative w-9 h-9 sm:w-11 sm:h-11 shrink-0 group-hover:scale-105 transition-transform duration-300">
         <svg 
           viewBox="0 0 100 100" 
           className="w-full h-full drop-shadow-[0_4px_10px_rgba(122,46,22,0.3)]" 
@@ -109,39 +109,39 @@ export default function KachorasLogo({
       </div>
 
       {/* Brand Typography */}
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center min-w-0">
         {/* Primary Wordmark with Licensure Grade */}
-        <div className="flex items-baseline gap-2">
+        <div className="flex items-baseline gap-1.5 sm:gap-2">
           <span 
-            className={`text-[20px] font-bold tracking-[0.16em] uppercase font-display leading-none transition-colors ${
+            className={`text-[17px] xs:text-[19px] sm:text-[20px] font-bold tracking-[0.14em] sm:tracking-[0.16em] uppercase font-display leading-none transition-colors ${
               isLightText ? 'text-white' : 'text-[#14171F]'
             }`}
           >
             Kachoras
           </span>
 
-          <span className="text-[10px] font-semibold tracking-wider text-[#C59B27] uppercase px-1.5 py-0.5 rounded bg-[#C59B27]/10 border border-[#C59B27]/30">
+          <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider text-[#C59B27] uppercase px-1.5 py-0.5 rounded bg-[#C59B27]/10 border border-[#C59B27]/30 shrink-0">
             G+1
           </span>
         </div>
 
         {/* Secondary Subtitle / Official Legal Translation */}
         {showTagline && (
-          <div className="flex items-center gap-2 mt-1">
+          <div className="flex items-center gap-1.5 sm:gap-2 mt-1">
             <span 
-              className={`text-[9.5px] uppercase tracking-[0.18em] font-medium leading-none ${
+              className={`text-[8.5px] sm:text-[9.5px] uppercase tracking-[0.12em] sm:tracking-[0.18em] font-medium leading-none truncate ${
                 isLightText ? 'text-[#ECC768]/90' : 'text-[#7A2E16]'
               }`}
             >
               Electromechanical Contracting L.L.C.
             </span>
-            <span className={`text-[10px] font-normal leading-none font-sans hidden sm:inline-block ${
+            <span className={`text-[10px] font-normal leading-none font-sans hidden md:inline-block ${
               isLightText ? 'text-white/40' : 'text-slate-400'
             }`}>
               •
             </span>
             <span 
-              className={`text-[10px] font-medium leading-none hidden sm:inline-block tracking-normal ${
+              className={`text-[10px] font-medium leading-none hidden md:inline-block tracking-normal ${
                 isLightText ? 'text-white/70' : 'text-slate-600'
               }`}
               dir="rtl"

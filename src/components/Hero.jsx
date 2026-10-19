@@ -56,39 +56,39 @@ export default function Hero({ onOpenQuoteModal }) {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-8 w-full z-10">
         
         {/* Subtle Corporate Accreditation Marker */}
-        <div className="mb-6 inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#E5DED3] text-xs text-slate-700 shadow-sm">
-          <span className="w-2 h-2 rounded-full bg-emerald-600" />
-          <span className="text-[#7A2E16] font-bold text-[11px] tracking-wide">
+        <div className="mb-6 inline-flex flex-wrap items-center gap-2 sm:gap-2.5 px-3 py-1.5 sm:px-3.5 rounded-full bg-white border border-[#E5DED3] text-xs text-slate-700 shadow-sm max-w-full">
+          <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" />
+          <span className="text-[#7A2E16] font-bold text-[10px] sm:text-[11px] tracking-wide">
             Dubai Municipality Approved G+1 Contractor
           </span>
-          <span className="text-slate-300">|</span>
-          <span className="text-slate-600 text-[11px] font-medium">Commercial License No. 578964</span>
+          <span className="text-slate-300 hidden xs:inline-block">|</span>
+          <span className="text-slate-600 text-[10px] sm:text-[11px] font-medium">Commercial License No. 578964</span>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* Left Column: Authoritative Editorial Copy (7 cols) */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
             
-            <div className="space-y-4">
-              <span className="text-xs uppercase tracking-[0.25em] font-bold text-[#8B6D1B] block">
+            <div className="space-y-3 sm:space-y-4">
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] font-bold text-[#8B6D1B] block">
                 كاشوراس للمقاولات الكهروميكانيكية ش.ذ.م.م • Est. 2006
               </span>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#14171F] font-display leading-[1.12]">
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#14171F] font-display leading-[1.14]">
                 Precision Building & Electromechanical Contracting in Dubai
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-600 max-w-2xl font-normal leading-relaxed pt-1">
+              <p className="text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl font-normal leading-relaxed pt-1">
                 For over two decades, <strong>Kachoras Electromechanical Contracting LLC</strong> has delivered bespoke luxury G+1 villas, traditional Arabian majlis pavilions, municipal civic landmarks, and MEP infrastructure built to the highest statutory standards.
               </p>
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-2">
               <button
                 onClick={() => onOpenQuoteModal()}
-                className="px-7 py-3.5 bg-[#7A2E16] hover:bg-[#652310] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition flex items-center gap-2.5 group cursor-pointer"
+                className="px-6 sm:px-7 py-3.5 bg-[#7A2E16] hover:bg-[#652310] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition flex items-center justify-center gap-2.5 group cursor-pointer w-full sm:w-auto min-h-[46px] active:scale-95"
               >
                 <span>Submit Tender / RFP</span>
                 <ArrowRight className="w-4 h-4 text-[#C59B27] group-hover:translate-x-1 transition-transform" />
@@ -96,14 +96,14 @@ export default function Hero({ onOpenQuoteModal }) {
 
               <a
                 href="#services"
-                className="px-6 py-3.5 bg-white hover:bg-[#F4EFE6] text-slate-800 font-bold text-xs uppercase tracking-wider rounded-xl border border-[#E5DED3] transition flex items-center gap-2"
+                className="px-6 py-3.5 bg-white hover:bg-[#F4EFE6] text-slate-800 font-bold text-xs uppercase tracking-wider rounded-xl border border-[#E5DED3] transition flex items-center justify-center gap-2 w-full sm:w-auto min-h-[46px] text-center active:scale-95"
               >
                 <span>Explore Disciplines</span>
               </a>
 
               <a
                 href={`tel:${COMPANY_INFO.phone}`}
-                className="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 hover:text-[#7A2E16] px-3 py-2 transition"
+                className="inline-flex items-center justify-center gap-2 text-xs font-semibold text-slate-600 hover:text-[#7A2E16] px-3 py-2 transition min-h-[40px]"
               >
                 <Phone className="w-3.5 h-3.5 text-[#C59B27]" />
                 <span>{COMPANY_INFO.phone}</span>
@@ -111,7 +111,7 @@ export default function Hero({ onOpenQuoteModal }) {
             </div>
 
             {/* Distinguished Institutional Metrics */}
-            <div className="pt-4 border-t border-[#E5DED3] grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
+            <div className="pt-4 border-t border-[#E5DED3] grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-left">
               <div>
                 <div className="text-2xl font-bold text-[#14171F] font-display">20+</div>
                 <div className="text-xs text-slate-500 font-medium mt-0.5">Years in Dubai</div>

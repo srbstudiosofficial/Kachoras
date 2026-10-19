@@ -117,7 +117,7 @@ export default function CategoriesWheel({ onSelectServiceForQuote }) {
                 <div className="p-5 pt-0 border-t border-[#F2ECE1] mt-2">
                   <button
                     onClick={() => onSelectServiceForQuote && onSelectServiceForQuote(cat.title)}
-                    className="w-full pt-3 flex items-center justify-between text-xs font-bold text-[#7A2E16] group-hover:text-[#5C200E] transition cursor-pointer"
+                    className="w-full min-h-[44px] pt-1 flex items-center justify-between text-xs font-bold text-[#7A2E16] group-hover:text-[#5C200E] transition cursor-pointer"
                   >
                     <span>Request Proposal</span>
                     <ArrowRight className="w-3.5 h-3.5 text-[#C59B27] group-hover:translate-x-1 transition-transform" />

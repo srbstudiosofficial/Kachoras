@@ -30,7 +30,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FBF9F5] text-[#1E293B] flex flex-col selection:bg-[#7A2E16] selection:text-white font-sans antialiased">
+    <div className="min-h-screen bg-[#FBF9F5] text-[#1E293B] flex flex-col selection:bg-[#7A2E16] selection:text-white font-sans antialiased overflow-x-hidden">
       
       {/* Fixed Luxury Navigation */}
       <Navbar 
@@ -78,7 +78,7 @@ export default function App() {
       />
 
       {/* Floating Action Buttons for Mobile */}
-      <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-2.5 sm:hidden">
+      <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-2.5 sm:hidden pb-[env(safe-area-inset-bottom,0px)] pr-[env(safe-area-inset-right,0px)]">
         <a
           href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project%20in%20Dubai.`}
           target="_blank"
@@ -91,7 +91,7 @@ export default function App() {
 
         <a
           href={`tel:${COMPANY_INFO.phone}`}
-          className="w-13 h-13 rounded-full bg-[#7A2E16] text-white flex items-center justify-center shadow-2xl font-black text-xs active:scale-95 transition"
+          className="w-12 h-12 rounded-full bg-[#7A2E16] text-white flex items-center justify-center shadow-2xl font-black text-xs active:scale-95 transition"
           title="Call Kachoras"
         >
           <Phone className="w-5 h-5" />

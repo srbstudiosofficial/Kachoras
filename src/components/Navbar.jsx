@@ -111,16 +111,16 @@ export default function Navbar({ onOpenQuoteModal }) {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center space-x-2 lg:hidden">
+          <div className="flex items-center space-x-2 lg:hidden shrink-0">
             <button
               onClick={() => onOpenQuoteModal()}
-              className="text-xs font-bold bg-[#7A2E16] text-white px-3 py-2 rounded-lg"
+              className="text-xs font-bold bg-[#7A2E16] text-white px-3 py-2 rounded-lg shrink-0 min-h-[38px] flex items-center justify-center shadow-sm active:scale-95 transition"
             >
               RFP
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-700 hover:text-[#7A2E16] focus:outline-none bg-[#FAF8F5] rounded-lg border border-[#E5DED3]"
+              className="p-2 text-slate-700 hover:text-[#7A2E16] focus:outline-none bg-[#FAF8F5] rounded-lg border border-[#E5DED3] min-w-[40px] min-h-[40px] flex items-center justify-center active:scale-95 transition"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -132,14 +132,14 @@ export default function Navbar({ onOpenQuoteModal }) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-[#E5DED3] p-5 shadow-xl space-y-4 animate-in slide-in-from-top-2 duration-200">
+        <div className="lg:hidden bg-white border-b border-[#E5DED3] p-4 sm:p-5 shadow-xl space-y-3 sm:space-y-4 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-80px)] overflow-y-auto">
           <div className="space-y-1">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-[#FAF8F5] rounded-lg"
+                className="block px-3.5 py-2.5 text-sm font-semibold text-slate-800 hover:bg-[#FAF8F5] rounded-lg transition min-h-[40px] flex items-center"
               >
                 {link.label}
               </a>
@@ -152,7 +152,7 @@ export default function Navbar({ onOpenQuoteModal }) {
                 setMobileMenuOpen(false);
                 onOpenQuoteModal();
               }}
-              className="w-full py-3 bg-[#7A2E16] text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center flex items-center justify-center gap-2"
+              className="w-full py-3 bg-[#7A2E16] text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center flex items-center justify-center gap-2 min-h-[44px] shadow-md active:scale-95 transition"
             >
               <span>Submit Tender / RFP</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />

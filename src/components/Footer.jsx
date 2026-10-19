@@ -119,11 +119,11 @@ export default function Footer({ onOpenQuoteModal }) {
         </div>
 
         {/* Bottom Strip */}
-        <div className="border-t border-[#232938] mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-white/40">
+        <div className="border-t border-[#232938] mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4 text-[11px] text-white/40">
           <div>
             © 2006–2026 Kachoras Electromechanical Contracting LLC. All rights reserved.
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-1">
             <span>Dubai, United Arab Emirates</span>
             <span>•</span>
             <span>Government of Dubai DET License #578964</span>
