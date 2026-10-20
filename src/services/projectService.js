@@ -7,7 +7,9 @@ import {
   isFirebaseActive,
   saveCloudProject,
   deleteCloudProject,
-  subscribeCloudProjects
+  subscribeCloudProjects,
+  DEFAULT_FIREBASE_CONFIG,
+  uploadProjectPhotoToStorage
 } from './firebaseSync';
 
 // LocalStorage Keys
@@ -399,10 +401,12 @@ export function resetAdminPasskeyToDefault() {
 export function getStoredFirebaseConfig() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY_FIREBASE);
-    return raw ? JSON.parse(raw) : null;
-  } catch (err) {
-    return null;
-  }
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.apiKey) return parsed;
+    }
+  } catch (err) {}
+  return DEFAULT_FIREBASE_CONFIG;
 }
 
 export function saveStoredFirebaseConfig(config) {
@@ -451,7 +455,14 @@ export async function addProjectToServer(formData, photoFile) {
   // 1. If Firebase Cloud Firestore is active, save directly to live cloud database
   if (isFirebaseActive()) {
     try {
-      const cloudSaved = await saveCloudProject(formData);
+      let finalData = { ...formData };
+      if (photoFile instanceof File) {
+        const storageUrl = await uploadProjectPhotoToStorage(photoFile);
+        if (storageUrl) {
+          finalData.image = storageUrl;
+        }
+      }
+      const cloudSaved = await saveCloudProject(finalData);
       if (cloudSaved) {
         const local = getLocalProjects();
         saveLocalProjects([cloudSaved, ...local.filter(p => p.id !== cloudSaved.id)]);
@@ -523,10 +534,17 @@ export async function addProjectToServer(formData, photoFile) {
   return fallbackProject;
 }
 
-export async function updateProjectOnServer(id, formData) {
+export async function updateProjectOnServer(id, formData, photoFile) {
   if (isFirebaseActive()) {
     try {
-      const cloudResult = await saveCloudProject({ ...formData, id });
+      let finalData = { ...formData, id };
+      if (photoFile instanceof File) {
+        const storageUrl = await uploadProjectPhotoToStorage(photoFile);
+        if (storageUrl) {
+          finalData.image = storageUrl;
+        }
+      }
+      const cloudResult = await saveCloudProject(finalData);
       if (cloudResult) {
         const existing = getLocalProjects();
         const idx = existing.findIndex(p => p.id === id);

@@ -8,24 +8,49 @@ import {
   getDocs, 
   onSnapshot 
 } from 'firebase/firestore';
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from 'firebase/storage';
 
 const STORAGE_KEY_FIREBASE = 'kachoras_firebase_config_v1';
 
+/**
+ * Official Default Firebase Configuration for Kachoras Electromechanical Contracting LLC
+ * Project ID: kachoras-73183
+ */
+export const DEFAULT_FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDOY_l4U454mruR9oOUaP9Aw5CjBac6SXw",
+  authDomain: "kachoras-73183.firebaseapp.com",
+  projectId: "kachoras-73183",
+  storageBucket: "kachoras-73183.firebasestorage.app",
+  messagingSenderId: "868033179924",
+  appId: "1:868033179924:web:653c0aea01cb66fa319201"
+};
+
 let firestoreInstance = null;
+let storageInstance = null;
 let unsubscribeProjects = null;
 let unsubscribeInquiries = null;
 
 /**
- * Get active stored Firebase config
+ * Get active Firebase config (stored override or production default)
  */
 export function getFirebaseConfig() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY_FIREBASE);
-    return raw ? JSON.parse(raw) : null;
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.apiKey && parsed.projectId) {
+        return parsed;
+      }
+    }
   } catch (err) {
     console.warn('Error reading Firebase config from storage:', err);
-    return null;
   }
+  return DEFAULT_FIREBASE_CONFIG;
 }
 
 /**
@@ -50,10 +75,87 @@ export function getFirebaseDb() {
 }
 
 /**
+ * Initialize or retrieve Firebase Storage instance
+ */
+export function getFirebaseStorage() {
+  if (storageInstance) return storageInstance;
+
+  const config = getFirebaseConfig();
+  if (!config || !config.storageBucket) {
+    return null;
+  }
+
+  try {
+    const app = getApps().length > 0 ? getApp() : initializeApp(config);
+    storageInstance = getStorage(app);
+    return storageInstance;
+  } catch (err) {
+    console.error('Firebase storage initialization error:', err);
+    return null;
+  }
+}
+
+/**
  * Check if Firebase cloud sync is currently configured and active
  */
 export function isFirebaseActive() {
   return !!getFirebaseDb();
+}
+
+/**
+ * Upload a project photo to Firebase Storage
+ * Returns public download URL on success, or null on fallback
+ */
+export async function uploadProjectPhotoToStorage(file) {
+  if (!file) return null;
+  const storage = getFirebaseStorage();
+  if (!storage) return null;
+
+  try {
+    const safeName = (file.name || 'photo.jpg').replace(/[^a-zA-Z0-9.-]/g, '_');
+    const path = `projects/${Date.now()}_${safeName}`;
+    const storageRef = ref(storage, path);
+    const snapshot = await uploadBytes(storageRef, file, {
+      contentType: file.type || 'image/jpeg'
+    });
+    const downloadUrl = await getDownloadURL(snapshot.ref);
+    return downloadUrl;
+  } catch (err) {
+    console.warn('Firebase Storage upload failed (falling back to compressed data URL):', err);
+    return null;
+  }
+}
+
+/**
+ * Auto-migrate any custom projects previously saved in browser localStorage to Cloud Firestore
+ * Ensures projects created by the client on their phone/laptop are immediately pushed to the cloud.
+ */
+export async function syncLocalProjectsToCloud() {
+  const db = getFirebaseDb();
+  if (!db) return;
+
+  try {
+    const raw = localStorage.getItem('kachoras_custom_projects_v1');
+    if (!raw) return;
+    const localProjects = JSON.parse(raw);
+    if (!Array.isArray(localProjects) || localProjects.length === 0) return;
+
+    // Check existing documents in Firestore
+    const projectsCol = collection(db, 'projects');
+    const snapshot = await getDocs(projectsCol);
+    const cloudIds = new Set();
+    snapshot.forEach(docSnap => cloudIds.add(docSnap.id));
+
+    // Upload any custom local project that is not yet in Firestore
+    for (const proj of localProjects) {
+      if (proj && proj.id && !cloudIds.has(proj.id) && proj.isCustom !== false) {
+        console.log('Syncing local project to Firestore cloud:', proj.title);
+        await saveCloudProject(proj);
+      }
+    }
+  } catch (err) {
+    console.warn('Auto-sync local to cloud notice:', err);
+  }
 }
 
 /**
@@ -78,6 +180,25 @@ export function subscribeCloudProjects(onUpdate) {
 
       // Sort newest first
       liveProjects.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+
+      // Merge with any un-synced local projects so no local data is ever lost
+      try {
+        const raw = localStorage.getItem('kachoras_custom_projects_v1');
+        if (raw) {
+          const local = JSON.parse(raw);
+          if (Array.isArray(local)) {
+            const cloudIds = new Set(liveProjects.map(p => p.id));
+            const unsynced = local.filter(p => !cloudIds.has(p.id) && p.isCustom !== false);
+            if (unsynced.length > 0) {
+              unsynced.forEach(p => {
+                saveCloudProject(p).catch(console.warn);
+              });
+              liveProjects.push(...unsynced);
+              liveProjects.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+            }
+          }
+        }
+      } catch (e) {}
 
       if (onUpdate) {
         onUpdate(liveProjects);

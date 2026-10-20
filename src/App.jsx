@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 import QuoteModal from './components/QuoteModal';
 import ProjectsSection from './components/ProjectsSection';
 import AdminProjectModal from './components/AdminProjectModal';
-import { subscribeCloudProjects } from './services/firebaseSync';
+import { subscribeCloudProjects, syncLocalProjectsToCloud } from './services/firebaseSync';
 import { saveLocalProjects } from './services/projectService';
 import { Phone, MessageSquare } from 'lucide-react';
 import { COMPANY_INFO } from './data/mockData';
@@ -62,6 +62,10 @@ export default function App() {
 
   // Real-Time Cloud Synchronization Listener (Firebase Cloud Firestore)
   useEffect(() => {
+    // 1. Auto-sync any previously added local projects on this device to Cloud Firestore
+    syncLocalProjectsToCloud().catch(console.warn);
+
+    // 2. Attach live real-time listener for global updates
     const unsubscribe = subscribeCloudProjects((liveCloudProjects) => {
       if (liveCloudProjects && Array.isArray(liveCloudProjects)) {
         saveLocalProjects(liveCloudProjects);

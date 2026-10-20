@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Showcase Prototypes (Local Client Demonstrations Only - Do Not Push)
+kachoras-theme-*.html

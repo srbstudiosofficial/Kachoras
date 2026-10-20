@@ -316,7 +316,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
     try {
       if (editingProjectId) {
-        await updateProjectOnServer(editingProjectId, formData);
+        await updateProjectOnServer(editingProjectId, formData, selectedPhotoFile);
         setFormSuccessMessage('Project successfully updated in database!');
       } else {
         await addProjectToServer(formData, selectedPhotoFile);
@@ -1395,40 +1395,48 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                   {/* Firebase Real-Time Cloud Sync */}
                   <div className="bg-white rounded-2xl border border-[#E5DED3] p-6 shadow-sm space-y-4">
                     <div className="border-b border-[#F0EBE1] pb-3">
-                      <div className="flex items-center gap-2">
-                        <Database className="w-4 h-4 text-[#C59B27]" />
-                        <h4 className="text-base font-bold font-display text-[#14171F]">
-                          Cloud Database Sync (Firebase / Supabase)
-                        </h4>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Database className="w-4 h-4 text-[#C59B27]" />
+                          <h4 className="text-base font-bold font-display text-[#14171F]">
+                            Global Cloud Database Sync (Google Firebase)
+                          </h4>
+                        </div>
+                        {isFirebaseActive() && (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            Live Sync Active
+                          </span>
+                        )}
                       </div>
                       <p className="text-xs text-slate-500 mt-1">
-                        Currently running in <strong>Instant Local Storage mode</strong> (projects saved instantly in browser). You can link a free Firebase project to synchronize across all visitors and devices globally.
+                        Connected to Cloud Firestore project <strong>kachoras-73183</strong>. Every project added, edited, or deleted on any device immediately synchronizes across all visitors and smartphones globally.
                       </p>
                     </div>
 
                     <div className="space-y-3">
                       <p className="text-xs text-slate-600 leading-relaxed">
-                        To connect global live cloud sync, paste your web app Firebase configuration JSON here:
+                        Active Web App Firebase configuration:
                       </p>
 
                       <textarea
-                        rows={4}
+                        rows={5}
                         value={firebaseConfigStr}
                         onChange={(e) => setFirebaseConfigStr(e.target.value)}
-                        placeholder='{ "apiKey": "AIzaSy...", "projectId": "kachoras-dubai", "storageBucket": "..." }'
+                        placeholder='{ "apiKey": "AIzaSy...", "projectId": "kachoras-73183", "storageBucket": "..." }'
                         className="w-full px-3.5 py-2.5 font-mono text-xs rounded-xl border border-[#E5DED3] bg-[#FAF8F5] focus:border-[#7A2E16] outline-none"
                       />
 
                       <div className="flex items-center justify-between">
                         <span className="text-[11px] text-slate-400">
-                          Leave empty to keep using Instant Browser Storage.
+                          Pre-configured with Kachoras official project credentials.
                         </span>
                         <button
                           type="button"
                           onClick={handleSaveFirebaseConfig}
                           className="px-4 py-2 bg-[#7A2E16] hover:bg-[#5C200E] text-white rounded-xl text-xs font-bold transition cursor-pointer"
                         >
-                          Save Cloud Config
+                          Update Config
                         </button>
                       </div>
                     </div>
