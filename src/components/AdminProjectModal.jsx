@@ -52,6 +52,11 @@ import {
   setApiBaseUrl
 } from '../services/projectService';
 import {
+  isFirebaseActive,
+  subscribeCloudProjects,
+  subscribeCloudInquiries
+} from '../services/firebaseSync';
+import {
   getStoredInquiries,
   updateInquiryStatus,
   deleteInquiry,
@@ -454,14 +459,19 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-400/20 text-[#C59B27] border border-[#C59B27]/30 uppercase">
                   Project Manager
                 </span>
-                {serverOnline ? (
+                {isFirebaseActive() ? (
+                  <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Firebase Cloud Sync
+                  </span>
+                ) : serverOnline ? (
                   <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                     Live DB Connected
                   </span>
                 ) : (
                   <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/10 text-white/60">
-                    Local DB Mode
+                    Local Device Mode
                   </span>
                 )}
               </div>

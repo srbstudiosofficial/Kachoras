@@ -1,4 +1,5 @@
 import { COMPANY_INFO } from '../data/mockData';
+import { isFirebaseActive, saveCloudInquiry } from './firebaseSync';
 
 const STORAGE_KEY_INQUIRIES = 'kachoras_leads_v1';
 const STORAGE_KEY_EMAIL_CONFIG = 'kachoras_email_config_v1';
@@ -97,7 +98,14 @@ export async function submitInquiry(payload) {
     status: "new"
   };
 
-  // 1. Attempt Live Server API Post
+  // 1. If Firebase Cloud Firestore is active, save lead directly to cloud
+  if (isFirebaseActive()) {
+    try {
+      saveCloudInquiry(newInquiry).catch(e => console.warn('Cloud inquiry save:', e));
+    } catch (e) {}
+  }
+
+  // 2. Attempt Live Server API Post
   try {
     const res = await fetch('/api/inquiries', {
       method: 'POST',

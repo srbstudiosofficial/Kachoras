@@ -3,6 +3,12 @@ import {
   DUBAI_MUNICIPALITY_PROJECTS, 
   ONGOING_PROJECTS 
 } from '../data/mockData';
+import {
+  isFirebaseActive,
+  saveCloudProject,
+  deleteCloudProject,
+  subscribeCloudProjects
+} from './firebaseSync';
 
 // LocalStorage Keys
 const STORAGE_KEY_PROJECTS = 'kachoras_custom_projects_v1';
@@ -442,6 +448,21 @@ export async function fetchServerProjects() {
 }
 
 export async function addProjectToServer(formData, photoFile) {
+  // 1. If Firebase Cloud Firestore is active, save directly to live cloud database
+  if (isFirebaseActive()) {
+    try {
+      const cloudSaved = await saveCloudProject(formData);
+      if (cloudSaved) {
+        const local = getLocalProjects();
+        saveLocalProjects([cloudSaved, ...local.filter(p => p.id !== cloudSaved.id)]);
+        window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+        return cloudSaved;
+      }
+    } catch (err) {
+      console.warn('Firebase cloud save failed, trying server/local fallback:', err);
+    }
+  }
+
   const base = getApiBaseUrl();
   const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
 
@@ -503,6 +524,24 @@ export async function addProjectToServer(formData, photoFile) {
 }
 
 export async function updateProjectOnServer(id, formData) {
+  if (isFirebaseActive()) {
+    try {
+      const cloudResult = await saveCloudProject({ ...formData, id });
+      if (cloudResult) {
+        const existing = getLocalProjects();
+        const idx = existing.findIndex(p => p.id === id);
+        if (idx !== -1) {
+          existing[idx] = cloudResult;
+          saveLocalProjects(existing);
+        }
+        window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+        return cloudResult;
+      }
+    } catch (err) {
+      console.warn('Firebase cloud update failed:', err);
+    }
+  }
+
   const base = getApiBaseUrl();
   const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
 
@@ -539,6 +578,14 @@ export async function updateProjectOnServer(id, formData) {
 }
 
 export async function deleteProjectOnServer(id) {
+  if (isFirebaseActive()) {
+    try {
+      await deleteCloudProject(id);
+    } catch (err) {
+      console.warn('Firebase cloud delete failed:', err);
+    }
+  }
+
   const base = getApiBaseUrl();
   const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
 
