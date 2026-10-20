@@ -6,8 +6,7 @@ import {
   Menu, 
   X, 
   MessageSquare, 
-  ShieldCheck,
-  Lock
+  ShieldCheck 
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 import KachorasLogo from './KachorasLogo';
@@ -70,17 +69,6 @@ export default function Navbar({ onOpenQuoteModal, onOpenAdmin }) {
             >
               <span>Tel: <strong className="text-white font-mono">{COMPANY_INFO.phone}</strong></span>
             </a>
-
-            <span className="inline-block text-white/20">|</span>
-
-            <button
-              onClick={onOpenAdmin}
-              className="flex items-center gap-1.5 text-white/70 hover:text-[#C59B27] transition font-medium cursor-pointer"
-              title="Open Owner & Admin Portal"
-            >
-              <Lock className="w-3 h-3 text-[#C59B27]" />
-              <span>Owner Portal</span>
-            </button>
           </div>
 
         </div>
@@ -169,17 +157,6 @@ export default function Navbar({ onOpenQuoteModal, onOpenAdmin }) {
             >
               <span>Submit Tender / RFP</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
-            </button>
-
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                if (onOpenAdmin) onOpenAdmin();
-              }}
-              className="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl text-center flex items-center justify-center gap-2 transition cursor-pointer"
-            >
-              <Lock className="w-3.5 h-3.5 text-[#C59B27]" />
-              <span>Owner / Admin Portal</span>
             </button>
           </div>
         </div>
