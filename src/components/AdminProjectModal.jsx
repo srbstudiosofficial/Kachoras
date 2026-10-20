@@ -18,6 +18,7 @@ import {
   ExternalLink,
   RefreshCw,
   Eye,
+  EyeOff,
   Check,
   Inbox,
   Mail,
@@ -36,6 +37,7 @@ import {
   deleteProject, 
   verifyAdminPasskey, 
   updateAdminPasskey, 
+  resetAdminPasskeyToDefault, 
   compressImageFile,
   getStoredFirebaseConfig,
   saveStoredFirebaseConfig,
@@ -76,6 +78,7 @@ const PRESET_IMAGES = [
 export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passkeyInput, setPasskeyInput] = useState('');
+  const [showPasskey, setShowPasskey] = useState(false);
   const [authError, setAuthError] = useState('');
   const [activeTab, setActiveTab] = useState('list'); // 'list' | 'add' | 'settings'
 
@@ -176,19 +179,49 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
     }
   }, [isOpen]);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (verifyAdminPasskey(passkeyInput)) {
+    const entered = (passkeyInput || '').trim();
+    if (!entered) {
+      setAuthError('Please enter the master passkey.');
+      return;
+    }
+
+    if (verifyAdminPasskey(entered)) {
       setIsAuthenticated(true);
       sessionStorage.setItem('kachoras_admin_session', 'true');
       setAuthError('');
       setPasskeyInput('');
+      
+      // Also sync token with backend server if online
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ passkey: entered })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.token) {
+            sessionStorage.setItem('kachoras_server_token', data.token);
+          }
+        }
+      } catch (err) {
+        // Local mode fallback
+      }
+
       refreshProjectsList();
       refreshInquiriesList();
       checkServerHealth().then(res => setServerOnline(res.online));
     } else {
-      setAuthError('Invalid master passkey. (Default: kachoras2006)');
+      setAuthError('Invalid master passkey. Default passkey: kachoras2006');
     }
+  };
+
+  const handleResetPasskeyClick = () => {
+    resetAdminPasskeyToDefault();
+    setPasskeyInput('kachoras2006');
+    setAuthError('');
   };
 
   const handleLogout = () => {
@@ -393,39 +426,77 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
               <form onSubmit={handleLogin} className="space-y-4 text-left">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                    Master Passkey
-                  </label>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                      Master Passkey
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPasskeyInput('kachoras2006');
+                        setAuthError('');
+                      }}
+                      className="text-[11px] font-semibold text-[#7A2E16] hover:text-[#5C200E] underline cursor-pointer"
+                    >
+                      Fill Default (kachoras2006)
+                    </button>
+                  </div>
                   <div className="relative">
                     <input
-                      type="password"
+                      type={showPasskey ? "text" : "password"}
                       value={passkeyInput}
-                      onChange={(e) => setPasskeyInput(e.target.value)}
-                      placeholder="Enter passkey (Default: kachoras2006)"
-                      className="w-full px-4 py-3 bg-white rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] focus:ring-1 focus:ring-[#7A2E16] outline-none"
+                      onChange={(e) => {
+                        setPasskeyInput(e.target.value);
+                        if (authError) setAuthError('');
+                      }}
+                      placeholder="Enter passkey (e.g. kachoras2006)"
+                      className="w-full px-4 py-3 pr-11 bg-white rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] focus:ring-1 focus:ring-[#7A2E16] outline-none font-mono"
                       autoFocus
                     />
-                    <Key className="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5" />
+                    <button
+                      type="button"
+                      onClick={() => setShowPasskey(!showPasskey)}
+                      className="absolute right-3 top-3 p-1 text-slate-400 hover:text-slate-600 cursor-pointer"
+                      title={showPasskey ? "Hide passkey" : "Show passkey"}
+                    >
+                      {showPasskey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
                   </div>
                   {authError && (
-                    <p className="text-xs text-rose-600 font-semibold mt-1.5 flex items-center gap-1">
-                      <AlertCircle className="w-3.5 h-3.5" />
-                      {authError}
-                    </p>
+                    <div className="mt-2 p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-start justify-between gap-2">
+                      <div className="flex items-start gap-1.5">
+                        <AlertCircle className="w-4 h-4 shrink-0 text-rose-600 mt-0.5" />
+                        <span>{authError}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleResetPasskeyClick}
+                        className="underline font-bold text-rose-800 hover:text-rose-900 shrink-0 text-[11px] cursor-pointer"
+                      >
+                        Reset Passkey
+                      </button>
+                    </div>
                   )}
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-[#7A2E16] hover:bg-[#5C200E] text-white font-bold text-sm uppercase tracking-wider rounded-xl transition shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3.5 bg-[#7A2E16] hover:bg-[#5C200E] text-white font-bold text-sm uppercase tracking-wider rounded-xl transition shadow-lg flex items-center justify-center gap-2 cursor-pointer active:scale-98"
                 >
                   <Unlock className="w-4 h-4" />
                   <span>Authenticate & Open Dashboard</span>
                 </button>
 
-                <p className="text-[11px] text-slate-400 text-center">
-                  Default developer passkey is <strong className="text-slate-600 font-mono">kachoras2006</strong>. You can change this in settings.
-                </p>
+                <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+                  <span>Passkey: <strong className="text-slate-800 font-mono">kachoras2006</strong></span>
+                  <button
+                    type="button"
+                    onClick={handleResetPasskeyClick}
+                    className="text-slate-500 hover:text-slate-700 underline cursor-pointer"
+                  >
+                    Restore Factory Default
+                  </button>
+                </div>
               </form>
             </div>
           ) : (

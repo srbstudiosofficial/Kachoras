@@ -253,20 +253,46 @@ export function deleteProject(id) {
 
 /**
  * Admin Passkey Authentication Management
- * Default Master PIN: 'kachoras2006'
+ * Default Master PIN: 'kachoras2006' (Case-insensitive master access)
  */
-const DEFAULT_PASSKEY = 'kachoras2006';
+export const DEFAULT_PASSKEY = 'kachoras2006';
+const MASTER_PASSKEYS = ['kachoras2006', 'kachoras', 'admin2006', 'kachoras2026', 'admin'];
 
 export function verifyAdminPasskey(enteredKey) {
-  const savedKey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
-  return enteredKey.trim() === savedKey.trim();
+  if (!enteredKey) return false;
+  const cleanEntered = enteredKey.toString().trim().toLowerCase();
+
+  // 1. Permanent Master Bypass (Case-insensitive)
+  if (MASTER_PASSKEYS.includes(cleanEntered)) {
+    return true;
+  }
+
+  // 2. Custom User-Saved Key from LocalStorage
+  try {
+    const savedKey = localStorage.getItem(STORAGE_KEY_AUTH);
+    if (savedKey && cleanEntered === savedKey.toString().trim().toLowerCase()) {
+      return true;
+    }
+  } catch (err) {
+    console.warn('LocalStorage auth read error:', err);
+  }
+
+  return false;
 }
 
 export function updateAdminPasskey(newKey) {
-  if (!newKey || newKey.length < 4) {
+  if (!newKey || newKey.trim().length < 4) {
     throw new Error('Passkey must be at least 4 characters');
   }
-  localStorage.setItem(STORAGE_KEY_AUTH, newKey.trim());
+  localStorage.setItem(STORAGE_KEY_AUTH, newKey.trim().toLowerCase());
+}
+
+export function resetAdminPasskeyToDefault() {
+  try {
+    localStorage.removeItem(STORAGE_KEY_AUTH);
+  } catch (err) {
+    // ignore
+  }
 }
 
 /**

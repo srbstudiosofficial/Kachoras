@@ -85,6 +85,7 @@ export default function App() {
       {/* Fixed Luxury Navigation */}
       <Navbar 
         onOpenQuoteModal={() => handleOpenQuoteModal()} 
+        onOpenAdmin={() => setAdminModalOpen(true)}
       />
 
       {/* Main Experience */}
@@ -123,6 +124,7 @@ export default function App() {
       {/* Imperial Mahogany & Bronze Footer */}
       <Footer 
         onOpenQuoteModal={() => handleOpenQuoteModal()} 
+        onOpenAdmin={() => setAdminModalOpen(true)}
       />
 
       {/* Interactive RFP / Proposal Modal */}

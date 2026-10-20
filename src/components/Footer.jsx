@@ -8,12 +8,13 @@ import {
   FileText, 
   ArrowRight,
   MessageSquare,
-  Award
+  Award,
+  Lock
 } from 'lucide-react';
 import { COMPANY_INFO, CORE_CATEGORIES } from '../data/mockData';
 import KachorasLogo from './KachorasLogo';
 
-export default function Footer({ onOpenQuoteModal }) {
+export default function Footer({ onOpenQuoteModal, onOpenAdmin }) {
   return (
     <footer className="bg-[#12161F] text-white border-t border-[#232938]">
       
@@ -124,10 +125,19 @@ export default function Footer({ onOpenQuoteModal }) {
           <div>
             © 2006–2026 Kachoras Electromechanical Contracting LLC. All rights reserved.
           </div>
-          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-1">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-4 gap-y-1">
             <span>Dubai, United Arab Emirates</span>
             <span>•</span>
             <span>Government of Dubai DET License #578964</span>
+            <span>•</span>
+            <button
+              onClick={onOpenAdmin}
+              className="text-[#C59B27] hover:text-white transition flex items-center gap-1 font-semibold cursor-pointer"
+              title="Open Owner & Admin Portal"
+            >
+              <Lock className="w-3 h-3 text-[#C59B27]" />
+              <span>Owner Portal</span>
+            </button>
           </div>
         </div>
 
