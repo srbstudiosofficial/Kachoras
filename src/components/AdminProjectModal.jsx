@@ -45,7 +45,11 @@ import {
   addProjectToServer,
   updateProjectOnServer,
   deleteProjectOnServer,
-  checkServerHealth
+  checkServerHealth,
+  exportProjectsJSON,
+  importProjectsJSON,
+  getApiBaseUrl,
+  setApiBaseUrl
 } from '../services/projectService';
 import {
   getStoredInquiries,
@@ -111,6 +115,8 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   const [newPasskey, setNewPasskey] = useState('');
   const [settingsNotice, setSettingsNotice] = useState('');
   const [firebaseConfigStr, setFirebaseConfigStr] = useState('');
+  const [cloudApiUrl, setCloudApiUrl] = useState(getApiBaseUrl());
+  const jsonImportInputRef = useRef(null);
 
   // Inquiries & Leads state
   const [inquiries, setInquiries] = useState([]);
@@ -351,6 +357,82 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
     }
   };
 
+  const handleExportProjects = () => {
+    try {
+      const jsonStr = exportProjectsJSON();
+      // Download as file
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `kachoras-projects-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      // Also copy to clipboard for quick WhatsApp / chat sharing
+      navigator.clipboard?.writeText(jsonStr).then(() => {
+        alert('Projects exported successfully! The file has been downloaded, and the JSON data was also copied to your clipboard so you can paste it into WhatsApp or email.');
+      }).catch(() => {
+        alert('Projects exported successfully! The backup JSON file has been downloaded.');
+      });
+    } catch (err) {
+      alert('Error exporting projects: ' + err.message);
+    }
+  };
+
+  const handleImportFileSelect = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      try {
+        const content = event.target.result;
+        const res = importProjectsJSON(content);
+        if (res.success) {
+          alert(`Successfully imported ${res.count} project(s)! Total active projects: ${res.total}`);
+          await refreshProjectsList();
+        } else {
+          alert('Import failed: ' + res.error);
+        }
+      } catch (err) {
+        alert('Failed to read JSON file: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  };
+
+  const handlePasteImportPrompt = async () => {
+    const pasted = window.prompt('Paste the project JSON code exported from the other device/browser:');
+    if (!pasted || !pasted.trim()) return;
+
+    const res = importProjectsJSON(pasted.trim());
+    if (res.success) {
+      alert(`Successfully imported ${res.count} project(s)! Total active projects: ${res.total}`);
+      await refreshProjectsList();
+    } else {
+      alert('Import failed: ' + res.error);
+    }
+  };
+
+  const handleSaveCloudApiUrl = async (e) => {
+    e.preventDefault();
+    setApiBaseUrl(cloudApiUrl);
+    setSettingsNotice('Cloud API Base URL updated! Checking connection...');
+    const health = await checkServerHealth();
+    setServerOnline(health.online);
+    if (health.online) {
+      setSettingsNotice('Connected to live cloud database server successfully!');
+      await refreshProjectsList();
+    } else {
+      setSettingsNotice('Cloud API URL saved (Server unreachable or offline).');
+    }
+    setTimeout(() => setSettingsNotice(''), 4000);
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -589,6 +671,61 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         {projects.filter(p => p.status === 'completed').length}
                       </div>
                       <div className="text-[11px] text-emerald-600 uppercase font-semibold">Completed</div>
+                    </div>
+                  </div>
+
+                  {/* Multi-Device Data Sync & Export/Import Bar */}
+                  <div className="bg-[#FAF8F5] border border-[#E5DED3] rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <Download className="w-4 h-4 text-[#7A2E16]" />
+                        <h4 className="text-sm font-bold text-[#14171F]">Multi-Device Project Sync & Backup</h4>
+                        <span className="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">
+                          Device-to-Device Sharing
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-500 max-w-xl leading-relaxed">
+                        If projects were added on the client's phone or another browser, click <strong>"Export Projects"</strong> on that device to download or copy the data, then click <strong>"Import Projects"</strong> here to sync them immediately.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-2 shrink-0">
+                      <input 
+                        type="file" 
+                        ref={jsonImportInputRef} 
+                        onChange={handleImportFileSelect} 
+                        accept=".json,application/json" 
+                        className="hidden" 
+                      />
+
+                      <button
+                        type="button"
+                        onClick={handleExportProjects}
+                        className="px-3.5 py-2 rounded-xl bg-white hover:bg-amber-50 text-[#7A2E16] border border-[#7A2E16]/30 text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer"
+                        title="Download backup file and copy JSON to clipboard"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        <span>Export Projects</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => jsonImportInputRef.current?.click()}
+                        className="px-3.5 py-2 rounded-xl bg-[#7A2E16] hover:bg-[#5C200E] text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer"
+                        title="Select and import a JSON file"
+                      >
+                        <Upload className="w-3.5 h-3.5" />
+                        <span>Import JSON File</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handlePasteImportPrompt}
+                        className="px-3 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 text-xs font-semibold transition cursor-pointer"
+                        title="Paste exported code directly"
+                      >
+                        Paste Code
+                      </button>
                     </div>
                   </div>
 
@@ -1199,6 +1336,48 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         className="px-5 py-2.5 bg-[#14171F] hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition cursor-pointer"
                       >
                         Save New Passkey
+                      </button>
+                    </form>
+                  </div>
+
+                  {/* Live Cloud Backend API Endpoint (Render / Node.js) */}
+                  <div className="bg-white rounded-2xl border border-[#E5DED3] p-6 shadow-sm space-y-4">
+                    <div className="border-b border-[#F0EBE1] pb-3 flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <Database className="w-4 h-4 text-[#7A2E16]" />
+                        <h4 className="text-base font-bold font-display text-[#14171F]">
+                          Live Cloud Server Backend API
+                        </h4>
+                      </div>
+                      {serverOnline ? (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                          Connected Live
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-600">
+                          Local Browser Storage Mode
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      To connect your live Express/Render backend server so projects sync automatically across all clients and visitors, enter your backend server URL below:
+                    </p>
+
+                    <form onSubmit={handleSaveCloudApiUrl} className="flex flex-wrap gap-2.5">
+                      <input
+                        type="url"
+                        value={cloudApiUrl}
+                        onChange={(e) => setCloudApiUrl(e.target.value)}
+                        placeholder="e.g. https://kachoras-backend.onrender.com"
+                        className="px-4 py-2.5 rounded-xl border border-[#E5DED3] text-sm focus:border-[#7A2E16] outline-none flex-1 min-w-[260px] font-mono"
+                      />
+                      <button
+                        type="submit"
+                        className="px-5 py-2.5 bg-[#7A2E16] hover:bg-[#5C200E] text-white rounded-xl text-xs font-bold transition cursor-pointer"
+                      >
+                        Connect Server
                       </button>
                     </form>
                   </div>

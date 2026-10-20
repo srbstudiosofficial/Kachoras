@@ -252,6 +252,98 @@ export function deleteProject(id) {
 }
 
 /**
+ * Export projects to JSON for sharing between devices/browsers
+ */
+export function exportProjectsJSON() {
+  const custom = getLocalProjects();
+  const all = getAllProjects();
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    version: '1.0',
+    customCount: custom.length,
+    customProjects: custom,
+    allProjects: all
+  };
+  return JSON.stringify(payload, null, 2);
+}
+
+/**
+ * Import projects from JSON string or object
+ */
+export function importProjectsJSON(jsonInput) {
+  try {
+    const parsed = typeof jsonInput === 'string' ? JSON.parse(jsonInput) : jsonInput;
+    let projectsToImport = [];
+
+    if (Array.isArray(parsed)) {
+      projectsToImport = parsed;
+    } else if (parsed && Array.isArray(parsed.customProjects)) {
+      projectsToImport = parsed.customProjects;
+    } else if (parsed && Array.isArray(parsed.allProjects)) {
+      projectsToImport = parsed.allProjects.filter(p => p.isCustom !== false);
+    } else if (parsed && Array.isArray(parsed.projects)) {
+      projectsToImport = parsed.projects;
+    } else {
+      throw new Error('Unrecognized JSON structure. Expected array of projects.');
+    }
+
+    if (projectsToImport.length === 0) {
+      return { success: false, error: 'No custom projects found in the imported data.' };
+    }
+
+    const existing = getLocalProjects();
+    const existingIds = new Set(existing.map(p => p.id));
+    const merged = [...existing];
+    let importedCount = 0;
+
+    projectsToImport.forEach(item => {
+      if (item && item.title) {
+        // Avoid duplicate ID collision
+        const uniqueId = (!item.id || existingIds.has(item.id)) 
+          ? `PRJ-IMP-${Date.now()}-${Math.round(Math.random() * 10000)}`
+          : item.id;
+        
+        merged.unshift({
+          ...item,
+          id: uniqueId,
+          isCustom: true,
+          importedAt: new Date().toISOString()
+        });
+        existingIds.add(uniqueId);
+        importedCount++;
+      }
+    });
+
+    saveLocalProjects(merged);
+    window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+    return { success: true, count: importedCount, total: merged.length };
+  } catch (err) {
+    console.error('Import error:', err);
+    return { success: false, error: err.message };
+  }
+}
+
+const STORAGE_KEY_API_URL = 'kachoras_cloud_api_url_v1';
+
+export function getApiBaseUrl() {
+  try {
+    const custom = localStorage.getItem(STORAGE_KEY_API_URL);
+    if (custom && custom.trim()) {
+      return custom.trim().replace(/\/$/, '');
+    }
+  } catch (err) {}
+  return '';
+}
+
+export function setApiBaseUrl(url) {
+  if (!url || !url.trim()) {
+    localStorage.removeItem(STORAGE_KEY_API_URL);
+  } else {
+    localStorage.setItem(STORAGE_KEY_API_URL, url.trim().replace(/\/$/, ''));
+  }
+}
+
+/**
  * Admin Passkey Authentication Management
  * Default Master PIN: 'kachoras2006' (Case-insensitive master access)
  */
@@ -320,8 +412,9 @@ export function saveStoredFirebaseConfig(config) {
  */
 
 export async function checkServerHealth() {
+  const base = getApiBaseUrl();
   try {
-    const res = await fetch('/api/health');
+    const res = await fetch(`${base}/api/health`);
     if (res.ok) {
       const data = await res.json();
       return { online: true, data };
@@ -333,8 +426,9 @@ export async function checkServerHealth() {
 }
 
 export async function fetchServerProjects() {
+  const base = getApiBaseUrl();
   try {
-    const res = await fetch('/api/projects');
+    const res = await fetch(`${base}/api/projects`);
     if (res.ok) {
       const liveList = await res.json();
       if (Array.isArray(liveList) && liveList.length > 0) {
@@ -348,6 +442,7 @@ export async function fetchServerProjects() {
 }
 
 export async function addProjectToServer(formData, photoFile) {
+  const base = getApiBaseUrl();
   const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
 
   try {
@@ -360,7 +455,7 @@ export async function addProjectToServer(formData, photoFile) {
       });
       body.append('photo', photoFile);
 
-      const res = await fetch('/api/admin/projects', {
+      const res = await fetch(`${base}/api/admin/projects`, {
         method: 'POST',
         headers: {
           'x-admin-passkey': passkey
@@ -378,7 +473,7 @@ export async function addProjectToServer(formData, photoFile) {
         }
       }
     } else {
-      const res = await fetch('/api/admin/projects', {
+      const res = await fetch(`${base}/api/admin/projects`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -408,10 +503,11 @@ export async function addProjectToServer(formData, photoFile) {
 }
 
 export async function updateProjectOnServer(id, formData) {
+  const base = getApiBaseUrl();
   const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
 
   try {
-    const res = await fetch(`/api/admin/projects/${id}`, {
+    const res = await fetch(`${base}/api/admin/projects/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -443,10 +539,11 @@ export async function updateProjectOnServer(id, formData) {
 }
 
 export async function deleteProjectOnServer(id) {
+  const base = getApiBaseUrl();
   const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
 
   try {
-    const res = await fetch(`/api/admin/projects/${id}`, {
+    const res = await fetch(`${base}/api/admin/projects/${id}`, {
       method: 'DELETE',
       headers: {
         'x-admin-passkey': passkey
