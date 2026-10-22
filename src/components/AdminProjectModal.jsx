@@ -54,7 +54,9 @@ import {
 import {
   isFirebaseActive,
   subscribeCloudProjects,
-  subscribeCloudInquiries
+  subscribeCloudInquiries,
+  syncLocalProjectsToCloud,
+  syncLocalInquiriesToCloud
 } from '../services/firebaseSync';
 import {
   getStoredInquiries,
@@ -316,11 +318,19 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
     try {
       if (editingProjectId) {
-        await updateProjectOnServer(editingProjectId, formData, selectedPhotoFile);
-        setFormSuccessMessage('Project successfully updated in database!');
+        const res = await updateProjectOnServer(editingProjectId, formData, selectedPhotoFile);
+        if (res && res.isOffline) {
+          setFormSuccessMessage('Project updated in offline local cache (pending cloud connection).');
+        } else {
+          setFormSuccessMessage('Project successfully updated and synchronized to live cloud database worldwide!');
+        }
       } else {
-        await addProjectToServer(formData, selectedPhotoFile);
-        setFormSuccessMessage('New project successfully saved to live server database!');
+        const res = await addProjectToServer(formData, selectedPhotoFile);
+        if (res && res.isOffline) {
+          setFormSuccessMessage('Project saved to offline local cache (pending cloud connection).');
+        } else {
+          setFormSuccessMessage('New project successfully saved and synchronized to live cloud database worldwide!');
+        }
       }
     } catch (err) {
       console.warn('Project save notice:', err);
@@ -771,9 +781,15 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                                   {proj.category}
                                 </span>
                                 {proj.isCustom && (
-                                  <span className="text-[9px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded font-bold">
-                                    Owner Upload
-                                  </span>
+                                  proj.syncStatus === 'local_only' ? (
+                                    <span className="text-[9px] bg-amber-100 text-amber-800 border border-amber-300 px-1.5 py-0.5 rounded font-bold">
+                                      Offline Cache
+                                    </span>
+                                  ) : (
+                                    <span className="text-[9px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-1.5 py-0.5 rounded font-bold">
+                                      Cloud Synced
+                                    </span>
+                                  )
                                 )}
                               </div>
 
@@ -1196,6 +1212,15 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${statusConfig.bg}`}>
                                   {statusConfig.label}
                                 </span>
+                                {lead.syncStatus === 'local_only' ? (
+                                  <span className="text-[9px] bg-amber-100 text-amber-800 border border-amber-300 px-1.5 py-0.5 rounded font-bold">
+                                    Offline Cache
+                                  </span>
+                                ) : (
+                                  <span className="text-[9px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-1.5 py-0.5 rounded font-bold">
+                                    Cloud Synced
+                                  </span>
+                                )}
                                 <span className="text-[11px] text-slate-400">
                                   {new Date(lead.timestamp).toLocaleString()}
                                 </span>
@@ -1253,9 +1278,32 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                             )}
 
                             {lead.attachedFile && (
-                              <div className="text-xs text-[#7A2E16] font-semibold flex items-center gap-1.5">
-                                <FileText className="w-3.5 h-3.5" />
-                                <span>Attached Drawings / BOQ: {lead.attachedFile}</span>
+                              <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#E5DED3] flex items-center justify-between gap-3 text-xs">
+                                <div className="flex items-center gap-2 text-slate-700">
+                                  <FileText className="w-4 h-4 text-[#7A2E16] shrink-0" />
+                                  <div>
+                                    <span className="font-bold block text-slate-900">
+                                      Attached Drawing / BOQ: {typeof lead.attachedFile === 'string' ? lead.attachedFile : lead.attachedFile.name}
+                                    </span>
+                                    {lead.attachedFile.size && (
+                                      <span className="text-[10px] text-slate-500 font-mono">
+                                        {(lead.attachedFile.size / 1024 / 1024).toFixed(2)} MB
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                                {lead.attachedFile.url && (
+                                  <a
+                                    href={lead.attachedFile.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    download={lead.attachedFile.name || 'drawing'}
+                                    className="px-3 py-1.5 bg-[#7A2E16] hover:bg-[#5C200E] text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm shrink-0"
+                                  >
+                                    <Download className="w-3.5 h-3.5" />
+                                    <span>Download</span>
+                                  </a>
+                                )}
                               </div>
                             )}
 
@@ -1427,10 +1475,24 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         className="w-full px-3.5 py-2.5 font-mono text-xs rounded-xl border border-[#E5DED3] bg-[#FAF8F5] focus:border-[#7A2E16] outline-none"
                       />
 
-                      <div className="flex items-center justify-between">
-                        <span className="text-[11px] text-slate-400">
-                          Pre-configured with Kachoras official project credentials.
-                        </span>
+                      <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            setSettingsNotice('Synchronizing local projects & inquiries with Cloud Firestore...');
+                            await syncLocalProjectsToCloud();
+                            await syncLocalInquiriesToCloud();
+                            await refreshProjectsList();
+                            await refreshInquiriesList();
+                            setSettingsNotice('Cloud synchronization complete! All records unified.');
+                            setTimeout(() => setSettingsNotice(''), 4000);
+                          }}
+                          className="px-3.5 py-2 bg-[#FAF8F5] hover:bg-[#F0EBE1] border border-[#E5DED3] text-slate-700 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-1.5"
+                        >
+                          <RefreshCw className="w-3.5 h-3.5 text-[#7A2E16]" />
+                          <span>Force Cloud Re-sync</span>
+                        </button>
+
                         <button
                           type="button"
                           onClick={handleSaveFirebaseConfig}

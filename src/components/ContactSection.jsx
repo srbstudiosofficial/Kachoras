@@ -9,7 +9,9 @@ import {
   ShieldCheck, 
   UploadCloud,
   FileText,
-  MessageSquare
+  MessageSquare,
+  AlertTriangle,
+  X
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 import { submitInquiry } from '../services/inquiryService';
@@ -28,11 +30,16 @@ export default function ContactSection() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [attachmentFile, setAttachmentFile] = useState(null);
   const [attachedFile, setAttachedFile] = useState(null);
   const [submissionRef, setSubmissionRef] = useState('');
+  const [submitError, setSubmitError] = useState('');
+  const [offlineWarning, setOfflineWarning] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError('');
+    setOfflineWarning(false);
     setIsSubmitting(true);
 
     try {
@@ -45,24 +52,56 @@ export default function ContactSection() {
         serviceType: formData.serviceType,
         budgetRange: formData.budgetRange,
         location: formData.location,
-        message: formData.message,
-        attachedFile: attachedFile
-      });
-      if (res && res.referenceId) {
-        setSubmissionRef(res.referenceId);
+        message: formData.message
+      }, attachmentFile);
+
+      if (res && res.success) {
+        setSubmissionRef(res.referenceId || '');
+        setOfflineWarning(false);
+        setIsSubmitted(true);
+      } else if (res && res.offlineSaved) {
+        setSubmissionRef(res.referenceId || '');
+        setOfflineWarning(true);
+        setIsSubmitted(true);
+      } else {
+        setSubmitError(res?.error || 'Unable to submit inquiry to company servers. Please try again.');
       }
     } catch (err) {
-      console.warn('Submission notice:', err);
+      console.error('Submission error:', err);
+      setSubmitError(err.message || 'Transmission failed. Please check your network connection.');
     } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
     }
   };
 
-  const handleFakeFileUpload = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setAttachedFile(e.target.files[0].name);
+  const handleFileUpload = (e) => {
+    setSubmitError('');
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    // Strict 50MB check
+    if (file.size > 50 * 1024 * 1024) {
+      setSubmitError(`File "${file.name}" exceeds the 50 MB limit (${(file.size / 1024 / 1024).toFixed(1)} MB). Please select a smaller drawing or document.`);
+      e.target.value = '';
+      return;
     }
+
+    // Allowed extensions check
+    const allowed = ['.pdf', '.dwg', '.dxf', '.png', '.jpg', '.jpeg', '.doc', '.docx', '.zip'];
+    const ext = '.' + file.name.split('.').pop().toLowerCase();
+    if (!allowed.includes(ext) && !file.type.startsWith('image/')) {
+      setSubmitError(`Unsupported file format "${ext}". Allowed: PDF, AutoCAD (DWG/DXF), Images, Word, ZIP.`);
+      e.target.value = '';
+      return;
+    }
+
+    setAttachmentFile(file);
+    setAttachedFile(file.name);
+  };
+
+  const handleRemoveFile = () => {
+    setAttachmentFile(null);
+    setAttachedFile(null);
   };
 
   return (
@@ -211,6 +250,19 @@ export default function ContactSection() {
                 <p className="text-sm text-[#475569] max-w-lg mx-auto leading-relaxed">
                   Thank you, <strong className="text-[#1E293B]">{formData.name}</strong>. Your project specifications have been dispatched to our estimating desk at <strong>kachorasdubai@gmail.com</strong> and logged into our engineering leads portal.
                 </p>
+
+                {/* Offline Warning Banner if Cloud failed */}
+                {offlineWarning && (
+                  <div className="p-4 bg-amber-50 border border-amber-300 rounded-xl text-xs text-amber-900 text-left max-w-lg mx-auto space-y-1">
+                    <div className="flex items-center gap-2 font-bold text-amber-800">
+                      <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+                      <span>Notice: Offline Browser Cache Mode</span>
+                    </div>
+                    <p className="text-amber-800/90 leading-relaxed">
+                      Your project specifications were saved in your browser cache, but could not be transmitted to our cloud servers due to network connectivity. Please reach out to our team directly via WhatsApp or Email below to ensure immediate pricing.
+                    </p>
+                  </div>
+                )}
 
                 {/* Instant Dispatch Actions */}
                 <div className="grid sm:grid-cols-2 gap-3 max-w-md mx-auto pt-2">
@@ -368,24 +420,51 @@ export default function ContactSection() {
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-[#1E293B] flex items-center justify-between">
                     <span>Attach Municipality Drawings / Blueprints & BOQ</span>
-                    <span className="text-[11px] text-[#64748B] font-normal">Optional (Max 50MB)</span>
+                    <span className="text-[11px] text-[#64748B] font-normal">Max 50MB (PDF, DWG, DXF, Images, ZIP)</span>
                   </label>
                   <div className="relative border-2 border-dashed border-[#CBD5E1] hover:border-[#7A2E16] rounded-xl p-4 text-center cursor-pointer transition bg-[#FBF9F5]">
                     <input
                       type="file"
-                      onChange={handleFakeFileUpload}
+                      accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg,.doc,.docx,.zip"
+                      onChange={handleFileUpload}
                       className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                     />
                     <UploadCloud className="w-6 h-6 text-[#7A2E16] mx-auto mb-1" />
                     <div className="text-xs text-[#64748B]">
                       {attachedFile ? (
-                        <span className="text-[#7A2E16] font-bold">Attached: {attachedFile}</span>
+                        <div className="flex items-center justify-center gap-2">
+                          <span className="text-[#7A2E16] font-bold">
+                            Attached: {attachedFile} {attachmentFile?.size ? `(${(attachmentFile.size / 1024 / 1024).toFixed(2)} MB)` : ''}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleRemoveFile();
+                            }}
+                            className="p-1 text-red-600 hover:text-red-800 transition z-10"
+                            title="Remove file"
+                          >
+                            <X className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       ) : (
-                        <span>Click or drag blueprints, CAD files, or BOQ documents here</span>
+                        <span>Click or drag blueprints, CAD files, or BOQ documents here (Max 50MB)</span>
                       )}
                     </div>
                   </div>
                 </div>
+
+                {/* Error Banner */}
+                {submitError && (
+                  <div className="p-3.5 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 flex items-start gap-2.5">
+                    <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="block font-bold">Submission Notice:</strong>
+                      <span>{submitError}</span>
+                    </div>
+                  </div>
+                )}
 
                 {/* Submit */}
                 <button

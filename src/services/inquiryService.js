@@ -1,5 +1,6 @@
 import { COMPANY_INFO } from '../data/mockData';
-import { isFirebaseActive, saveCloudInquiry } from './firebaseSync';
+import { isFirebaseActive, saveCloudInquiry, uploadInquiryAttachment } from './firebaseSync';
+import { getApiBaseUrl } from './projectService';
 
 const STORAGE_KEY_INQUIRIES = 'kachoras_leads_v1';
 const STORAGE_KEY_EMAIL_CONFIG = 'kachoras_email_config_v1';
@@ -73,13 +74,58 @@ const DEFAULT_PASSKEY = 'kachoras2006';
 
 /**
  * Submit a new inquiry from Contact Form or Quote Modal
- * 1. Posts to Live Dynamic Server (/api/inquiries)
- * 2. Saves to internal Owner Portal Inbox
- * 3. Attempts email dispatch to kachorasdubai@gmail.com
+ * 1. Uploads real drawing/blueprint attachment if present (up to 50MB)
+ * 2. Confirms live Cloud Firestore synchronization
+ * 3. Fallback to Express backend if online
+ * 4. Provides honest delivery status (never falsely claims success if cloud failed)
  */
-export async function submitInquiry(payload) {
+export async function submitInquiry(payload, attachmentFile = null) {
   const randomNum = Math.floor(1000 + Math.random() * 9000);
   const ref = `KCH-${randomNum}-RFQ`;
+
+  // 1. Process Drawing Attachment if provided
+  let attachedFileMeta = null;
+  if (attachmentFile instanceof File) {
+    if (attachmentFile.size > 50 * 1024 * 1024) {
+      throw new Error('Drawing file exceeds the 50MB maximum size limit.');
+    }
+
+    // Try Firebase Storage first
+    if (isFirebaseActive()) {
+      try {
+        attachedFileMeta = await uploadInquiryAttachment(attachmentFile);
+      } catch (err) {
+        console.warn('Firebase Storage inquiry upload failed:', err);
+      }
+    }
+
+    // If storage is not active, prepare structured file metadata
+    if (!attachedFileMeta) {
+      attachedFileMeta = {
+        name: attachmentFile.name,
+        size: attachmentFile.size,
+        type: attachmentFile.type || 'application/octet-stream',
+        uploadedAt: new Date().toISOString()
+      };
+
+      // For files under 500KB, preserve data URL so the owner can preview it
+      if (attachmentFile.size < 500 * 1024) {
+        try {
+          const dataUrl = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(attachmentFile);
+          });
+          attachedFileMeta.url = dataUrl;
+        } catch (e) {}
+      }
+    }
+  } else if (payload.attachedFile) {
+    attachedFileMeta = typeof payload.attachedFile === 'string'
+      ? { name: payload.attachedFile }
+      : payload.attachedFile;
+  }
 
   const newInquiry = {
     id: `LEAD-${Date.now()}`,
@@ -90,67 +136,92 @@ export async function submitInquiry(payload) {
     phone: payload.phone || '',
     location: payload.location || 'Dubai, UAE',
     plotNo: payload.plotNo || '',
-    serviceType: payload.serviceType || payload.category || 'General Construction',
+    serviceType: payload.serviceType || payload.category || 'General Contracting',
     budgetRange: payload.budgetRange || payload.budget || '',
     message: payload.message || payload.notes || '',
-    attachedFile: payload.attachedFile || null,
+    attachedFile: attachedFileMeta,
     timestamp: new Date().toISOString(),
-    status: "new"
+    status: "new",
+    syncStatus: "pending"
   };
 
-  // 1. If Firebase Cloud Firestore is active, save lead directly to cloud
+  let deliveredToCloud = false;
+
+  // 2. Primary: Save directly to Cloud Firestore (Global real-time sync)
   if (isFirebaseActive()) {
     try {
-      saveCloudInquiry(newInquiry).catch(e => console.warn('Cloud inquiry save:', e));
-    } catch (e) {}
-  }
-
-  // 2. Attempt Live Server API Post
-  try {
-    const res = await fetch('/api/inquiries', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newInquiry)
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      if (data && data.inquiry) {
-        const existing = getStoredInquiries();
-        saveStoredInquiries([data.inquiry, ...existing.filter(i => i.id !== data.inquiry.id)]);
-        window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
-        
-        // Background email dispatch
-        sendEmailNotification(data.inquiry).catch(err => console.warn('Email notice:', err));
-
-        return {
-          success: true,
-          referenceId: data.referenceId || ref,
-          inquiry: data.inquiry
-        };
+      const saved = await saveCloudInquiry({ ...newInquiry, syncStatus: 'synced' });
+      if (saved) {
+        deliveredToCloud = true;
+        newInquiry.syncStatus = 'synced';
       }
+    } catch (e) {
+      console.warn('Cloud Firestore inquiry save failed:', e);
     }
-  } catch (err) {
-    console.info('Live server unavailable, proceeding with local offline lead capture:', err);
   }
 
-  // 2. Offline / Local fallback: Save to portal inbox
+  // 3. Secondary: Try Live Backend Server if online
+  if (!deliveredToCloud) {
+    try {
+      const base = getApiBaseUrl();
+      let res;
+
+      if (attachmentFile instanceof File) {
+        const formData = new FormData();
+        Object.keys(newInquiry).forEach(k => {
+          if (k !== 'attachedFile') formData.append(k, newInquiry[k] || '');
+        });
+        formData.append('drawingFile', attachmentFile);
+        res = await fetch(`${base}/api/inquiries`, {
+          method: 'POST',
+          body: formData
+        });
+      } else {
+        res = await fetch(`${base}/api/inquiries`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newInquiry)
+        });
+      }
+
+      if (res && res.ok) {
+        const data = await res.json();
+        if (data && data.inquiry) {
+          deliveredToCloud = true;
+          newInquiry.syncStatus = 'synced';
+          if (data.inquiry.attachedFile) {
+            newInquiry.attachedFile = data.inquiry.attachedFile;
+          }
+        }
+      }
+    } catch (err) {
+      console.info('Live backend server unreachable for inquiry:', err);
+    }
+  }
+
+  // 4. Update local cache
   const existing = getStoredInquiries();
-  const updated = [newInquiry, ...existing];
-  saveStoredInquiries(updated);
+  saveStoredInquiries([newInquiry, ...existing.filter(i => i.id !== newInquiry.id)]);
   window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
 
-  // 3. Dispatch email to company inbox (kachorasdubai@gmail.com)
-  try {
-    await sendEmailNotification(newInquiry);
-  } catch (err) {
-    console.warn('Email dispatch warning (lead preserved in Owner Portal):', err);
+  // 5. Attempt email notification
+  sendEmailNotification(newInquiry).catch(err => console.warn('Email dispatch notice:', err));
+
+  // If cloud delivery failed, report honestly so visitor knows it's only in local cache
+  if (!deliveredToCloud) {
+    return {
+      success: false,
+      deliveredToCloud: false,
+      offlineSaved: true,
+      referenceId: ref,
+      inquiry: newInquiry,
+      error: 'Unable to reach cloud servers. Inquiry saved to local browser cache only.'
+    };
   }
 
   return {
     success: true,
+    deliveredToCloud: true,
     referenceId: ref,
     inquiry: newInquiry
   };

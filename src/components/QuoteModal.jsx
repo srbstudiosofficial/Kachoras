@@ -11,7 +11,8 @@ import {
   Sparkles, 
   ShieldCheck,
   Mail,
-  MessageSquare 
+  MessageSquare,
+  AlertTriangle 
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 import { submitInquiry } from '../services/inquiryService';
@@ -32,8 +33,11 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
     company: '',
     notes: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [referenceId, setReferenceId] = useState('');
+  const [submitError, setSubmitError] = useState('');
+  const [offlineWarning, setOfflineWarning] = useState(false);
 
   useEffect(() => {
     if (initialData) {
@@ -61,6 +65,10 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError('');
+    setOfflineWarning(false);
+    setIsSubmitting(true);
+
     try {
       const res = await submitInquiry({
         name: formData.name,
@@ -73,13 +81,23 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
         location: formData.location || 'Dubai, UAE',
         message: `${formData.sqft ? `Approx Area: ${formData.sqft} sq.ft. ` : ''}${formData.timeline ? `Timeline: ${formData.timeline}. ` : ''}${formData.hasBlueprints ? `Blueprints: ${formData.hasBlueprints}. ` : ''}${formData.notes || ''}`
       });
-      setReferenceId(res.referenceId);
+
+      if (res && res.success) {
+        setReferenceId(res.referenceId || '');
+        setOfflineWarning(false);
+        setIsSubmitted(true);
+      } else if (res && res.offlineSaved) {
+        setReferenceId(res.referenceId || '');
+        setOfflineWarning(true);
+        setIsSubmitted(true);
+      } else {
+        setSubmitError(res?.error || 'Failed to submit quote request. Please try again.');
+      }
     } catch (err) {
-      console.warn('Inquiry notice:', err);
-      const randomNum = Math.floor(1000 + Math.random() * 9000);
-      setReferenceId(`KCH-${randomNum}-RFQ`);
+      console.error('Inquiry error:', err);
+      setSubmitError(err.message || 'Failed to transmit RFQ. Please check your connection.');
     } finally {
-      setIsSubmitted(true);
+      setIsSubmitting(false);
     }
   };
 
@@ -139,6 +157,19 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                 <span className="font-bold text-[#7A2E16]">Jose K. George (General Manager)</span>
               </div>
             </div>
+
+            {/* Offline Notice Banner if cloud failed */}
+            {offlineWarning && (
+              <div className="p-3.5 bg-amber-50 border border-amber-300 rounded-xl text-xs text-amber-900 text-left max-w-md mx-auto space-y-1">
+                <div className="flex items-center gap-1.5 font-bold text-amber-800">
+                  <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>Notice: Offline Browser Cache Mode</span>
+                </div>
+                <p className="text-amber-800/90 leading-relaxed text-[11px]">
+                  Your RFQ was stored in local browser cache because cloud connectivity was unavailable. Please tap the WhatsApp button below to ensure our engineering desk receives your request immediately.
+                </p>
+              </div>
+            )}
 
             {/* Instant Communication Actions */}
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2">
@@ -391,11 +422,23 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                     />
                   </div>
 
+                  {/* Error Banner */}
+                  {submitError && (
+                    <div className="p-3.5 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 flex items-start gap-2">
+                      <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="block font-bold">Submission Notice:</strong>
+                        <span>{submitError}</span>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 pt-4">
                     <button
                       type="button"
                       onClick={() => setStep(2)}
-                      className="px-5 py-3.5 bg-[#F4EFE6] hover:bg-[#E5DED3] text-[#475569] font-semibold text-xs rounded-xl flex items-center justify-center gap-2 border border-[#E5DED3] w-full sm:w-auto min-h-[44px]"
+                      disabled={isSubmitting}
+                      className="px-5 py-3.5 bg-[#F4EFE6] hover:bg-[#E5DED3] text-[#475569] font-semibold text-xs rounded-xl flex items-center justify-center gap-2 border border-[#E5DED3] w-full sm:w-auto min-h-[44px] disabled:opacity-50"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>Back</span>
@@ -403,9 +446,10 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
 
                     <button
                       type="submit"
-                      className="px-8 py-3.5 bg-gradient-to-r from-[#7A2E16] via-[#8E341B] to-[#7A2E16] hover:brightness-110 text-white font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 shadow-lg transition w-full sm:w-auto min-h-[44px]"
+                      disabled={isSubmitting}
+                      className="px-8 py-3.5 bg-gradient-to-r from-[#7A2E16] via-[#8E341B] to-[#7A2E16] hover:brightness-110 text-white font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 shadow-lg transition w-full sm:w-auto min-h-[44px] disabled:opacity-50"
                     >
-                      <span>Transmit Proposal Request</span>
+                      <span>{isSubmitting ? 'Transmitting Request...' : 'Transmit Proposal Request'}</span>
                     </button>
                   </div>
                 </div>

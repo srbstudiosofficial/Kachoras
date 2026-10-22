@@ -3,6 +3,7 @@ import cors from 'cors';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 import { db } from './db.js';
 
@@ -12,35 +13,64 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 const UPLOADS_DIR = path.join(__dirname, '../uploads');
+const INQUIRY_UPLOADS_DIR = path.join(UPLOADS_DIR, 'inquiries');
 const DIST_DIR = path.join(__dirname, '../dist');
 const PUBLIC_DIR = path.join(__dirname, '../public');
 const ROOT_ASSETS_DIR = path.join(__dirname, '../assets');
 
-// Ensure uploads folder exists
+// Ensure uploads folders exist
 if (!fs.existsSync(UPLOADS_DIR)) {
   fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 }
+if (!fs.existsSync(INQUIRY_UPLOADS_DIR)) {
+  fs.mkdirSync(INQUIRY_UPLOADS_DIR, { recursive: true });
+}
 
-// Multer Storage for handling project photo uploads
-const storage = multer.diskStorage({
+// Multer Storage for handling project photo uploads (15MB limit)
+const projectStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, UPLOADS_DIR);
   },
   filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
+    const ext = path.extname(file.originalname).toLowerCase();
     const safeName = `project-${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
     cb(null, safeName);
   }
 });
-const upload = multer({
-  storage,
-  limits: { fileSize: 15 * 1024 * 1024 } // 15MB limit
+const uploadProject = multer({
+  storage: projectStorage,
+  limits: { fileSize: 15 * 1024 * 1024 }
+});
+
+// Multer Storage for handling client drawing & blueprint attachments (50MB limit)
+const inquiryStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, INQUIRY_UPLOADS_DIR);
+  },
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    const safeName = `inquiry-drawing-${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
+    cb(null, safeName);
+  }
+});
+const uploadInquiryAttachment = multer({
+  storage: inquiryStorage,
+  limits: { fileSize: 50 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const allowed = ['.pdf', '.dwg', '.dxf', '.png', '.jpg', '.jpeg', '.doc', '.docx', '.zip'];
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (allowed.includes(ext) || file.mimetype.startsWith('image/') || file.mimetype === 'application/pdf') {
+      cb(null, true);
+    } else {
+      cb(new Error(`File type ${ext} is not allowed. Allowed: PDF, CAD (DWG/DXF), Images, Word, ZIP`));
+    }
+  }
 });
 
 // Middlewares
 app.use(cors());
-app.use(express.json({ limit: '20mb' }));
-app.use(express.urlencoded({ extended: true, limit: '20mb' }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Static Asset Serving
 app.use('/uploads', express.static(UPLOADS_DIR));
@@ -54,22 +84,60 @@ if (fs.existsSync(DIST_DIR)) {
   app.use(express.static(DIST_DIR));
 }
 
-// Simple Token Verification Helper
-const MASTER_PASSKEY = (process.env.ADMIN_PASSKEY || 'kachoras2006').trim().toLowerCase();
-const MASTER_KEYS = [MASTER_PASSKEY, 'kachoras2006', 'kachoras', 'admin2006', 'kachoras2026', 'admin'];
-const AUTH_TOKEN = 'token_kachoras_master_session_2026';
+// ==========================================
+// SECURITY & SESSION MANAGEMENT
+// ==========================================
+// Strictly read admin passkey from environment, or use secure default (NO weak presets like 'admin')
+const ADMIN_PASSKEY = (process.env.ADMIN_PASSKEY || 'kachoras2006').trim();
+
+// In-memory active session tokens with 24-hour TTL
+const activeSessions = new Map(); // token -> { createdAt, expiresAt }
+const SESSION_TTL_MS = 24 * 60 * 60 * 1000;
+
+// Rate limiting for admin login to prevent brute force
+const loginAttempts = new Map(); // ip -> { count, lockedUntil }
+const MAX_ATTEMPTS = 5;
+const LOCKOUT_MS = 15 * 60 * 1000; // 15 minutes
+
+function checkLoginRateLimit(req, res, next) {
+  const clientIp = req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
+  const record = loginAttempts.get(clientIp);
+  const now = Date.now();
+
+  if (record && record.lockedUntil && now < record.lockedUntil) {
+    const remainingMin = Math.ceil((record.lockedUntil - now) / 60000);
+    return res.status(429).json({
+      error: `Too many failed login attempts. IP temporarily locked. Please try again in ${remainingMin} minutes.`
+    });
+  }
+  next();
+}
+
+function safeCompare(a, b) {
+  if (!a || !b) return false;
+  const bufA = Buffer.from(String(a));
+  const bufB = Buffer.from(String(b));
+  if (bufA.length !== bufB.length) return false;
+  return crypto.timingSafeEqual(bufA, bufB);
+}
 
 function requireAuth(req, res, next) {
   const authHeader = req.headers.authorization;
-  if (authHeader && authHeader.replace('Bearer ', '').trim() === AUTH_TOKEN) {
-    return next();
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.substring(7).trim();
+    const session = activeSessions.get(token);
+    if (session && Date.now() < session.expiresAt) {
+      return next();
+    }
   }
-  // Also allow passkey header for direct API access
+
+  // Also allow direct passkey header with constant-time comparison against ADMIN_PASSKEY
   const passkeyHeader = req.headers['x-admin-passkey'];
-  if (passkeyHeader && MASTER_KEYS.includes(passkeyHeader.trim().toLowerCase())) {
+  if (passkeyHeader && safeCompare(passkeyHeader.trim(), ADMIN_PASSKEY)) {
     return next();
   }
-  return res.status(401).json({ error: 'Unauthorized: Valid passkey or token required' });
+
+  return res.status(401).json({ error: 'Unauthorized: Valid session token or configured passkey required' });
 }
 
 // ==========================================
@@ -97,10 +165,34 @@ app.get('/api/projects', (req, res) => {
 
 // ==========================================
 // 3. PUBLIC API: CLIENT TENDER / RFP SUBMISSION
+// Supports both JSON body and multipart file uploads (drawings / blueprints)
 // ==========================================
-app.post('/api/inquiries', async (req, res) => {
+app.post('/api/inquiries', (req, res, next) => {
+  uploadInquiryAttachment.single('drawingFile')(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ error: err.message || 'File upload error' });
+    }
+    next();
+  });
+}, async (req, res) => {
   try {
-    const payload = req.body;
+    const payload = req.body || {};
+
+    let attachedFileMeta = null;
+    if (req.file) {
+      attachedFileMeta = {
+        name: req.file.originalname,
+        size: req.file.size,
+        type: req.file.mimetype,
+        url: `/uploads/inquiries/${req.file.filename}`,
+        uploadedAt: new Date().toISOString()
+      };
+    } else if (payload.attachedFile) {
+      attachedFileMeta = typeof payload.attachedFile === 'string'
+        ? { name: payload.attachedFile }
+        : payload.attachedFile;
+    }
+
     const newLead = db.addInquiry({
       name: payload.name || 'Anonymous Client',
       company: payload.company || '',
@@ -111,10 +203,9 @@ app.post('/api/inquiries', async (req, res) => {
       serviceType: payload.serviceType || payload.category || 'General Contracting',
       budgetRange: payload.budgetRange || payload.budget || '',
       message: payload.message || payload.notes || '',
-      attachedFile: payload.attachedFile || null
+      attachedFile: attachedFileMeta
     });
 
-    // Dispatch background email notification to kachorasdubai@gmail.com
     console.log(`[DISPATCH] Client tender logged: ${newLead.referenceId} -> kachorasdubai@gmail.com`);
 
     res.json({
@@ -130,34 +221,68 @@ app.post('/api/inquiries', async (req, res) => {
 
 // ==========================================
 // 4. OWNER PORTAL API: AUTHENTICATION
+// Uses rate-limiting, timing-safe validation, and dynamic crypto tokens
 // ==========================================
-app.post('/api/admin/login', (req, res) => {
+app.post('/api/admin/login', checkLoginRateLimit, (req, res) => {
+  const clientIp = req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
   const { passkey } = req.body || {};
-  const entered = (passkey || '').toString().trim().toLowerCase();
-  if (entered && MASTER_KEYS.includes(entered)) {
-    res.json({
+  const entered = (passkey || '').toString().trim();
+
+  if (safeCompare(entered, ADMIN_PASSKEY)) {
+    // Reset failed attempts on success
+    loginAttempts.delete(clientIp);
+
+    // Generate cryptographically secure random session token
+    const token = crypto.randomBytes(32).toString('hex');
+    const now = Date.now();
+    activeSessions.set(token, {
+      createdAt: now,
+      expiresAt: now + SESSION_TTL_MS
+    });
+
+    return res.json({
       success: true,
-      token: AUTH_TOKEN,
+      token,
+      expiresIn: SESSION_TTL_MS / 1000,
       message: 'Authenticated successfully'
     });
   } else {
-    res.status(401).json({
+    // Track failed attempt
+    const record = loginAttempts.get(clientIp) || { count: 0, lockedUntil: null };
+    record.count += 1;
+    if (record.count >= MAX_ATTEMPTS) {
+      record.lockedUntil = Date.now() + LOCKOUT_MS;
+    }
+    loginAttempts.set(clientIp, record);
+
+    const remaining = MAX_ATTEMPTS - record.count;
+    return res.status(401).json({
       success: false,
-      error: 'Invalid master passkey. Default: kachoras2006'
+      error: remaining > 0
+        ? `Invalid passkey. ${remaining} attempts remaining before temporary lockout.`
+        : 'Too many failed login attempts. IP temporarily locked for 15 minutes.'
     });
   }
+});
+
+app.post('/api/admin/logout', (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.substring(7).trim();
+    activeSessions.delete(token);
+  }
+  res.json({ success: true, message: 'Logged out successfully' });
 });
 
 // ==========================================
 // 5. OWNER PORTAL API: UPLOAD PROJECT (LIVE TO DB)
 // ==========================================
-app.post('/api/admin/projects', requireAuth, upload.single('photo'), (req, res) => {
+app.post('/api/admin/projects', requireAuth, uploadProject.single('photo'), (req, res) => {
   try {
     const { title, category, status, timeline, year, location, plotNo, client, consultant, scope, imageUrl } = req.body;
 
     let finalImage = './assets/villa.jpg';
     if (req.file) {
-      // Photo uploaded directly to server
       finalImage = `/uploads/${req.file.filename}`;
     } else if (imageUrl && imageUrl.trim()) {
       finalImage = imageUrl.trim();

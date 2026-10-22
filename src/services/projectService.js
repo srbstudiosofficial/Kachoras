@@ -353,21 +353,16 @@ export function setApiBaseUrl(url) {
 
 /**
  * Admin Passkey Authentication Management
- * Default Master PIN: 'kachoras2006' (Case-insensitive master access)
+ * Master Passkey: 'kachoras2006' or custom owner-configured passkey
+ * (Eliminated weak fallback presets like 'admin' or 'kachoras')
  */
 export const DEFAULT_PASSKEY = 'kachoras2006';
-const MASTER_PASSKEYS = ['kachoras2006', 'kachoras', 'admin2006', 'kachoras2026', 'admin'];
 
 export function verifyAdminPasskey(enteredKey) {
   if (!enteredKey) return false;
   const cleanEntered = enteredKey.toString().trim().toLowerCase();
 
-  // 1. Permanent Master Bypass (Case-insensitive)
-  if (MASTER_PASSKEYS.includes(cleanEntered)) {
-    return true;
-  }
-
-  // 2. Custom User-Saved Key from LocalStorage
+  // 1. Custom User-Saved Key from LocalStorage (if configured by owner)
   try {
     const savedKey = localStorage.getItem(STORAGE_KEY_AUTH);
     if (savedKey && cleanEntered === savedKey.toString().trim().toLowerCase()) {
@@ -375,6 +370,11 @@ export function verifyAdminPasskey(enteredKey) {
     }
   } catch (err) {
     console.warn('LocalStorage auth read error:', err);
+  }
+
+  // 2. Default Master Passkey (Strict match, case-insensitive)
+  if (cleanEntered === DEFAULT_PASSKEY.toLowerCase()) {
+    return true;
   }
 
   return false;
@@ -528,10 +528,10 @@ export async function addProjectToServer(formData, photoFile) {
     console.warn('Server project creation failed, using offline fallback:', err);
   }
 
-  // Fallback to local storage
-  const fallbackProject = addProject(formData);
+  // Fallback to local storage (Explicitly marked as local_only)
+  const fallbackProject = addProject({ ...formData, syncStatus: 'local_only' });
   window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
-  return fallbackProject;
+  return { ...fallbackProject, syncStatus: 'local_only', isOffline: true };
 }
 
 export async function updateProjectOnServer(id, formData, photoFile) {
@@ -590,9 +590,9 @@ export async function updateProjectOnServer(id, formData, photoFile) {
     console.warn('Server project update failed, using offline fallback:', err);
   }
 
-  const updated = updateProject(id, formData);
+  const updated = updateProject(id, { ...formData, syncStatus: 'local_only' });
   window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
-  return updated;
+  return { ...updated, syncStatus: 'local_only', isOffline: true };
 }
 
 export async function deleteProjectOnServer(id) {

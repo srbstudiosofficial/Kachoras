@@ -127,6 +127,72 @@ export async function uploadProjectPhotoToStorage(file) {
 }
 
 /**
+ * Upload client drawings/blueprints/BOQ documents to Firebase Storage
+ * Supports PDF, CAD (DWG/DXF), Images, ZIP up to 50MB
+ */
+export async function uploadInquiryAttachment(file) {
+  if (!file) return null;
+  const storage = getFirebaseStorage();
+  if (!storage) return null;
+
+  try {
+    const safeName = (file.name || 'drawing.pdf').replace(/[^a-zA-Z0-9.-]/g, '_');
+    const path = `inquiries/${Date.now()}_${safeName}`;
+    const storageRef = ref(storage, path);
+    const snapshot = await uploadBytes(storageRef, file, {
+      contentType: file.type || 'application/octet-stream'
+    });
+    const downloadUrl = await getDownloadURL(snapshot.ref);
+    return {
+      name: file.name,
+      size: file.size,
+      type: file.type || 'application/octet-stream',
+      url: downloadUrl,
+      uploadedAt: new Date().toISOString()
+    };
+  } catch (err) {
+    console.warn('Firebase Storage inquiry upload failed:', err);
+    return null;
+  }
+}
+
+/**
+ * Auto-migrate any offline inquiries saved in browser localStorage to Cloud Firestore
+ */
+export async function syncLocalInquiriesToCloud() {
+  const db = getFirebaseDb();
+  if (!db) return;
+
+  try {
+    const raw = localStorage.getItem('kachoras_leads_v1');
+    if (!raw) return;
+    const localInquiries = JSON.parse(raw);
+    if (!Array.isArray(localInquiries) || localInquiries.length === 0) return;
+
+    const inquiriesCol = collection(db, 'inquiries');
+    const snapshot = await getDocs(inquiriesCol);
+    const cloudIds = new Set();
+    snapshot.forEach(docSnap => cloudIds.add(docSnap.id));
+
+    let updated = false;
+    for (const inq of localInquiries) {
+      if (inq && inq.id && !cloudIds.has(inq.id)) {
+        console.log('Syncing offline lead to Firestore cloud:', inq.referenceId || inq.id);
+        await saveCloudInquiry({ ...inq, syncStatus: 'synced' });
+        inq.syncStatus = 'synced';
+        updated = true;
+      }
+    }
+    if (updated) {
+      localStorage.setItem('kachoras_leads_v1', JSON.stringify(localInquiries));
+      window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
+    }
+  } catch (err) {
+    console.warn('Auto-sync inquiries to cloud notice:', err);
+  }
+}
+
+/**
  * Auto-migrate any custom projects previously saved in browser localStorage to Cloud Firestore
  * Ensures projects created by the client on their phone/laptop are immediately pushed to the cloud.
  */
@@ -226,6 +292,7 @@ export async function saveCloudProject(projectData) {
     ...projectData,
     id: projectId,
     isCustom: true,
+    syncStatus: 'synced',
     updatedAt: new Date().toISOString()
   };
 
@@ -302,6 +369,7 @@ export async function saveCloudInquiry(inquiryData) {
   const payload = {
     ...inquiryData,
     id: inquiryId,
+    syncStatus: 'synced',
     timestamp: inquiryData.timestamp || new Date().toISOString()
   };
 
