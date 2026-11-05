@@ -12,9 +12,9 @@ import {
 } from 'lucide-react';
 import { getAllProjects, fetchServerProjects } from '../services/projectService';
 
-export default function ProjectsSection({ onOpenQuoteModal }) {
+export default function ProjectsSection({ onOpenQuoteModal, hideHeader = false }) {
   const [projects, setProjects] = useState([]);
-  const [filter, setFilter] = useState('all'); // 'all' | 'upcoming' | 'ongoing' | 'completed'
+  const [filter, setFilter] = useState('ongoing'); // 'all' | 'upcoming' | 'ongoing' | 'completed'
 
   const loadProjects = async () => {
     const local = getAllProjects();
@@ -54,23 +54,24 @@ export default function ProjectsSection({ onOpenQuoteModal }) {
   };
 
   return (
-    <section id="portfolio" className="py-24 bg-[#F5F2EB] relative border-t border-[#E5DED3]">
+    <section id="projects" className="py-24 bg-[#F5F2EB] relative border-t border-[#E5DED3]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-12 space-y-3 reveal-on-scroll reveal-init">
-          <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
-            Contracting Portfolio • Future Pipeline
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
-            Projects & Upcoming Works
-          </h2>
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Explore our track record of Dubai Municipality approved G+1 villas, active majlis construction sites, and upcoming pipeline developments across the UAE.
-          </p>
-        </div>
+        {!hideHeader && (
+          <div className="max-w-3xl mb-12 space-y-3 reveal-on-scroll reveal-init">
+            <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
+              Contracting Projects • Future Pipeline
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
+              Projects & Upcoming Works
+            </h2>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+              Explore our track record of Dubai Municipality approved G+1 villas, active majlis construction sites, and upcoming pipeline developments across the UAE.
+            </p>
+          </div>
+        )}
 
-        {/* Filter Navigation Tabs */}
         <div className="flex flex-wrap items-center gap-2 mb-10 pb-2 border-b border-[#E5DED3] reveal-on-scroll reveal-init delay-100">
           <button
             onClick={() => setFilter('all')}
@@ -92,7 +93,7 @@ export default function ProjectsSection({ onOpenQuoteModal }) {
                 : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#FAF8F5]'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-indigo-300 animate-spin-slow" />
+            <Clock className="w-3.5 h-3.5 text-indigo-300" />
             <span>Upcoming Tenders (2026)</span>
             <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-indigo-100 text-indigo-800">{counts.upcoming}</span>
           </button>
@@ -101,7 +102,7 @@ export default function ProjectsSection({ onOpenQuoteModal }) {
             onClick={() => setFilter('ongoing')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95 ${
               filter === 'ongoing'
-                ? 'bg-amber-700 text-white shadow-md'
+                ? 'bg-[#A35216] text-white shadow-md'
                 : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#FAF8F5]'
             }`}
           >
@@ -119,7 +120,7 @@ export default function ProjectsSection({ onOpenQuoteModal }) {
             }`}
           >
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />
-            <span>Completed Handovers</span>
+            <span>Recent Completed Handovers</span>
             <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800">{counts.completed}</span>
           </button>
         </div>

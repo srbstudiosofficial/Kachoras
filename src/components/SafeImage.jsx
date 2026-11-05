@@ -1,18 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Building2, Home, Hammer, ShieldCheck, HardHat, Compass } from 'lucide-react';
 
 export default function SafeImage({ 
   src, 
-  alt, 
+  alt = '', 
   className = "w-full h-full object-cover", 
   category = "Construction",
   plotNo = ""
 }) {
+  const normalize = (path) => {
+    if (!path) return '';
+    return path.startsWith('/') ? '.' + path : path;
+  };
+
+  const [currentSrc, setCurrentSrc] = useState(normalize(src));
   const [hasError, setHasError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  useEffect(() => {
+    setCurrentSrc(normalize(src));
+    setHasError(false);
+    setIsLoaded(false);
+  }, [src]);
+
+  const handleImageError = () => {
+    // If the image fails and isn't already the default villa fallback, try the fallback villa image
+    if (currentSrc && !currentSrc.includes('villa.jpg')) {
+      setCurrentSrc('./assets/villa.jpg');
+    } else {
+      setHasError(true);
+    }
+  };
+
   // Fallback architectural pattern if external CDN fails or is blocked
-  if (hasError || !src) {
+  if (hasError || !currentSrc) {
     return (
       <div className="w-full h-full bg-gradient-to-br from-[#131B2A] via-[#0E1522] to-[#182338] relative flex flex-col items-center justify-center p-4 select-none overflow-hidden">
         {/* Architectural Blueprint Grid Pattern */}
@@ -55,11 +76,11 @@ export default function SafeImage({
       )}
 
       <img
-        src={src}
-        alt=""
+        src={currentSrc}
+        alt={alt}
         loading="lazy"
         onLoad={() => setIsLoaded(true)}
-        onError={() => setHasError(true)}
+        onError={handleImageError}
         className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
       />
     </div>

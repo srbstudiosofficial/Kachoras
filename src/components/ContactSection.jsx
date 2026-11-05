@@ -384,7 +384,9 @@ export default function ContactSection() {
                       <option value="Building Contracting (G+1 Villa / Majlis)">Building Contracting (G+1 Villa / Majlis)</option>
                       <option value="MEP & HVAC Engineering">MEP & HVAC Engineering</option>
                       <option value="Aluminium and Glass Works">Aluminium and Glass Works</option>
-                      <option value="Civil Maintenance & Gypsum Decor">Civil Maintenance & Gypsum Decor</option>
+                      <option value="Civil Maintenance & Fit-out">Civil Maintenance & Fit-out</option>
+                      <option value="Kitchen Cabinets & Wardrobes">Kitchen Cabinets & Wardrobes</option>
+                      <option value="Gypsum Decoration Works">Gypsum Decoration Works</option>
                       <option value="Dubai Municipality Civic Projects">Dubai Municipality Civic Projects</option>
                     </select>
                   </div>

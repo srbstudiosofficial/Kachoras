@@ -1,72 +1,113 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import VisionMissionSection from './components/VisionMissionSection';
-import CategoriesWheel from './components/CategoriesWheel';
-import MunicipalSection from './components/MunicipalSection';
-import TradeLicenseSection from './components/TradeLicenseSection';
-import OfficeMapSection from './components/OfficeMapSection';
-import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
+import ProjectsPage from './pages/ProjectsPage';
+import LicensePage from './pages/LicensePage';
+import ContactPage from './pages/ContactPage';
 import QuoteModal from './components/QuoteModal';
-import ProjectsSection from './components/ProjectsSection';
 import AdminProjectModal from './components/AdminProjectModal';
 import { subscribeCloudProjects, syncLocalProjectsToCloud, syncLocalInquiriesToCloud } from './services/firebaseSync';
 import { saveLocalProjects } from './services/projectService';
-import { Phone, MessageSquare } from 'lucide-react';
-import { COMPANY_INFO } from './data/mockData';
 import { useScrollReveal } from './hooks/useScrollReveal';
+
+const PAGE_TITLES = {
+  home: 'Kachoras Electromechanical Contracting LLC | Dubai Municipality G+1 Contractor',
+  about: 'About Us | Kachoras Electromechanical Contracting LLC (Dubai)',
+  services: 'Contracting Disciplines & Capabilities | Kachoras Contracting LLC',
+  projects: 'Live Engineering Projects & Pipeline | Kachoras Contracting LLC',
+  license: 'Trade License #578964 & Municipal Approvals | Kachoras Contracting',
+  contact: 'Contact Estimating Desk & Headquarters | Kachoras Contracting'
+};
+
+const resolvePageFromLocation = () => {
+  const path = (window.location.pathname || '').toLowerCase().replace(/^\/+|\/+$/g, '');
+  const hash = (window.location.hash || '').toLowerCase().replace(/^#+/, '');
+
+  const target = path || hash;
+  if (target === 'about' || target === 'vision' || target === 'leadership') return 'about';
+  if (target === 'services' || target === 'disciplines' || target === 'categories') return 'services';
+  if (target === 'projects' || target === 'portfolio' || target === 'works') return 'projects';
+  if (target === 'license' || target === 'municipal' || target === 'compliance') return 'license';
+  if (target === 'contact' || target === 'location' || target === 'tender' || target === 'map') return 'contact';
+  return 'home';
+};
 
 export default function App() {
   useScrollReveal();
 
+  const [currentPage, setCurrentPage] = useState(() => resolvePageFromLocation());
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quoteInitialData, setQuoteInitialData] = useState(null);
   const [adminModalOpen, setAdminModalOpen] = useState(false);
 
-  // Secret Link Listener: Trigger admin portal via URL link (#admin, #owner, #portal, or ?admin)
+  // Synchronize document title with active page
+  useEffect(() => {
+    document.title = PAGE_TITLES[currentPage] || PAGE_TITLES.home;
+  }, [currentPage]);
+
+  // Handle Browser Back / Forward & Hash Navigation
+  useEffect(() => {
+    const handleUrlChange = () => {
+      const p = resolvePageFromLocation();
+      if (p && p !== currentPage) {
+        setCurrentPage(p);
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+    };
+
+    window.addEventListener('popstate', handleUrlChange);
+    window.addEventListener('hashchange', handleUrlChange);
+
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+      window.removeEventListener('hashchange', handleUrlChange);
+    };
+  }, [currentPage]);
+
+  // Link-Only Trigger: Opens owner portal via /admin, #admin, #portal, ?admin
   useEffect(() => {
     const checkAdminTrigger = () => {
       const hash = (window.location.hash || '').toLowerCase();
       const search = (window.location.search || '').toLowerCase();
+      const pathname = (window.location.pathname || '').toLowerCase();
       if (
         hash === '#admin' || 
         hash === '#owner' || 
         hash === '#portal' || 
+        hash === '#control' ||
         search.includes('admin') || 
-        search.includes('portal')
+        search.includes('portal') ||
+        search.includes('control') ||
+        pathname.endsWith('/admin') ||
+        pathname.endsWith('/portal') ||
+        pathname.endsWith('/control')
       ) {
         setAdminModalOpen(true);
       }
     };
 
     checkAdminTrigger();
+    const t = setTimeout(checkAdminTrigger, 300);
     window.addEventListener('hashchange', checkAdminTrigger);
     window.addEventListener('popstate', checkAdminTrigger);
-
-    // Optional owner secret keyboard shortcut (Ctrl + Shift + A)
-    const handleKeyDown = (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
-        e.preventDefault();
-        setAdminModalOpen(prev => !prev);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('focus', checkAdminTrigger);
 
     return () => {
+      clearTimeout(t);
       window.removeEventListener('hashchange', checkAdminTrigger);
       window.removeEventListener('popstate', checkAdminTrigger);
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('focus', checkAdminTrigger);
     };
   }, []);
 
   // Real-Time Cloud Synchronization Listener (Firebase Cloud Firestore)
   useEffect(() => {
-    // 1. Auto-sync any previously added local projects & inquiries on this device to Cloud Firestore
     syncLocalProjectsToCloud().catch(console.warn);
     syncLocalInquiriesToCloud().catch(console.warn);
 
-    // 2. Attach live real-time listener for global updates
     const unsubscribe = subscribeCloudProjects((liveCloudProjects) => {
       if (liveCloudProjects && Array.isArray(liveCloudProjects)) {
         saveLocalProjects(liveCloudProjects);
@@ -78,6 +119,25 @@ export default function App() {
       if (unsubscribe) unsubscribe();
     };
   }, []);
+
+  const navigateTo = (pageId) => {
+    if (pageId === 'admin') {
+      setAdminModalOpen(true);
+      return;
+    }
+
+    const validPage = PAGE_TITLES[pageId] ? pageId : 'home';
+    setCurrentPage(validPage);
+
+    // Update browser URL without page reload
+    const targetPath = validPage === 'home' ? '/' : `/${validPage}`;
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({ page: validPage }, '', targetPath);
+    }
+
+    document.title = PAGE_TITLES[validPage] || PAGE_TITLES.home;
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
 
   const handleCloseAdminModal = () => {
     setAdminModalOpen(false);
@@ -105,82 +165,77 @@ export default function App() {
       
       {/* Fixed Luxury Navigation */}
       <Navbar 
+        currentPage={currentPage}
+        onNavigate={navigateTo}
         onOpenQuoteModal={() => handleOpenQuoteModal()} 
-        onOpenAdmin={() => setAdminModalOpen(true)}
       />
 
-      {/* Main Experience */}
+      {/* Main Multi-Page Experience */}
       <main className="flex-1">
-        {/* Hero Section with 2006-2026 Milestone & Vector Elevation */}
-        <Hero 
-          onOpenQuoteModal={() => handleOpenQuoteModal()} 
-        />
+        {currentPage === 'home' && (
+          <HomePage 
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSelectServiceForQuote={handleSelectServiceForQuote}
+          />
+        )}
 
-        {/* Corporate Philosophy: Vision & Mission */}
-        <VisionMissionSection />
+        {currentPage === 'about' && (
+          <AboutPage 
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+          />
+        )}
 
-        {/* 4 Core Contracting Categories */}
-        <CategoriesWheel 
-          onSelectServiceForQuote={handleSelectServiceForQuote} 
-        />
+        {currentPage === 'services' && (
+          <ServicesPage 
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+            onSelectServiceForQuote={handleSelectServiceForQuote}
+          />
+        )}
 
-        {/* Track Record & Live Project Pipeline (Upcoming & Completed) */}
-        <ProjectsSection 
-          onOpenQuoteModal={handleOpenQuoteModal} 
-        />
+        {currentPage === 'projects' && (
+          <ProjectsPage 
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+          />
+        )}
 
-        {/* Dubai Municipality Civic Contracts Showcase */}
-        <MunicipalSection />
+        {currentPage === 'license' && (
+          <LicensePage 
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+          />
+        )}
 
-        {/* Official Commercial Trade License & Dubai Municipality G+1 Verification */}
-        <TradeLicenseSection />
-
-        {/* Warehouse B-25 Al Qusais Office & Access Map */}
-        <OfficeMapSection />
-
-        {/* Direct RFP / Tender Transmittal Form */}
-        <ContactSection />
+        {currentPage === 'contact' && (
+          <ContactPage 
+            onNavigate={navigateTo}
+            onOpenQuoteModal={handleOpenQuoteModal}
+          />
+        )}
       </main>
 
       {/* Imperial Mahogany & Bronze Footer */}
       <Footer 
+        currentPage={currentPage}
+        onNavigate={navigateTo}
         onOpenQuoteModal={() => handleOpenQuoteModal()} 
-        onOpenAdmin={() => setAdminModalOpen(true)}
       />
 
-      {/* Interactive RFP / Proposal Modal */}
+      {/* Interactive RFQ / Proposal Modal */}
       <QuoteModal
         isOpen={quoteModalOpen}
         onClose={() => setQuoteModalOpen(false)}
         initialData={quoteInitialData}
       />
 
-      {/* Owner Portal / Admin Project Management Modal (Hidden, accessible only via link #admin or ?admin) */}
+      {/* Owner Portal / Admin Project Management Modal (Hidden, accessible only via link /admin or #admin) */}
       <AdminProjectModal
         isOpen={adminModalOpen}
         onClose={handleCloseAdminModal}
       />
-
-      {/* Floating Action Buttons for Mobile */}
-      <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-2.5 sm:hidden pb-[env(safe-area-inset-bottom,0px)] pr-[env(safe-area-inset-right,0px)]">
-        <a
-          href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project%20in%20Dubai.`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-12 h-12 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-2xl active:scale-95 transition"
-          title="WhatsApp Chat"
-        >
-          <MessageSquare className="w-5 h-5" />
-        </a>
-
-        <a
-          href={`tel:${COMPANY_INFO.phone}`}
-          className="w-12 h-12 rounded-full bg-[#7A2E16] text-white flex items-center justify-center shadow-2xl font-black text-xs active:scale-95 transition"
-          title="Call Kachoras"
-        >
-          <Phone className="w-5 h-5" />
-        </a>
-      </div>
 
     </div>
   );

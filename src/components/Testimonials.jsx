@@ -1,101 +1,116 @@
 import React from 'react';
 import { 
-  Star, 
-  Quote, 
   Building2, 
-  CheckCircle,
-  ThumbsUp,
-  MessageSquare
+  MapPin, 
+  ShieldCheck, 
+  FileCheck2,
+  CheckCircle2
 } from 'lucide-react';
-import { TESTIMONIALS } from '../data/mockData';
+
+const CONSULTANCY_RECORDS = [
+  {
+    consultant: 'Al Manhal Engineering Consultants',
+    discipline: 'G+1 Turnkey Villa & Service Block',
+    location: 'Al Warqaa Fourth, Dubai',
+    plotRef: 'Plot #424-7036',
+    client: 'Mariam Hussain Redha Hassan Albannay',
+    scope: 'Full civil structural frame, post-tensioned slabs, MEP installations, and Dubai Municipality BCC certification.'
+  },
+  {
+    consultant: 'Al Majal Engineering Consultants',
+    discipline: 'Luxury G+1 Villa & Boundary Wall',
+    location: 'Al Warqaa Third, Dubai',
+    plotRef: 'Plot #423-1407',
+    client: 'Abdul Raouf Siraj Shehab Ahmad Mohammad',
+    scope: 'Turnkey residential villa, specialized electrical fittings, and in-house aluminium thermal-break glazing.'
+  },
+  {
+    consultant: 'Croquis Engineering Consultancy',
+    discipline: 'Majlis Block & Joinery Remodel',
+    location: 'Al Barsha Second, Dubai',
+    plotRef: 'Plot #3761835',
+    client: 'Ismail Ibrahim Mohammad Ahmad',
+    scope: 'Foundation excavation, structural blockwork, ducted AC networks, and luxury custom kitchen joinery.'
+  },
+  {
+    consultant: 'Arkiplan Consulting Architects',
+    discipline: 'G+1 Villa & Boundary Infrastructure',
+    location: 'Al Barsha Second, Dubai',
+    plotRef: 'Plot #3760253',
+    client: 'Ahmed Khalil Ibrahim Al Sayegh',
+    scope: 'Reinforced concrete structure, DEWA MDB substation connection, and architectural glazing.'
+  },
+  {
+    consultant: 'Teamwork Engineering Consultants',
+    discipline: 'Proposed Majlis Block & Interior Fitout',
+    location: 'Al Barsha South First, Dubai',
+    plotRef: 'Plot #6716536',
+    client: 'Maha Ebrahim Mohammad Hassan Alblooshi',
+    scope: 'Superstructure concrete casting, custom gypsum ceiling rough-ins, and ducted HVAC air-distribution.'
+  },
+  {
+    consultant: 'Gulf Engineering Consultants',
+    discipline: 'Structural Villa Remodel & Facade',
+    location: 'Al Barsha Second, Dubai',
+    plotRef: 'Plot #3760283',
+    client: 'Talal Malalla Mohammad Jassem',
+    scope: 'Load-bearing modifications, structural steel reinforcement, MEP rerouting, and boundary wall restoration.'
+  }
+];
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-24 bg-[#0B0F17] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section id="consultants" className="py-20 sm:py-24 bg-[#FAF9F6] border-t border-[#E5DED3]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
-            <ThumbsUp className="w-3.5 h-3.5" />
-            <span>Reputation & Client Trust</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight font-display">
-            WHAT DEVELOPERS & ARCHITECTS SAY
+        <div className="max-w-3xl space-y-3">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B]">
+            Consultant Coordination & Execution Record
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111622] font-display">
+            Approved Consultant Engineering Partners
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg">
-            Our reputation is constructed one project at a time. Over 85% of our annual volume comes from repeat developers and institutional clients.
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Kachoras operates under direct supervision and inspection protocols with premier Dubai architectural and structural engineering consultancies.
           </p>
         </div>
 
-        {/* Testimonials 3-Card Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {TESTIMONIALS.map((t, idx) => (
+        {/* 6-Card Consultant Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {CONSULTANCY_RECORDS.map((item, idx) => (
             <div
               key={idx}
-              className="bg-[#121A27] border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-xl relative hover:border-slate-700 transition"
+              className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:border-[#7A2E16] transition-all space-y-4"
             >
-              <div className="space-y-4">
-                {/* 5-Star Rating */}
-                <div className="flex items-center space-x-1">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
-                  ))}
-                  <span className="text-xs text-amber-400 font-bold ml-2">5.0 Verified</span>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between border-b border-[#F0EBE1] pb-3">
+                  <span className="text-[11px] font-mono font-bold text-[#7A2E16] bg-[#7A2E16]/10 px-2 py-0.5 rounded">
+                    {item.plotRef}
+                  </span>
+                  <span className="text-[11px] font-semibold text-slate-500">
+                    {item.location}
+                  </span>
                 </div>
 
-                {/* Quote text */}
-                <p className="text-sm text-slate-300 leading-relaxed italic">
-                  "{t.quote}"
+                <h3 className="text-base font-bold text-[#111622] font-display leading-snug">
+                  {item.consultant}
+                </h3>
+
+                <div className="text-xs font-semibold text-[#8B6D1B]">
+                  {item.discipline}
+                </div>
+
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {item.scope}
                 </p>
-
-                {/* Associated Project Badge */}
-                <div className="bg-slate-900/90 border border-slate-800/80 px-3 py-1.5 rounded-lg text-xs text-slate-400 flex items-center gap-1.5">
-                  <Building2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                  <span className="truncate">Build: <strong className="text-slate-200">{t.project}</strong></span>
-                </div>
               </div>
 
-              {/* Author Info */}
-              <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center gap-3.5">
-                <img
-                  src={t.avatar}
-                  alt={t.name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-amber-500"
-                />
-                <div>
-                  <h4 className="text-sm font-bold text-white">{t.name}</h4>
-                  <div className="text-xs text-slate-400">{t.role}</div>
-                  <div className="text-[11px] font-semibold text-amber-400">{t.company}</div>
-                </div>
+              <div className="pt-3 border-t border-[#F0EBE1] text-[11px] text-slate-500">
+                Client: <strong className="text-slate-800">{item.client}</strong>
               </div>
-
             </div>
           ))}
-        </div>
-
-        {/* Client Portal Highlight Banner */}
-        <div className="mt-16 bg-gradient-to-r from-[#141E2F] via-[#101927] to-[#141E2F] border border-slate-700/80 rounded-2xl p-8 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="space-y-3 max-w-xl text-center lg:text-left">
-            <span className="text-xs font-bold uppercase tracking-widest text-amber-400">Exclusive Owner Experience</span>
-            <h3 className="text-2xl font-bold text-white font-display">
-              Live Digital Jobsite Transparency
-            </h3>
-            <p className="text-sm text-slate-300 leading-relaxed">
-              Every client receives dedicated access to our proprietary cloud portal: daily high-resolution drone flights, subcontractor daily logs, submittal approvals, and automated financial draw schedules.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-3">
-            <div className="bg-slate-950/80 border border-slate-800 px-4 py-3 rounded-xl text-center">
-              <div className="text-xs text-slate-400">Average Client Retention</div>
-              <div className="text-xl font-bold text-emerald-400">94.2%</div>
-            </div>
-            <div className="bg-slate-950/80 border border-slate-800 px-4 py-3 rounded-xl text-center">
-              <div className="text-xs text-slate-400">On-Time Completion Rate</div>
-              <div className="text-xl font-bold text-amber-400">98.8%</div>
-            </div>
-          </div>
         </div>
 
       </div>

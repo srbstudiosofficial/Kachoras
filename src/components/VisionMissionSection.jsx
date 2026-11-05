@@ -12,10 +12,10 @@ export default function VisionMissionSection() {
             Institutional Values & Governance
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
-            Corporate Vision & Mission
+            Vision & Mission
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Guided by uncompromising engineering standards, Dubai statutory compliance, and transparent contracting relationships across the UAE since 2006.
+            Since 2006, Kachoras ElectroMechanical Contracting LLC has been guided by uncompromising engineering standards, strict adherence to applicable Dubai regulatory requirements, and transparent contracting relationships throughout the UAE. Our commitment to integrity, technical excellence, and accountability underpins every project we undertake.
           </p>
         </div>
 
@@ -33,7 +33,7 @@ export default function VisionMissionSection() {
               </div>
 
               <h3 className="text-2xl font-bold text-[#14171F] font-display">
-                Corporate Vision (رؤيتنا)
+                Vision
               </h3>
 
               <blockquote className="border-l-2 border-[#7A2E16] pl-5 py-2 text-slate-700 text-base leading-relaxed italic font-serif">
@@ -58,11 +58,11 @@ export default function VisionMissionSection() {
               </div>
 
               <h3 className="text-2xl font-bold text-[#14171F] font-display">
-                Corporate Mission (رسالتنا)
+                Mission
               </h3>
 
               <blockquote className="border-l-2 border-[#C59B27] pl-5 py-2 text-slate-700 text-base leading-relaxed italic font-serif">
-                "To deliver exceptional construction services and engineering craftsmanship that exceed client expectations, through unwavering integrity, rigorous safety, and seasoned technical leadership."
+                "To deliver exceptional construction services and engineering excellence that consistently exceed client expectations, guided by unwavering integrity, uncompromising safety standards, and experienced technical leadership."
               </blockquote>
             </div>
 

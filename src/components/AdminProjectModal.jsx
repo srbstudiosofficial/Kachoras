@@ -28,7 +28,11 @@ import {
   MapPin,
   Building,
   User,
-  FileText
+  FileText,
+  Copy,
+  Link,
+  Sparkles,
+  Search
 } from 'lucide-react';
 import { 
   getAllProjects, 
@@ -78,12 +82,15 @@ const CATEGORY_OPTIONS = [
 ];
 
 const PRESET_IMAGES = [
-  { label: "G+1 Luxury Villa", path: "./assets/villa.jpg" },
-  { label: "Traditional Majlis", path: "./assets/majlis.jpg" },
-  { label: "Aluminium & Glass", path: "./assets/aluminium.jpg" },
-  { label: "Civic Infrastructure", path: "./assets/civic.jpg" },
-  { label: "MEP & Electrical", path: "./assets/mep.jpg" },
-  { label: "Modern Villa Stone", path: "./assets/villa_stone.jpg" }
+  { label: "Albannay Classical Villa", path: "./assets/real-projects/completed-construction-albannay-424-7036.jpg" },
+  { label: "AlSaffar Modern Villa", path: "./assets/real-projects/completed-construction-alsaffar-423-19966.jpg" },
+  { label: "Shehab Panoramic Villa", path: "./assets/real-projects/completed-construction-shehab-423-1407.jpg" },
+  { label: "Alabdulla Majlis Block", path: "./assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg" },
+  { label: "Alseraj Villa Maintenance", path: "./assets/real-projects/completed-maintenance-alseraj-422-0200.jpg" },
+  { label: "Curtain Wall Facade", path: "./assets/real-projects/completed-aluminum-flag-villa.jpg" },
+  { label: "Louvers & Carport", path: "./assets/real-projects/completed-aluminum-modern-carport.jpg" },
+  { label: "Travertine Corner Glazing", path: "./assets/real-projects/completed-aluminum-travertine-glazing.jpg" },
+  { label: "Al Sayegh Villa 3D", path: "./assets/real-projects/p373-alsayegh-villa-2014.jpg" }
 ];
 
 export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }) {
@@ -102,7 +109,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
     title: '',
     category: 'Building Contracting',
     status: 'upcoming',
-    timeline: 'Commencing Q4 2026',
+    timeline: '',
     year: '2026',
     location: '',
     plotNo: '',
@@ -127,7 +134,29 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
   // Inquiries & Leads state
   const [inquiries, setInquiries] = useState([]);
-  const [inquiryFilter, setInquiryFilter] = useState('all'); // 'all' | 'new' | 'contacted' | 'archived'
+  const [inquiryFilter, setInquiryFilter] = useState('all');
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [projectSearchQuery, setProjectSearchQuery] = useState('');
+  const [projectListFilter, setProjectListFilter] = useState('all');
+
+  const getDirectAdminUrl = () => {
+    if (typeof window !== 'undefined') {
+      return `${window.location.origin}/#admin`;
+    }
+    return 'https://kachoras.netlify.app/#admin';
+  };
+
+  const handleCopyAdminLink = async () => {
+    try {
+      const url = getDirectAdminUrl();
+      await navigator.clipboard.writeText(url);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2500);
+    } catch (e) {
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2500);
+    }
+  };
 
   // Load inquiries
   const refreshInquiriesList = async () => {
@@ -142,6 +171,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
     }
   };
 
+  
   const handleStatusChange = async (id, newStatus) => {
     const updated = await updateInquiryStatusOnServer(id, newStatus);
     setInquiries(updated);
@@ -227,14 +257,14 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
       refreshInquiriesList();
       checkServerHealth().then(res => setServerOnline(res.online));
     } else {
-      setAuthError('Invalid master passkey. Default passkey: kachoras2006');
+      setAuthError('Invalid master passkey. Please check your credentials and try again.');
     }
   };
 
   const handleResetPasskeyClick = () => {
     resetAdminPasskeyToDefault();
-    setPasskeyInput('kachoras2006');
-    setAuthError('');
+    setSettingsNotice('Master passkey has been restored to factory default.');
+    setTimeout(() => setSettingsNotice(''), 4000);
   };
 
   const handleLogout = () => {
@@ -490,6 +520,15 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
           </div>
 
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleCopyAdminLink}
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-medium text-amber-300 transition cursor-pointer"
+              title="Copy secret link for direct access"
+            >
+              {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-amber-300" />}
+              <span>{copiedLink ? 'Link Copied!' : 'Copy Direct Link (#admin)'}</span>
+            </button>
             {isAuthenticated && (
               <button
                 onClick={handleLogout}
@@ -526,22 +565,33 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                 </p>
               </div>
 
+              {/* Direct Link Banner */}
+              <div className="p-3.5 bg-amber-500/10 border border-amber-500/20 rounded-2xl text-left text-xs text-amber-900 space-y-1">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 font-bold text-[#7A2E16]">
+                    <Link className="w-3.5 h-3.5" />
+                    <span>Private Link-Only Access</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleCopyAdminLink}
+                    className="text-[11px] font-bold text-[#7A2E16] hover:underline flex items-center gap-1 cursor-pointer"
+                  >
+                    {copiedLink ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
+                    <span>{copiedLink ? 'Copied' : 'Copy Link'}</span>
+                  </button>
+                </div>
+                <p className="text-[11px] text-slate-600 leading-relaxed">
+                  This control panel is private and accessible only via direct URL: <strong className="font-mono text-slate-800">#admin</strong>. You can bookmark it in your browser for 1-click access anytime.
+                </p>
+              </div>
+
               <form onSubmit={handleLogin} className="space-y-4 text-left">
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
                       Master Passkey
                     </label>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setPasskeyInput('kachoras2006');
-                        setAuthError('');
-                      }}
-                      className="text-[11px] font-semibold text-[#7A2E16] hover:text-[#5C200E] underline cursor-pointer"
-                    >
-                      Fill Default (kachoras2006)
-                    </button>
                   </div>
                   <div className="relative">
                     <input
@@ -551,7 +601,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         setPasskeyInput(e.target.value);
                         if (authError) setAuthError('');
                       }}
-                      placeholder="Enter passkey (e.g. kachoras2006)"
+                      placeholder="Enter master passkey"
                       className="w-full px-4 py-3 pr-11 bg-white rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] focus:ring-1 focus:ring-[#7A2E16] outline-none font-mono"
                       autoFocus
                     />
@@ -565,18 +615,9 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                     </button>
                   </div>
                   {authError && (
-                    <div className="mt-2 p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-start justify-between gap-2">
-                      <div className="flex items-start gap-1.5">
-                        <AlertCircle className="w-4 h-4 shrink-0 text-rose-600 mt-0.5" />
-                        <span>{authError}</span>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={handleResetPasskeyClick}
-                        className="underline font-bold text-rose-800 hover:text-rose-900 shrink-0 text-[11px] cursor-pointer"
-                      >
-                        Reset Passkey
-                      </button>
+                    <div className="mt-2 p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+                      <span>{authError}</span>
                     </div>
                   )}
                 </div>
@@ -589,15 +630,8 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                   <span>Authenticate & Open Dashboard</span>
                 </button>
 
-                <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1">
-                  <span>Passkey: <strong className="text-slate-800 font-mono">kachoras2006</strong></span>
-                  <button
-                    type="button"
-                    onClick={handleResetPasskeyClick}
-                    className="text-slate-500 hover:text-slate-700 underline cursor-pointer"
-                  >
-                    Restore Factory Default
-                  </button>
+                <div className="text-center text-[11px] text-slate-400 pt-1">
+                  Authorized personnel only • Protected under commercial NDA standards
                 </div>
               </form>
             </div>
@@ -750,8 +784,70 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                   </div>
 
                   {/* Project Cards Table */}
+                  {/* Search and Category Filter Bar */}
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white p-3.5 rounded-2xl border border-[#E5DED3] shadow-xs">
+                    <div className="relative flex-1">
+                      <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                      <input
+                        type="text"
+                        value={projectSearchQuery}
+                        onChange={(e) => setProjectSearchQuery(e.target.value)}
+                        placeholder="Search projects by title, plot number, client, consultant..."
+                        className="w-full pl-9 pr-7 py-2 text-xs rounded-xl border border-[#E5DED3] bg-[#FAF8F5] focus:bg-white focus:border-[#7A2E16] outline-none"
+                      />
+                      {projectSearchQuery && (
+                        <button 
+                          onClick={() => setProjectSearchQuery('')}
+                          className="absolute right-2.5 top-2.5 text-xs text-slate-400 hover:text-slate-600"
+                        >
+                          ×
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 shrink-0">
+                      {[
+                        { id: 'all', label: 'All', count: projects.length },
+                        { id: 'upcoming', label: 'Upcoming', count: projects.filter(p => p.status === 'upcoming').length },
+                        { id: 'ongoing', label: 'Active', count: projects.filter(p => p.status === 'ongoing').length },
+                        { id: 'completed', label: 'Completed', count: projects.filter(p => p.status === 'completed').length }
+                      ].map(tab => (
+                        <button
+                          key={tab.id}
+                          type="button"
+                          onClick={() => setProjectListFilter(tab.id)}
+                          className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
+                            projectListFilter === tab.id
+                              ? 'bg-[#14171F] text-white shadow-sm'
+                              : 'bg-[#FAF8F5] hover:bg-[#F0EBE1] text-slate-600 border border-[#E5DED3]'
+                          }`}
+                        >
+                          <span>{tab.label}</span>
+                          <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono ${projectListFilter === tab.id ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'}`}>
+                            {tab.count}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Project Cards Table */}
                   <div className="space-y-3">
-                    {projects.map((proj) => {
+                    {projects
+                      .filter(proj => {
+                        if (projectListFilter !== 'all' && proj.status !== projectListFilter) return false;
+                        if (!projectSearchQuery.trim()) return true;
+                        const q = projectSearchQuery.toLowerCase();
+                        return (
+                          (proj.title && proj.title.toLowerCase().includes(q)) ||
+                          (proj.plotNo && proj.plotNo.toLowerCase().includes(q)) ||
+                          (proj.client && proj.client.toLowerCase().includes(q)) ||
+                          (proj.consultant && proj.consultant.toLowerCase().includes(q)) ||
+                          (proj.location && proj.location.toLowerCase().includes(q)) ||
+                          (proj.category && proj.category.toLowerCase().includes(q))
+                        );
+                      })
+                      .map((proj) => {
                       const statusBadge = 
                         proj.status === 'upcoming'
                           ? { bg: 'bg-indigo-50 text-indigo-700 border-indigo-200', label: 'Upcoming 2026' }
@@ -838,7 +934,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         {editingProjectId ? 'Edit Project Details' : 'Upload New Project'}
                       </h4>
                       <p className="text-xs text-slate-500">
-                        Add upcoming planned tenders or newly finished contract handovers to the portfolio.
+                        Add upcoming planned tenders or newly finished contract handovers to projects.
                       </p>
                     </div>
                     {formSuccessMessage && (
@@ -851,6 +947,41 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
                   <form onSubmit={handleFormSubmit} className="space-y-5">
                     
+                    {/* Interactive Project Status Selector */}
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                        Project Status & Section Placement *
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                        {[
+                          { id: 'ongoing', label: 'Active Construction', desc: 'Active site under construction in Dubai' },
+                          { id: 'upcoming', label: 'Upcoming Tender (2026)', desc: 'Future tender pipeline or planned project' },
+                          { id: 'completed', label: 'Completed Handover', desc: 'Finished project certified & handed over' }
+                        ].map((st) => (
+                          <button
+                            key={st.id}
+                            type="button"
+                            onClick={() => setFormData(prev => ({ ...prev, status: st.id }))}
+                            className={`p-3 rounded-xl border text-left transition cursor-pointer flex flex-col justify-between ${
+                              formData.status === st.id 
+                                ? 'border-[#7A2E16] bg-[#FAF8F5] ring-2 ring-[#7A2E16]/20' 
+                                : 'border-[#E5DED3] bg-white hover:bg-[#FAF8F5]'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs font-bold text-[#14171F]">{st.label}</span>
+                              <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
+                                formData.status === st.id ? 'border-[#7A2E16] bg-[#7A2E16]' : 'border-slate-300'
+                              }`}>
+                                {formData.status === st.id && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
+                              </span>
+                            </div>
+                            <span className="text-[10px] text-slate-500 mt-1 leading-tight">{st.desc}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
                     {/* Project Title & Category */}
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
@@ -883,22 +1014,8 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                       </div>
                     </div>
 
-                    {/* Status & Timeline */}
-                    <div className="grid sm:grid-cols-3 gap-4">
-                      <div>
-                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                          Project Status *
-                        </label>
-                        <select
-                          value={formData.status}
-                          onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value }))}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm bg-white focus:border-[#7A2E16] outline-none font-semibold text-[#7A2E16]"
-                        >
-                          <option value="upcoming">Upcoming / Tender (2026)</option>
-                          <option value="ongoing">Under Active Construction</option>
-                          <option value="completed">Completed & Handed Over</option>
-                        </select>
-                      </div>
+                    {/* Timeline & Year */}
+                    <div className="grid sm:grid-cols-2 gap-4">
 
                       <div>
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
@@ -1057,7 +1174,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
                           {/* Quick Preset Selector */}
                           <div className="space-y-1.5">
-                            <span className="text-[11px] text-slate-500 font-medium">Or choose from portfolio library:</span>
+                            <span className="text-[11px] text-slate-500 font-medium">Or choose from project library:</span>
                             <div className="flex flex-wrap gap-1.5">
                               {PRESET_IMAGES.map((img, idx) => (
                                 <button
@@ -1079,6 +1196,59 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                       </div>
                     </div>
 
+                    {/* Real-time Website Card Preview */}
+                    <div className="bg-[#FAF8F5] border border-[#E5DED3] rounded-2xl p-4 sm:p-5 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Eye className="w-4 h-4 text-[#7A2E16]" />
+                          <span className="text-xs font-bold uppercase tracking-wider text-[#14171F]">
+                            Live Card Preview (How it appears on website)
+                          </span>
+                        </div>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">
+                          Live Render Preview
+                        </span>
+                      </div>
+
+                      <div className="max-w-md mx-auto bg-white rounded-2xl border border-[#E5DED3] shadow-sm overflow-hidden">
+                        <div className="relative h-44 bg-slate-100 overflow-hidden">
+                          <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                          <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                            <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-xs ${
+                              formData.status === 'upcoming' ? 'bg-indigo-600 text-white' : formData.status === 'ongoing' ? 'bg-[#A35216] text-white' : 'bg-emerald-600 text-white'
+                            }`}>
+                              {formData.status === 'upcoming' ? 'Upcoming 2026' : formData.status === 'ongoing' ? 'Under Construction' : 'Handed Over'}
+                            </span>
+                            {formData.timeline && (
+                              <span className="text-[10px] font-medium bg-black/60 text-white backdrop-blur-xs px-2.5 py-1 rounded-full">
+                                {formData.timeline}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                        <div className="p-4 space-y-2">
+                          <div className="text-[10px] font-mono text-slate-400 uppercase font-semibold">{formData.category}</div>
+                          <h4 className="text-base font-bold text-[#14171F] font-display">{formData.title || 'Untitled Project'}</h4>
+                          <p className="text-xs text-slate-500 flex items-center gap-1">
+                            <MapPin className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                            <span>{formData.location || 'Dubai, UAE'}</span>
+                            {formData.plotNo && <span className="ml-1 px-1.5 py-0.2 bg-slate-100 rounded text-[10px] font-mono text-slate-700">Plot #{formData.plotNo}</span>}
+                          </p>
+                          {formData.scope && (
+                            <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed pt-1 border-t border-slate-100">
+                              {formData.scope}
+                            </p>
+                          )}
+                          {(formData.client || formData.consultant) && (
+                            <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-100 space-y-0.5">
+                              {formData.client && <div>Client: <strong className="text-slate-700">{formData.client}</strong></div>}
+                              {formData.consultant && <div>Consultant: <strong className="text-slate-700">{formData.consultant}</strong></div>}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
                     {/* Action Buttons */}
                     <div className="pt-4 border-t border-[#F0EBE1] flex flex-wrap items-center justify-between gap-3">
                       <button
@@ -1094,7 +1264,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         className="px-6 py-3 bg-[#7A2E16] hover:bg-[#5C200E] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition shadow-md flex items-center gap-2 cursor-pointer"
                       >
                         <Check className="w-4 h-4" />
-                        <span>{editingProjectId ? 'Save Changes' : 'Publish Project to Portfolio'}</span>
+                        <span>{editingProjectId ? 'Save Changes' : 'Publish Project'}</span>
                       </button>
                     </div>
 
@@ -1372,18 +1542,31 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
                   {/* Passkey Security Setting */}
                   <div className="bg-white rounded-2xl border border-[#E5DED3] p-6 shadow-sm space-y-4">
-                    <div className="border-b border-[#F0EBE1] pb-3">
-                      <h4 className="text-base font-bold font-display text-[#14171F]">
-                        Update Master Passkey
-                      </h4>
-                      <p className="text-xs text-slate-500">
-                        Change the secret code required to unlock this Owner Portal.
-                      </p>
+                    <div className="border-b border-[#F0EBE1] pb-3 flex flex-wrap items-center justify-between gap-2">
+                      <div>
+                        <h4 className="text-base font-bold font-display text-[#14171F]">
+                          Update Master Passkey
+                        </h4>
+                        <p className="text-xs text-slate-500">
+                          Change the secret code required to unlock this Owner Portal.
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (window.confirm('Are you sure you want to restore the master passkey to factory default?')) {
+                            handleResetPasskeyClick();
+                          }
+                        }}
+                        className="text-xs text-slate-500 hover:text-slate-800 underline cursor-pointer"
+                      >
+                        Reset to Factory Default
+                      </button>
                     </div>
 
                     <form onSubmit={handleSavePasskey} className="flex flex-wrap items-center gap-3">
                       <input
-                        type="text"
+                        type="password"
                         value={newPasskey}
                         onChange={(e) => setNewPasskey(e.target.value)}
                         placeholder="Enter new passkey (min 4 characters)"

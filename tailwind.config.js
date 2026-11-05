@@ -26,8 +26,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['Outfit', '"Plus Jakarta Sans"', 'sans-serif'],
+        sans: ['"JUST Sans"', 'Manrope', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Manrope', '"JUST Sans"', 'sans-serif'],
         regal: ['Cinzel', 'Georgia', 'serif'],
         arabic: ['Arial', 'Tahoma', 'sans-serif']
       },

@@ -25,3 +25,5 @@ dist-ssr
 
 # Showcase Prototypes (Local Client Demonstrations Only - Do Not Push)
 kachoras-theme-*.html
+/extracted-3d-perspectives/
+/assets/

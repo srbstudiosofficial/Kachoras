@@ -5,77 +5,84 @@ import {
   Camera, 
   FileCheck2, 
   Leaf, 
-  Radio, 
   CheckCircle,
   AlertTriangle
 } from 'lucide-react';
-import { COMPANY_INFO, CERTIFICATIONS } from '../data/mockData';
+import { COMPANY_INFO } from '../data/mockData';
+
+const UAE_CERTIFICATIONS = [
+  { name: 'Dubai Municipality (DM)', label: 'G+1 Building Contractor Approved' },
+  { name: 'DEWA Regulations', label: 'Electrical & Water Compliance' },
+  { name: 'Dubai Civil Defence (DCD)', label: 'Fire & Life Safety Certified' },
+  { name: 'Dubai Chamber (DCCI)', label: 'Active Commercial Member' },
+  { name: 'Dubai Economy (DED)', label: 'Commercial License #578964' }
+];
 
 export default function SafetyStats() {
   const safetyProtocols = [
     {
       icon: HardHat,
-      title: "100% OSHA 30 Field Supervisors",
-      desc: "Every jobsite superintendent holds advanced OSHA 30-hour safety credentials with mandatory daily site hazard audits."
+      title: "100% Dubai Municipality Safety Compliance",
+      desc: "Every jobsite operates under DM Code of Construction Safety Practice with continuous site safety engineer oversight."
     },
     {
       icon: Camera,
-      title: "Weekly 4K Drone & 360° Laser Scans",
-      desc: "Clients log in to an encrypted portal to inspect cloud photogrammetry, thermal envelopes, and 3D clash verifications."
+      title: "Weekly Milestone Photo & BIM Audits",
+      desc: "Owners and consultants receive timestamped progress photography, structural milestone verification, and inspection records."
     },
     {
       icon: ShieldCheck,
-      title: "$25M Comprehensive Bonding & Insurance",
-      desc: "Full bonding capacity protecting owners and financial institutions against schedule delays, liens, or default."
+      title: "Comprehensive UAE Contractor Insurance",
+      desc: "Full Contractors All Risk (CAR) and Third-Party Liability insurance protecting property owners and financial institutions."
     },
     {
       icon: Leaf,
-      title: "USGBC LEED & Net-Zero Execution",
-      desc: "Over 85% construction waste diversion rates, recycled aggregate utilization, and low-VOC compliant building methods."
+      title: "Dubai Green Building (Al Sa'fat)",
+      desc: "High thermal performance blockwork, eco-friendly insulation, and sustainable waste management on all residential builds."
     }
   ];
 
   return (
-    <section id="safety" className="py-24 bg-[#0A0E17] relative border-t border-slate-800/80">
+    <section id="safety" className="py-20 bg-[#121620] text-white relative border-t border-[#232A38]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
             <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Uncompromising Risk Management</span>
+            <span>Uncompromising Jobsite Safety & Risk Management</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight font-display">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-display">
             SAFETY CULTURE & FIELD PROTOCOLS
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg">
-            Construction excellence starts with keeping our workforce and your investment completely secure. We hold one of the lowest EMR (Experience Modification Ratings) in the Midwest.
+          <p className="text-white/70 text-sm sm:text-base">
+            Construction excellence starts with protecting our skilled tradesmen, adjacent properties, and your capital investment under UAE statutory standards.
           </p>
         </div>
 
         {/* Big Safety Metrics Grid */}
         <div className="grid md:grid-cols-3 gap-6 mb-16">
-          <div className="bg-[#121A27] border border-emerald-500/30 rounded-2xl p-6 sm:p-8 text-center space-y-2 relative overflow-hidden">
-            <div className="text-4xl sm:text-5xl font-black text-emerald-400 font-display">0.68</div>
-            <div className="text-base font-bold text-white">EMR Safety Rating</div>
-            <p className="text-xs text-slate-400 max-w-xs mx-auto">
-              Well below the 1.0 industry benchmark, ensuring the lowest worker compensation risk and insurance premiums.
+          <div className="bg-[#1A202C] border border-emerald-500/30 rounded-2xl p-6 sm:p-8 text-center space-y-2 relative overflow-hidden">
+            <div className="text-4xl sm:text-5xl font-black text-emerald-400 font-display">Zero</div>
+            <div className="text-base font-bold text-white">Lost-Time Incidents</div>
+            <p className="text-xs text-white/60 max-w-xs mx-auto">
+              Exemplary safety record across all private villa, commercial warehouse, and municipal projects.
             </p>
           </div>
 
-          <div className="bg-[#121A27] border border-amber-500/30 rounded-2xl p-6 sm:p-8 text-center space-y-2 relative overflow-hidden">
-            <div className="text-4xl sm:text-5xl font-black text-amber-400 font-display">1.4M+</div>
-            <div className="text-base font-bold text-white">Safe Work Hours</div>
-            <p className="text-xs text-slate-400 max-w-xs mx-auto">
-              Over 1,400,000 consecutive trade hours logged without a single lost-time incident across commercial and civil works.
+          <div className="bg-[#1A202C] border border-[#C59B27]/40 rounded-2xl p-6 sm:p-8 text-center space-y-2 relative overflow-hidden">
+            <div className="text-4xl sm:text-5xl font-black text-[#C59B27] font-display">18+</div>
+            <div className="text-base font-bold text-white">Years in Dubai</div>
+            <p className="text-xs text-white/60 max-w-xs mx-auto">
+              Continuous operational presence in Dubai without regulatory penalties or suspension.
             </p>
           </div>
 
-          <div className="bg-[#121A27] border border-blue-500/30 rounded-2xl p-6 sm:p-8 text-center space-y-2 relative overflow-hidden">
+          <div className="bg-[#1A202C] border border-blue-500/30 rounded-2xl p-6 sm:p-8 text-center space-y-2 relative overflow-hidden">
             <div className="text-4xl sm:text-5xl font-black text-blue-400 font-display">100%</div>
-            <div className="text-base font-bold text-white">Drug-Free Worksite</div>
-            <p className="text-xs text-slate-400 max-w-xs mx-auto">
-              Strict pre-hire, random, and post-incident testing protocols enforced for all employees and specialized trade partners.
+            <div className="text-base font-bold text-white">DEWA & DM Pass Rate</div>
+            <p className="text-xs text-white/60 max-w-xs mx-auto">
+              Strict adherence to engineering drawings ensuring immediate first-pass approvals from municipal inspectors.
             </p>
           </div>
         </div>
@@ -87,33 +94,33 @@ export default function SafetyStats() {
             return (
               <div 
                 key={idx} 
-                className="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl space-y-3 hover:border-slate-700 transition"
+                className="bg-white/5 border border-white/10 p-6 rounded-2xl space-y-3 hover:border-white/20 transition"
               >
-                <div className="w-12 h-12 rounded-xl bg-slate-800 text-amber-400 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-xl bg-white/10 text-[#C59B27] flex items-center justify-center">
                   <Icon className="w-6 h-6 stroke-[2]" />
                 </div>
-                <h3 className="text-base font-bold text-white">{item.title}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+                <h3 className="text-sm font-bold text-white">{item.title}</h3>
+                <p className="text-xs text-white/60 leading-relaxed">{item.desc}</p>
               </div>
             );
           })}
         </div>
 
         {/* Partner / Industry Accreditation Badges Strip */}
-        <div className="mt-16 pt-12 border-t border-slate-800/80">
-          <div className="text-center text-xs uppercase font-bold tracking-widest text-slate-400 mb-8">
-            Accredited & Certified By Industry Authorities
+        <div className="mt-16 pt-12 border-t border-white/10">
+          <div className="text-center text-xs uppercase font-bold tracking-widest text-white/60 mb-8">
+            Accredited & Certified Under Dubai Regulatory Authorities
           </div>
-          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8">
-            {CERTIFICATIONS.map((cert, index) => (
+          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+            {UAE_CERTIFICATIONS.map((cert, index) => (
               <div
                 key={index}
-                className="flex items-center gap-2 bg-slate-900/80 border border-slate-800 px-4 py-2.5 rounded-xl text-xs"
+                className="flex items-center gap-2.5 bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl text-xs"
               >
-                <CheckCircle className="w-4 h-4 text-amber-500 shrink-0" />
+                <CheckCircle className="w-4 h-4 text-[#C59B27] shrink-0" />
                 <div>
-                  <div className="font-bold text-slate-200">{cert.name}</div>
-                  <div className="text-[10px] text-slate-400">{cert.label}</div>
+                  <div className="font-bold text-white">{cert.name}</div>
+                  <div className="text-[10px] text-white/60">{cert.label}</div>
                 </div>
               </div>
             ))}

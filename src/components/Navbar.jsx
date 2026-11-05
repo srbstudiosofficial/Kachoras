@@ -11,7 +11,7 @@ import {
 import { COMPANY_INFO } from '../data/mockData';
 import KachorasLogo from './KachorasLogo';
 
-export default function Navbar({ onOpenQuoteModal, onOpenAdmin }) {
+export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteModal }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -23,14 +23,22 @@ export default function Navbar({ onOpenQuoteModal, onOpenAdmin }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: "Overview", href: "#vision" },
-    { label: "Disciplines", href: "#services" },
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "Municipal", href: "#municipal" },
-    { label: "License", href: "#license" },
-    { label: "Location", href: "#location" }
+  const navItems = [
+    { id: 'home', label: 'Home', href: '/' },
+    { id: 'about', label: 'About Us', href: '/about' },
+    { id: 'services', label: 'Disciplines', href: '/services' },
+    { id: 'projects', label: 'Projects', href: '/projects' },
+    { id: 'license', label: 'License & Compliance', href: '/license' },
+    { id: 'contact', label: 'Contact & Tender', href: '/contact' }
   ];
+
+  const handleNavClick = (e, pageId) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(pageId);
+    }
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
@@ -77,36 +85,51 @@ export default function Navbar({ onOpenQuoteModal, onOpenAdmin }) {
       {/* Main Navigation Bar */}
       <nav className={`transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#E5DED3] py-3' 
-          : 'bg-[#FAF9F6]/90 backdrop-blur-sm border-b border-[#E5DED3]/60 py-4'
+          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#E5DED3] py-2.5' 
+          : 'bg-[#FAF9F6]/95 backdrop-blur-sm border-b border-[#E5DED3]/70 py-3.5'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
           
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          <button 
+            onClick={(e) => handleNavClick(e, 'home')} 
+            className="flex items-center gap-3 group cursor-pointer text-left focus:outline-none"
+            aria-label="Kachoras Home"
+          >
             <KachorasLogo />
-          </a>
+          </button>
 
-          {/* Desktop Links */}
+          {/* Desktop Multi-Page Links */}
           <div className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="px-3 py-2 text-xs font-semibold text-slate-700 hover:text-[#7A2E16] hover:bg-[#F2ECE1]/60 rounded-lg transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = currentPage === item.id;
+              return (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className={`px-3 py-2 text-xs rounded-xl transition-all relative ${
+                    isActive 
+                      ? 'text-[#7A2E16] bg-[#7A2E16]/10 font-black shadow-inner' 
+                      : 'text-slate-700 hover:text-[#7A2E16] hover:bg-[#F2ECE1]/60 font-semibold'
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#7A2E16] rounded-full" />
+                  )}
+                </a>
+              );
+            })}
           </div>
 
           {/* Action CTA */}
           <div className="hidden md:flex items-center space-x-3">
             <button
               onClick={() => onOpenQuoteModal()}
-              className="flex items-center gap-2 text-xs font-bold bg-[#7A2E16] hover:bg-[#652310] text-white px-5 py-2.5 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer shimmer-trigger active:scale-95"
+              className="flex items-center gap-2 text-xs font-bold bg-[#7A2E16] hover:bg-[#63220E] text-white px-5 py-2.5 rounded-xl shadow-xs transition-all cursor-pointer"
             >
-              <span>Submit Tender / RFP</span>
+              <span>ENQUIRY / RFQ</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#C59B27] group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -121,7 +144,7 @@ export default function Navbar({ onOpenQuoteModal, onOpenAdmin }) {
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-700 hover:text-[#7A2E16] focus:outline-none bg-[#FAF8F5] rounded-lg border border-[#E5DED3] min-w-[40px] min-h-[40px] flex items-center justify-center active:scale-95 transition"
+              className="p-2 text-slate-700 hover:text-[#7A2E16] focus:outline-none bg-[#FAF8F5] rounded-lg border border-[#E5DED3] min-w-[40px] min-h-[40px] flex items-center justify-center active:scale-95 transition cursor-pointer"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -133,18 +156,26 @@ export default function Navbar({ onOpenQuoteModal, onOpenAdmin }) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-[#E5DED3] p-4 sm:p-5 shadow-xl space-y-3 sm:space-y-4 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-80px)] overflow-y-auto">
+        <div className="lg:hidden bg-white border-b border-[#E5DED3] p-4 sm:p-5 shadow-2xl space-y-3 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-80px)] overflow-y-auto">
           <div className="space-y-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3.5 py-2.5 text-sm font-semibold text-slate-800 hover:bg-[#FAF8F5] rounded-lg transition min-h-[40px] flex items-center"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = currentPage === item.id;
+              return (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className={`block px-4 py-3 text-sm rounded-xl transition flex items-center justify-between ${
+                    isActive 
+                      ? 'bg-[#7A2E16] text-white font-bold' 
+                      : 'text-slate-800 hover:bg-[#FAF8F5] font-semibold'
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  {isActive && <span className="text-xs text-[#C59B27]">Active</span>}
+                </a>
+              );
+            })}
           </div>
 
           <div className="pt-3 border-t border-[#E5DED3] space-y-2">
@@ -153,9 +184,9 @@ export default function Navbar({ onOpenQuoteModal, onOpenAdmin }) {
                 setMobileMenuOpen(false);
                 onOpenQuoteModal();
               }}
-              className="w-full py-3 bg-[#7A2E16] text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center flex items-center justify-center gap-2 min-h-[44px] shadow-md active:scale-95 transition cursor-pointer"
+              className="w-full py-3.5 bg-[#7A2E16] text-white font-bold text-xs uppercase tracking-wider rounded-xl text-center flex items-center justify-center gap-2 min-h-[44px] shadow-md active:scale-95 transition cursor-pointer"
             >
-              <span>Submit Tender / RFP</span>
+              <span>Submit Tender / RFQ</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
             </button>
           </div>

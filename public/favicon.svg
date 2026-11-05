@@ -1,65 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
   <defs>
-    <!-- Deep Mahogany Obsidian Shield Gradient -->
-    <radialGradient id="favBg" cx="35%" cy="30%" r="85%">
-      <stop offset="0%" stop-color="#6E1F0B" />
-      <stop offset="55%" stop-color="#340E05" />
-      <stop offset="100%" stop-color="#14171F" />
-    </radialGradient>
-
-    <!-- Brushed Champagne Gold Facet Light -->
-    <linearGradient id="favGoldLight" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFF8DC" />
-      <stop offset="50%" stop-color="#ECC666" />
-      <stop offset="100%" stop-color="#C59B27" />
+    <!-- Kachoras Signature Crimson Gradient -->
+    <linearGradient id="kachorasRed" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#C0281F"/>
+      <stop offset="100%" stop-color="#7A2E16"/>
     </linearGradient>
-
-    <!-- Midtone Gold Facet -->
-    <linearGradient id="favGoldMid" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ECC666" />
-      <stop offset="60%" stop-color="#B88A1E" />
-      <stop offset="100%" stop-color="#7A580E" />
-    </linearGradient>
-
-    <!-- Shadow Facet -->
-    <linearGradient id="favGoldShadow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8F6813" />
-      <stop offset="60%" stop-color="#4D3505" />
-      <stop offset="100%" stop-color="#261902" />
-    </linearGradient>
-
-    <!-- Outer Rim Gold -->
-    <linearGradient id="favRim" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFF0BE" />
-      <stop offset="50%" stop-color="#C59B27" />
-      <stop offset="100%" stop-color="#8C6514" />
+    <!-- Champagne Gold Accent Rim -->
+    <linearGradient id="kachorasGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="50%" stop-color="#C59B27"/>
+      <stop offset="100%" stop-color="#8C6514"/>
     </linearGradient>
   </defs>
 
-  <!-- Solid Rounded Shield -->
-  <rect x="2" y="2" width="96" height="96" rx="24" fill="url(#favBg)" stroke="url(#favRim)" stroke-width="3" />
+  <!-- Solid Rounded Crest -->
+  <rect x="2.5" y="2.5" width="59" height="59" rx="14" fill="url(#kachorasRed)" stroke="url(#kachorasGold)" stroke-width="2.5"/>
 
-  <!-- Monogram: Bold Faceted Architectural "K" -->
-  <!-- Left Vertical Structural Column -->
-  <polygon points="22,18 33,14 33,50 22,50" fill="url(#favGoldLight)" />
-  <polygon points="33,14 44,18 44,50 33,50" fill="url(#favGoldMid)" />
-  <polygon points="22,50 33,50 33,86 22,82" fill="url(#favGoldMid)" />
-  <polygon points="33,50 44,50 44,82 33,86" fill="url(#favGoldShadow)" />
+  <!-- High-Contrast Architectural Serif 'K' -->
+  <path d="M 49.94 40.04 L 38.42 40.04 C 36.68 37.37, 35.12 35.14, 33.72 33.35 C 32.33 31.56, 30.54 29.31, 28.37 26.61 L 27.3 26.61 L 27.3 35.75 C 27.3 36.24, 27.39 36.66, 27.57 37 C 27.75 37.34, 28.1 37.63, 28.64 37.86 C 28.88 37.97, 29.25 38.08, 29.73 38.19 C 30.22 38.3, 30.7 38.38, 31.18 38.44 L 31.18 40.04 L 15.72 40.04 L 15.72 38.44 C 16.09 38.41, 16.61 38.37, 17.29 38.32 C 17.96 38.26, 18.44 38.18, 18.71 38.07 C 19.2 37.88, 19.54 37.61, 19.74 37.27 C 19.93 36.93, 20.02 36.5, 20.02 35.98 L 20.02 15.35 C 20.02 14.87, 19.94 14.46, 19.78 14.14 C 19.61 13.81, 19.26 13.51, 18.71 13.25 C 18.29 13.06, 17.77 12.91, 17.17 12.78 C 16.57 12.66, 16.09 12.58, 15.72 12.54 L 15.72 10.94 L 31.69 10.94 L 31.69 12.54 C 31.27 12.58, 30.76 12.64, 30.16 12.71 C 29.57 12.79, 29.06 12.89, 28.64 13.03 C 28.1 13.21, 27.75 13.49, 27.57 13.87 C 27.39 14.25, 27.3 14.68, 27.3 15.14 L 27.3 24.94 L 28.17 24.94 C 29.23 23.97, 30.48 22.8, 31.9 21.44 C 33.32 20.07, 34.42 18.95, 35.2 18.07 C 36.29 16.86, 37.1 15.89, 37.61 15.18 C 38.12 14.47, 38.38 13.86, 38.38 13.34 C 38.38 13.1, 38.13 12.93, 37.64 12.8 C 37.15 12.68, 36.4 12.59, 35.38 12.54 L 35.38 10.94 L 48.04 10.94 L 48.04 12.54 C 46.51 12.7, 45.22 12.98, 44.19 13.37 C 43.15 13.76, 42.12 14.41, 41.09 15.33 C 39.63 16.64, 38.43 17.77, 37.48 18.74 C 36.53 19.7, 35.31 20.93, 33.83 22.43 C 35.14 24.03, 36.72 25.99, 38.56 28.31 C 40.4 30.63, 42.24 32.89, 44.07 35.1 C 44.53 35.66, 45.07 36.19, 45.67 36.71 C 46.27 37.22, 46.93 37.63, 47.65 37.95 C 47.99 38.1, 48.38 38.21, 48.82 38.29 C 49.26 38.38, 49.63 38.42, 49.94 38.44" fill="#FFFFFF"/>
 
-  <!-- Upper Cantilever Arm -->
-  <polygon points="44,45 61,30 78,15 82,21 52,51" fill="url(#favGoldLight)" />
-  <polygon points="52,51 82,21 86,28 56,58" fill="url(#favGoldShadow)" />
-  <polygon points="78,15 86,28 82,21" fill="url(#favGoldMid)" />
-
-  <!-- Lower Diagonal Strut -->
-  <polygon points="46,53 55,47 83,75 74,85" fill="url(#favGoldMid)" />
-  <polygon points="46,53 74,85 63,85 39,58" fill="url(#favGoldShadow)" />
-
-  <!-- Central Keystone Nexus -->
-  <polygon points="38,50 46,42 54,50 46,58" fill="url(#favGoldLight)" stroke="#FFF8DC" stroke-width="0.75" />
-
-  <!-- Polished Architectural Bevel Ridges -->
-  <line x1="33" y1="14" x2="33" y2="86" stroke="#FFF8DC" stroke-width="1.2" opacity="0.8" />
-  <polyline points="22,18 33,14 44,18" fill="none" stroke="url(#favRim)" stroke-width="1.5" />
-  <polyline points="22,82 33,86 44,82" fill="none" stroke="url(#favRim)" stroke-width="1.5" />
+  <!-- Official Foundation Gold Anchor Bar -->
+  <rect x="15" y="48" width="34" height="3.5" rx="1.75" fill="url(#kachorasGold)"/>
 </svg>

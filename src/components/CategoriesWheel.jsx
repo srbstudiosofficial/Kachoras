@@ -19,8 +19,9 @@ const DISCIPLINE_ASSETS = {
   },
   mep: {
     tag: 'Electromechanical Engineering',
-    image: './assets/mep.jpg',
-    webp: './assets/mep.webp',
+    // Normal realistic MEP installation picture
+    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+    webp: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
     details: 'Ducted HVAC systems, DEWA-approved electrical substations, plumbing, and building management networks.'
   },
   aluminium: {
@@ -31,9 +32,22 @@ const DISCIPLINE_ASSETS = {
   },
   maintenance: {
     tag: 'Dubai Civic & Maintenance',
-    image: './assets/civic.jpg',
-    webp: './assets/civic.webp',
+    // Internal villa picture as requested
+    image: './assets/villa_annex.jpg',
+    webp: './assets/villa_annex.webp',
     details: 'Municipal civic contracts, hydraulic valve chambers, public park infrastructure, and commercial refurbishment.'
+  },
+  kitchen_wardrobes: {
+    tag: 'Custom Joinery & Millwork',
+    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
+    webp: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
+    details: 'Custom modular luxury kitchen cabinets, integrated walk-in closets, bespoke vanity units, and premium European fittings.'
+  },
+  gypsum_works: {
+    tag: 'Decorative Ceilings & Partitions',
+    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
+    webp: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
+    details: 'Intricate classical Arabian and modern false ceilings, concealed LED ambient lighting troughs, GRC decorative screens, and acoustic partitions.'
   }
 };
 
@@ -48,15 +62,20 @@ export default function CategoriesWheel({ onSelectServiceForQuote }) {
             Capabilities & Contracting Scope
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
-            Core Contracting Disciplines
+            Disciplines
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Kachoras integrates civil building contracting, specialized MEP engineering, in-house aluminium fabrication, and civic infrastructure under unified Dubai Municipality G+1 management.
-          </p>
+          <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p>
+              Kachoras ElectroMechanical Contracting LLC integrates civil and building construction, specialized electromechanical (MEP) engineering, in-house aluminium fabrication, and civil infrastructure works under a unified project management framework. Our capabilities encompass Dubai Municipality G+1 villa projects, supported by coordinated execution, technical expertise, quality workmanship, and compliance with applicable regulatory requirements and industry standards.
+            </p>
+            <p>
+              Through integrated project delivery and experienced technical leadership, we provide comprehensive construction solutions designed to ensure efficiency, safety, durability, and client satisfaction.
+            </p>
+          </div>
         </div>
 
         {/* 4 Architectural Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {CORE_CATEGORIES.map((cat, idx) => {
             const asset = DISCIPLINE_ASSETS[cat.id] || DISCIPLINE_ASSETS.construction;
             return (

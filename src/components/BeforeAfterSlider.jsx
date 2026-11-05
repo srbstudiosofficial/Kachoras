@@ -7,7 +7,33 @@ import {
   DollarSign, 
   Layers 
 } from 'lucide-react';
-import { BEFORE_AFTER_CASES } from '../data/mockData';
+
+const DUBAI_BEFORE_AFTER_CASES = [
+  {
+    category: 'G+1 Luxury Villa',
+    title: 'Private Villa & Majlis Handover',
+    location: 'Nad Al Sheba 2, Dubai',
+    duration: '11 Months',
+    value: 'AED 3.8M',
+    description: 'Transformation from bare sand plot to luxury G+1 residence with structural concrete, bespoke curtain walling, and ducted inverter AC.',
+    beforeImage: 'https://images.unsplash.com/photo-1541888946425-d0fbb186156f?q=80&w=1200&auto=format&fit=crop',
+    beforeLabel: 'Raft Foundation & Substructure',
+    afterImage: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1200&auto=format&fit=crop',
+    afterLabel: 'Completed Handover (BCC Approved)'
+  },
+  {
+    category: 'MEP & Substation',
+    title: 'Commercial DEWA Substation & HVAC',
+    location: 'Al Barsha South, Dubai',
+    duration: '6 Months',
+    value: 'AED 2.2M',
+    description: 'Complete mechanical and electrical room fitout, low-smoke zero-halogen cabling, and multi-zone VRF climate control.',
+    beforeImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop',
+    beforeLabel: 'Rough-in Conduit & Cable Trays',
+    afterImage: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?q=80&w=1200&auto=format&fit=crop',
+    afterLabel: 'Commissioned Switchgear (DEWA Energized)'
+  }
+];
 
 export default function BeforeAfterSlider() {
   const [activeCaseIndex, setActiveCaseIndex] = useState(0);
@@ -15,7 +41,7 @@ export default function BeforeAfterSlider() {
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef(null);
 
-  const activeCase = BEFORE_AFTER_CASES[activeCaseIndex];
+  const activeCase = DUBAI_BEFORE_AFTER_CASES[activeCaseIndex] || DUBAI_BEFORE_AFTER_CASES[0];
 
   const handleMove = useCallback((clientX) => {
     if (!containerRef.current) return;
@@ -35,37 +61,37 @@ export default function BeforeAfterSlider() {
   };
 
   return (
-    <section className="py-20 bg-[#070A0F] border-y border-slate-800/80 relative">
+    <section className="py-16 bg-[#121620] text-white rounded-3xl border border-[#232A38] relative overflow-hidden shadow-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C59B27]/15 border border-[#C59B27]/30 text-[#C59B27] text-xs font-bold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Interactive Site Transformation</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-display">
-              BEFORE & AFTER: ENGINEERING REDEFINED
+            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight font-display">
+              BEFORE & AFTER: ON-SITE EXECUTION
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
-              Slide back and forth to examine how our team converts derelict industrial footprints and raw rugged terrain into architectural landmarks.
+            <p className="text-white/70 text-xs sm:text-sm">
+              Slide back and forth to inspect how Kachoras transforms raw sand foundations into fully certified handovers.
             </p>
           </div>
 
           {/* Case Switcher Tabs */}
-          <div className="flex bg-slate-900/90 p-1.5 rounded-xl border border-slate-800">
-            {BEFORE_AFTER_CASES.map((item, idx) => (
+          <div className="flex bg-white/5 p-1.5 rounded-xl border border-white/10">
+            {DUBAI_BEFORE_AFTER_CASES.map((item, idx) => (
               <button
                 key={idx}
                 onClick={() => {
                   setActiveCaseIndex(idx);
                   setSliderPosition(50);
                 }}
-                className={`px-4 py-2 rounded-lg text-xs font-bold transition ${
+                className={`px-4 py-2 rounded-lg text-xs font-bold transition cursor-pointer ${
                   activeCaseIndex === idx
-                    ? 'bg-amber-500 text-slate-950 shadow-md'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-[#7A2E16] text-white shadow-md'
+                    : 'text-white/60 hover:text-white'
                 }`}
               >
                 Case 0{idx + 1}: {item.category}
@@ -75,28 +101,28 @@ export default function BeforeAfterSlider() {
         </div>
 
         {/* The Interactive Slider Frame */}
-        <div className="bg-[#121A27] border border-slate-800 rounded-2xl overflow-hidden shadow-2xl p-4 sm:p-6 space-y-6">
+        <div className="bg-[#1A202C] border border-white/10 rounded-2xl overflow-hidden shadow-2xl p-4 sm:p-6 space-y-6">
           
           {/* Metadata banner */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10">
             <div>
-              <h3 className="text-xl font-bold text-white font-display">{activeCase.title}</h3>
-              <div className="flex items-center gap-3 text-xs text-slate-400 mt-1">
-                <span className="flex items-center gap-1 text-amber-400 font-semibold">
+              <h3 className="text-lg font-bold text-white font-display">{activeCase.title}</h3>
+              <div className="flex items-center gap-3 text-xs text-white/60 mt-1">
+                <span className="flex items-center gap-1 text-[#C59B27] font-semibold">
                   <MapPin className="w-3.5 h-3.5" /> {activeCase.location}
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1">
-                  <Calendar className="w-3.5 h-3.5 text-slate-500" /> {activeCase.duration}
+                  <Calendar className="w-3.5 h-3.5 text-white/40" /> {activeCase.duration}
                 </span>
                 <span>•</span>
-                <span className="flex items-center gap-1 text-slate-200 font-semibold">
+                <span className="flex items-center gap-1 text-white font-semibold">
                   <DollarSign className="w-3.5 h-3.5 text-emerald-400" /> {activeCase.value}
                 </span>
               </div>
             </div>
 
-            <p className="text-xs text-slate-300 max-w-md hidden lg:block">
+            <p className="text-xs text-white/70 max-w-md hidden lg:block">
               {activeCase.description}
             </p>
           </div>
@@ -109,9 +135,9 @@ export default function BeforeAfterSlider() {
             onMouseUp={() => setIsDragging(false)}
             onMouseLeave={() => setIsDragging(false)}
             onTouchMove={handleTouchMove}
-            className="relative h-[360px] sm:h-[480px] lg:h-[540px] w-full select-none overflow-hidden rounded-xl cursor-ew-resize group"
+            className="relative h-[320px] sm:h-[420px] lg:h-[480px] w-full select-none overflow-hidden rounded-xl cursor-ew-resize group"
           >
-            {/* After Image (Full background) */}
+            {/* After Image */}
             <img
               src={activeCase.afterImage}
               alt="After transformation"
@@ -136,23 +162,23 @@ export default function BeforeAfterSlider() {
                 }}
                 draggable="false"
               />
-              <div className="absolute top-4 left-4 bg-slate-950/80 backdrop-blur-md border border-slate-700/80 px-3.5 py-1.5 rounded-full text-xs font-bold text-amber-400 shadow-lg">
+              <div className="absolute top-4 left-4 bg-slate-950/80 backdrop-blur-md border border-slate-700/80 px-3.5 py-1.5 rounded-full text-xs font-bold text-[#C59B27] shadow-lg">
                 {activeCase.beforeLabel}
               </div>
             </div>
 
             {/* Divider Line & Draggable Handle */}
             <div
-              className="absolute top-0 bottom-0 w-1 bg-amber-400 pointer-events-none shadow-[0_0_15px_rgba(245,158,11,0.8)]"
+              className="absolute top-0 bottom-0 w-1 bg-[#C59B27] pointer-events-none shadow-[0_0_15px_rgba(197,155,39,0.8)]"
               style={{ left: `${sliderPosition}%` }}
             >
-              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center shadow-2xl border-2 border-white pointer-events-auto cursor-grab active:cursor-grabbing">
-                <MoveHorizontal className="w-5 h-5 stroke-[2.5]" />
+              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-[#7A2E16] text-[#C59B27] flex items-center justify-center shadow-2xl border-2 border-white pointer-events-auto cursor-grab active:cursor-grabbing">
+                <MoveHorizontal className="w-4 h-4 stroke-[2.5]" />
               </div>
             </div>
 
             {/* Bottom helper tip */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-950/70 backdrop-blur-sm px-4 py-1 rounded-full text-[11px] text-slate-400 border border-slate-800 pointer-events-none">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-950/70 backdrop-blur-sm px-4 py-1 rounded-full text-[11px] text-white/60 border border-white/10 pointer-events-none">
               Drag slider left or right to compare
             </div>
 

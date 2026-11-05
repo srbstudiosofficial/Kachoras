@@ -18,7 +18,7 @@ export const COMPANY_INFO = {
   registerNo: "2148781",
   dcciNo: "169651",
   experienceYears: 20,
-  completedProjectsCount: "380+",
+  completedProjectsCount: "450+",
   activeProjectsCount: "Active 2026 Operations",
   specialties: [
     "Building Contracting (G+1 Villa Construction)",
@@ -109,6 +109,46 @@ export const CORE_CATEGORIES = [
       "Full warranty and post-occupancy care"
     ],
     image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    id: "kitchen_wardrobes",
+    title: "Kitchen Cabinets & Wardrobes",
+    subtitle: "Custom Luxury Cabinetry, Closets & Joinery",
+    icon: "Hammer",
+    description: "In-house joinery craftsmanship specializing in bespoke luxury kitchen cabinets, custom walk-in wardrobes, vanity units, and architectural joinery.",
+    features: [
+      "Custom modular luxury kitchen cabinets & islands",
+      "Bespoke built-in wardrobes & walk-in closet systems",
+      "Soft-close European fittings (Blum / Häfele hardware)",
+      "Moisture-resistant marine grade ply & PU lacquered finishes"
+    ],
+    deliverables: [
+      "3D interior shop drawings & material specification",
+      "Factory-precision CNC cutting & edge-banding",
+      "Quartz, granite, and porcelain countertop integration",
+      "Turnkey on-site installation and multi-year warranty"
+    ],
+    image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    id: "gypsum_works",
+    title: "Gypsum Decoration Works",
+    subtitle: "Architectural Ceilings, Cornices & Ambient Lighting Troughs",
+    icon: "Sparkles",
+    description: "Master artisanal false ceilings, classical Arabian majlis mouldings, modern minimalist recessed LED troughs, decorative GRC wall features, and drywall partitions.",
+    features: [
+      "Modern drop false ceilings with hidden LED light troughs",
+      "Intricate classical Arabic majlis plaster cornices & domes",
+      "Moisture-proof gypsum board installation for wet areas",
+      "GRC decorative screen panels, mouldings & arches"
+    ],
+    deliverables: [
+      "Heavy-duty galvanized channel framing & laser leveling",
+      "Seamless tape jointing & ultra-smooth micro-skimming",
+      "Concealed AC linear slot diffuser coordination",
+      "Civil Defense and Dubai Municipality fire-safety compliance"
+    ],
+    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80"
   }
 ];
 
@@ -127,6 +167,97 @@ export const STAFF_MEMBERS = [
 ];
 
 export const COMPLETED_PROJECTS_VILLAS = [
+  {
+    id: "V-P426",
+    code: "P-426",
+    client: "Mr. Fareed Ali Hassan Al Zarooni",
+    consultant: "Approved Engineering Consultancy",
+    projectDetails: "G+1 Luxury Private Residence, Dubai",
+    location: "Dubai Residential Sector",
+    plotNo: "DM Approved Plot",
+    type: "G+1 Luxury Villa",
+    category: "Building Contracting",
+    status: "Completed & Handed Over",
+    image: "./assets/real-projects/p426-al-zarooni-g1-villa.jpg"
+  },
+  {
+    id: "V-P405",
+    code: "P-405",
+    client: "Mr. Suad Salman Jabur Mahmood Al Kabie",
+    consultant: "Premier Architectural Consultants",
+    projectDetails: "Contemporary Luxury Villa, Dubai",
+    location: "Dubai Residential Sector",
+    plotNo: "DM Approved Plot",
+    type: "Luxury Contemporary Villa",
+    category: "Building Contracting",
+    status: "Completed & Handed Over",
+    image: "./assets/real-projects/p405-al-kabie-luxury-villa.jpg"
+  },
+  {
+    id: "V-P384",
+    code: "P-384",
+    client: "Mr. Al Sayed Jaffer Al Sayed Mohd Al Sharaf",
+    consultant: "Al Sharaf Engineering Consultancy",
+    projectDetails: "Modern Townhouse Development on Plot No – 3342119, Dubai",
+    location: "Plot No – 3342119, Dubai",
+    plotNo: "3342119",
+    type: "Townhouse Residence",
+    category: "Building Contracting",
+    status: "Completed & Handed Over",
+    image: "./assets/real-projects/p384-sharaf-townhouse-plot-3342119.jpg"
+  },
+  {
+    id: "V-P385",
+    code: "P-385",
+    client: "Mr. Al Sayed Jaffer Al Sayed Mohd Al Sharaf",
+    consultant: "Al Sharaf Engineering Consultancy",
+    projectDetails: "Modern Townhouse Development on Plot No – 3342135, Dubai",
+    location: "Plot No – 3342135, Dubai",
+    plotNo: "3342135",
+    type: "Townhouse Residence",
+    category: "Building Contracting",
+    status: "Completed & Handed Over",
+    image: "./assets/real-projects/p385-sharaf-townhouse-plot-3342135.jpg"
+  },
+  {
+    id: "V-P382",
+    code: "P-382",
+    client: "Mr. Mohammad Abdul Hameed Yousuf Abuali",
+    consultant: "Consulting Engineers Group",
+    projectDetails: "4-Townhouse Residential Complex, Dubai",
+    location: "Dubai",
+    plotNo: "DM Approved Plot",
+    type: "4-Townhouse Complex",
+    category: "Building Contracting",
+    status: "Completed & Handed Over",
+    image: "./assets/real-projects/p382-abuali-4-townhouse.jpg"
+  },
+  {
+    id: "V-P367",
+    code: "P-367",
+    client: "Mr. Ahmad Alsayed Mohd Alsyd Ibrahim Moosawi",
+    consultant: "Croquis Engineering Consultancy",
+    projectDetails: "G+1 Villa Architectural Facade, Dubai",
+    location: "Dubai",
+    plotNo: "DM Approved Plot",
+    type: "G+1 Villa",
+    category: "Aluminium & Glass Fabrication",
+    status: "Completed & Handed Over",
+    image: "./assets/real-projects/p367-moosawi-g1-villa.jpg"
+  },
+  {
+    id: "V-P363",
+    code: "P-363",
+    client: "Mr. Mohamed Rashed Abdulla Al Nuaimi",
+    consultant: "Engineering Consultants Dubai",
+    projectDetails: "Residential Villa & Majlis, Dubai",
+    location: "Dubai",
+    plotNo: "DM Approved Plot",
+    type: "Residential Villa",
+    category: "Building Contracting",
+    status: "Completed & Handed Over",
+    image: "./assets/real-projects/p363-nuaimi-villa-elevation.jpg"
+  },
   {
     id: "V1",
     client: "Mr. Khalifa Sebil Almas Khamis Salmin",
@@ -153,15 +284,17 @@ export const COMPLETED_PROJECTS_VILLAS = [
   },
   {
     id: "V3",
+    code: "P-373",
     client: "Mr. Ahmed Khalil Ibrahim Al Sayegh",
-    consultant: "Gulf Engineering and Consultants",
+    consultant: "Arkiplan Consulting Architects",
     projectDetails: "G+1 Villa and Service Block on Plot No – 3760253 at Al Barsha Second, Dubai",
     location: "Al Barsha Second, Dubai",
     plotNo: "3760253",
     type: "G+1 Villa + Service Block",
-    category: "Private Luxury Villas",
+    category: "Building Contracting",
     status: "Completed & Handed Over",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+    image: "./assets/real-projects/p373-alsayegh-villa-2014.jpg",
+    elevationImage: "./assets/real-projects/p373-alsayegh-elevation.jpg"
   },
   {
     id: "V4",
@@ -173,7 +306,7 @@ export const COMPLETED_PROJECTS_VILLAS = [
     type: "G+1 Villa + Service Block",
     category: "Private Luxury Villas",
     status: "Completed & Handed Over",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+    image: "./assets/real-projects/completed-construction-albannay-424-7036.jpg"
   },
   {
     id: "V5",
@@ -285,6 +418,18 @@ export const DUBAI_MUNICIPALITY_PROJECTS = [
     category: "Government Civic Works",
     status: "Completed & Certified",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    id: "DM7",
+    client: "Dubai Municipality",
+    consultant: "Dubai Municipality General Maintenance Department",
+    projectDetails: "Modifications, Maintenance and Painting works at Cattle Market, Al Qusais",
+    location: "Al Qusais, Dubai",
+    plotNo: "Cattle Market Complex",
+    scope: "Modifications, Maintenance & Painting Works",
+    category: "Government Civic Works",
+    status: "Completed & Certified",
+    image: "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80"
   }
 ];
 
@@ -337,7 +482,7 @@ export const ONGOING_PROJECTS = [
     plotNo: "3760283",
     type: "G+1 Villa Maintenance & Upgrades",
     status: "Active Execution",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+    image: "./assets/real-projects/completed-construction-albannay-424-7036.jpg"
   },
   {
     id: "OG6",

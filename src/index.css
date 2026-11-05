@@ -2,16 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Premium UAE Contractor Typography: Manrope (Headings) + JUST Sans (Body) */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url('./assets/fonts/Manrope-VariableFont.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JUST Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('./assets/fonts/JUST-Sans-Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JUST Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/JUST-Sans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JUST Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/JUST-Sans-Medium.woff2') format('woff2');
+}
+
 @layer base {
   body {
     background-color: #FBF9F5;
     color: #1F2937;
-    font-family: 'Inter', sans-serif;
+    font-family: 'JUST Sans', 'Manrope', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Manrope', 'JUST Sans', sans-serif;
     letter-spacing: -0.02em;
     color: #111827;
   }
