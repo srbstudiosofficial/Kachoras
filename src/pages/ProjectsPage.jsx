@@ -18,8 +18,8 @@ export default function ProjectsPage({ onNavigate, onOpenQuoteModal }) {
       
       {/* 1. Page Header */}
       <PageHeader 
-        title="Engineering Projects & Live Pipeline"
-        subtitle="450+ Cumulative Completed Works Across Dubai (2006–2026) • Featuring Recent Completed Handovers & Active Sites"
+        title="Engineering Projects Portfolio"
+        subtitle="20+ Years of Structural & Electromechanical Excellence Across Dubai (2006–2026) • Verified Project Portfolio"
         breadcrumb="Projects"
         onNavigate={onNavigate}
       />
@@ -36,21 +36,21 @@ export default function ProjectsPage({ onNavigate, onOpenQuoteModal }) {
             </div>
 
             <div className="p-4 sm:p-5 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] space-y-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">Active Sites</span>
-              <div className="text-3xl font-black text-emerald-700 font-mono">100%</div>
-              <p className="text-xs text-slate-600">On-schedule execution under DM supervision</p>
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">Track Record</span>
+              <div className="text-3xl font-black text-emerald-700 font-mono">20+ Yrs</div>
+              <p className="text-xs text-slate-600">Trusted engineering in Dubai under Jose K. George</p>
             </div>
 
             <div className="p-4 sm:p-5 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] space-y-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#C59B27]">Authority Grade</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#8B6D1B]">Authority Rating</span>
               <div className="text-3xl font-black text-[#1E293B] font-display">G+1</div>
-              <p className="text-xs text-slate-600">Dubai Municipality licensed structural rating</p>
+              <p className="text-xs text-slate-600">Dubai Municipality licensed structural contractor</p>
             </div>
 
             <div className="p-4 sm:p-5 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] space-y-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Approval Rate</span>
-              <div className="text-3xl font-black text-[#7A2E16] font-mono">Zero</div>
-              <p className="text-xs text-slate-600">First-pass DEWA inspection rejections</p>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Authority Compliance</span>
+              <div className="text-3xl font-black text-[#7A2E16] font-mono">100%</div>
+              <p className="text-xs text-slate-600">DM, DEWA, and Civil Defence standards</p>
             </div>
 
           </div>
@@ -59,9 +59,6 @@ export default function ProjectsPage({ onNavigate, onOpenQuoteModal }) {
 
       {/* 3. The Full Projects Section & Interactive Grid */}
       <ProjectsSection onOpenQuoteModal={onOpenQuoteModal} hideHeader={true} />
-
-      {/* 4. Pre-Footer Call to Action */}
-      
 
     </div>
   );
