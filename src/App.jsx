@@ -9,6 +9,7 @@ import LicensePage from './pages/LicensePage';
 import ContactPage from './pages/ContactPage';
 import QuoteModal from './components/QuoteModal';
 import AdminProjectModal from './components/AdminProjectModal';
+import SecurityDomainLock from './components/SecurityDomainLock';
 import { subscribeCloudProjects, syncLocalProjectsToCloud, syncLocalInquiriesToCloud } from './services/firebaseSync';
 import { saveLocalProjects } from './services/projectService';
 import { useScrollReveal } from './hooks/useScrollReveal';
@@ -48,23 +49,22 @@ export default function App() {
     document.title = PAGE_TITLES[currentPage] || PAGE_TITLES.home;
   }, [currentPage]);
 
-  // Handle Browser Back / Forward & Hash Navigation
+  // Handle browser back/forward and hash changes
   useEffect(() => {
-    const handleUrlChange = () => {
-      const p = resolvePageFromLocation();
-      if (p && p !== currentPage) {
-        setCurrentPage(p);
-        window.scrollTo({ top: 0, behavior: 'instant' });
-      }
+    const handlePopState = () => {
+      setCurrentPage(resolvePageFromLocation());
     };
-
-    window.addEventListener('popstate', handleUrlChange);
-    window.addEventListener('hashchange', handleUrlChange);
-
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('hashchange', handlePopState);
     return () => {
-      window.removeEventListener('popstate', handleUrlChange);
-      window.removeEventListener('hashchange', handleUrlChange);
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('hashchange', handlePopState);
     };
+  }, []);
+
+  // Scroll to top on page change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
   // Link-Only Trigger: Opens owner portal via /admin, #admin, #portal, ?admin
@@ -73,17 +73,16 @@ export default function App() {
       const hash = (window.location.hash || '').toLowerCase();
       const search = (window.location.search || '').toLowerCase();
       const pathname = (window.location.pathname || '').toLowerCase();
+
       if (
         hash === '#admin' || 
         hash === '#owner' || 
         hash === '#portal' || 
-        hash === '#control' ||
+        hash === '#dashboard' ||
         search.includes('admin') || 
-        search.includes('portal') ||
-        search.includes('control') ||
+        search.includes('owner') ||
         pathname.endsWith('/admin') ||
-        pathname.endsWith('/portal') ||
-        pathname.endsWith('/control')
+        pathname.endsWith('/owner')
       ) {
         setAdminModalOpen(true);
       }
@@ -103,20 +102,29 @@ export default function App() {
     };
   }, []);
 
-  // Real-Time Cloud Synchronization Listener (Firebase Cloud Firestore)
+  // Firebase Real-time Synchronization
   useEffect(() => {
-    syncLocalProjectsToCloud().catch(console.warn);
-    syncLocalInquiriesToCloud().catch(console.warn);
+    let unsubscribeProjects = null;
+    let unsubscribeInquiries = null;
 
-    const unsubscribe = subscribeCloudProjects((liveCloudProjects) => {
-      if (liveCloudProjects && Array.isArray(liveCloudProjects)) {
-        saveLocalProjects(liveCloudProjects);
-        window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
-      }
-    });
+    try {
+      unsubscribeProjects = subscribeCloudProjects((cloudProjects) => {
+        if (Array.isArray(cloudProjects) && cloudProjects.length > 0) {
+          saveLocalProjects(cloudProjects);
+        }
+      });
+
+      unsubscribeInquiries = subscribeCloudInquiries(() => {});
+
+      syncLocalProjectsToCloud().catch(() => {});
+      syncLocalInquiriesToCloud().catch(() => {});
+    } catch (e) {
+      console.warn('Firebase background sync skipped:', e);
+    }
 
     return () => {
-      if (unsubscribe) unsubscribe();
+      if (typeof unsubscribeProjects === 'function') unsubscribeProjects();
+      if (typeof unsubscribeInquiries === 'function') unsubscribeInquiries();
     };
   }, []);
 
@@ -126,24 +134,10 @@ export default function App() {
       return;
     }
 
-    const validPage = PAGE_TITLES[pageId] ? pageId : 'home';
-    setCurrentPage(validPage);
-
-    // Update browser URL without page reload
-    const targetPath = validPage === 'home' ? '/' : `/${validPage}`;
-    if (window.location.pathname !== targetPath) {
-      window.history.pushState({ page: validPage }, '', targetPath);
-    }
-
-    document.title = PAGE_TITLES[validPage] || PAGE_TITLES.home;
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  };
-
-  const handleCloseAdminModal = () => {
-    setAdminModalOpen(false);
-    const hash = (window.location.hash || '').toLowerCase();
-    if (hash === '#admin' || hash === '#owner' || hash === '#portal') {
-      history.replaceState(null, document.title, window.location.pathname + window.location.search);
+    if (PAGE_TITLES[pageId]) {
+      setCurrentPage(pageId);
+      const url = pageId === 'home' ? '/' : `/${pageId}`;
+      window.history.pushState({ page: pageId }, '', url);
     }
   };
 
@@ -152,91 +146,100 @@ export default function App() {
     setQuoteModalOpen(true);
   };
 
-  const handleSelectServiceForQuote = (serviceName) => {
+  const handleCloseAdminModal = () => {
+    setAdminModalOpen(false);
+    const hash = window.location.hash.toLowerCase();
+    if (hash === '#admin' || hash === '#owner' || hash === '#portal') {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  };
+
+  const handleSelectServiceForQuote = (serviceTitle) => {
     handleOpenQuoteModal({
-      category: serviceName,
-      budget: '',
-      notes: `Proposal request initiated for: ${serviceName}`
+      category: serviceTitle,
+      notes: `Inquiring specifically for: ${serviceTitle}`
     });
   };
 
   return (
-    <div className="min-h-screen bg-[#FBF9F5] text-[#1E293B] flex flex-col selection:bg-[#7A2E16] selection:text-white font-sans antialiased overflow-x-hidden">
-      
-      {/* Fixed Luxury Navigation */}
-      <Navbar 
-        currentPage={currentPage}
-        onNavigate={navigateTo}
-        onOpenQuoteModal={() => handleOpenQuoteModal()} 
-      />
+    <SecurityDomainLock>
+      <div className="min-h-screen bg-[#FBF9F5] text-[#1E293B] flex flex-col selection:bg-[#7A2E16] selection:text-white font-sans antialiased overflow-x-hidden">
+        
+        {/* Fixed Luxury Navigation */}
+        <Navbar 
+          currentPage={currentPage}
+          onNavigate={navigateTo}
+          onOpenQuoteModal={() => handleOpenQuoteModal()} 
+        />
 
-      {/* Main Multi-Page Experience */}
-      <main className="flex-1">
-        {currentPage === 'home' && (
-          <HomePage 
-            onNavigate={navigateTo}
-            onOpenQuoteModal={handleOpenQuoteModal}
-            onSelectServiceForQuote={handleSelectServiceForQuote}
-          />
-        )}
+        {/* Main Multi-Page Experience */}
+        <main className="flex-1">
+          {currentPage === 'home' && (
+            <HomePage 
+              onNavigate={navigateTo}
+              onOpenQuoteModal={handleOpenQuoteModal}
+              onSelectServiceForQuote={handleSelectServiceForQuote}
+            />
+          )}
 
-        {currentPage === 'about' && (
-          <AboutPage 
-            onNavigate={navigateTo}
-            onOpenQuoteModal={handleOpenQuoteModal}
-          />
-        )}
+          {currentPage === 'about' && (
+            <AboutPage 
+              onNavigate={navigateTo}
+              onOpenQuoteModal={handleOpenQuoteModal}
+            />
+          )}
 
-        {currentPage === 'services' && (
-          <ServicesPage 
-            onNavigate={navigateTo}
-            onOpenQuoteModal={handleOpenQuoteModal}
-            onSelectServiceForQuote={handleSelectServiceForQuote}
-          />
-        )}
+          {currentPage === 'services' && (
+            <ServicesPage 
+              onNavigate={navigateTo}
+              onOpenQuoteModal={handleOpenQuoteModal}
+              onSelectServiceForQuote={handleSelectServiceForQuote}
+            />
+          )}
 
-        {currentPage === 'projects' && (
-          <ProjectsPage 
-            onNavigate={navigateTo}
-            onOpenQuoteModal={handleOpenQuoteModal}
-          />
-        )}
+          {currentPage === 'projects' && (
+            <ProjectsPage 
+              onNavigate={navigateTo}
+              onOpenQuoteModal={handleOpenQuoteModal}
+            />
+          )}
 
-        {currentPage === 'license' && (
-          <LicensePage 
-            onNavigate={navigateTo}
-            onOpenQuoteModal={handleOpenQuoteModal}
-          />
-        )}
+          {currentPage === 'license' && (
+            <LicensePage 
+              onNavigate={navigateTo}
+              onOpenQuoteModal={handleOpenQuoteModal}
+            />
+          )}
 
-        {currentPage === 'contact' && (
-          <ContactPage 
-            onNavigate={navigateTo}
-            onOpenQuoteModal={handleOpenQuoteModal}
-          />
-        )}
-      </main>
+          {currentPage === 'contact' && (
+            <ContactPage 
+              onNavigate={navigateTo}
+              onOpenQuoteModal={handleOpenQuoteModal}
+            />
+          )}
+        </main>
 
-      {/* Imperial Mahogany & Bronze Footer */}
-      <Footer 
-        currentPage={currentPage}
-        onNavigate={navigateTo}
-        onOpenQuoteModal={() => handleOpenQuoteModal()} 
-      />
+        {/* Imperial Mahogany & Bronze Footer */}
+        <Footer 
+          currentPage={currentPage}
+          onNavigate={navigateTo}
+          onOpenQuoteModal={() => handleOpenQuoteModal()} 
+        />
 
-      {/* Interactive RFQ / Proposal Modal */}
-      <QuoteModal
-        isOpen={quoteModalOpen}
-        onClose={() => setQuoteModalOpen(false)}
-        initialData={quoteInitialData}
-      />
+        {/* Interactive RFQ / Proposal Modal */}
+        <QuoteModal
+          isOpen={quoteModalOpen}
+          onClose={() => setQuoteModalOpen(false)}
+          initialData={quoteInitialData}
+        />
 
-      {/* Owner Portal / Admin Project Management Modal (Hidden, accessible only via link /admin or #admin) */}
-      <AdminProjectModal
-        isOpen={adminModalOpen}
-        onClose={handleCloseAdminModal}
-      />
+        {/* Owner Portal / Admin Project Management Modal (Hidden, accessible only via link /admin or #admin) */}
+        <AdminProjectModal
+          isOpen={adminModalOpen}
+          onClose={handleCloseAdminModal}
+        />
 
-    </div>
+      </div>
+    </SecurityDomainLock>
   );
 }
