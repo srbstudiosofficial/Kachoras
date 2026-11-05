@@ -28,24 +28,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
         onNavigate={onNavigate}
       />
 
-      {/* 2. Who We Are (ECC Reference & Client Recommended Architecture) */}
-      <section className="py-16 sm:py-20 bg-white border-b border-[#E5DED3]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8 text-center space-y-6">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#111622] font-display tracking-tight">
-            Who We Are
-          </h2>
-          <div className="space-y-4 text-slate-700 text-base sm:text-lg leading-relaxed font-sans text-left sm:text-center">
-            <p>
-              With over two decades of industry experience, <strong>Kachoras Electro-Mechanical Contracting LLC</strong> has built a strong reputation for delivering high-quality luxury G+1 villas, electromechanical (MEP) services, Dubai Municipality-approved general maintenance, and architectural aluminium and glass fabrication works in accordance with applicable industry standards and project specifications.
-            </p>
-            <p>
-              We are committed to excellence in every project, combining technical expertise, skilled workmanship, rigorous safety practices, and professional project management to deliver reliable, efficient, and lasting solutions that exceed client expectations across the UAE.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Executive Leadership & Company Heritage */}
+      {/* 2. Executive Leadership & Company Heritage */}
       <section className="py-20 bg-white border-b border-[#E5DED3]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
