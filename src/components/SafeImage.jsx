@@ -26,7 +26,7 @@ export default function SafeImage({
   const handleImageError = () => {
     // If the image fails and isn't already the default villa fallback, try the fallback villa image
     if (currentSrc && !currentSrc.includes('villa.jpg')) {
-      setCurrentSrc('./assets/villa.jpg');
+      setCurrentSrc('./assets/real-projects/completed-construction-albannay-424-7036.jpg');
     } else {
       setHasError(true);
     }

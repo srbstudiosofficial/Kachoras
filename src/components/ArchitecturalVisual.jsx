@@ -36,10 +36,10 @@ const getAssetForProject = (type = '', plotNo = '') => {
     return './assets/real-projects/completed-aluminum-flag-villa.jpg';
   }
   if (t.includes('civic') || t.includes('municipality')) {
-    return './assets/civic.jpg';
+    return './assets/real-projects/completed-maintenance-abdulrahman-422-0322.jpg';
   }
   if (t.includes('mep')) {
-    return './assets/mep.jpg';
+    return './assets/real-projects/completed-aluminum-flag-villa.jpg';
   }
 
   return './assets/real-projects/completed-construction-albannay-424-7036.jpg';

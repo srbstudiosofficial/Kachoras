@@ -34,7 +34,9 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
         'Management of Dubai Municipality inspections, permit renewals, and Building Completion Certificates (BCC)'
       ],
       compliance: 'Compliant with Dubai Building Code 2021 & DM Structural Safety Regulations',
-      typicalTimeline: '8 – 14 Months (Turnkey Structure to Handover)'
+      typicalTimeline: '8 – 14 Months (Turnkey Structure to Handover)',
+      image: './assets/real-projects/completed-construction-albannay-424-7036.jpg',
+      imageCaption: 'G+1 Classical Villa Execution (Al Warqaa Fourth, Plot 424-7036)'
     },
     {
       id: 'mep',
@@ -50,7 +52,9 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
         'Energy-efficient LED architectural lighting automation and low-voltage (ELV) data cabling'
       ],
       compliance: 'DEWA Regulations for Electrical Installations & DCD Fire Code',
-      typicalTimeline: 'Integrated concurrently with civil construction'
+      typicalTimeline: 'Integrated concurrently with civil construction',
+      image: './assets/real-projects/completed-aluminum-flag-villa.jpg',
+      imageCaption: 'DEWA Integrated Electromechanical Substation & Infrastructure'
     },
     {
       id: 'aluminium',
@@ -66,7 +70,9 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
         'Skylights and insulated glass units (IGU) compliant with Estidama and Dubai Green Building Regulations'
       ],
       compliance: 'Dubai Green Building Standards (Al Sa’fat Certified Glazing)',
-      typicalTimeline: 'Fabricated in-house to synchronize with site finishes'
+      typicalTimeline: 'Fabricated in-house to synchronize with site finishes',
+      image: './assets/real-projects/completed-aluminum-travertine-glazing.jpg',
+      imageCaption: 'Al Qusais Workshop Double-Glazed Curtain Wall & Entryway'
     },
     {
       id: 'maintenance',
@@ -82,7 +88,9 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
         'Rapid emergency repair response for DEWA electrical disruptions and plumbing failures'
       ],
       compliance: 'Dubai Municipality Health & Safety Standards',
-      typicalTimeline: 'Custom fitout programs & 24/7 AMC coverage'
+      typicalTimeline: 'Custom fitout programs & 24/7 AMC coverage',
+      image: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg',
+      imageCaption: 'Royal Majlis & Decorative Gypsum Maintenance (Al Barsha, Plot 376-1176)'
     }
   ];
 
@@ -242,7 +250,26 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                   </div>
 
                   {/* Right Details Box */}
-                  <div className="lg:col-span-5 bg-white border border-[#E5DED3] rounded-2xl p-6 space-y-5 shadow-sm">
+                  <div className="lg:col-span-5 bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-sm">
+                    {activeItem.image && (
+                      <div className="h-48 sm:h-52 relative bg-slate-900 overflow-hidden">
+                        <img 
+                          src={activeItem.image}
+                          alt={activeItem.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                        <div className="absolute bottom-3 left-4 right-4 text-white">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#C59B27] block">
+                            Verified Project Execution
+                          </span>
+                          <p className="text-xs font-semibold text-white/95">
+                            {activeItem.imageCaption}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    <div className="p-6 space-y-5">
                     <div className="border-b border-[#E5DED3] pb-3">
                       <span className="text-xs font-bold uppercase tracking-wider text-[#7A2E16]">Technical Compliance</span>
                       <h4 className="text-base font-bold text-slate-900 mt-0.5">Statutory & Regulatory Matrix</h4>
@@ -273,6 +300,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                         <span>Calculate Cost for this Division</span>
                         <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
                       </button>
+                    </div>
                     </div>
                   </div>
 

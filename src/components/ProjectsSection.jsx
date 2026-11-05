@@ -1,3 +1,4 @@
+import ProjectDetailModal from './ProjectDetailModal';
 import React, { useState, useEffect } from 'react';
 import { 
   Building2, 
@@ -14,7 +15,8 @@ import { getAllProjects, fetchServerProjects } from '../services/projectService'
 
 export default function ProjectsSection({ onOpenQuoteModal, hideHeader = false }) {
   const [projects, setProjects] = useState([]);
-  const [filter, setFilter] = useState('ongoing'); // 'all' | 'upcoming' | 'ongoing' | 'completed'
+  const [filter, setFilter] = useState('ongoing');
+  const [selectedProject, setSelectedProject] = useState(null); // 'all' | 'upcoming' | 'ongoing' | 'completed'
 
   const loadProjects = async () => {
     const local = getAllProjects();
@@ -218,14 +220,27 @@ export default function ProjectsSection({ onOpenQuoteModal, hideHeader = false }
                   </div>
                 </div>
 
-                {/* Card Action */}
-                <div className="p-5 pt-0 border-t border-[#F2ECE1] mt-2">
+                {/* Card Actions */}
+                <div className="p-5 pt-0 border-t border-[#F2ECE1] mt-2 space-y-2">
                   <button
-                    onClick={() => onOpenQuoteModal && onOpenQuoteModal({ category: item.category, notes: `Inquiry regarding: ${item.title}` })}
-                    className="w-full min-h-[44px] pt-1 flex items-center justify-between text-xs font-bold text-[#7A2E16] group-hover:text-[#5C200E] transition cursor-pointer"
+                    type="button"
+                    onClick={() => setSelectedProject(item)}
+                    className="w-full py-2.5 px-3 bg-[#FAF8F5] hover:bg-[#F2ECE1] border border-[#E5DED3] rounded-xl text-xs font-bold text-slate-800 transition flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+                  >
+                    <span>View Project Sheet & Scope</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#7A2E16]" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onOpenQuoteModal && onOpenQuoteModal({ category: item.category, notes: `Inquiry regarding: ${item.title}` });
+                    }}
+                    className="w-full pt-1 flex items-center justify-between text-[11px] font-bold text-[#7A2E16] hover:text-[#5C200E] transition cursor-pointer"
                   >
                     <span>Inquire for Similar Project</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#C59B27] group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
                   </button>
                 </div>
 
@@ -235,6 +250,14 @@ export default function ProjectsSection({ onOpenQuoteModal, hideHeader = false }
         </div>
 
       </div>
+
+      {/* Interactive Project Detail Sheet Modal */}
+      <ProjectDetailModal 
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+        onOpenQuoteModal={onOpenQuoteModal}
+      />
     </section>
   );
 }

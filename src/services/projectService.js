@@ -287,7 +287,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2025",
     "timeline": "Handed Over & DM Certified",
     "scope": "Turnkey clinical fitout, medical plumbing, anti-bacterial sanitary wall finishes, and underground hydraulic valve control conduits.",
-    "image": "./assets/civic.jpg",
+    "image": "./assets/real-projects/completed-maintenance-abdulrahman-422-0322.jpg",
     "isCustom": false,
     "createdAt": "2025-11-20T00:00:00.000Z"
   },
@@ -304,7 +304,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2025",
     "timeline": "Testing, Commissioning & Inspection Passed",
     "scope": "Underground valve chambers, pressure balancing, automated irrigation pump sets, and industrial switchboards.",
-    "image": "./assets/mep.jpg",
+    "image": "./assets/real-projects/completed-aluminum-flag-villa.jpg",
     "isCustom": false,
     "createdAt": "2025-06-10T00:00:00.000Z"
   },
@@ -321,7 +321,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Tender Submission Closed \u2014 Under DM Technical Evaluation",
     "scope": "Full turnkey building contracting, reinforced concrete substructure & superstructure, MEP infrastructure, and luxury architectural envelope.",
-    "image": "./assets/villa_arabic.jpg",
+    "image": "./assets/real-projects/p405-al-kabie-luxury-villa.jpg",
     "isCustom": false,
     "createdAt": "2026-04-01T00:00:00.000Z"
   },
@@ -338,7 +338,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Contract Award Stage \u2014 Mobilization Q3 2026",
     "scope": "Complete electromechanical revamping, 11kV substation coordination, busbar trunking, and central firefighting booster system.",
-    "image": "./assets/mep.jpg",
+    "image": "./assets/real-projects/completed-aluminum-flag-villa.jpg",
     "isCustom": false,
     "createdAt": "2026-04-05T00:00:00.000Z"
   },
@@ -355,7 +355,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Substructure & Ground Floor Slab",
     "scope": "Turnkey G+1 private residence featuring reinforced concrete framing, integrated MEP infrastructure, and classical facade moldings.",
-    "image": "./assets/villa.jpg",
+    "image": "./assets/real-projects/completed-construction-albannay-424-7036.jpg",
     "isCustom": false,
     "createdAt": "2026-03-01T00:00:00.000Z"
   },
@@ -372,7 +372,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "First Floor Columns & Beams",
     "scope": "Modern architectural villa with double-height glazing, cantilevered balconies, separate service block, and boundary wall.",
-    "image": "./assets/villa_modern.jpg",
+    "image": "./assets/real-projects/p426-al-zarooni-g1-villa.jpg",
     "isCustom": false,
     "createdAt": "2026-03-05T00:00:00.000Z"
   },
@@ -389,7 +389,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Frame Erection & Roof Slab",
     "scope": "Ground-up heritage majlis hall, decorative archways, ducted AC, and insulated glazing installation.",
-    "image": "./assets/villa_arabic.jpg",
+    "image": "./assets/real-projects/p405-al-kabie-luxury-villa.jpg",
     "isCustom": false,
     "createdAt": "2026-03-10T00:00:00.000Z"
   },
@@ -406,7 +406,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Structural Strengthening & MEP Fitout",
     "scope": "Load-bearing beam modifications, steel reinforcement, MEP rerouting, and custom facade panels.",
-    "image": "./assets/villa_stone.jpg",
+    "image": "./assets/real-projects/p363-nuaimi-villa-elevation.jpg",
     "isCustom": false,
     "createdAt": "2026-03-12T00:00:00.000Z"
   },
@@ -423,7 +423,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Interior Fitout & Facade Painting",
     "scope": "Weatherproofing, facade repainting, AC duct sanitation, and boundary wall structural restoration.",
-    "image": "./assets/villa_annex.jpg",
+    "image": "./assets/real-projects/completed-maintenance-alseraj-422-0200.jpg",
     "isCustom": false,
     "createdAt": "2026-03-15T00:00:00.000Z"
   },
@@ -440,7 +440,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Cabinetry & Gypsum Ceiling Works",
     "scope": "Complete kitchen cabinetry overhaul, decorative gypsum false ceiling installation, and LED lighting troughs.",
-    "image": "./assets/villa_glass.jpg",
+    "image": "./assets/real-projects/completed-maintenance-almarzooqui-376-1918.jpg",
     "isCustom": false,
     "createdAt": "2026-03-18T00:00:00.000Z"
   }

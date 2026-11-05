@@ -13,8 +13,8 @@ import { CORE_CATEGORIES } from '../data/mockData';
 const DISCIPLINE_ASSETS = {
   construction: {
     tag: 'G+1 Villa Contracting',
-    image: './assets/villa.jpg',
-    webp: './assets/villa.webp',
+    image: './assets/real-projects/completed-construction-albannay-424-7036.jpg',
+    webp: './assets/real-projects/completed-construction-albannay-424-7036.jpg',
     details: 'Ground-up civil execution, structural substructures, luxury G+1 villas, and Arabian majlis blocks.'
   },
   mep: {
@@ -26,15 +26,15 @@ const DISCIPLINE_ASSETS = {
   },
   aluminium: {
     tag: 'Aluminium & Glass Fabrication',
-    image: './assets/aluminium.jpg',
-    webp: './assets/aluminium.webp',
+    image: './assets/real-projects/completed-aluminum-travertine-glazing.jpg',
+    webp: './assets/real-projects/completed-aluminum-travertine-glazing.jpg',
     details: 'Manufactured at our Al Qusais B-25 fabrication workshop: curtain walls, structural glazing, and thermal-break systems.'
   },
   maintenance: {
     tag: 'Dubai Civic & Maintenance',
     // Internal villa picture as requested
-    image: './assets/villa_annex.jpg',
-    webp: './assets/villa_annex.webp',
+    image: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg',
+    webp: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg',
     details: 'Municipal civic contracts, hydraulic valve chambers, public park infrastructure, and commercial refurbishment.'
   },
   kitchen_wardrobes: {
