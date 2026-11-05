@@ -185,15 +185,15 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
               <div className="pt-2 flex flex-wrap gap-4 text-xs font-semibold text-slate-600">
                 <span className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-lg border border-[#E5DED3]">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  17 Completed Handovers
+                  20 Handed Over Projects
                 </span>
                 <span className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-lg border border-[#E5DED3]">
                   <CheckCircle2 className="w-4 h-4 text-[#8B6D1B]" />
-                  6 Active Construction Sites
+                  4 Core Disciplines
                 </span>
                 <span className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-lg border border-[#E5DED3]">
                   <CheckCircle2 className="w-4 h-4 text-[#7A2E16]" />
-                  Dedicated Project Detail Sheets
+                  Dedicated Handover Sheets
                 </span>
               </div>
             </div>
