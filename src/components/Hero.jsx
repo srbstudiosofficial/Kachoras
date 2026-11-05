@@ -14,34 +14,22 @@ import AnimatedCounter from './AnimatedCounter';
 const FEATURED_PROJECTS = [
   {
     id: 'albannay',
-    label: 'G+1 Luxury Villa',
-    title: 'G+1 Classical Villa & Service Block',
-    location: 'Al Warqaa Fourth, Dubai',
-    plotNo: '424-7036',
-    bua: '9,200 sq.ft',
-    consultant: 'Al Manhal Engineering Consultants',
-    discipline: 'G+1 CIVIL & MEP',
+    label: 'G+1 Luxury Villas',
+    title: 'Turnkey G+1 Villa Civil Construction',
+    discipline: 'CIVIL & STRUCTURAL',
     image: './assets/real-projects/completed-construction-albannay-424-7036.jpg'
   },
   {
     id: 'alabdulla',
-    label: 'Luxury Majlis',
-    title: 'Traditional Majlis & Architectural Glazing',
-    location: 'Al Barsha Second, Dubai',
-    plotNo: '376-1176',
-    bua: '3,800 sq.ft',
-    consultant: 'Teamwork Engineering Consultants',
-    discipline: 'CIVIL & TRADITIONAL WORKS',
+    label: 'Majlis Pavilions',
+    title: 'Traditional Majlis & Heritage Architecture',
+    discipline: 'MAJLIS & ARCHITECTURAL',
     image: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg'
   },
   {
     id: 'facade',
-    label: 'Curtain Wall Facade',
-    title: 'Architectural Glazing & Structural Facade',
-    location: 'Dubai Residential Sector',
-    plotNo: 'DM Registered Plot',
-    bua: 'Thermal-Break',
-    consultant: 'In-House Al Qusais Fabrication',
+    label: 'Curtain Wall Facades',
+    title: 'Architectural Glazing & Aluminium Systems',
     discipline: 'ALUMINIUM & GLASS',
     image: './assets/real-projects/completed-aluminum-flag-villa.jpg'
   }
@@ -61,83 +49,99 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
   };
 
   return (
-    <section className="relative min-h-[82vh] lg:min-h-[86vh] flex items-center pt-24 sm:pt-28 pb-12 sm:pb-16 bg-[#FAF9F6] border-b border-[#E5DED3]">
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-8 w-full z-10">
+    <section className="relative bg-[#FAF9F6] border-b border-[#E5DED3] pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden">
+      
+      {/* Subtle Classical Geometric Background Grid */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-[0.035]"
+        style={{
+          backgroundImage: `radial-gradient(#1E293B 1px, transparent 1px), radial-gradient(#7A2E16 1px, transparent 1px)`,
+          backgroundSize: '32px 32px',
+          backgroundPosition: '0 0, 16px 16px'
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         
-        {/* Accreditation Marker */}
-        <div className="mb-5 inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#E5DED3] text-xs text-slate-700 shadow-xs max-w-full">
-          <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" />
-          <span className="text-[#7A2E16] font-bold text-[11px] sm:text-xs tracking-wide">
-            Dubai Municipality Approved G+1 Contractor
-          </span>
-          <span className="text-slate-300">|</span>
-          <span className="text-slate-600 text-[11px] sm:text-xs font-mono font-medium">Commercial License No. 578964</span>
-        </div>
-
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          {/* Left Column: Official Identity & Text (7 cols) */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Left Column: Firm Title, Regulatory License & Value Proposition */}
+          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
             
-            <div className="space-y-3.5">
-              <span className="text-xs uppercase tracking-[0.22em] font-bold text-[#8B6D1B] block font-mono">
-                كاشوراس للمقاولات الكهروميكانيكية ش.ذ.م.م • EST. 2006
-              </span>
+            {/* Top Authority Header & Verified License Badge */}
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold tracking-wide">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Dubai Municipality Approved Contractor • Commercial License #{COMPANY_INFO.licenseNumber}</span>
+              </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[50px] font-bold tracking-tight text-[#111622] font-display leading-[1.12]">
-                Kachoras Electro-Mechanical Contracting LLC
+              {/* Exact Legal Registered Arabic Name */}
+              <div className="font-arabic text-lg sm:text-xl font-bold text-[#7A2E16] tracking-normal" dir="rtl">
+                كاشوراس للمقاولات الكهروميكانيكية ش.ذ.م.م
+              </div>
+
+              {/* Primary English Corporate Title */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#111622] font-display tracking-tight leading-[1.08]">
+                Kachoras Electro-Mechanical <span className="text-[#7A2E16]">Contracting LLC</span>
               </h1>
+            </div>
 
-              <div className="space-y-3 text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl font-sans pt-1">
-                <p>
-                  With over two decades of industry experience, We have built a strong reputation for delivering high-quality luxury G+1 villas, electromechanical (MEP) services, DM-approved general maintenance and construction works in accordance with applicable industry standards and project specifications.
-                </p>
-                <p>
-                  We are committed to excellence in every project, combining technical expertise, skilled workmanship, rigorous safety practices, and professional project management to deliver reliable, efficient, and lasting solutions that exceed client expectations.
-                </p>
+            {/* Sub-headline / Corporate Positioning */}
+            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-sans max-w-2xl">
+              20 years of structural and electromechanical precision across the Emirate of Dubai. Accredited for turnkey <strong>luxury G+1 residential villas</strong>, <strong>traditional majlis halls</strong>, <strong>high-capacity MEP engineering</strong>, and <strong>in-house architectural aluminium and glass fabrication</strong>.
+            </p>
+
+            {/* Official Registration Data Strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1">
+              <div className="p-3 bg-white border border-[#E5DED3] rounded-xl shadow-2xs space-y-0.5">
+                <div className="text-[10px] uppercase font-bold text-slate-600 tracking-wider">DM Registration</div>
+                <div className="text-xs font-bold text-[#111622] font-mono">G+1 Approved</div>
+              </div>
+
+              <div className="p-3 bg-white border border-[#E5DED3] rounded-xl shadow-2xs space-y-0.5">
+                <div className="text-[10px] uppercase font-bold text-slate-600 tracking-wider">Established</div>
+                <div className="text-xs font-bold text-[#7A2E16] font-mono">Dubai 2006 (20 Yrs)</div>
+              </div>
+
+              <div className="p-3 bg-white border border-[#E5DED3] rounded-xl shadow-2xs space-y-0.5 col-span-2 sm:col-span-1">
+                <div className="text-[10px] uppercase font-bold text-slate-600 tracking-wider">Fabrication Facility</div>
+                <div className="text-xs font-bold text-[#111622] font-mono">Al Qusais B-25</div>
               </div>
             </div>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            {/* Primary Calls to Action */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <button
-                type="button"
-                onClick={() => onOpenQuoteModal && onOpenQuoteModal()}
-                className="px-6 py-3.5 bg-[#7A2E16] hover:bg-[#63220E] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-sm transition flex items-center gap-2 cursor-pointer active:scale-98"
+                onClick={onOpenQuoteModal}
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl text-sm font-bold tracking-wider uppercase text-white bg-[#7A2E16] hover:bg-[#63220E] transition-all shadow-md hover:shadow-lg cursor-pointer"
               >
-                <span>ENQUIRY / RFQ</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Request Project Proposal</span>
+                <ArrowRight className="w-4 h-4 text-[#C59B27]" />
               </button>
 
               <button
-                type="button"
                 onClick={handleExploreClick}
-                className="px-6 py-3.5 bg-white hover:bg-[#F2ECE1] text-[#14171F] font-bold text-xs uppercase tracking-wider rounded-xl border border-[#D9D0C3] transition cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-bold tracking-wider uppercase text-[#111622] bg-white border border-[#E5DED3] hover:border-[#7A2E16] hover:bg-[#FAF8F5] transition shadow-xs cursor-pointer"
               >
-                <span>EXPLORE DISCIPLINES</span>
+                <span>Explore Capabilities</span>
               </button>
 
-              <a
-                href={`tel:${COMPANY_INFO.phone}`}
-                className="px-4 py-3.5 text-xs text-slate-700 hover:text-[#7A2E16] font-semibold flex items-center gap-2 transition"
+              <button
+                onClick={() => onNavigate('projects')}
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-sm font-bold tracking-wider uppercase text-[#7A2E16] bg-transparent hover:underline transition cursor-pointer"
               >
-                <Phone className="w-4 h-4 text-[#C59B27]" />
-                <span className="font-mono">{COMPANY_INFO.phone}</span>
-              </a>
+                <span>View Projects Directory</span>
+                <ArrowRight className="w-4 h-4 text-[#C59B27]" />
+              </button>
             </div>
 
-            {/* Stats Bar */}
-            <div className="pt-6 border-t border-[#EAE3D6] grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {/* Credibility Counter Strip */}
+            <div className="grid grid-cols-3 gap-6 pt-4 border-t border-[#E5DED3]">
               <div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#111622] font-display">
-                  <AnimatedCounter target={20} suffix="+" duration={1800} />
+                <div className="text-2xl sm:text-3xl font-extrabold text-[#7A2E16] font-display">
+                  <AnimatedCounter target={20} suffix="+" duration={1500} />
                 </div>
                 <div className="text-xs text-slate-500 font-medium mt-0.5">Years in Dubai</div>
-              </div>
-
-              <div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#7A2E16] font-display">G+1</div>
-                <div className="text-xs text-slate-500 font-medium mt-0.5">DM License Grade</div>
               </div>
 
               <div>
@@ -157,7 +161,7 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
 
           </div>
 
-          {/* Right Column: Real Client Project Showcase (Real photo of Albannay Classical Villa) */}
+          {/* Right Column: Architectural Visual Showcase */}
           <div className="lg:col-span-5">
             <div className="bg-white rounded-2xl border border-[#E5DED3] p-3 shadow-md space-y-3 relative">
               
@@ -171,49 +175,42 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
               <div className="h-64 sm:h-72 lg:h-76 xl:h-80 rounded-xl overflow-hidden relative bg-[#14171F]">
                 <ArchitecturalVisual 
                   type={activeProj.id}
-                  plotNo={activeProj.plotNo}
-                  location={activeProj.location}
+                  plotNo=""
+                  location="Dubai, UAE"
                   image={activeProj.image}
                   className="w-full h-full"
                 />
               </div>
 
-              {/* Technical Specification Card */}
-              <div className="p-3.5 bg-[#FAF8F5] rounded-xl border border-[#EFE9DF] space-y-2">
+              {/* Engineering Showcase & Credentials Card */}
+              <div className="p-3.5 bg-[#FAF8F5] rounded-xl border border-[#EFE9DF] space-y-2.5">
                 <div className="flex items-start justify-between gap-2">
-                  <div>
+                  <div className="space-y-0.5">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#8B6D1B] block">
+                      {activeProj.discipline}
+                    </span>
                     <h3 className="font-bold text-sm text-[#14171F] font-display">
                       {activeProj.title}
                     </h3>
-                    <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-                      <MapPin className="w-3.5 h-3.5 text-[#C59B27]" />
-                      <span>{activeProj.location}</span>
-                    </p>
                   </div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#9E3E20] bg-[#F7EBE8] border border-[#F0D5CE] px-2.5 py-0.5 rounded-full shrink-0">
-                    {activeProj.discipline}
+                    Dubai Approved
                   </span>
                 </div>
 
-                <div className="pt-2 border-t border-[#EAE3D6] grid grid-cols-3 gap-2 text-[11px] text-slate-600">
-                  <div>
-                    <span className="block text-[10px] text-slate-400 font-medium uppercase">BUA Area</span>
-                    <strong className="text-slate-800 font-semibold">{activeProj.bua}</strong>
-                  </div>
-                  <div>
-                    <span className="block text-[10px] text-slate-400 font-medium uppercase">Plot Number</span>
-                    <strong className="text-slate-800 font-mono font-semibold">{activeProj.plotNo}</strong>
-                  </div>
-                  <div>
-                    <span className="block text-[10px] text-slate-400 font-medium uppercase">Consultant</span>
-                    <strong className="text-slate-800 font-semibold truncate block" title={activeProj.consultant}>
-                      {activeProj.consultant}
-                    </strong>
-                  </div>
+                <div className="pt-2 border-t border-[#EAE3D6] flex items-center justify-between text-xs">
+                  <span className="text-[11px] text-slate-500 font-medium">Dubai Municipality License #578964</span>
+                  <button
+                    onClick={() => onNavigate('projects')}
+                    className="text-xs font-bold text-[#7A2E16] hover:text-[#5C1E0A] flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>View Projects Directory</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
+                  </button>
                 </div>
               </div>
 
-              {/* Project Selector Tabs */}
+              {/* Discipline Showcase Tabs */}
               <div className="flex items-center gap-1.5 pt-1">
                 {FEATURED_PROJECTS.map((p, idx) => (
                   <button

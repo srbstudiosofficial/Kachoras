@@ -8,52 +8,14 @@ import {
   ArrowRight, 
   CheckCircle2, 
   FileCheck2, 
-  MapPin, 
   Phone,
   Award,
-  Layers
+  Layers,
+  Sparkles
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
-import SafeImage from '../components/SafeImage';
 
 export default function HomePage({ onNavigate, onOpenQuoteModal }) {
-  // Handpicked premier landmark highlights from client records
-  const featuredHighlights = [
-    {
-      id: 'ALBANNAY',
-      title: 'Construction of G+1 Villa + Service Block + Compound Wall',
-      location: 'Al Warqaa Fourth, Dubai',
-      plotNo: '424-7036',
-      client: 'Mariam Hussain Redha Hassan Albannay',
-      consultant: 'Al Manhal Engineering Consultants',
-      type: 'G+1 Classical Villa',
-      status: 'Completed & Handed Over',
-      image: './assets/real-projects/completed-construction-albannay-424-7036.jpg'
-    },
-    {
-      id: 'SHEHAB',
-      title: 'Construction of G+1 Villa + Service Block & Compound Wall',
-      location: 'Al Warqaa Third, Dubai',
-      plotNo: '423-1407',
-      client: 'Abdul Raouf Siraj Shehab Ahmad Mohammad',
-      consultant: 'Al Majal Engineering Consultants',
-      type: 'G+1 Luxury Villa',
-      status: 'Completed & Handed Over',
-      image: './assets/real-projects/completed-construction-shehab-423-1407.jpg'
-    },
-    {
-      id: 'ALUM-FLAG',
-      title: 'Architectural Curtain Wall & Structural Glass Facade',
-      location: 'Dubai Residential Sector',
-      plotNo: 'DM Registered Plot',
-      client: 'Private Luxury Residence',
-      consultant: 'Architectural Glazing Consultants',
-      type: 'Aluminium & Curtain Wall',
-      status: 'Completed & Handed Over',
-      image: './assets/real-projects/completed-aluminum-flag-villa.jpg'
-    }
-  ];
-
   const coreDivisions = [
     {
       number: '01',
@@ -86,18 +48,18 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
   ];
 
   const consultantPartners = [
-    { name: "Al Manhal Engineering Consultants", role: "Villa Architecture & Civil Supervision", plot: "Plot 424-7036" },
-    { name: "Al Majal Engineering Consultants", role: "Structural & MEP Review", plot: "Plot 423-1407" },
-    { name: "Croquis Engineering Consultants", role: "Residential G+1 Civil Design", plot: "Plot 431-7233" },
-    { name: "Arkiplan Consulting Architects", role: "Architectural Planning & Authority Submissions", plot: "Plot 423-19966" },
-    { name: "Teamwork Engineering Consultants", role: "Authority Permitting & Structural Engineering", plot: "Plot 376-1176" },
-    { name: "Gulf Engineering Consultants", role: "MEP Infrastructure & DEWA Substation", plot: "Commercial Sectors" }
+    { name: "Al Manhal Engineering Consultants", role: "Villa Architecture & Civil Supervision", discipline: "Residential G+1" },
+    { name: "Al Majal Engineering Consultants", role: "Structural & MEP Review", discipline: "Turnkey Contracting" },
+    { name: "Croquis Engineering Consultants", role: "Residential G+1 Civil Design", discipline: "Civil Engineering" },
+    { name: "Arkiplan Consulting Architects", role: "Architectural Planning & Authority Submissions", discipline: "Statutory Permitting" },
+    { name: "Teamwork Engineering Consultants", role: "Authority Permitting & Structural Engineering", discipline: "Majlis & Structural Works" },
+    { name: "Gulf Engineering Consultants", role: "MEP Infrastructure & DEWA Substation", discipline: "MEP Infrastructure" }
   ];
 
   return (
     <div className="space-y-0 text-slate-800">
       
-      {/* 1. Hero Section (Matching Image 1: High-res villa showcase, exact client text, no AI grid) */}
+      {/* 1. Hero Section */}
       <Hero onOpenQuoteModal={onOpenQuoteModal} onNavigate={onNavigate} />
 
       {/* 2. Core Contracting Disciplines (Architectural Directory) */}
@@ -170,7 +132,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
         </div>
       </section>
 
-      {/* 4. Approved Consultant Engineering Partners */}
+      {/* 3. Approved Consultant Engineering Partners */}
       <section className="py-16 sm:py-20 bg-white border-b border-[#E5DED3]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-8">
           <div className="max-w-3xl space-y-2">
@@ -192,7 +154,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
                 className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] space-y-2 hover:border-[#7A2E16] transition"
               >
                 <div className="text-[10px] font-mono text-amber-700 uppercase font-semibold">
-                  {item.plot}
+                  {item.discipline}
                 </div>
                 <h3 className="text-sm font-bold text-[#14171F] font-display">
                   {item.name}
@@ -206,77 +168,44 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
         </div>
       </section>
 
-      {/* 5. Featured Landmark Handover Projects */}
+      {/* 4. Comprehensive Portfolio Directory Gateway */}
       <section className="py-20 sm:py-24 bg-[#FAF9F6] border-b border-[#E5DED3]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-10">
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="space-y-2">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="bg-white rounded-3xl border border-[#E5DED3] p-8 sm:p-12 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="space-y-4 max-w-2xl">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B] block">
                 Track Record & Executed Portfolio
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111622] font-display">
-                Featured Executed Works
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#111622] font-display leading-tight">
+                Explore Our Complete Projects Directory & Handover Sheets
               </h2>
-              <p className="text-sm text-slate-600">
-                Verified luxury G+1 villas and architectural envelopes across Dubai's premier residential sectors.
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                Comprehensive project specifications, statutory Dubai Municipality records, structural scopes, and photographic handover documentation have been organized on our dedicated portfolio page.
               </p>
+              <div className="pt-2 flex flex-wrap gap-4 text-xs font-semibold text-slate-600">
+                <span className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-lg border border-[#E5DED3]">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  17 Completed Handovers
+                </span>
+                <span className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-lg border border-[#E5DED3]">
+                  <CheckCircle2 className="w-4 h-4 text-[#8B6D1B]" />
+                  6 Active Construction Sites
+                </span>
+                <span className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-lg border border-[#E5DED3]">
+                  <CheckCircle2 className="w-4 h-4 text-[#7A2E16]" />
+                  Dedicated Project Detail Sheets
+                </span>
+              </div>
             </div>
 
             <button
               onClick={() => onNavigate('projects')}
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white bg-[#7A2E16] hover:bg-[#63220E] transition py-3 px-6 rounded-xl shadow-xs cursor-pointer shrink-0"
+              className="inline-flex items-center gap-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-[#7A2E16] hover:bg-[#63220E] transition py-4 px-8 rounded-xl shadow-xs hover:shadow-md cursor-pointer shrink-0"
             >
-              <span>Explore All Verified Projects</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
+              <span>View Projects Directory</span>
+              <ArrowRight className="w-4 h-4 text-[#C59B27]" />
             </button>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {featuredHighlights.map((proj) => (
-              <div 
-                key={proj.id}
-                className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-xs hover:border-[#7A2E16] hover:shadow-md transition group flex flex-col justify-between"
-              >
-                <div>
-                  <div className="h-56 bg-slate-100 overflow-hidden relative">
-                    <SafeImage 
-                      src={proj.image} 
-                      alt={proj.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-3 left-3 bg-[#111622]/80 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-mono text-white">
-                      Plot #{proj.plotNo}
-                    </div>
-                    <div className="absolute top-3 right-3 bg-emerald-600 text-white px-2 py-0.5 rounded text-[10px] font-bold">
-                      {proj.status}
-                    </div>
-                  </div>
-
-                  <div className="p-6 space-y-3">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A2E16] block">
-                      {proj.type}
-                    </span>
-                    <h3 className="text-base font-bold text-[#111622] font-display line-clamp-2">
-                      {proj.title}
-                    </h3>
-                    <p className="text-xs text-slate-500 flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-[#C59B27] shrink-0" />
-                      <span>{proj.location}</span>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-6 pt-0 border-t border-[#F0EBE1] mt-2">
-                  <div className="pt-3 text-[11px] text-slate-500 space-y-1">
-                    <div>Client: <strong className="text-slate-700">{proj.client}</strong></div>
-                    <div>Consultant: <strong className="text-slate-700">{proj.consultant}</strong></div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
         </div>
       </section>
 
