@@ -16,9 +16,9 @@ const DUBAI_BEFORE_AFTER_CASES = [
     duration: '11 Months',
     value: 'AED 3.8M',
     description: 'Transformation from bare sand plot to luxury G+1 residence with structural concrete, bespoke curtain walling, and ducted inverter AC.',
-    beforeImage: 'https://images.unsplash.com/photo-1541888946425-d0fbb186156f?q=80&w=1200&auto=format&fit=crop',
+    beforeImage: './assets/real-projects/construction-site-progress-01.jpg',
     beforeLabel: 'Raft Foundation & Substructure',
-    afterImage: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1200&auto=format&fit=crop',
+    afterImage: './assets/real-projects/completed-construction-albannay-424-7036.jpg',
     afterLabel: 'Completed Handover (BCC Approved)'
   },
   {
@@ -28,9 +28,9 @@ const DUBAI_BEFORE_AFTER_CASES = [
     duration: '6 Months',
     value: 'AED 2.2M',
     description: 'Complete mechanical and electrical room fitout, low-smoke zero-halogen cabling, and multi-zone VRF climate control.',
-    beforeImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200&auto=format&fit=crop',
+    beforeImage: './assets/real-projects/construction-site-progress-03.jpg',
     beforeLabel: 'Rough-in Conduit & Cable Trays',
-    afterImage: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?q=80&w=1200&auto=format&fit=crop',
+    afterImage: './assets/real-projects/completed-aluminum-contemporary-geometric.jpg',
     afterLabel: 'Commissioned Switchgear (DEWA Energized)'
   }
 ];

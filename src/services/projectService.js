@@ -13,7 +13,7 @@ import {
 } from './firebaseSync';
 
 // LocalStorage Keys
-const STORAGE_KEY_PROJECTS = 'kachoras_custom_projects_v1';
+const STORAGE_KEY_PROJECTS = 'kachoras_custom_projects_v2';
 const STORAGE_KEY_FIREBASE = 'kachoras_firebase_config_v1';
 const STORAGE_KEY_AUTH = 'kachoras_admin_auth_v1';
 
@@ -287,7 +287,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2025",
     "timeline": "Handed Over & DM Certified",
     "scope": "Turnkey clinical fitout, medical plumbing, anti-bacterial sanitary wall finishes, and underground hydraulic valve control conduits.",
-    "image": "./assets/real-projects/completed-maintenance-01.jpg",
+    "image": "./assets/real-projects/p373-alsayegh-elevation.jpg",
     "isCustom": false,
     "createdAt": "2025-11-20T00:00:00.000Z"
   },
@@ -304,7 +304,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2025",
     "timeline": "Testing, Commissioning & Inspection Passed",
     "scope": "Underground valve chambers, pressure balancing, automated irrigation pump sets, and industrial switchboards.",
-    "image": "./assets/real-projects/completed-maintenance-interior-villa.jpg",
+    "image": "./assets/real-projects/p373-alsayegh-villa-2014.jpg",
     "isCustom": false,
     "createdAt": "2025-06-10T00:00:00.000Z"
   },
@@ -355,7 +355,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Substructure & Ground Floor Slab",
     "scope": "Turnkey G+1 private residence featuring reinforced concrete framing, integrated MEP infrastructure, and classical facade moldings.",
-    "image": "./assets/real-projects/p373-alsayegh-villa-2014.jpg",
+    "image": "./assets/real-projects/construction-site-progress-01.jpg",
     "isCustom": false,
     "createdAt": "2026-03-01T00:00:00.000Z"
   },
@@ -372,7 +372,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "First Floor Columns & Beams",
     "scope": "Modern architectural villa with double-height glazing, cantilevered balconies, separate service block, and boundary wall.",
-    "image": "./assets/real-projects/p426-al-zarooni-g1-villa.jpg",
+    "image": "./assets/real-projects/construction-site-progress-02.jpg",
     "isCustom": false,
     "createdAt": "2026-03-05T00:00:00.000Z"
   },
@@ -389,7 +389,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Frame Erection & Roof Slab",
     "scope": "Ground-up heritage majlis hall, decorative archways, ducted AC, and insulated glazing installation.",
-    "image": "./assets/real-projects/p367-moosawi-g1-villa.jpg",
+    "image": "./assets/real-projects/construction-site-progress-03.jpg",
     "isCustom": false,
     "createdAt": "2026-03-10T00:00:00.000Z"
   },
@@ -406,7 +406,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Structural Strengthening & MEP Fitout",
     "scope": "Load-bearing beam modifications, steel reinforcement, MEP rerouting, and custom facade panels.",
-    "image": "./assets/real-projects/p363-nuaimi-villa-elevation.jpg",
+    "image": "./assets/real-projects/construction-site-progress-04.jpg",
     "isCustom": false,
     "createdAt": "2026-03-12T00:00:00.000Z"
   },
@@ -423,7 +423,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Interior Fitout & Facade Painting",
     "scope": "Weatherproofing, facade repainting, AC duct sanitation, and boundary wall structural restoration.",
-    "image": "./assets/real-projects/p385-sharaf-townhouse-plot-3342135.jpg",
+    "image": "./assets/real-projects/p426-al-zarooni-g1-villa.jpg",
     "isCustom": false,
     "createdAt": "2026-03-15T00:00:00.000Z"
   },
@@ -440,7 +440,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2026",
     "timeline": "Cabinetry & Gypsum Ceiling Works",
     "scope": "Complete kitchen cabinetry overhaul, decorative gypsum false ceiling installation, and LED lighting troughs.",
-    "image": "./assets/real-projects/p382-abuali-4-townhouse.jpg",
+    "image": "./assets/real-projects/p367-moosawi-g1-villa.jpg",
     "isCustom": false,
     "createdAt": "2026-03-18T00:00:00.000Z"
   }

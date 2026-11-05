@@ -20,8 +20,8 @@ const DISCIPLINE_ASSETS = {
   mep: {
     tag: 'Electromechanical Engineering',
     // Normal realistic MEP installation picture
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
-    webp: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+    image: './assets/real-projects/construction-site-progress-04.jpg',
+    webp: './assets/real-projects/construction-site-progress-04.jpg',
     details: 'Ducted HVAC systems, DEWA-approved electrical substations, plumbing, and building management networks.'
   },
   aluminium: {
@@ -39,14 +39,14 @@ const DISCIPLINE_ASSETS = {
   },
   kitchen_wardrobes: {
     tag: 'Custom Joinery & Millwork',
-    image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
-    webp: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
+    image: './assets/real-projects/p382-abuali-4-townhouse.jpg',
+    webp: './assets/real-projects/p382-abuali-4-townhouse.jpg',
     details: 'Custom modular luxury kitchen cabinets, integrated walk-in closets, bespoke vanity units, and premium European fittings.'
   },
   gypsum_works: {
     tag: 'Decorative Ceilings & Partitions',
-    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
-    webp: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
+    image: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg',
+    webp: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg',
     details: 'Intricate classical Arabian and modern false ceilings, concealed LED ambient lighting troughs, GRC decorative screens, and acoustic partitions.'
   }
 };

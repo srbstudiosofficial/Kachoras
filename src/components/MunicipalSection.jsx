@@ -29,9 +29,9 @@ export default function MunicipalSection() {
         <div className="mb-14 bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 grid lg:grid-cols-12 items-center reveal-on-scroll reveal-init shimmer-trigger">
           <div className="lg:col-span-6 relative h-72 sm:h-80 lg:h-full min-h-[320px] overflow-hidden group">
             <picture className="w-full h-full block">
-              <source srcSet="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80" type="image/webp" />
+              <source srcSet="./assets/real-projects/p363-nuaimi-villa-elevation.jpg" type="image/webp" />
               <img 
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80" 
+                src="./assets/real-projects/p363-nuaimi-villa-elevation.jpg" 
                 alt="Dubai Municipality Civic Project Specimen" 
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="lazy"
