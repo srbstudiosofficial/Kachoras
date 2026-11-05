@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin } from 'lucide-react';
+import { resolveSafeAsset, useCoreLayout } from '../core/runtimeContext';
 
 const getAssetForProject = (type = '', plotNo = '') => {
   const t = (type || '').toLowerCase();

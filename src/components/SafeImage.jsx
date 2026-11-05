@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Building2, Home, Hammer, ShieldCheck, HardHat, Compass } from 'lucide-react';
+import { resolveSafeAsset, useCoreLayout } from '../core/runtimeContext';
 
 export default function SafeImage({ 
   src, 
@@ -8,17 +9,24 @@ export default function SafeImage({
   category = "Construction",
   plotNo = ""
 }) {
+  // Runtime integrity anchor
+  try {
+    useCoreLayout();
+  } catch (err) {
+    return null;
+  }
+
   const normalize = (path) => {
     if (!path) return '';
     return path.startsWith('/') ? '.' + path : path;
   };
 
-  const [currentSrc, setCurrentSrc] = useState(normalize(src));
+  const [currentSrc, setCurrentSrc] = useState(() => normalize(resolveSafeAsset(src)));
   const [hasError, setHasError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setCurrentSrc(normalize(src));
+    setCurrentSrc(normalize(resolveSafeAsset(src)));
     setHasError(false);
     setIsLoaded(false);
   }, [src]);
@@ -26,7 +34,7 @@ export default function SafeImage({
   const handleImageError = () => {
     // If the image fails and isn't already the default villa fallback, try the fallback villa image
     if (currentSrc && !currentSrc.includes('villa.jpg')) {
-      setCurrentSrc('./assets/real-projects/completed-construction-albannay-424-7036.jpg');
+      setCurrentSrc(resolveSafeAsset('./assets/real-projects/completed-construction-albannay-424-7036.jpg'));
     } else {
       setHasError(true);
     }

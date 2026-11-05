@@ -10,8 +10,11 @@ import {
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 import KachorasLogo from './KachorasLogo';
+import { useCoreLayout } from '../core/runtimeContext';
 
 export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteModal }) {
+  try { useCoreLayout(); } catch (err) { return null; }
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

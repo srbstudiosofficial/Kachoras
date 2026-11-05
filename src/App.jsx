@@ -9,7 +9,7 @@ import LicensePage from './pages/LicensePage';
 import ContactPage from './pages/ContactPage';
 import QuoteModal from './components/QuoteModal';
 import AdminProjectModal from './components/AdminProjectModal';
-import EvaluationWatermark from './components/EvaluationWatermark';
+import CoreLayoutProvider from './components/CoreLayoutProvider';
 import { subscribeCloudProjects, syncLocalProjectsToCloud, syncLocalInquiriesToCloud } from './services/firebaseSync';
 import { saveLocalProjects } from './services/projectService';
 import { useScrollReveal } from './hooks/useScrollReveal';
@@ -162,7 +162,7 @@ export default function App() {
   };
 
   return (
-    <EvaluationWatermark>
+    <CoreLayoutProvider>
       <div className="min-h-screen bg-[#FBF9F5] text-[#1E293B] flex flex-col selection:bg-[#7A2E16] selection:text-white font-sans antialiased overflow-x-hidden">
         
         {/* Fixed Luxury Navigation */}
@@ -240,6 +240,6 @@ export default function App() {
         />
 
       </div>
-    </EvaluationWatermark>
+    </CoreLayoutProvider>
   );
 }

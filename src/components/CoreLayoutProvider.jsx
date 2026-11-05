@@ -1,13 +1,18 @@
-import React from 'react';
-import { Lock, ShieldAlert, AlertTriangle, Clock } from 'lucide-react';
-import { verifyEvaluationLicense } from '../core/licenseVerifier';
+import React, { useState, useEffect } from 'react';
+import { Lock, ShieldAlert, Clock } from 'lucide-react';
+import { CoreLayoutContext, verifyHostIntegrity } from '../core/runtimeContext';
 
-export default function EvaluationWatermark({ children }) {
-  const license = verifyEvaluationLicense();
+export default function CoreLayoutProvider({ children }) {
+  const [status, setStatus] = useState(() => verifyHostIntegrity());
 
-  // 1. Hard Kill-Switch Screen (If domain is unauthorized OR time expired)
-  if (!license.valid) {
-    const isExpired = license.reason === 'EXPIRED';
+  useEffect(() => {
+    const check = verifyHostIntegrity();
+    setStatus(check);
+  }, []);
+
+  // 1. Hard Kill-Switch Screen (If domain is unauthorized OR evaluation time expired)
+  if (!status.valid) {
+    const isExpired = status.reason === 'EXPIRED';
 
     return (
       <div className="fixed inset-0 z-[999999] bg-[#0A0D14] text-white flex items-center justify-center p-4 font-sans select-none">
@@ -32,7 +37,7 @@ export default function EvaluationWatermark({ children }) {
             </h1>
             
             <p className="text-sm text-slate-400 leading-relaxed max-w-md mx-auto">
-              {license.message}
+              {status.message || `Commercial deployment has not been licensed for "${status.host || window.location.hostname}". This build is restricted to authorized staging and local development environments.`}
             </p>
           </div>
 
@@ -58,7 +63,7 @@ export default function EvaluationWatermark({ children }) {
 
   // 2. Evaluation Mode Active (Localhost / Staging Preview)
   return (
-    <>
+    <CoreLayoutContext.Provider value={status}>
       {/* Top Persistent Staging Banner */}
       <aside aria-label="Evaluation mode" className="bg-[#121620] border-b border-amber-500/40 text-white text-[11px] py-1.5 px-4 text-center sticky top-0 z-[100] flex flex-wrap items-center justify-center gap-2 backdrop-blur-md shadow-sm">
         <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
@@ -85,6 +90,6 @@ export default function EvaluationWatermark({ children }) {
       </div>
 
       {children}
-    </>
+    </CoreLayoutContext.Provider>
   );
 }
