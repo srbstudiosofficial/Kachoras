@@ -43,14 +43,14 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteMo
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       
-      {/* Top Corporate Strip */}
-      <div className="bg-[#14171F] border-b border-[#242A38] text-white/80 text-xs py-2 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-[11px]">
+      {/* Top Corporate Strip - Responsive across all phone sizes */}
+      <div className="bg-[#14171F] border-b border-[#242A38] text-white/80 text-[10px] sm:text-xs py-1.5 sm:py-2 px-3 sm:px-8">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1.5 sm:gap-2">
           
-          <div className="flex items-center space-x-3 sm:space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4 text-center sm:text-left">
             <span className="flex items-center text-white/90 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2" />
-              Dubai Municipality Approved G+1 Contractor • License #{COMPANY_INFO.licenseNumber}
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 shrink-0" />
+              <span className="hidden sm:inline">Dubai Municipality Approved G+1 Contractor • </span>License #{COMPANY_INFO.licenseNumber}
             </span>
             <span className="hidden lg:inline-block text-white/20">|</span>
             <span className="hidden lg:flex items-center text-white/60">
@@ -58,18 +58,18 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteMo
             </span>
           </div>
 
-          <div className="flex items-center space-x-4 ml-auto">
+          <div className="flex items-center space-x-3 sm:space-x-4">
             <a 
               href="https://wa.me/971555585079?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20inquire%20about%20a%20construction%20project%20in%20Dubai." 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-semibold transition"
+              className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold transition"
             >
-              <MessageSquare className="w-3 h-3" />
+              <MessageSquare className="w-3 h-3 shrink-0" />
               <span>WhatsApp Inquiries</span>
             </a>
 
-            <span className="hidden sm:inline-block text-white/20">|</span>
+            <span className="text-white/20">|</span>
 
             <a 
               href={`tel:${COMPANY_INFO.phone}`} 
@@ -85,10 +85,10 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteMo
       {/* Main Navigation Bar */}
       <nav className={`transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#E5DED3] py-2.5' 
-          : 'bg-[#FAF9F6]/95 backdrop-blur-sm border-b border-[#E5DED3]/70 py-3.5'
+          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-[#E5DED3] py-2 sm:py-2.5' 
+          : 'bg-[#FAF9F6]/95 backdrop-blur-sm border-b border-[#E5DED3]/70 py-2.5 sm:py-3.5'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-8 flex items-center justify-between">
           
           {/* Logo */}
           <button 
@@ -134,7 +134,7 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteMo
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button & Quick RFQ */}
           <div className="flex items-center space-x-2 lg:hidden shrink-0">
             <button
               onClick={() => onOpenQuoteModal()}
