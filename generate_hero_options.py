@@ -837,7 +837,7 @@ def get_option2_hero():
             </div>
 
             <div class="font-arabic text-xl sm:text-2xl font-black text-[#B3261E]" dir="rtl">
-              كاشوراس للمقاولات الكهروميكانيكية ش.ذ.മ.മ
+              كاشوراس للمقاولات الكهروميكانيكية ش.ذ.م.م
             </div>
 
             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight leading-[1.12]">
