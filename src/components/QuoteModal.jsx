@@ -174,7 +174,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
             {/* Instant Communication Actions */}
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2">
               <a
-                href={`https://wa.me/971555585079?text=${encodeURIComponent(
+                href={`https://wa.me/971565066904?text=${encodeURIComponent(
                   `*KACHORAS RFQ SUBMISSION [${referenceId}]*\n• Client: ${formData.name || 'Client'}\n• Phone: ${formData.phone || 'N/A'}\n• Discipline: ${formData.category}\n• Area: ${formData.sqft} sq.ft\n• Budget: ${formData.budget || 'As per BOQ'}\n• Timeline: ${formData.timeline}\n• Location: ${formData.location} ${formData.plotNo ? `(Plot: ${formData.plotNo})` : ''}\n• Drawings: ${formData.hasBlueprints}\n• Notes: ${formData.notes || 'None'}`
                 )}`}
                 target="_blank"

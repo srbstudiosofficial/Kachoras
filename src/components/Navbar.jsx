@@ -63,7 +63,7 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteMo
 
           <div className="flex items-center space-x-3 sm:space-x-4">
             <a 
-              href="https://wa.me/971555585079?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20inquire%20about%20a%20construction%20project%20in%20Dubai." 
+              href="https://wa.me/971565066904?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20inquire%20about%20a%20construction%20project%20in%20Dubai." 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold transition"

@@ -65,7 +65,7 @@ export default function Footer({ currentPage = 'home', onNavigate, onOpenQuoteMo
               </a>
 
               <a
-                href="https://wa.me/971555585079?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project%20in%20Dubai."
+                href="https://wa.me/971565066904?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project%20in%20Dubai."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-5 py-3.5 bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-xs rounded-xl transition flex items-center gap-2 shadow-sm"
@@ -96,7 +96,7 @@ export default function Footer({ currentPage = 'home', onNavigate, onOpenQuoteMo
             </div>
 
             <p className="text-white/60 leading-relaxed text-xs max-w-sm">
-              Established in 2006, <strong>Kachoras Electro-Mechanical Contracting LLC</strong> is a Dubai Municipality G+1 licensed contractor specializing in luxury residences, royal majlis pavilions, civic infrastructure, and MEP engineering.
+              Established in 2006, <strong>Kachoras Electromechanical Contracting LLC</strong> is a Dubai Municipality G+1 licensed contractor specializing in luxury residences, royal majlis pavilions, civic infrastructure, and MEP engineering.
             </p>
 
             <div className="space-y-1.5 pt-2 text-[11px] text-white/70">
@@ -148,7 +148,7 @@ export default function Footer({ currentPage = 'home', onNavigate, onOpenQuoteMo
               <p>P.O. Box: <strong className="text-white font-mono">{COMPANY_INFO.poBox}</strong></p>
               <p>Tel: <strong className="text-white font-mono">{COMPANY_INFO.phone}</strong></p>
               <p>Mobile: <strong className="text-white font-mono">{COMPANY_INFO.mobile}</strong></p>
-              <p>Email: <a href={`mailto:${COMPANY_INFO.email}`} className="text-[#C59B27] hover:underline">{COMPANY_INFO.email}</a></p>
+              <p>Email: <a href={`mailto:${COMPANY_INFO.email}`} className="text-[#C59B27] hover:underline">{COMPANY_INFO.email}</a> • <a href="mailto:info@kachoras.com" className="text-[#C59B27] hover:underline">info@kachoras.com</a></p>
             </div>
           </div>
 
@@ -156,7 +156,7 @@ export default function Footer({ currentPage = 'home', onNavigate, onOpenQuoteMo
 
         {/* Bottom Legal Copyright */}
         <div className="border-t border-[#232938] mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-white/40 gap-4">
-          <p>© 2006–2026 Kachoras Electro-Mechanical Contracting LLC. All rights reserved.</p>
+          <p>© 2006–2026 Kachoras Electromechanical Contracting LLC. All rights reserved.</p>
           <p>Dubai, United Arab Emirates • Government of Dubai Commercial License #578964</p>
         </div>
       </div>

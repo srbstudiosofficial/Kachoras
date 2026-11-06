@@ -8,162 +8,107 @@ export const COMPANY_INFO = {
   intPhone: "+971 4 2390946",
   fax: "04-2582778",
   mobile: "+971-55-5585079",
+  whatsapp: "+971-56-5066904",
+  whatsappDisplay: "+971 56 506 6904",
   email: "kachorasdubai@gmail.com",
+  secondaryEmail: "info@kachoras.com",
   poBox: "123397, Dubai, U.A.E.",
   address: "B25, Bin Sougat Warehouse Complex, Al Qusais Industrial Area 1, Dubai, U.A.E.",
-  landmark: "Near Damascus Street & Doha Road, Behind Dubai Women's Hostel",
+  locationDisplay: "B25, Bin Sougat Warehouse Complex, Al Qusais Industrial Area 1, Dubai, U.A.E.",
+  landmark: "Bin Sougat Warehouse Complex, Al Qusais Industrial Area 1",
   licenseNumber: "578964",
-  municipalityLicense: "Dubai Municipality G+1 License Holder (Continuously Renewed)",
+  municipalityLicense: "Dubai Municipality G+1 Approved Contractor",
   dunsNumber: "561419908",
   registerNo: "2148781",
   dcciNo: "169651",
   experienceYears: 20,
-  completedProjectsCount: "450+",
+  completedProjectsCount: "500+",
   activeProjectsCount: "Active 2026 Operations",
+  workingHours: "Monday – Saturday: 7:00 AM – 4:00 PM | Sunday Closed (Emergency site teams on call)",
   specialties: [
-    "Building Contracting (G+1 Villa Construction)",
-    "Electromechanical Equipment Installation & Maintenance (MEP)",
-    "Electrical Fitting Contracting",
-    "Metal Doors, Windows Making & Fixing (Aluminium & Glass)",
-    "HVAC, Gypsum Decorations, GRC, Kitchen Cabinets & Wardrobes"
+    "G+1 Building Contracting (Residential & Commercial Villas/Buildings)",
+    "MEP Works & Engineering (HVAC, Electrical & Plumbing)",
+    "Aluminium & Glass Works (Manufacturing & Installation)",
+    "Kitchen Cabinets & Wardrobes",
+    "Dubai Municipality Maintenance & Civil Works"
   ]
 };
 
 export const CORE_CATEGORIES = [
   {
     id: "construction",
-    title: "Building Contracting",
-    subtitle: "G+1 Villas, Majlis Blocks & Luxury Extensions",
+    title: "G+1 Licensed Construction",
+    subtitle: "Complete construction services from foundations to final handover",
     icon: "Building2",
-    description: "Licensed by Dubai Municipality for G+1 construction. We execute ground-up luxury villas, proposed majlis blocks, service blocks, driver quarters, and turnkey residential extensions across Dubai.",
+    description: "Complete construction services from foundations to final handover of keys in compliance with Dubai Municipality regulations and engineering standards. Accredited for turnkey luxury G+1 residential and commercial villas and buildings.",
     features: [
-      "Turnkey G+1 villa civil construction",
-      "Traditional & modern custom Majlis blocks",
-      "Structural villa extensions & remodeling",
-      "Boundary walls & heavy foundation substructures"
+      "Soil excavation, foundation and substructure works",
+      "Reinforced concrete structure and superstructure works",
+      "AAC blockwork and thermal insulation as per Dubai regulations",
+      "Residential villas, Majlis extensions, and boundary walls",
+      "Dubai Municipality inspections, permits, and Building Completion Certificates (BCC)"
     ],
-    deliverables: [
-      "Dubai Municipality & Civil Defense approvals",
-      "Consultant engineering coordination (Croquis, Al Manhal, Al Majal)",
-      "Soil investigation & foundation casting",
-      "Comprehensive structural handover"
-    ],
+    deliverables: [],
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
   },
   {
     id: "mep",
     title: "MEP Works & Engineering",
-    subtitle: "HVAC, Electrical, Plumbing & Specialized Utility",
+    subtitle: "Electrical, Plumbing & Air-Conditioning (HVAC) Works",
     icon: "Cpu",
-    description: "Complete mechanical, electrical, and plumbing engineering. Authorized for specialized electrical fittings, ducted HVAC networks, underground valve chambers, and civic sound and cable installations.",
+    description: "Complete mechanical, electrical, and plumbing (MEP) services, covering all stages from installation to testing and commissioning. Approved subcontractor for leading AC brands including Carrier, O General, Trane, Daikin, and Super General.",
     features: [
-      "HVAC central ducted & VRF air conditioning systems",
-      "DEWA approved electrical installations & distribution boards",
-      "Sanitary plumbing, drainage & pump stations",
-      "Underground valve chambers & irrigation conduits"
+      "Supply, installation and maintenance of decorative split, ducted split, VRF and chiller systems",
+      "Complete electrical installation, wiring, MDB/SMDB panels, testing and commissioning",
+      "Complete plumbing and drainage installation, water pumps, testing and commissioning",
+      "Fire alarm, smoke detection and fire sprinkler systems compliance",
+      "DEWA electrical coordination and municipal approvals"
     ],
-    deliverables: [
-      "DEWA & Dubai Municipality compliance certifications",
-      "Cable conduit installations & speaker pole networks",
-      "Load schedules & single line diagrams (SLD)",
-      "Testing, balancing & commissioning (TAB)"
-    ],
+    deliverables: [],
     image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80"
   },
   {
     id: "aluminum_glass",
-    title: "Aluminium & Glass Fabrication",
-    subtitle: "Custom Metal Doors, Windows & Architectural Glazing",
+    title: "Aluminium & Glass Works",
+    subtitle: "Manufacturing & Installation at In-House Al Qusais Workshop",
     icon: "ShieldCheck",
-    description: "Our dedicated Al Qusais fabrication workshop engineers high-specification thermal break aluminium profiles, double-glazed curtain walls, frameless glass partitions, and decorative metalwork.",
+    description: "Manufacturing and installation of aluminium doors, windows, skylights, pergolas, glass and mirrors fabricated at our dedicated Al Qusais facility.",
     features: [
-      "Architectural aluminium windows & sliding patio doors",
-      "Tempered & laminated structural glass curtain walls",
-      "Skylights, glass balustrades & shower enclosures",
-      "Custom metal doors, security grills & gates"
+      "Aluminium curtain walls and double-glazed windows",
+      "Thermal-break aluminium doors and windows",
+      "Heavy-duty sliding doors and panoramic glazing",
+      "Frameless glass railings, balustrades and mirrors",
+      "Aluminium pergolas, canopies, skylights and louvers"
     ],
-    deliverables: [
-      "Precision in-house fabrication at Bin Sougat B25 facility",
-      "Acoustic and thermal insulation testing",
-      "Anodized & powder-coated durable finishes",
-      "On-site installation by veteran supervisors"
-    ],
+    deliverables: [],
     image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80"
   },
   {
     id: "maintenance",
-    title: "Civil Maintenance & Fit-out",
-    subtitle: "Gypsum, GRC, Painting & Dubai Municipality Works",
+    title: "Civil Maintenance & Fit-out Works",
+    subtitle: "Building Maintenance, Renovation & Interior Finishing",
     icon: "Hammer",
-    description: "Approved contractor for Dubai Municipality General Maintenance Department. Expert execution of GRC (Glass Reinforced Concrete), decorative gypsum ceilings, kitchen cabinets, wardrobes, and pest control facility renovations.",
+    description: "Approved contractor for Dubai Municipality General Maintenance Department, MBRHE, and EIB, providing building maintenance, renovation, and interior finishing services. Our services include decorative gypsum ceilings, custom-made kitchen cabinets, wardrobes, and general building maintenance.",
     features: [
-      "Dubai Municipality civic & public infrastructure maintenance",
-      "Intricate classical & modern gypsum ceiling decorations",
-      "GRC screens, decorative cornices & ornamental cladding",
-      "Custom kitchen cabinetry, wardrobes & bespoke joinery"
+      "Decorative gypsum ceilings, false ceilings, and ambient cove lighting",
+      "Custom-made modular kitchen cabinets and wardrobes",
+      "Tile, marble, porcelain flooring, waterproofing and structural crack repairs",
+      "Dubai Municipality civic facilities, clinics, and public infrastructure works",
+      "Annual Maintenance Contracts (AMC) and emergency repair support"
     ],
-    deliverables: [
-      "Municipal maintenance contracts & emergency repairs",
-      "Anti-bacterial coatings & public health painting",
-      "Specialized park foundation & sculpture installations",
-      "Full warranty and post-occupancy care"
-    ],
+    deliverables: [],
     image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "kitchen_wardrobes",
-    title: "Kitchen Cabinets & Wardrobes",
-    subtitle: "Custom Luxury Cabinetry, Closets & Joinery",
-    icon: "Hammer",
-    description: "In-house joinery craftsmanship specializing in bespoke luxury kitchen cabinets, custom walk-in wardrobes, vanity units, and architectural joinery.",
-    features: [
-      "Custom modular luxury kitchen cabinets & islands",
-      "Bespoke built-in wardrobes & walk-in closet systems",
-      "Soft-close European fittings (Blum / Häfele hardware)",
-      "Moisture-resistant marine grade ply & PU lacquered finishes"
-    ],
-    deliverables: [
-      "3D interior shop drawings & material specification",
-      "Factory-precision CNC cutting & edge-banding",
-      "Quartz, granite, and porcelain countertop integration",
-      "Turnkey on-site installation and multi-year warranty"
-    ],
-    image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    id: "gypsum_works",
-    title: "Gypsum Decoration Works",
-    subtitle: "Architectural Ceilings, Cornices & Ambient Lighting Troughs",
-    icon: "Sparkles",
-    description: "Master artisanal false ceilings, classical Arabian majlis mouldings, modern minimalist recessed LED troughs, decorative GRC wall features, and drywall partitions.",
-    features: [
-      "Modern drop false ceilings with hidden LED light troughs",
-      "Intricate classical Arabic majlis plaster cornices & domes",
-      "Moisture-proof gypsum board installation for wet areas",
-      "GRC decorative screen panels, mouldings & arches"
-    ],
-    deliverables: [
-      "Heavy-duty galvanized channel framing & laser leveling",
-      "Seamless tape jointing & ultra-smooth micro-skimming",
-      "Concealed AC linear slot diffuser coordination",
-      "Civil Defense and Dubai Municipality fire-safety compliance"
-    ],
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80"
   }
 ];
 
 export const STAFF_MEMBERS = [
   { sNo: 1, name: "Jose K. George", designation: "General Manager", phone: "+971-555585079", department: "Executive Leadership" },
-  { sNo: 2, name: "Soby John", designation: "Manager", phone: "+971-555585046", department: "Operations & Contracts" },
-  { sNo: 3, name: "Jaison Jesudasan", designation: "Accounts", phone: "+971-565066901", department: "Finance & Accounts" },
+  { sNo: 2, name: "Soby John", designation: "Manager", phone: "+971-555585046", department: "Operations & Management" },
+  { sNo: 3, name: "Jaison Jesudasan", designation: "Accounts & HR", phone: "+971-565066901", department: "Finance & Human Resources" },
   { sNo: 4, name: "Jesudasan K.G", designation: "Sales Executive", phone: "+971-555585047", department: "Business Development" },
   { sNo: 5, name: "Faizul Shaik", designation: "Project Manager", phone: "+971-565066904", department: "Project Delivery" },
-  { sNo: 6, name: "Amanullah", designation: "Civil Engineer", phone: "+971-509954825", department: "Civil Engineering" },
-  { sNo: 7, name: "Anu Sree", designation: "HR", phone: "+971-505562350", department: "Human Resources" },
-  { sNo: 8, name: "Prabhakar", designation: "Project Coordinator", phone: "+971-504554302", department: "Field Coordination" },
-  { sNo: 9, name: "Balakrishna", designation: "Supervisor", phone: "+971-565066906", department: "Site Supervision" },
-  { sNo: 10, name: "Reghu", designation: "Supervisor", phone: "+971-565066905", department: "Site Supervision" },
-  { sNo: 11, name: "Umar", designation: "Supervisor", phone: "+971-588313541", department: "Site Supervision" }
+  { sNo: 6, name: "Amanullah Muhammadi Gul", designation: "Senior Engineer", phone: "+971-509954825", department: "Engineering & Technical" },
+  { sNo: 7, name: "Annu", designation: "Project Co-ordinator", phone: "+971-505562350", department: "Project Coordination" }
 ];
 
 export const COMPLETED_PROJECTS_VILLAS = [
@@ -507,12 +452,12 @@ export const ONGOING_PROJECTS = [
 ];
 
 export const CONSULTANT_PARTNERS = [
-  "Dubai Municipality General Maintenance Dept",
-  "Croquis Engineering Consultancy",
-  "Gulf Engineering and Consultants",
-  "Al Manhal Engineering Consultants",
-  "Al Majal Engineering Consultation",
-  "Talent Engineering Consultants"
+  { name: "Gulf Engineering Consultants", role: "G+1 Villas, Building Maintenance and MEP works", location: "Dubai, UAE" },
+  { name: "Al Majal Engineering Consultants", role: "G+1 Villas, Building Maintenance and MEP works", location: "Dubai, UAE" },
+  { name: "Croquis Engineering Consultants", role: "G+1 Villas, Building Maintenance and MEP works", location: "Dubai, UAE" },
+  { name: "Al Manhal Engineering Consultants", role: "G+1 Villas, Building Maintenance and MEP works", location: "Dubai, UAE" },
+  { name: "Teamwork Engineering Consultants", role: "G+1 Villas, Building Maintenance and MEP works", location: "Dubai, UAE" },
+  { name: "Al Bait International Architectural Design Consultancy", role: "G+1 Villas, Building Maintenance and MEP works", location: "Dubai, UAE" }
 ];
 
 export const UAE_ESTIMATOR_CONFIG = {

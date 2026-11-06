@@ -135,7 +135,7 @@ export default function OfficeMapSection() {
               </a>
 
               <a
-                href="https://wa.me/971555585079?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20visit%20your%20office%20in%20Al%20Qusais."
+                href="https://wa.me/971565066904?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20visit%20your%20office%20in%20Al%20Qusais."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full min-h-[44px] py-3 bg-white hover:bg-[#FAF8F5] text-slate-800 font-bold text-xs uppercase tracking-wider rounded-xl border border-[#E5DED3] transition flex items-center justify-center gap-2"

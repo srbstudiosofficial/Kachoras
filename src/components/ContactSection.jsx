@@ -183,13 +183,13 @@ export default function ContactSection() {
               {/* Direct WhatsApp Callout */}
               <div className="pt-2">
                 <a
-                  href={`https://wa.me/971555585079?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project%20in%20Dubai.`}
+                  href={`https://wa.me/971565066904?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project%20in%20Dubai.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>Instant WhatsApp Chat (+971 55 5585079)</span>
+                  <span>Instant WhatsApp Chat (+971 56 506 6904)</span>
                 </a>
               </div>
 
@@ -267,7 +267,7 @@ export default function ContactSection() {
                 {/* Instant Dispatch Actions */}
                 <div className="grid sm:grid-cols-2 gap-3 max-w-md mx-auto pt-2">
                   <a
-                    href={`https://wa.me/971555585079?text=${encodeURIComponent(
+                    href={`https://wa.me/971565066904?text=${encodeURIComponent(
                       `*NEW KACHORAS PROJECT INQUIRY*\n• Client: ${formData.name}\n• Phone: ${formData.phone}\n• Email: ${formData.email}\n• Service: ${formData.serviceType}\n• Plot/Area: ${formData.plotNo || 'Dubai'}\n• Budget: ${formData.budgetRange}\n• Scope: ${formData.message || 'Consultation request'}${attachedFile ? `\n• Drawing: ${attachedFile}` : ''}`
                     )}`}
                     target="_blank"
@@ -275,7 +275,7 @@ export default function ContactSection() {
                     className="flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition"
                   >
                     <MessageSquare className="w-4 h-4" />
-                    <span>Send via WhatsApp (+971 55 5585079)</span>
+                    <span>Send via WhatsApp (+971 56 506 6904)</span>
                   </a>
 
                   <a

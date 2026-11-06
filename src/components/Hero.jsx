@@ -69,13 +69,11 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
 
               {/* Primary English Corporate Title */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white font-display tracking-tight leading-[1.12]">
-                Kachoras Electro-Mechanical <span className="text-[#E0A96D]">Contracting LLC</span>
+                Kachoras Electromechanical <span className="text-[#E0A96D]">Contracting LLC</span>
               </h1>
 
               {/* Sub-headline / Corporate Positioning */}
-              <p className="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed font-sans max-w-2xl">
-                20 years of structural and electromechanical precision across Dubai. Accredited for turnkey <strong>luxury G+1 residential villas</strong>, <strong>traditional majlis halls</strong>, <strong>high-capacity MEP engineering</strong>, and <strong>in-house architectural aluminium & glass fabrication</strong>.
-              </p>
+              <p className="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed font-sans max-w-2xl">With 20 years of experience in Dubai, we specialize in Construction and electromechanical works. We are accredited to deliver complete turnkey solutions for <strong>G+1 residential and commercial Villas/Building</strong>, <strong>MEP</strong>, <strong>Aluminium and Glass</strong>, <strong>Kitchen cabinets</strong>, and <strong>Wardrobes</strong>.</p>
             </div>
 
             {/* Official Registration Data Strip (Glassmorphism) */}
@@ -91,8 +89,8 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
               </div>
 
               <div className="flex sm:flex-col justify-between sm:justify-start items-center sm:items-start p-2.5 sm:p-3 bg-white/10 backdrop-blur-md border border-white/15 rounded-xl shadow-xs">
-                <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Fabrication Facility</div>
-                <div className="text-xs font-bold text-white font-mono">Al Qusais B-25</div>
+                <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Location</div>
+                <div className="text-[11px] font-bold text-white font-mono truncate" title="B25, Bin Sougat Warehouse Complex, Al Qusais Industrial Area 1, Dubai">B25, Al Qusais Ind 1</div>
               </div>
             </div>
 
@@ -138,7 +136,7 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
               </div>
 
               <h3 className="text-base sm:text-xl font-bold text-white font-display">
-                Single-Contractor Turnkey Delivery
+                Complete Turnkey Construction Services
               </h3>
 
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -150,32 +148,32 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
                 <div className="flex items-start gap-2.5 p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/10">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <div className="text-xs font-bold text-white">Turnkey G+1 Luxury Villas</div>
-                    <div className="text-[10px] sm:text-[11px] text-slate-400">Raft foundations, reinforced concrete framing & DM approvals</div>
+                    <div className="text-xs font-bold text-white">G+1 Licensed Construction</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-400">Complete construction services, from foundations to final handover of keys</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-2.5 p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/10">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <div className="text-xs font-bold text-white">Certified MEP & DEWA Substation</div>
-                    <div className="text-[10px] sm:text-[11px] text-slate-400">High-capacity MDB switchboards & central ducted HVAC</div>
+                    <div className="text-xs font-bold text-white">MEP Works</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-400">Electrical, plumbing, and air-conditioning (HVAC) works</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-2.5 p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/10">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <div className="text-xs font-bold text-white">In-House Aluminium & Glass Workshop</div>
-                    <div className="text-[10px] sm:text-[11px] text-slate-400">Al Qusais B-25 facility for thermal-break curtain walls</div>
+                    <div className="text-xs font-bold text-white">Aluminium & Glass Works</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-400">Manufacturing and installation of aluminium doors, windows, skylights, pergolas, glass, and mirrors</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-2.5 p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/10">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <div className="text-xs font-bold text-white">Dubai Municipality Civic Contractor</div>
-                    <div className="text-[10px] sm:text-[11px] text-slate-400">Public health clinics, heritage compounds & infrastructure</div>
+                    <div className="text-xs font-bold text-white">Dubai Municipality Works</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-400">Civil maintenance, building renovation, and repair works</div>
                   </div>
                 </div>
               </div>
@@ -214,7 +212,7 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
 
           <div className="flex items-center justify-center sm:justify-start gap-3">
             <div className="text-2xl sm:text-4xl font-extrabold text-white font-display">
-              <AnimatedCounter target={450} suffix="+" duration={1800} />
+              <AnimatedCounter target={500} suffix="+" duration={1800} />
             </div>
             <div className="text-[10px] sm:text-xs text-slate-400 font-medium leading-tight">
               Completed Works<br /><span className="text-slate-300 font-semibold">Across Dubai</span>
@@ -235,7 +233,7 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
               G+1
             </div>
             <div className="text-[10px] sm:text-xs text-slate-400 font-medium leading-tight">
-              Structural License<br /><span className="text-slate-300 font-semibold">License #578964</span>
+              Building Contracting<br /><span className="text-slate-300 font-semibold">License #578964</span>
             </div>
           </div>
 

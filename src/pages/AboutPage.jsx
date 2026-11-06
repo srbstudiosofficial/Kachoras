@@ -39,7 +39,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
               </span>
 
               <h2 className="text-3xl sm:text-4xl font-black text-[#1E293B] font-display tracking-tight leading-tight">
-                Two Decades of Engineering Precision Under Managing Director Jose K. George
+                Over 20 Years of Experience in Construction and Engineering
               </h2>
 
               <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed">
@@ -65,8 +65,8 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
                   <p className="text-xs text-slate-600 font-medium">Municipality Approval</p>
                 </div>
                 <div className="p-4 rounded-xl bg-[#FBF9F5] border border-[#E5DED3] text-center space-y-1">
-                  <span className="text-2xl font-black text-[#7A2E16] font-display">450+</span>
-                  <p className="text-xs text-slate-600 font-medium">Delivered Works</p>
+                  <span className="text-2xl font-black text-[#7A2E16] font-display">500+</span>
+                  <p className="text-xs text-slate-600 font-medium">Completed Projects and Works</p>
                 </div>
               </div>
 
@@ -101,7 +101,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
                   <MapPin className="w-4 h-4 text-[#C59B27] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-slate-900 font-bold">Operational Headquarters</strong>
-                    <span className="text-slate-600">Al Qusais Industrial 1, Warehouse B-25, Dubai, UAE</span>
+                    <span className="text-slate-600">B25, Bin Sougat Warehouse Complex, Al Qusais Industrial Area 1, Dubai, U.A.E.</span>
                   </div>
                 </div>
               </div>

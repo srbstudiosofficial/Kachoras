@@ -48,7 +48,7 @@ export default function ContactPage({ onNavigate, onOpenQuoteModal }) {
             </a>
 
             <a 
-              href="https://wa.me/971555585079?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project%20in%20Dubai."
+              href="https://wa.me/971565066904?text=Hello%20Kachoras%20Team%2C%20I%20would%20like%20to%20discuss%20a%20construction%20project%20in%20Dubai."
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-200 hover:border-emerald-500 transition group flex items-start gap-3.5"
@@ -58,7 +58,7 @@ export default function ContactPage({ onNavigate, onOpenQuoteModal }) {
               </div>
               <div className="space-y-0.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Direct WhatsApp</span>
-                <strong className="block text-sm font-bold text-slate-900 font-mono">+971 55 5585079</strong>
+                <strong className="block text-sm font-bold text-slate-900 font-mono">+971 56 506 6904</strong>
                 <p className="text-[11px] text-emerald-700">Immediate Technical Chat</p>
               </div>
             </a>

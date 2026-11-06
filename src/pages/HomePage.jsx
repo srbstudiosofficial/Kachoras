@@ -20,34 +20,30 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
   const coreDivisions = [
     {
       number: '01',
-      title: 'Building Contracting (G+1)',
-      subtitle: 'Civil Structure, Villas & Majlis',
-      desc: 'Full structural authority for ground plus one private villas, royal majlis halls, service quarters, and heavy raft foundation substructures under direct Dubai Municipality engineering supervision.',
-      specs: 'Raft Foundations • Post-Tensioned Slabs • Thermal AAC Blockwork • Boundary Walls',
+      title: 'G+1 Licensed Construction',
+      subtitle: 'Complete Turnkey Construction Services',
+      desc: 'Complete construction services from foundations to final handover of keys in compliance with Dubai Municipality regulations and engineering standards.',
       image: './assets/real-projects/completed-construction-albannay-424-7036.jpg'
     },
     {
       number: '02',
       title: 'MEP Works & Engineering',
-      subtitle: 'HVAC, Electrical & Specialized Utilities',
-      desc: 'Complete in-house mechanical, electrical, and plumbing engineering. Authorized for DEWA substation coordination, high-capacity MDB switchgear, central ducted split & VRF air-conditioning networks.',
-      specs: 'DEWA Substation Approvals • Central Ducted Split & VRF • Single Line Diagrams • DCD Fire Code',
+      subtitle: 'HVAC, Electrical & Plumbing Engineering',
+      desc: 'Complete mechanical, electrical, and plumbing (MEP) services, covering all stages from installation to testing and commissioning. Approved subcontractor for leading AC brands including Carrier, O General, Trane, Daikin, and Super General.',
       image: './assets/mep.jpg'
     },
     {
       number: '03',
-      title: 'Aluminium & Glass Fabrication',
-      subtitle: 'Dedicated Al Qusais In-House Workshop',
-      desc: 'Direct fabrication at our Bin Sougat B-25 facility. Engineering high-specification thermal-break aluminium profiles, double-glazed curtain walls, panoramic sliding doors, and structural glass balustrades.',
-      specs: 'Thermal-Break Facades • Double-Glazed IGU • Frameless Balustrades • In-House Powder Coating',
+      title: 'Aluminium & Glass Works',
+      subtitle: 'Manufacturing & Installation',
+      desc: 'Manufacturing and installation of aluminium doors, windows, skylights, pergolas, glass and mirrors fabricated at our dedicated Al Qusais facility.',
       image: './assets/real-projects/completed-aluminum-flag-villa.jpg'
     },
     {
       number: '04',
-      title: 'Civil Maintenance & Fitout',
-      subtitle: 'Dubai Municipality Approved Contractor',
-      desc: 'Approved contractor for Dubai Municipality General Maintenance Department. Specialized in decorative false gypsum ceilings, classical Arabian majlis cornices, custom luxury cabinetry, and preventative facility care.',
-      specs: 'Dubai Municipality Civic Contracts • Bespoke Plaster Cornices • Luxury Cabinetry • 24/7 Facility Care',
+      title: 'Civil Maintenance & Fit-out Works',
+      subtitle: 'Approved Municipality, MBRHE & EIB Contractor',
+      desc: 'Approved contractor for Dubai Municipality General Maintenance Department, MBRHE, and EIB, providing building maintenance, renovation, and interior finishing services including decorative gypsum ceilings, custom kitchen cabinets, wardrobes, and general building maintenance.',
       image: './assets/real-projects/completed-maintenance-basaeed-422-1513.jpg'
     }
   ];
@@ -70,7 +66,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
       discipline: 'Aluminium & Glazing',
       location: 'Dubai Residential Sector',
       plotNo: 'In-House Fabrication',
-      consultant: 'Al Qusais B-25 Workshop',
+      consultant: '',
       image: './assets/real-projects/completed-aluminum-flag-villa.jpg',
       scope: 'Thermal-break structural aluminium curtain walling with double-glazed insulated units and entrance canopy.'
     },
@@ -169,7 +165,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
 
                   <div className="pt-3 border-t border-[#F0EBE1] space-y-3">
                     <div className="text-[11px] font-mono text-slate-500 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#E5DED3] break-words">
-                      {div.specs}
+                      {div.specs || null}
                     </div>
                     <button
                       onClick={() => onNavigate('services')}

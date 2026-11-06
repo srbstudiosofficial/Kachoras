@@ -8,7 +8,7 @@ const SECTIONS = [
     targetId: 'top',
     screenshot: './client-screenshots/01-hero-showcase.png',
     checks: [
-      { label: 'Company Title', value: 'Kachoras Electro-Mechanical Contracting LLC (Exact Title)' },
+      { label: 'Company Title', value: 'Kachoras Electromechanical Contracting LLC (Exact Title)' },
       { label: 'License Strip', value: 'Dubai Municipality Approved G+1 Contractor • License #578964 | Al Qusais' },
       { label: 'Subhead (Arabic)', value: 'كاشوراس للمقاولات الكهروميكانيكية ش.ذ.م.م • EST. 2006' },
       { label: 'Editorial Paragraphs', value: 'Exact 2 paragraphs on 20+ years, MEP, villas & quality management' },

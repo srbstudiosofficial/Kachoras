@@ -22,18 +22,18 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
   const detailedDisciplines = [
     {
       id: 'building',
-      title: 'Building Contracting (G+1 Villa / Majlis)',
+      title: 'G+1 Licensed Construction',
       badge: 'Dubai Municipality G+1 Approved',
       icon: Building2,
-      tagline: 'Precision structural engineering for luxury private residences, majlis pavilions, and commercial developments.',
+      tagline: 'Complete construction services from foundations to final handover of keys in compliance with Dubai Municipality standards.',
       scope: [
-        'Raft foundations, isolated footings, and substructure soil compaction',
-        'Reinforced concrete (RCC) columns, post-tensioned slabs, and structural frame',
-        'AAC blockwork, structural masonry, and Dubai Municipality thermal insulation compliance',
-        'Private Emirati luxury villas, modern majlis extensions, and boundary wall infrastructure',
-        'Management of Dubai Municipality inspections, permit renewals, and Building Completion Certificates (BCC)'
+        'Soil excavation, site preparation, and foundation substructure works',
+        'Reinforced concrete structure and superstructure works',
+        'AAC blockwork and thermal insulation as per applicable Dubai requirements',
+        'Residential villas, Majlis extensions, service blocks, and boundary walls',
+        'Dubai Municipality inspections, statutory permits, and Building Completion Certificates (BCC)'
       ],
-      compliance: 'Compliant with Dubai Building Code 2021 & DM Structural Safety Regulations',
+      compliance: 'Dubai Building Code & Dubai Municipality Structural Safety Regulations',
       typicalTimeline: '8 – 14 Months (Turnkey Structure to Handover)',
       image: './assets/real-projects/completed-construction-albannay-424-7036.jpg',
       imageCaption: 'G+1 Classical Villa Execution (Al Warqaa Fourth, Plot 424-7036)'
@@ -41,54 +41,56 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
     {
       id: 'mep',
       title: 'MEP & HVAC Engineering Works',
-      badge: 'DEWA & Dubai Civil Defence Approved',
+      badge: 'DEWA & Dubai Civil Defence Compliant',
       icon: Cpu,
-      tagline: 'Comprehensive mechanical, electrical, and plumbing infrastructure engineered for Dubai’s climate.',
+      tagline: 'Complete mechanical, electrical, and plumbing (MEP) services, covering all stages from installation to testing and commissioning.',
       scope: [
-        'DEWA substation construction, MDB/SMDB load distribution, and copper cable trenching',
-        'Central ducted split, VRF/VRV systems, and chilled water fan coil unit (FCU) installations',
-        'Complete sanitary drainage, grease interceptors, water supply pumps, and solar water heating',
-        'Fire alarm panels, smoke detection, sprinkler systems, and Dubai Civil Defence certification',
-        'Energy-efficient LED architectural lighting automation and low-voltage (ELV) data cabling'
+        'Electrical wiring, MDB and SMDB panels, copper cable connections and power distribution',
+        'Split, ducted split, VRF/VRV, and chilled water air-conditioning systems',
+        'Approved subcontractor for leading brands such as Carrier, O General, Trane, Daikin, and Super General',
+        'Water supply, drainage, sanitary installations, water pumps, grease traps, and solar water heaters',
+        'Fire alarm, smoke detection, fire sprinkler systems, and Dubai Civil Defence compliance',
+        'Energy-efficient LED lighting, automation, and low-voltage (ELV) data cabling'
       ],
-      compliance: 'DEWA Regulations for Electrical Installations & DCD Fire Code',
+      compliance: 'DEWA Electrical Standards & Dubai Civil Defence Fire Safety Regulations',
       typicalTimeline: 'Integrated concurrently with civil construction',
       image: './assets/real-projects/completed-aluminum-flag-villa.jpg',
       imageCaption: 'DEWA Integrated Electromechanical Substation & Infrastructure'
     },
     {
       id: 'aluminium',
-      title: 'Architectural Aluminium and Glass Works',
+      title: 'Architectural Aluminium & Glass Works',
       badge: 'Custom Workshop Fabrication in Al Qusais',
       icon: ShieldCheck,
-      tagline: 'Thermal-break facades, panoramic curtain walls, and frameless glazing engineered for energy efficiency.',
+      tagline: 'Manufacturing and installation of aluminium doors, windows, skylights, pergolas, glass, and mirrors.',
       scope: [
-        'Structural curtain walling and double-glazed thermally broken window systems',
-        'Heavy-duty aluminium sliding patio doors with acoustic and thermal performance',
-        'Frameless structural glass balustrades for balconies, staircases, and rooftop terraces',
-        'Architectural aluminium louvers, composite cladding panels, and pergola canopies',
-        'Skylights and insulated glass units (IGU) compliant with Estidama and Dubai Green Building Regulations'
+        'Aluminium curtain walls and double-glazed windows',
+        'Thermal-break aluminium doors, panoramic windows, and heavy-duty sliding doors',
+        'Frameless glass railings, balustrades, and structural mirrors',
+        'Aluminium louvers, composite cladding, pergolas, and entrance canopies',
+        'Glass skylights and insulated glass units (IGU) compliant with Dubai Green Building Regulations'
       ],
-      compliance: 'Dubai Green Building Standards (Al Sa’fat Certified Glazing)',
+      compliance: 'Dubai Green Building Standards & Estidama Glazing Safety Codes',
       typicalTimeline: 'Fabricated in-house to synchronize with site finishes',
       image: './assets/real-projects/completed-aluminum-travertine-glazing.jpg',
       imageCaption: 'Al Qusais Workshop Double-Glazed Curtain Wall & Entryway'
     },
     {
       id: 'maintenance',
-      title: 'Civil Maintenance & Gypsum Decor',
-      badge: 'Government & Commercial Facility Care',
+      title: 'Civil Maintenance & Fit-out Works',
+      badge: 'Approved Dubai Municipality, MBRHE & EIB Contractor',
       icon: Hammer,
-      tagline: 'Interior turnkey fitouts, acoustic ceiling installations, and preventative facility maintenance.',
+      tagline: 'Approved contractor for Dubai Municipality General Maintenance Department, MBRHE, and EIB for renovation and finishing.',
       scope: [
-        'Multi-tier false gypsum ceilings, cove indirect lighting recesses, and decorative moldings',
+        'Decorative gypsum ceilings, false ceilings, cove indirect lighting, and wall cornices',
+        'Custom-made luxury kitchen cabinets, wardrobes, and architectural joinery',
         'Tile, marble, and porcelain floor laying with precision waterproofing membranes',
         'Civil refurbishment, crack repairs, structural retrofitting, and epoxy floor coatings',
-        'Commercial and residential annual maintenance contracts (AMC) for MEP systems',
-        'Rapid emergency repair response for DEWA electrical disruptions and plumbing failures'
+        'Annual Maintenance Contracts (AMC) for residential, commercial, and government properties',
+        '24/7 emergency electrical, plumbing, and facility repair services'
       ],
       compliance: 'Dubai Municipality Health & Safety Standards',
-      typicalTimeline: 'Custom fitout programs & 24/7 AMC coverage',
+      typicalTimeline: 'Scheduled maintenance programs & emergency support',
       image: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg',
       imageCaption: 'Royal Majlis & Decorative Gypsum Maintenance (Al Barsha, Plot 376-1176)'
     }
