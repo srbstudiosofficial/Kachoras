@@ -58,7 +58,7 @@ export default function ProjectsPage({ onNavigate, onOpenQuoteModal }) {
       </section>
 
       {/* 3. The Full Projects Section & Interactive Grid */}
-      <ProjectsSection onOpenQuoteModal={onOpenQuoteModal} hideHeader={true} />
+      <ProjectsSection onNavigate={onNavigate} onOpenQuoteModal={onOpenQuoteModal} hideHeader={true} />
 
     </div>
   );

@@ -13,7 +13,7 @@ import {
 } from './firebaseSync';
 
 // LocalStorage Keys
-const STORAGE_KEY_PROJECTS = 'kachoras_custom_projects_v2';
+const STORAGE_KEY_PROJECTS = 'kachoras_custom_projects_v5';
 const STORAGE_KEY_FIREBASE = 'kachoras_firebase_config_v1';
 const STORAGE_KEY_AUTH = 'kachoras_admin_auth_v1';
 
@@ -295,7 +295,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "client": "Shaikha Salem Saeed Basaeed",
     "consultant": "In-House Engineering",
     "category": "Maintenance and MEP Works",
-    "categoryFilter": "civic",
+    "categoryFilter": "civic_mep",
     "type": "Maintenance and MEP Works",
     "status": "completed",
     "location": "Al Warqaa Second, Dubai",
@@ -313,7 +313,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "client": "Hassan Abdulla Almarzooqui",
     "consultant": "In-House Engineering",
     "category": "Maintenance and MEP Works",
-    "categoryFilter": "civic",
+    "categoryFilter": "civic_mep",
     "type": "Maintenance and MEP Works",
     "status": "completed",
     "location": "Al Barsha Second, Dubai",
@@ -331,7 +331,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "client": "Dubai Municipality",
     "consultant": "DM General Maintenance Dept",
     "category": "Civil & MEP Works",
-    "categoryFilter": "civic",
+    "categoryFilter": "civic_mep",
     "type": "Civil & MEP Works",
     "status": "completed",
     "location": "Hatta Civic Sector, Dubai",
@@ -339,7 +339,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2024",
     "timeline": "DM Handover & BCC Issued",
     "scope": "Maintenance, modification, and clinical facility construction for Dubai Municipality Veterinary Services in Hatta.",
-    "image": "./assets/real-projects/p363-nuaimi-villa-elevation.jpg",
+    "image": "./assets/real-projects/p373-alsayegh-elevation.jpg",
     "isCustom": false,
     "createdAt": "2024-10-15T00:00:00.000Z"
   },
@@ -349,7 +349,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "client": "Dubai Municipality / Civic Maintenance",
     "consultant": "DM General Maintenance Dept",
     "category": "Civil & MEP Works",
-    "categoryFilter": "civic",
+    "categoryFilter": "civic_mep",
     "type": "Civil & MEP Works",
     "status": "completed",
     "location": "Shooroq Irrigation Hub, Mirdif, Dubai",
@@ -367,7 +367,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "client": "Commercial Property Developer",
     "consultant": "DEWA Approved Consultant",
     "category": "Maintenance and MEP Works",
-    "categoryFilter": "civic",
+    "categoryFilter": "civic_mep",
     "type": "Maintenance and MEP Works",
     "status": "completed",
     "location": "Al Quoz 3, Dubai",
@@ -375,7 +375,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2024",
     "timeline": "Handed Over & Commissioned",
     "scope": "Commercial property maintenance, structural modifications, and electrical substation upgrade in compliance with DEWA regulations.",
-    "image": "./assets/real-projects/construction-site-progress-04.jpg",
+    "image": "./assets/real-projects/p382-abuali-4-townhouse.jpg",
     "isCustom": false,
     "createdAt": "2024-10-30T00:00:00.000Z"
   }
@@ -450,6 +450,20 @@ export function saveLocalProjects(projects) {
 export function getAllProjects() {
   // Always serve clean authentic verified projects without stale overrides
   return INITIAL_FEATURED_PROJECTS;
+}
+
+/**
+ * Get project by ID, plot number, or slug
+ */
+export function getProjectById(id) {
+  if (!id) return null;
+  const targetId = String(id).toLowerCase().trim();
+  const list = getAllProjects();
+  return list.find(p => 
+    p.id.toLowerCase() === targetId || 
+    (p.plotNo && p.plotNo.toLowerCase() === targetId) ||
+    p.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').includes(targetId)
+  ) || null;
 }
 
 /**

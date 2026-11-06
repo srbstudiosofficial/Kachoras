@@ -105,7 +105,7 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteMo
           {/* Desktop Multi-Page Links */}
           <div className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => {
-              const isActive = currentPage === item.id;
+              const isActive = currentPage === item.id || (currentPage === 'project-detail' && item.id === 'projects');
               return (
                 <a
                   key={item.id}
@@ -162,7 +162,7 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteMo
         <div className="lg:hidden bg-white border-b border-[#E5DED3] p-4 sm:p-5 shadow-2xl space-y-3 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-80px)] overflow-y-auto">
           <div className="space-y-1">
             {navItems.map((item) => {
-              const isActive = currentPage === item.id;
+              const isActive = currentPage === item.id || (currentPage === 'project-detail' && item.id === 'projects');
               return (
                 <a
                   key={item.id}

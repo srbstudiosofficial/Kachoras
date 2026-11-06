@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
 import LicensePage from './pages/LicensePage';
 import ContactPage from './pages/ContactPage';
 import QuoteModal from './components/QuoteModal';
@@ -19,6 +20,7 @@ const PAGE_TITLES = {
   about: 'About Us | Kachoras Electromechanical Contracting LLC (Dubai)',
   services: 'Contracting Disciplines & Capabilities | Kachoras Contracting LLC',
   projects: 'Live Engineering Projects & Pipeline | Kachoras Contracting LLC',
+  'project-detail': 'Project Details & Specifications | Kachoras Electromechanical Contracting LLC',
   license: 'Trade License #578964 & Municipal Approvals | Kachoras Contracting',
   contact: 'Contact Estimating Desk & Headquarters | Kachoras Contracting'
 };
@@ -26,33 +28,58 @@ const PAGE_TITLES = {
 const resolvePageFromLocation = () => {
   const path = (window.location.pathname || '').toLowerCase().replace(/^\/+|\/+$/g, '');
   const hash = (window.location.hash || '').toLowerCase().replace(/^#+/, '');
+  const searchParams = new URLSearchParams(window.location.search || '');
+
+  // 1. Check query parameter: ?project=...
+  const queryProject = searchParams.get('project');
+  if (queryProject) {
+    return { page: 'project-detail', projectId: queryProject };
+  }
+
+  // 2. Check path: /project/:id or /projects/:id
+  const projectPathMatch = path.match(/^projects?\/([a-z0-9_-]+)/i);
+  if (projectPathMatch) {
+    return { page: 'project-detail', projectId: projectPathMatch[1] };
+  }
+
+  // 3. Check hash: #project/:id or #project-...
+  const projectHashMatch = hash.match(/^projects?[-/]([a-z0-9_-]+)/i);
+  if (projectHashMatch) {
+    return { page: 'project-detail', projectId: projectHashMatch[1] };
+  }
 
   const target = path || hash;
-  if (target === 'about' || target === 'vision' || target === 'leadership') return 'about';
-  if (target === 'services' || target === 'disciplines' || target === 'categories') return 'services';
-  if (target === 'projects' || target === 'portfolio' || target === 'works') return 'projects';
-  if (target === 'license' || target === 'municipal' || target === 'compliance') return 'license';
-  if (target === 'contact' || target === 'location' || target === 'tender' || target === 'map') return 'contact';
-  return 'home';
+  if (target === 'about' || target === 'vision' || target === 'leadership') return { page: 'about', projectId: null };
+  if (target === 'services' || target === 'disciplines' || target === 'categories') return { page: 'services', projectId: null };
+  if (target === 'projects' || target === 'portfolio' || target === 'works') return { page: 'projects', projectId: null };
+  if (target === 'license' || target === 'municipal' || target === 'compliance') return { page: 'license', projectId: null };
+  if (target === 'contact' || target === 'location' || target === 'tender' || target === 'map') return { page: 'contact', projectId: null };
+  return { page: 'home', projectId: null };
 };
 
 export default function App() {
   useScrollReveal();
 
-  const [currentPage, setCurrentPage] = useState(() => resolvePageFromLocation());
+  const [route, setRoute] = useState(() => resolvePageFromLocation());
+  const currentPage = route.page;
+  const currentProjectId = route.projectId;
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quoteInitialData, setQuoteInitialData] = useState(null);
   const [adminModalOpen, setAdminModalOpen] = useState(false);
 
   // Synchronize document title with active page
   useEffect(() => {
-    document.title = PAGE_TITLES[currentPage] || PAGE_TITLES.home;
-  }, [currentPage]);
+    if (currentPage === 'project-detail' && currentProjectId) {
+      document.title = `Project Details | Kachoras Electromechanical Contracting LLC`;
+    } else {
+      document.title = PAGE_TITLES[currentPage] || PAGE_TITLES.home;
+    }
+  }, [currentPage, currentProjectId]);
 
   // Handle browser back/forward and hash changes
   useEffect(() => {
     const handlePopState = () => {
-      setCurrentPage(resolvePageFromLocation());
+      setRoute(resolvePageFromLocation());
     };
     window.addEventListener('popstate', handlePopState);
     window.addEventListener('hashchange', handlePopState);
@@ -128,16 +155,23 @@ export default function App() {
     };
   }, []);
 
-  const navigateTo = (pageId) => {
+  const navigateTo = (pageId, projectId = null) => {
     if (pageId === 'admin') {
       setAdminModalOpen(true);
       return;
     }
 
+    if (pageId === 'project-detail' || pageId === 'project') {
+      const pid = projectId || 'REAL-CP-ALBANNAY';
+      setRoute({ page: 'project-detail', projectId: pid });
+      window.history.pushState({ page: 'project-detail', projectId: pid }, '', `?project=${pid}`);
+      return;
+    }
+
     if (PAGE_TITLES[pageId]) {
-      setCurrentPage(pageId);
+      setRoute({ page: pageId, projectId: null });
       const url = pageId === 'home' ? '/' : `/${pageId}`;
-      window.history.pushState({ page: pageId }, '', url);
+      window.history.pushState({ page: pageId, projectId: null }, '', url);
     }
   };
 
@@ -199,6 +233,14 @@ export default function App() {
 
           {currentPage === 'projects' && (
             <ProjectsPage 
+              onNavigate={navigateTo}
+              onOpenQuoteModal={handleOpenQuoteModal}
+            />
+          )}
+
+          {currentPage === 'project-detail' && (
+            <ProjectDetailPage 
+              projectId={currentProjectId}
               onNavigate={navigateTo}
               onOpenQuoteModal={handleOpenQuoteModal}
             />

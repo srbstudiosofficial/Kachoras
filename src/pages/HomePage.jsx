@@ -51,7 +51,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
   // 3 Curated Landmark Projects (ECC Group & Syed Contracting Style)
   const landmarkProjects = [
     {
-      id: 'LM-1',
+      id: 'REAL-CP-ALBANNAY',
       title: 'Classical Luxury G+1 Villa & Outbuilding',
       discipline: 'Luxury G+1 Villa',
       location: 'Al Warqaa Fourth, Dubai',
@@ -61,7 +61,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
       scope: 'Turnkey private residence featuring fluted classical columns, perimeter compound wall, and integrated MEP infrastructure.'
     },
     {
-      id: 'LM-2',
+      id: 'REAL-CP-ALUM-FLAG',
       title: 'Architectural Curtain Wall & Glass Facade',
       discipline: 'Aluminium & Glazing',
       location: 'Dubai Residential Sector',
@@ -71,7 +71,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
       scope: 'Thermal-break structural aluminium curtain walling with double-glazed insulated units and entrance canopy.'
     },
     {
-      id: 'LM-3',
+      id: 'REAL-CP-ALABDULLA',
       title: 'Royal Arabian Majlis Hall & Compound Wall',
       discipline: 'Majlis & Traditional',
       location: 'Al Barsha Second, Dubai',
@@ -214,7 +214,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
             {landmarkProjects.map((item) => (
               <div
                 key={item.id}
-                onClick={() => onNavigate('projects')}
+                onClick={() => onNavigate('project-detail', item.id)}
                 className="bg-[#FAF9F6] border border-[#E5DED3] rounded-2xl overflow-hidden shadow-xs hover:border-[#7A2E16] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer"
               >
                 {/* Visual Image */}

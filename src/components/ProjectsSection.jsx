@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { getAllProjects } from '../services/projectService';
 
-export default function ProjectsSection({ onOpenQuoteModal, hideHeader = false }) {
+export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHeader = false }) {
   const [projects, setProjects] = useState([]);
   const [filter, setFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
@@ -93,7 +93,10 @@ export default function ProjectsSection({ onOpenQuoteModal, hideHeader = false }
               key={item.id}
               className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#7A2E16] transition-all duration-300 flex flex-col justify-between group"
             >
-              <div>
+              <div 
+                className="cursor-pointer"
+                onClick={() => onNavigate ? onNavigate('project-detail', item.id) : setSelectedProject(item)}
+              >
                 {/* Project Image */}
                 <div className="h-56 overflow-hidden relative bg-slate-100">
                   <img
@@ -150,10 +153,17 @@ export default function ProjectsSection({ onOpenQuoteModal, hideHeader = false }
               <div className="p-6 pt-0 border-t border-[#F0EBE1] mt-2">
                 <button
                   type="button"
-                  onClick={() => setSelectedProject(item)}
-                  className="w-full mt-3 py-2.5 px-4 bg-[#FAF8F5] hover:bg-[#7A2E16] hover:text-white border border-[#E5DED3] hover:border-[#7A2E16] rounded-xl text-xs font-bold text-slate-800 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onNavigate) {
+                      onNavigate('project-detail', item.id);
+                    } else {
+                      setSelectedProject(item);
+                    }
+                  }}
+                  className="w-full mt-3 py-2.5 px-4 bg-[#FAF8F5] hover:bg-[#7A2E16] hover:text-white border border-[#E5DED3] hover:border-[#7A2E16] rounded-xl text-xs font-bold text-slate-800 transition-colors flex items-center justify-center gap-2 cursor-pointer group-hover:bg-[#7A2E16] group-hover:text-white"
                 >
-                  <span>View Project Sheet & Scope</span>
+                  <span>View Full Project Sheet</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
