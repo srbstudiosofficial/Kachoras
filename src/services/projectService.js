@@ -183,7 +183,7 @@ export const INITIAL_FEATURED_PROJECTS = [
   },
   {
     "id": "REAL-CP-ALUM-CARPORT",
-    "title": "Curtain Wall & Glass Facade Installation",
+    "title": "Cantilever Aluminium Carport Canopy",
     "client": "",
     "consultant": "",
     "category": "Aluminium & Glazing",
@@ -201,7 +201,7 @@ export const INITIAL_FEATURED_PROJECTS = [
   },
   {
     "id": "REAL-CP-ALUM-TRAVERTINE",
-    "title": "Curtain Wall & Glass Facade Installation",
+    "title": "Double-Glazed Curtain Wall & Travertine Glazing",
     "client": "",
     "consultant": "",
     "category": "Aluminium & Glazing",
@@ -249,7 +249,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2024",
     "timeline": "Fabricated & Installed",
     "scope": "Contemporary cubic residence architectural tinted solar glazing with high UV rejection, glass skylights, and custom framed entrance doors.",
-    "image": "./assets/real-projects/completed-aluminum-modern-tinted.jpg",
+    "image": "./assets/real-projects/completed-aluminum-cubic-tinted.jpg",
     "isCustom": false,
     "createdAt": "2024-12-24T00:00:00.000Z"
   },
@@ -267,7 +267,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2024",
     "timeline": "Fabricated & Installed",
     "scope": "Precision louvered screening wall engineered for solar shading and visual privacy with integrated perimeter drainage channels.",
-    "image": "./assets/real-projects/completed-aluminum-louver-facade.jpg",
+    "image": "./assets/real-projects/completed-aluminum-white-louvers.jpg",
     "isCustom": false,
     "createdAt": "2024-12-26T00:00:00.000Z"
   },
@@ -285,7 +285,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2024",
     "timeline": "Fabricated & Installed",
     "scope": "Motorized sliding privacy gate and pedestrian access gate fabricated with architectural bronze finish and heavy-duty Italian automation.",
-    "image": "./assets/real-projects/completed-aluminum-motorized-gate.jpg",
+    "image": "./assets/real-projects/completed-aluminum-grand-sliding-gate.jpg",
     "isCustom": false,
     "createdAt": "2024-12-28T00:00:00.000Z"
   },
@@ -321,7 +321,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2024",
     "timeline": "Handed Over & Inspected",
     "scope": "Villa exterior refurbishment, heavy-duty interlock and porcelain paving, external lighting circuitry, and stormwater grading.",
-    "image": "./assets/real-projects/completed-maintenance-marzooqui-376-1918.jpg",
+    "image": "./assets/real-projects/completed-maintenance-almarzooqui-376-1918.jpg",
     "isCustom": false,
     "createdAt": "2024-12-05T00:00:00.000Z"
   },
