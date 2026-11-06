@@ -83,12 +83,12 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
   ];
 
   const consultantPartners = [
-    { name: "Al Manhal Engineering Consultants", role: "Villa Architecture & Civil Supervision", discipline: "Residential G+1" },
-    { name: "Al Majal Engineering Consultants", role: "Structural & MEP Review", discipline: "Turnkey Contracting" },
-    { name: "Croquis Engineering Consultants", role: "Residential G+1 Civil Design", discipline: "Civil Engineering" },
-    { name: "Arkiplan Consulting Architects", role: "Architectural Planning & Authority Submissions", discipline: "Statutory Permitting" },
-    { name: "Teamwork Engineering Consultants", role: "Authority Permitting & Structural Engineering", discipline: "Majlis & Structural Works" },
-    { name: "Gulf Engineering Consultants", role: "MEP Infrastructure & DEWA Substation", discipline: "MEP Infrastructure" }
+    { name: "Gulf Engineering Consultants", role: "G+1 Villas, Building Maintenance and MEP works", discipline: "Consulting Engineers" },
+    { name: "Al Majal Engineering Consultants", role: "G+1 Villas, Building Maintenance and MEP works", discipline: "Consulting Engineers" },
+    { name: "Croquis Engineering Consultants", role: "G+1 Villas, Building Maintenance and MEP works", discipline: "Consulting Engineers" },
+    { name: "Al Manhal Engineering Consultants", role: "G+1 Villas, Building Maintenance and MEP works", discipline: "Consulting Engineers" },
+    { name: "Teamwork Engineering Consultants", role: "G+1 Villas, Building Maintenance and MEP works", discipline: "Consulting Engineers" },
+    { name: "Al Bait International Architectural Design Consultancy", role: "G+1 Villas, Building Maintenance and MEP works", discipline: "Consulting Engineers" }
   ];
 
   return (
@@ -163,10 +163,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
                     {div.desc}
                   </p>
 
-                  <div className="pt-3 border-t border-[#E2E8F0] space-y-3">
-                    <div className="text-[11px] font-mono text-slate-500 bg-[#F8FAFC] p-2.5 rounded-lg border border-[#E2E8F0] break-words">
-                      {div.specs || null}
-                    </div>
+                  <div className="pt-3 border-t border-[#E2E8F0] flex items-center justify-between">
                     <button
                       onClick={() => onNavigate('services')}
                       className="text-xs font-bold text-[#B3261E] hover:underline flex items-center gap-1.5 cursor-pointer py-1"
