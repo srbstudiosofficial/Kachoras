@@ -108,10 +108,10 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
       />
 
       {/* 2. The Turnkey Advantage Banner */}
-      <section className="py-16 bg-[#FBF9F5] border-b border-[#E5DED3]">
+      <section className="py-16 bg-white border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="bg-white border border-[#E5DED3] rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-[#E5DED3] pb-6">
+          <div className="bg-white border border-[#E2E8F0] rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-[#E2E8F0] pb-6">
               <div className="space-y-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">The Kachoras Advantage</span>
                 <h2 className="text-2xl sm:text-3xl font-black text-[#1E293B] font-display">
@@ -129,19 +129,19 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
             </p>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-              <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#E5DED3] space-y-1">
+              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
                 <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">01. Single Point of Contact</strong>
                 <p className="text-xs text-slate-600">One dedicated project manager and General Manager Jose K. George oversee your build.</p>
               </div>
-              <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#E5DED3] space-y-1">
+              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
                 <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">02. Synchronized DEWA / DM</strong>
                 <p className="text-xs text-slate-600">Electrical and plumbing sleeves are cast directly into RCC slabs without structural coring.</p>
               </div>
-              <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#E5DED3] space-y-1">
+              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
                 <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">03. In-House Glass & Steel</strong>
                 <p className="text-xs text-slate-600">Aluminium profiles and glass units fabricated in our Al Qusais workshop to exact site dimensions.</p>
               </div>
-              <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#E5DED3] space-y-1">
+              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
                 <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">04. Cost & Schedule Predictability</strong>
                 <p className="text-xs text-slate-600">Eliminating third-party markups ensures competitive pricing and strict milestone handovers.</p>
               </div>
@@ -151,7 +151,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
       </section>
 
       {/* 3. Deep-Dive Section for Each Discipline */}
-      <section className="py-20 bg-white border-b border-[#E5DED3]">
+      <section className="py-20 bg-white border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -178,7 +178,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                   className={`p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer flex flex-col justify-between min-h-[110px] ${
                     isActive 
                       ? 'bg-[#B3261E] text-white border-[#B3261E] shadow-lg shadow-[#B3261E]/20 -translate-y-1' 
-                      : 'bg-[#FAF8F5] text-slate-700 border-[#E5DED3] hover:bg-white hover:border-[#CBD5E1]'
+                      : 'bg-[#F8FAFC] text-slate-700 border-[#E2E8F0] hover:bg-white hover:border-[#CBD5E1]'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -202,7 +202,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
             const activeItem = detailedDisciplines[selectedDiscipline];
             const ActiveIcon = activeItem.icon;
             return (
-              <div className="bg-[#FAF8F5] border border-[#E5DED3] rounded-3xl p-6 sm:p-10 shadow-md animate-in fade-in duration-300">
+              <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-3xl p-6 sm:p-10 shadow-md animate-in fade-in duration-300">
                 <div className="grid lg:grid-cols-12 gap-8 items-start">
                   
                   <div className="lg:col-span-7 space-y-6">
@@ -252,7 +252,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                   </div>
 
                   {/* Right Details Box */}
-                  <div className="lg:col-span-5 bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-sm">
+                  <div className="lg:col-span-5 bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-sm">
                     {activeItem.image && (
                       <div className="h-48 sm:h-52 relative bg-slate-900 overflow-hidden">
                         <img 
@@ -272,23 +272,23 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                       </div>
                     )}
                     <div className="p-6 space-y-5">
-                    <div className="border-b border-[#E5DED3] pb-3">
+                    <div className="border-b border-[#E2E8F0] pb-3">
                       <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">Technical Compliance</span>
                       <h4 className="text-base font-bold text-slate-900 mt-0.5">Statutory & Regulatory Matrix</h4>
                     </div>
 
                     <div className="space-y-3.5 text-xs">
-                      <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#E5DED3] space-y-1">
+                      <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-1">
                         <span className="text-slate-500 font-medium">Standards & Approvals:</span>
                         <strong className="block text-slate-900 font-bold">{activeItem.compliance}</strong>
                       </div>
 
-                      <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#E5DED3] space-y-1">
+                      <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-1">
                         <span className="text-slate-500 font-medium">Typical Project Timeline:</span>
                         <strong className="block text-slate-900 font-bold">{activeItem.typicalTimeline}</strong>
                       </div>
 
-                      <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#E5DED3] space-y-1">
+                      <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-1">
                         <span className="text-slate-500 font-medium">Commercial License Activity:</span>
                         <strong className="block text-slate-900 font-bold">Authorized under DED License #578964</strong>
                       </div>
@@ -315,7 +315,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
       </section>
 
       {/* 4. Turnkey Construction Methodology & Quality Assurance Matrix */}
-      <section className="py-20 sm:py-24 bg-[#FAF9F6] border-b border-[#E5DED3]">
+      <section className="py-20 sm:py-24 bg-white border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
           <div className="max-w-3xl space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B]">
@@ -330,7 +330,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white p-6 rounded-2xl border border-[#E5DED3] space-y-3">
+            <div className="bg-white p-6 rounded-2xl border border-[#E2E8F0] space-y-3">
               <span className="text-xs font-mono font-bold text-[#8B6D1B]">PHASE 01</span>
               <h3 className="text-base font-bold text-[#111622] font-display">Substructure & Raft Foundations</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
@@ -338,7 +338,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-[#E5DED3] space-y-3">
+            <div className="bg-white p-6 rounded-2xl border border-[#E2E8F0] space-y-3">
               <span className="text-xs font-mono font-bold text-[#8B6D1B]">PHASE 02</span>
               <h3 className="text-base font-bold text-[#111622] font-display">Superstructure & Thermal Masonry</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
@@ -346,7 +346,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-[#E5DED3] space-y-3">
+            <div className="bg-white p-6 rounded-2xl border border-[#E2E8F0] space-y-3">
               <span className="text-xs font-mono font-bold text-[#8B6D1B]">PHASE 03</span>
               <h3 className="text-base font-bold text-[#111622] font-display">Concurrent MEP & Glazing Fitout</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
@@ -354,7 +354,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-[#E5DED3] space-y-3">
+            <div className="bg-white p-6 rounded-2xl border border-[#E2E8F0] space-y-3">
               <span className="text-xs font-mono font-bold text-[#8B6D1B]">PHASE 04</span>
               <h3 className="text-base font-bold text-[#111622] font-display">Testing, DEWA Meter & BCC Handover</h3>
               <p className="text-xs text-slate-600 leading-relaxed">

@@ -29,13 +29,13 @@ export default function ContactPage({ onNavigate, onOpenQuoteModal }) {
       />
 
       {/* 2. Quick Communication Channels Strip */}
-      <section className="py-10 bg-white border-b border-[#E5DED3]">
+      <section className="py-10 bg-white border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             
             <a 
               href={`tel:${COMPANY_INFO.phone}`}
-              className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] hover:border-[#B3261E] transition group flex items-start gap-3.5"
+              className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#B3261E] transition group flex items-start gap-3.5"
             >
               <div className="w-10 h-10 rounded-xl bg-[#B3261E]/10 text-[#B3261E] flex items-center justify-center shrink-0 group-hover:bg-[#B3261E] group-hover:text-white transition">
                 <Phone className="w-5 h-5" />
@@ -65,7 +65,7 @@ export default function ContactPage({ onNavigate, onOpenQuoteModal }) {
 
             <a 
               href={`mailto:${COMPANY_INFO.email}`}
-              className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] hover:border-[#B3261E] transition group flex items-start gap-3.5"
+              className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#B3261E] transition group flex items-start gap-3.5"
             >
               <div className="w-10 h-10 rounded-xl bg-[#B3261E]/10 text-[#B3261E] flex items-center justify-center shrink-0 group-hover:bg-[#B3261E] group-hover:text-white transition">
                 <Mail className="w-5 h-5" />
@@ -77,7 +77,7 @@ export default function ContactPage({ onNavigate, onOpenQuoteModal }) {
               </div>
             </a>
 
-            <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] flex items-start gap-3.5">
+            <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-start gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-[#C59B27]/15 text-[#B3261E] flex items-center justify-center shrink-0">
                 <Clock className="w-5 h-5" />
               </div>

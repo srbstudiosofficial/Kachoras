@@ -112,11 +112,11 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
       
       <div className="absolute inset-0" onClick={handleResetAndClose} />
 
-      <div className="bg-white border border-[#E5DED3] max-w-2xl w-full rounded-2xl p-4 sm:p-8 shadow-2xl relative z-10 space-y-6 max-h-[92vh] overflow-y-auto">
+      <div className="bg-white border border-[#E2E8F0] max-w-2xl w-full rounded-2xl p-4 sm:p-8 shadow-2xl relative z-10 space-y-6 max-h-[92vh] overflow-y-auto">
         
         <button
           onClick={handleResetAndClose}
-          className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 text-[#64748B] hover:text-[#1E293B] bg-[#FBF9F5] border border-[#E5DED3] rounded-xl transition min-w-[36px] min-h-[36px] flex items-center justify-center"
+          className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 text-[#64748B] hover:text-[#1E293B] bg-white border border-[#E2E8F0] rounded-xl transition min-w-[36px] min-h-[36px] flex items-center justify-center"
           aria-label="Close dialog"
         >
           <X className="w-5 h-5" />
@@ -139,8 +139,8 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
             </div>
 
             {/* Ticket Card */}
-            <div className="bg-[#FBF9F5] border border-[#E5DED3] p-4 sm:p-5 rounded-xl max-w-md mx-auto text-left space-y-2 text-xs">
-              <div className="flex justify-between items-center text-[#64748B] border-b border-[#E5DED3] pb-2">
+            <div className="bg-white border border-[#E2E8F0] p-4 sm:p-5 rounded-xl max-w-md mx-auto text-left space-y-2 text-xs">
+              <div className="flex justify-between items-center text-[#64748B] border-b border-[#E2E8F0] pb-2">
                 <span>Protocol Reference:</span>
                 <strong className="text-[#B3261E] font-mono text-sm font-black">{referenceId}</strong>
               </div>
@@ -207,7 +207,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
           </div>
         ) : (
           <div>
-            <div className="border-b border-[#E5DED3] pb-4 space-y-1">
+            <div className="border-b border-[#E2E8F0] pb-4 space-y-1">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E] bg-[#B3261E]/10 px-3 py-0.5 rounded-full border border-[#B3261E]/20">
                   Step {step} of 3
@@ -230,7 +230,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                     <select
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                      className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     >
                       <option value="Building Contracting (G+1 Villa / Majlis)">Building Contracting (G+1 Villa / Majlis)</option>
                       <option value="MEP & HVAC Works">MEP & HVAC Works</option>
@@ -248,7 +248,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="e.g. 6,500"
                         value={formData.sqft}
                         onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
 
@@ -257,7 +257,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                       <select
                         value={formData.timeline}
                         onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       >
                         <option value="Immediate (Next 30-60 Days)">Immediate (Next 30-60 Days)</option>
                         <option value="3 - 6 Months">3 – 6 Months</option>
@@ -291,7 +291,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="e.g. 4317233"
                         value={formData.plotNo}
                         onChange={(e) => setFormData({ ...formData, plotNo: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
 
@@ -302,7 +302,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="e.g. Al Barsha, Wadi Al Shabak"
                         value={formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
                   </div>
@@ -318,7 +318,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="e.g. As per BOQ or enter amount"
                         value={formData.budget}
                         onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
 
@@ -327,7 +327,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                       <select
                         value={formData.hasBlueprints}
                         onChange={(e) => setFormData({ ...formData, hasBlueprints: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       >
                         <option value="Yes, full stamped drawings">Yes, full stamped drawings</option>
                         <option value="Under Review by Consultant">Under Review by Consultant</option>
@@ -340,7 +340,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="px-5 py-3.5 bg-[#F4EFE6] hover:bg-[#E5DED3] text-[#475569] font-semibold text-xs rounded-xl flex items-center justify-center gap-2 border border-[#E5DED3] w-full sm:w-auto min-h-[44px]"
+                      className="px-5 py-3.5 bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#475569] font-semibold text-xs rounded-xl flex items-center justify-center gap-2 border border-[#E2E8F0] w-full sm:w-auto min-h-[44px]"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>Back</span>
@@ -369,7 +369,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="e.g. Mr. Ahmed"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
 
@@ -380,7 +380,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="Company or Private"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
                   </div>
@@ -394,7 +394,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="name@domain.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
 
@@ -406,7 +406,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="+971-5X-XXXXXXX"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
                   </div>
@@ -418,7 +418,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                       placeholder="e.g. Consultant: Croquis Engineering; Majlis with custom kitchen and guest bathroom."
                       value={formData.notes}
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                      className="w-full bg-white border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
 
@@ -438,7 +438,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                       type="button"
                       onClick={() => setStep(2)}
                       disabled={isSubmitting}
-                      className="px-5 py-3.5 bg-[#F4EFE6] hover:bg-[#E5DED3] text-[#475569] font-semibold text-xs rounded-xl flex items-center justify-center gap-2 border border-[#E5DED3] w-full sm:w-auto min-h-[44px] disabled:opacity-50"
+                      className="px-5 py-3.5 bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#475569] font-semibold text-xs rounded-xl flex items-center justify-center gap-2 border border-[#E2E8F0] w-full sm:w-auto min-h-[44px] disabled:opacity-50"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>Back</span>

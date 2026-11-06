@@ -60,7 +60,7 @@ const CONSULTANCY_RECORDS = [
 
 export default function Testimonials() {
   return (
-    <section id="consultants" className="py-20 sm:py-24 bg-[#FAF9F6] border-t border-[#E5DED3]">
+    <section id="consultants" className="py-20 sm:py-24 bg-white border-t border-[#E2E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
         
         {/* Header */}
@@ -81,10 +81,10 @@ export default function Testimonials() {
           {CONSULTANCY_RECORDS.map((item, idx) => (
             <div
               key={idx}
-              className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:border-[#B3261E] transition-all space-y-4"
+              className="bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:border-[#B3261E] transition-all space-y-4"
             >
               <div className="space-y-3">
-                <div className="flex items-center justify-between border-b border-[#F0EBE1] pb-3">
+                <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
                   <span className="text-[11px] font-mono font-bold text-[#B3261E] bg-[#B3261E]/10 px-2 py-0.5 rounded">
                     {item.plotRef}
                   </span>
@@ -106,7 +106,7 @@ export default function Testimonials() {
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-[#F0EBE1] text-[11px] text-slate-500">
+              <div className="pt-3 border-t border-[#E2E8F0] text-[11px] text-slate-500">
                 Client: <strong className="text-slate-800">{item.client}</strong>
               </div>
             </div>

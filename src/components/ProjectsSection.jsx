@@ -43,7 +43,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
   ];
 
   return (
-    <section id="projects" className="py-20 sm:py-24 bg-[#FAF9F6] relative border-t border-[#E5DED3]">
+    <section id="projects" className="py-20 sm:py-24 bg-white relative border-t border-[#E2E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
@@ -62,7 +62,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
         )}
 
         {/* Clean Category Filter Tabs (ECC Group & Dani Trading Style) */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-[#E5DED3]">
+        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-[#E2E8F0]">
           {categories.map((cat) => {
             const isActive = filter === cat.id;
             return (
@@ -72,7 +72,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
                 className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
                   isActive
                     ? 'bg-[#B3261E] text-white shadow-md'
-                    : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#F2ECE1] hover:text-[#B3261E]'
+                    : 'bg-white text-slate-700 border border-[#E2E8F0] hover:bg-[#F1F5F9] hover:text-[#B3261E]'
                 }`}
               >
                 <span>{cat.label}</span>
@@ -91,7 +91,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
           {filteredProjects.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#B3261E] transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#B3261E] transition-all duration-300 flex flex-col justify-between group"
             >
               <div 
                 className="cursor-pointer"
@@ -138,7 +138,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
                   </p>
 
                   {/* Client & Consultant Info */}
-                  <div className="pt-2 border-t border-[#F0EBE1] text-[11px] text-slate-500 space-y-0.5">
+                  <div className="pt-2 border-t border-[#E2E8F0] text-[11px] text-slate-500 space-y-0.5">
                     {item.client && (
                       <div className="truncate">Client: <strong className="text-slate-700 font-semibold">{item.client}</strong></div>
                     )}
@@ -150,7 +150,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
               </div>
 
               {/* Card Actions */}
-              <div className="p-6 pt-0 border-t border-[#F0EBE1] mt-2">
+              <div className="p-6 pt-0 border-t border-[#E2E8F0] mt-2">
                 <button
                   type="button"
                   onClick={(e) => {
@@ -161,7 +161,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
                       setSelectedProject(item);
                     }
                   }}
-                  className="w-full mt-3 py-2.5 px-4 bg-[#FAF8F5] hover:bg-[#B3261E] hover:text-white border border-[#E5DED3] hover:border-[#B3261E] rounded-xl text-xs font-bold text-slate-800 transition-colors flex items-center justify-center gap-2 cursor-pointer group-hover:bg-[#B3261E] group-hover:text-white"
+                  className="w-full mt-3 py-2.5 px-4 bg-[#F8FAFC] hover:bg-[#B3261E] hover:text-white border border-[#E2E8F0] hover:border-[#B3261E] rounded-xl text-xs font-bold text-slate-800 transition-colors flex items-center justify-center gap-2 cursor-pointer group-hover:bg-[#B3261E] group-hover:text-white"
                 >
                   <span>View Full Project Sheet</span>
                   <ArrowRight className="w-3.5 h-3.5" />

@@ -112,7 +112,7 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in">
-      <div className="bg-[#FAF9F6] border-2 border-[#B3261E] max-w-6xl w-full h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+      <div className="bg-white border-2 border-[#B3261E] max-w-6xl w-full h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         
         {/* Modal Header */}
         <div className="bg-[#14171F] text-white p-4 px-6 flex items-center justify-between border-b border-[#2D3748]">
@@ -136,7 +136,7 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex overflow-x-auto border-b border-[#E5DED3] bg-white px-4 py-2 gap-2 text-xs">
+        <div className="flex overflow-x-auto border-b border-[#E2E8F0] bg-white px-4 py-2 gap-2 text-xs">
           {SECTIONS.map((sec, idx) => (
             <button
               key={sec.id}
@@ -144,7 +144,7 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
               className={`px-3 py-2 rounded-lg font-semibold whitespace-nowrap transition flex items-center gap-1.5 ${
                 idx === activeTab
                   ? 'bg-[#B3261E] text-white shadow'
-                  : 'bg-[#FAF8F5] text-slate-700 hover:bg-[#F2ECE1] border border-[#E5DED3]'
+                  : 'bg-[#F8FAFC] text-slate-700 hover:bg-[#F1F5F9] border border-[#E2E8F0]'
               }`}
             >
               <CheckCircle2 className={`w-3.5 h-3.5 ${idx === activeTab ? 'text-amber-300' : 'text-emerald-600'}`} />
@@ -154,11 +154,11 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
         </div>
 
         {/* Modal Body: Split View (Screenshot Left, Checklist Right) */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 grid lg:grid-cols-12 gap-6 bg-[#FAF9F6]">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 grid lg:grid-cols-12 gap-6 bg-white">
           
           {/* Left Column: Client Screenshot (7 cols) */}
-          <div className="lg:col-span-7 flex flex-col bg-white rounded-xl border border-[#E5DED3] p-3 shadow-sm">
-            <div className="flex items-center justify-between pb-2 border-b border-[#E5DED3] text-xs font-semibold text-slate-700">
+          <div className="lg:col-span-7 flex flex-col bg-white rounded-xl border border-[#E2E8F0] p-3 shadow-sm">
+            <div className="flex items-center justify-between pb-2 border-b border-[#E2E8F0] text-xs font-semibold text-slate-700">
               <span className="flex items-center gap-1.5">
                 <Image className="w-4 h-4 text-[#B3261E]" />
                 Client Reference Screenshot
@@ -184,9 +184,9 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
           </div>
 
           {/* Right Column: Verification Checklist (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col justify-between bg-white rounded-xl border border-[#E5DED3] p-5 shadow-sm space-y-4">
+          <div className="lg:col-span-5 flex flex-col justify-between bg-white rounded-xl border border-[#E2E8F0] p-5 shadow-sm space-y-4">
             <div>
-              <div className="flex items-center justify-between border-b border-[#F0EBE1] pb-3">
+              <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
                 <span className="text-xs uppercase font-bold text-[#8B6D1B]">
                   Section Audit ({activeTab + 1} of 6)
                 </span>
@@ -201,7 +201,7 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
 
               <div className="mt-4 space-y-3">
                 {current.checks.map((c, i) => (
-                  <div key={i} className="flex items-start gap-2.5 p-2 rounded-lg bg-[#FAF8F5] border border-[#EFE9DF]">
+                  <div key={i} className="flex items-start gap-2.5 p-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0]">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <div className="text-xs">
                       <span className="font-bold text-[#14171F] block">{c.label}</span>
@@ -212,7 +212,7 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#E5DED3] flex items-center justify-between gap-3">
+            <div className="pt-4 border-t border-[#E2E8F0] flex items-center justify-between gap-3">
               <button
                 onClick={() => handleJump(current.targetId)}
                 className="flex-1 py-2.5 px-4 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold rounded-xl shadow transition flex items-center justify-center gap-2"
@@ -225,14 +225,14 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
                 <button
                   disabled={activeTab === 0}
                   onClick={() => setActiveTab(prev => Math.max(0, prev - 1))}
-                  className="p-2 border border-[#E5DED3] rounded-lg disabled:opacity-40 hover:bg-[#FAF8F5]"
+                  className="p-2 border border-[#E2E8F0] rounded-lg disabled:opacity-40 hover:bg-[#F8FAFC]"
                 >
                   <ChevronLeft className="w-4 h-4 text-slate-700" />
                 </button>
                 <button
                   disabled={activeTab === SECTIONS.length - 1}
                   onClick={() => setActiveTab(prev => Math.min(SECTIONS.length - 1, prev + 1))}
-                  className="p-2 border border-[#E5DED3] rounded-lg disabled:opacity-40 hover:bg-[#FAF8F5]"
+                  className="p-2 border border-[#E2E8F0] rounded-lg disabled:opacity-40 hover:bg-[#F8FAFC]"
                 >
                   <ChevronRight className="w-4 h-4 text-slate-700" />
                 </button>

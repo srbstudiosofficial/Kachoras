@@ -15,13 +15,13 @@ export default {
           gold: '#C59B27',
           goldHover: '#B0881F',
           goldLight: '#F7EFCF',
-          ivory: '#FBF9F5',
-          cream: '#F4EFE6',
-          sand: '#EADBCA',
+          ivory: '#FFFFFF',
+          cream: '#F1F5F9',
+          sand: '#E2E8F0',
           charcoal: '#111827',
           slate: '#1F2937',
           muted: '#6B7280',
-          border: '#E5DED3',
+          border: '#E2E8F0',
           borderDark: '#2D3748'
         }
       },

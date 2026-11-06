@@ -37,7 +37,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
       />
 
       {/* Modal Dialog */}
-      <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl border border-[#E5DED3] overflow-hidden z-10 max-h-[90vh] flex flex-col">
+      <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl border border-[#E2E8F0] overflow-hidden z-10 max-h-[90vh] flex flex-col">
         
         {/* Close Button */}
         <button
@@ -88,7 +88,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
           
           {/* Metadata Grid */}
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-            <div className="p-3.5 bg-[#FAF8F5] rounded-xl border border-[#E5DED3] space-y-0.5">
+            <div className="p-3.5 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-0.5">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Location</span>
               <p className="text-xs font-bold text-slate-900 flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5 text-[#C59B27] shrink-0" />
@@ -97,7 +97,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
             </div>
 
             {project.plotNo && (
-              <div className="p-3.5 bg-[#FAF8F5] rounded-xl border border-[#E5DED3] space-y-0.5">
+              <div className="p-3.5 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-0.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">DM Plot Number</span>
                 <p className="text-xs font-mono font-bold text-[#B3261E]">
                   Plot #{project.plotNo}
@@ -106,7 +106,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
             )}
 
             {project.year && (
-              <div className="p-3.5 bg-[#FAF8F5] rounded-xl border border-[#E5DED3] space-y-0.5">
+              <div className="p-3.5 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-0.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Handover Year</span>
                 <p className="text-xs font-mono font-bold text-slate-900 flex items-center gap-1">
                   <Calendar className="w-3.5 h-3.5 text-slate-500 shrink-0" />
@@ -118,7 +118,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
 
           {/* Project Stakeholders */}
           {(project.client || project.consultant) && (
-            <div className="grid sm:grid-cols-2 gap-3 p-4 bg-[#FBF9F5] rounded-2xl border border-[#E5DED3]">
+            <div className="grid sm:grid-cols-2 gap-3 p-4 bg-white rounded-2xl border border-[#E2E8F0]">
               {project.client && (
                 <div>
                   <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold block">Client / Owner</span>
@@ -139,7 +139,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
             <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E] block">
               Contract Scope & Technical Execution
             </span>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed bg-white p-4 rounded-xl border border-[#E5DED3]">
+            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed bg-white p-4 rounded-xl border border-[#E2E8F0]">
               {project.scope}
             </p>
           </div>
@@ -150,19 +150,19 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
               In-House Divisions Mobilized
             </span>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] text-slate-600 font-medium">
-              <div className="p-2.5 rounded-lg bg-[#FAF8F5] border border-[#E5DED3] flex items-center gap-1.5">
+              <div className="p-2.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                 <span>DM G+1 Civil</span>
               </div>
-              <div className="p-2.5 rounded-lg bg-[#FAF8F5] border border-[#E5DED3] flex items-center gap-1.5">
+              <div className="p-2.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                 <span>DEWA Electrical</span>
               </div>
-              <div className="p-2.5 rounded-lg bg-[#FAF8F5] border border-[#E5DED3] flex items-center gap-1.5">
+              <div className="p-2.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                 <span>Al Qusais Glass</span>
               </div>
-              <div className="p-2.5 rounded-lg bg-[#FAF8F5] border border-[#E5DED3] flex items-center gap-1.5">
+              <div className="p-2.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                 <span>HVAC Systems</span>
               </div>
@@ -172,7 +172,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
         </div>
 
         {/* Footer Actions */}
-        <div className="p-4 sm:p-6 bg-[#FAF8F5] border-t border-[#E5DED3] flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <div className="p-4 sm:p-6 bg-[#F8FAFC] border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3 shrink-0">
           <button
             onClick={onClose}
             className="px-5 py-2.5 rounded-xl border border-[#CBD5E1] text-xs font-bold text-slate-700 hover:bg-white transition cursor-pointer"

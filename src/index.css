@@ -37,7 +37,7 @@
 
 @layer base {
   body {
-    background-color: #FBF9F5;
+    background-color: #FFFFFF;
     color: #1F2937;
     font-family: 'JUST Sans', 'Manrope', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -57,7 +57,7 @@
   width: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: #F4EFE6;
+  background: #F1F5F9;
 }
 ::-webkit-scrollbar-thumb {
   background: #B3261E;
@@ -93,7 +93,7 @@ html {
 
 .luxury-card {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid #E5DED3;
+  border: 1px solid #E2E8F0;
   background: #FFFFFF;
 }
 

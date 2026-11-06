@@ -98,10 +98,10 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
       <Hero onOpenQuoteModal={onOpenQuoteModal} onNavigate={onNavigate} />
 
       {/* 2. Core Contracting Disciplines with Authentic Photography (Like ECC Group's "Our Businesses") */}
-      <section id="disciplines" className="py-16 sm:py-20 lg:py-24 bg-[#FAF9F6] border-b border-[#E5DED3]">
+      <section id="disciplines" className="py-16 sm:py-20 lg:py-24 bg-white border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-10 sm:space-y-12">
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#E5DED3] pb-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#E2E8F0] pb-6">
             <div className="space-y-2 max-w-2xl">
               <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B]">
                 In-House Engineering Disciplines
@@ -128,7 +128,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
             {coreDivisions.map((div, idx) => (
               <div 
                 key={idx}
-                className="bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-xs hover:border-[#B3261E] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
+                className="bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-xs hover:border-[#B3261E] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
               >
                 {/* Visual Image Header */}
                 <div className="h-48 sm:h-56 relative overflow-hidden bg-slate-900">
@@ -163,8 +163,8 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
                     {div.desc}
                   </p>
 
-                  <div className="pt-3 border-t border-[#F0EBE1] space-y-3">
-                    <div className="text-[11px] font-mono text-slate-500 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#E5DED3] break-words">
+                  <div className="pt-3 border-t border-[#E2E8F0] space-y-3">
+                    <div className="text-[11px] font-mono text-slate-500 bg-[#F8FAFC] p-2.5 rounded-lg border border-[#E2E8F0] break-words">
                       {div.specs || null}
                     </div>
                     <button
@@ -184,10 +184,10 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
       </section>
 
       {/* 3. Landmark Delivered Works Showcase (ECC Group & Syed Contracting Style) */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-white border-b border-[#E5DED3]">
+      <section className="py-16 sm:py-20 lg:py-24 bg-white border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-10 sm:space-y-12">
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#E5DED3] pb-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#E2E8F0] pb-6">
             <div className="space-y-2 max-w-2xl">
               <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B]">
                 Delivered Engineering Excellence
@@ -202,7 +202,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
 
             <button
               onClick={() => onNavigate('projects')}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B3261E] hover:text-[#961F18] transition py-3 px-6 rounded-xl border border-[#B3261E]/30 hover:border-[#B3261E] bg-[#FAF8F5] shadow-xs cursor-pointer shrink-0 min-h-[44px]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B3261E] hover:text-[#961F18] transition py-3 px-6 rounded-xl border border-[#B3261E]/30 hover:border-[#B3261E] bg-[#F8FAFC] shadow-xs cursor-pointer shrink-0 min-h-[44px]"
             >
               <span>Explore All 20 Verified Works</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
@@ -215,7 +215,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
               <div
                 key={item.id}
                 onClick={() => onNavigate('project-detail', item.id)}
-                className="bg-[#FAF9F6] border border-[#E5DED3] rounded-2xl overflow-hidden shadow-xs hover:border-[#B3261E] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer"
+                className="bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-xs hover:border-[#B3261E] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer"
               >
                 {/* Visual Image */}
                 <div className="h-56 sm:h-64 relative overflow-hidden bg-slate-900">
@@ -254,7 +254,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs font-bold text-[#B3261E]">
+                  <div className="pt-3 border-t border-[#E2E8F0] flex items-center justify-between text-xs font-bold text-[#B3261E]">
                     <span>View Handover Details</span>
                     <ArrowRight className="w-3.5 h-3.5 text-[#C59B27] group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -267,7 +267,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
       </section>
 
       {/* 4. Approved Consultant Engineering Partners */}
-      <section className="py-14 sm:py-20 bg-[#FAF9F6] border-b border-[#E5DED3]">
+      <section className="py-14 sm:py-20 bg-white border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-8">
           <div className="max-w-3xl space-y-2">
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B]">
@@ -285,7 +285,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
             {consultantPartners.map((item, idx) => (
               <div 
                 key={idx}
-                className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5DED3] space-y-1.5 hover:border-[#B3261E] transition shadow-xs"
+                className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E2E8F0] space-y-1.5 hover:border-[#B3261E] transition shadow-xs"
               >
                 <div className="text-[10px] font-mono text-amber-700 uppercase font-semibold">
                   {item.discipline}
@@ -303,9 +303,9 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
       </section>
 
       {/* 5. Comprehensive Portfolio Directory Gateway */}
-      <section className="py-14 sm:py-20 lg:py-24 bg-white border-b border-[#E5DED3]">
+      <section className="py-14 sm:py-20 lg:py-24 bg-white border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="bg-[#FAF9F6] rounded-3xl border border-[#E5DED3] p-6 sm:p-10 lg:p-12 shadow-xs flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 sm:gap-8">
+          <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6 sm:p-10 lg:p-12 shadow-xs flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 sm:gap-8">
             <div className="space-y-4 max-w-2xl">
               <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B] block">
                 Track Record & Executed Portfolio
@@ -317,15 +317,15 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
                 Comprehensive project specifications, statutory Dubai Municipality records, structural scopes, and photographic handover documentation have been organized on our dedicated portfolio page.
               </p>
               <div className="pt-2 flex flex-wrap gap-2.5 sm:gap-3 text-xs font-semibold text-slate-600">
-                <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-[#E5DED3] text-[11px] sm:text-xs">
+                <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-[11px] sm:text-xs">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   20 Handed Over Projects
                 </span>
-                <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-[#E5DED3] text-[11px] sm:text-xs">
+                <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-[11px] sm:text-xs">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#8B6D1B] shrink-0" />
                   4 Core Disciplines
                 </span>
-                <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-[#E5DED3] text-[11px] sm:text-xs">
+                <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-[#E2E8F0] text-[11px] sm:text-xs">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#B3261E] shrink-0" />
                   Dedicated Handover Sheets
                 </span>

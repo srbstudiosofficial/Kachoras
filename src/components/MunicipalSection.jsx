@@ -9,7 +9,7 @@ import { DUBAI_MUNICIPALITY_PROJECTS } from '../data/mockData';
 
 export default function MunicipalSection() {
   return (
-    <section id="municipal" className="py-24 bg-[#FAF9F6] relative border-t border-[#E5DED3]">
+    <section id="municipal" className="py-24 bg-white relative border-t border-[#E2E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
@@ -26,7 +26,7 @@ export default function MunicipalSection() {
         </div>
 
         {/* Feature Split Banner: Civic Building Render & Credentials */}
-        <div className="mb-14 bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 grid lg:grid-cols-12 items-center reveal-on-scroll reveal-init shimmer-trigger">
+        <div className="mb-14 bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 grid lg:grid-cols-12 items-center reveal-on-scroll reveal-init shimmer-trigger">
           <div className="lg:col-span-6 relative h-72 sm:h-80 lg:h-full min-h-[320px] overflow-hidden group">
             <picture className="w-full h-full block">
               <source srcSet="./assets/real-projects/p363-nuaimi-villa-elevation.jpg" type="image/webp" />
@@ -61,11 +61,11 @@ export default function MunicipalSection() {
             </p>
 
             <div className="grid grid-cols-2 gap-4 pt-2">
-              <div className="bg-[#FAF8F5] p-4 rounded-xl border border-[#EFE9DF]">
+              <div className="bg-[#F8FAFC] p-4 rounded-xl border border-[#E2E8F0]">
                 <div className="text-2xl font-bold text-[#B3261E] font-display">100%</div>
                 <div className="text-xs text-slate-500 font-medium mt-0.5">Municipal Inspection Pass Rate</div>
               </div>
-              <div className="bg-[#FAF8F5] p-4 rounded-xl border border-[#EFE9DF]">
+              <div className="bg-[#F8FAFC] p-4 rounded-xl border border-[#E2E8F0]">
                 <div className="text-2xl font-bold text-emerald-800 font-display">7+ Contracts</div>
                 <div className="text-xs text-slate-500 font-medium mt-0.5">Delivered Public Facilities</div>
               </div>
@@ -79,14 +79,14 @@ export default function MunicipalSection() {
             <div 
               key={item.id}
               data-delay={idx * 150}
-              className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-sm hover:shadow-2xl hover:border-emerald-700 hover:-translate-y-2 transition-all duration-500 group reveal-on-scroll reveal-init shimmer-trigger"
+              className="bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-sm hover:shadow-2xl hover:border-emerald-700 hover:-translate-y-2 transition-all duration-500 group reveal-on-scroll reveal-init shimmer-trigger"
             >
               <div className="space-y-4">
-                <div className="flex items-center justify-between border-b border-[#F0EBE1] pb-3">
+                <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
                   <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider">
                     {item.scope}
                   </span>
-                  <span className="text-[11px] font-mono text-slate-500 bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#E5DED3]">
+                  <span className="text-[11px] font-mono text-slate-500 bg-[#F8FAFC] px-2 py-0.5 rounded border border-[#E2E8F0]">
                     Plot #{item.plotNo}
                   </span>
                 </div>
@@ -109,7 +109,7 @@ export default function MunicipalSection() {
                 </div>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs">
+              <div className="mt-5 pt-3 border-t border-[#E2E8F0] flex items-center justify-between text-xs">
                 <span className="text-emerald-700 font-semibold flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                   {item.status}

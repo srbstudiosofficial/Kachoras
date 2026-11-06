@@ -3,7 +3,7 @@ import { Target, Compass, Award, ShieldCheck, CheckCircle2 } from 'lucide-react'
 
 export default function VisionMissionSection() {
   return (
-    <section id="vision" className="py-24 bg-[#FAF9F6] border-y border-[#E5DED3] relative overflow-hidden">
+    <section id="vision" className="py-24 bg-white border-y border-[#E2E8F0] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
@@ -23,9 +23,9 @@ export default function VisionMissionSection() {
         <div className="grid md:grid-cols-2 gap-8 items-stretch">
           
           {/* Vision Column */}
-          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-[#E5DED3] shadow-sm hover:shadow-2xl hover:border-[#B3261E] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between space-y-6 reveal-on-scroll reveal-left">
+          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-[#E2E8F0] shadow-sm hover:shadow-2xl hover:border-[#B3261E] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between space-y-6 reveal-on-scroll reveal-left">
             <div className="space-y-4">
-              <div className="flex items-center justify-between border-b border-[#F0EBE1] pb-4">
+              <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">
                   Strategic Purpose
                 </span>
@@ -41,16 +41,16 @@ export default function VisionMissionSection() {
               </blockquote>
             </div>
 
-            <div className="pt-4 border-t border-[#F0EBE1] flex items-center justify-between text-xs text-slate-500">
+            <div className="pt-4 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-slate-500">
               <span className="font-semibold text-slate-700">Quality & Sustainable Handover</span>
               <span className="text-[11px] font-mono text-slate-400">Dubai Municipality G+1</span>
             </div>
           </div>
 
           {/* Mission Column */}
-          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-[#E5DED3] shadow-sm hover:shadow-2xl hover:border-[#C59B27] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between space-y-6 reveal-on-scroll reveal-right">
+          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-[#E2E8F0] shadow-sm hover:shadow-2xl hover:border-[#C59B27] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between space-y-6 reveal-on-scroll reveal-right">
             <div className="space-y-4">
-              <div className="flex items-center justify-between border-b border-[#F0EBE1] pb-4">
+              <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#8B6D1B]">
                   Operational Commitment
                 </span>
@@ -66,7 +66,7 @@ export default function VisionMissionSection() {
               </blockquote>
             </div>
 
-            <div className="pt-4 border-t border-[#F0EBE1] flex items-center justify-between text-xs text-slate-500">
+            <div className="pt-4 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-slate-500">
               <span className="font-semibold text-slate-700">Client-First Accountability</span>
               <span className="text-[11px] font-mono text-slate-400">Est. 2006</span>
             </div>

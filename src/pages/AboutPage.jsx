@@ -29,7 +29,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
       />
 
       {/* 2. Executive Leadership & Company Heritage */}
-      <section className="py-20 bg-white border-b border-[#E5DED3]">
+      <section className="py-20 bg-white border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             
@@ -56,15 +56,15 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
 
               {/* Pillars */}
               <div className="grid sm:grid-cols-3 gap-4 pt-2">
-                <div className="p-4 rounded-xl bg-[#FBF9F5] border border-[#E5DED3] text-center space-y-1">
+                <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] text-center space-y-1">
                   <span className="text-2xl font-black text-[#B3261E] font-display">2006</span>
                   <p className="text-xs text-slate-600 font-medium">Dubai Incorporation</p>
                 </div>
-                <div className="p-4 rounded-xl bg-[#FBF9F5] border border-[#E5DED3] text-center space-y-1">
+                <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] text-center space-y-1">
                   <span className="text-2xl font-black text-[#B3261E] font-display">G+1</span>
                   <p className="text-xs text-slate-600 font-medium">Municipality Approval</p>
                 </div>
-                <div className="p-4 rounded-xl bg-[#FBF9F5] border border-[#E5DED3] text-center space-y-1">
+                <div className="p-4 rounded-xl bg-white border border-[#E2E8F0] text-center space-y-1">
                   <span className="text-2xl font-black text-[#B3261E] font-display">500+</span>
                   <p className="text-xs text-slate-600 font-medium">Completed Projects and Works</p>
                 </div>
@@ -73,15 +73,15 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
             </div>
 
             {/* Right Card: Al Qusais HQ & Executive Profile */}
-            <div className="lg:col-span-5 bg-[#FAF8F5] border border-[#E5DED3] p-8 rounded-3xl space-y-6 shadow-sm">
-              <div className="border-b border-[#E5DED3] pb-4 space-y-1">
+            <div className="lg:col-span-5 bg-[#F8FAFC] border border-[#E2E8F0] p-8 rounded-3xl space-y-6 shadow-sm">
+              <div className="border-b border-[#E2E8F0] pb-4 space-y-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">Corporate Governance</span>
                 <h3 className="text-xl font-black text-[#1E293B] font-display">Kachoras Electromechanical Contracting LLC</h3>
                 <p className="text-xs text-slate-600">Registered with Dubai Economy & Tourism and Dubai Municipality</p>
               </div>
 
               <div className="space-y-3.5 text-xs">
-                <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-[#E5DED3]">
+                <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-[#E2E8F0]">
                   <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-slate-900 font-bold">Trade License #578964</strong>
@@ -89,7 +89,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-[#E5DED3]">
+                <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-[#E2E8F0]">
                   <Building2 className="w-4 h-4 text-[#B3261E] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-slate-900 font-bold">Dubai Municipality G+1 License</strong>
@@ -97,7 +97,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-[#E5DED3]">
+                <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-[#E2E8F0]">
                   <MapPin className="w-4 h-4 text-[#C59B27] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-slate-900 font-bold">Operational Headquarters</strong>

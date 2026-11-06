@@ -33,9 +33,9 @@ export default function LicensePage({ onNavigate, onOpenQuoteModal }) {
       <MunicipalSection />
 
       {/* 4. Pre-Qualification Dossier Notice for Main Contractors & Consultants */}
-      <section className="py-16 bg-[#FAF8F5] border-b border-[#E5DED3]">
+      <section className="py-16 bg-[#F8FAFC] border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="bg-white border border-[#E5DED3] rounded-3xl p-8 sm:p-10 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="bg-white border border-[#E2E8F0] rounded-3xl p-8 sm:p-10 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="space-y-2 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />

@@ -105,7 +105,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#FBF9F5] relative border-t border-[#E5DED3]">
+    <section id="contact" className="py-24 bg-white relative border-t border-[#E2E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
@@ -126,8 +126,8 @@ export default function ContactSection() {
           {/* Left Column: Official Contact Card (5 cols) */}
           <div className="lg:col-span-5 space-y-6 reveal-on-scroll reveal-left">
             
-            <div className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500">
-              <h3 className="text-xl font-black text-[#1E293B] font-display border-b border-[#E5DED3] pb-4">
+            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500">
+              <h3 className="text-xl font-black text-[#1E293B] font-display border-b border-[#E2E8F0] pb-4">
                 Corporate Office Details
               </h3>
 
@@ -194,7 +194,7 @@ export default function ContactSection() {
               </div>
 
               {/* License Quick Summary */}
-              <div className="bg-[#FBF9F5] border border-[#E5DED3] p-4 rounded-xl space-y-2 text-xs">
+              <div className="bg-white border border-[#E2E8F0] p-4 rounded-xl space-y-2 text-xs">
                 <span className="font-bold text-[#B3261E] block uppercase tracking-wider text-[11px]">
                   Government of Dubai License Verified
                 </span>
@@ -232,7 +232,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right Column: RFP & Bid Request Form (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 reveal-on-scroll reveal-right">
+          <div className="lg:col-span-7 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 reveal-on-scroll reveal-right">
             {isSubmitted ? (
               <div className="text-center py-12 px-4 space-y-5">
                 <div className="w-16 h-16 bg-emerald-500/10 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
@@ -242,7 +242,7 @@ export default function ContactSection() {
                   <span className="text-xs font-bold uppercase tracking-widest text-emerald-700">Inquiry Logged Successfully</span>
                   <h3 className="text-2xl font-black text-[#1E293B] font-display">Tender / RFP Transmitted!</h3>
                   {submissionRef && (
-                    <div className="inline-block font-mono text-xs font-bold text-[#B3261E] bg-[#FAF8F5] px-3 py-1 rounded-lg border border-[#EFE9DF] mt-1">
+                    <div className="inline-block font-mono text-xs font-bold text-[#B3261E] bg-[#F8FAFC] px-3 py-1 rounded-lg border border-[#E2E8F0] mt-1">
                       Tracking Reference: {submissionRef}
                     </div>
                   )}
@@ -289,7 +289,7 @@ export default function ContactSection() {
                   </a>
                 </div>
 
-                <div className="pt-4 border-t border-[#E5DED3]">
+                <div className="pt-4 border-t border-[#E2E8F0]">
                   <button
                     onClick={() => {
                       setIsSubmitted(false);
@@ -314,7 +314,7 @@ export default function ContactSection() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="border-b border-[#E5DED3] pb-4">
+                <div className="border-b border-[#E2E8F0] pb-4">
                   <h3 className="text-xl font-black text-[#1E293B] font-display">Submit RFP / Villa Tender</h3>
                   <p className="text-xs text-[#64748B] mt-1 font-medium">Direct routing to General Manager Jose K. George and engineering managers.</p>
                 </div>
@@ -329,7 +329,7 @@ export default function ContactSection() {
                       placeholder="e.g. Mr. Khalifa Almas"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                      className="w-full bg-white border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
 
@@ -341,7 +341,7 @@ export default function ContactSection() {
                       placeholder="+971-5X-XXXXXXX"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                      className="w-full bg-white border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
                 </div>
@@ -356,7 +356,7 @@ export default function ContactSection() {
                       placeholder="client@domain.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                      className="w-full bg-white border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
 
@@ -367,7 +367,7 @@ export default function ContactSection() {
                       placeholder="e.g. Plot No. 4317233, Al Barsha"
                       value={formData.plotNo}
                       onChange={(e) => setFormData({ ...formData, plotNo: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                      className="w-full bg-white border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
                 </div>
@@ -379,7 +379,7 @@ export default function ContactSection() {
                     <select
                       value={formData.serviceType}
                       onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                      className="w-full bg-white border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     >
                       <option value="Building Contracting (G+1 Villa / Majlis)">Building Contracting (G+1 Villa / Majlis)</option>
                       <option value="MEP & HVAC Engineering">MEP & HVAC Engineering</option>
@@ -401,7 +401,7 @@ export default function ContactSection() {
                       placeholder="e.g. As per Consultant BOQ / Tender drawings"
                       value={formData.budgetRange}
                       onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                      className="w-full bg-white border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
                 </div>
@@ -414,7 +414,7 @@ export default function ContactSection() {
                     placeholder="Provide details about consultant (e.g. Croquis, Al Manhal), required ground breaking date, Majlis requirements, etc."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
+                    className="w-full bg-white border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                   />
                 </div>
 
@@ -424,7 +424,7 @@ export default function ContactSection() {
                     <span>Attach Municipality Drawings / Blueprints & BOQ</span>
                     <span className="text-[11px] text-[#64748B] font-normal">Max 50MB (PDF, DWG, DXF, Images, ZIP)</span>
                   </label>
-                  <div className="relative border-2 border-dashed border-[#CBD5E1] hover:border-[#B3261E] rounded-xl p-4 text-center cursor-pointer transition bg-[#FBF9F5]">
+                  <div className="relative border-2 border-dashed border-[#CBD5E1] hover:border-[#B3261E] rounded-xl p-4 text-center cursor-pointer transition bg-white">
                     <input
                       type="file"
                       accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg,.doc,.docx,.zip"

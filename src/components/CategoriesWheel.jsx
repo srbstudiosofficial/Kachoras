@@ -53,7 +53,7 @@ const DISCIPLINE_ASSETS = {
 
 export default function CategoriesWheel({ onSelectServiceForQuote }) {
   return (
-    <section id="services" className="py-24 bg-[#F5F2EB] relative border-t border-[#E5DED3]">
+    <section id="services" className="py-24 bg-[#F8FAFC] relative border-t border-[#E2E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
@@ -82,7 +82,7 @@ export default function CategoriesWheel({ onSelectServiceForQuote }) {
               <div
                 key={cat.id}
                 data-delay={idx * 150}
-                className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#B3261E] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group reveal-on-scroll reveal-init shimmer-trigger"
+                className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#B3261E] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group reveal-on-scroll reveal-init shimmer-trigger"
               >
                 <div>
                   {/* Discipline Photography */}
@@ -134,7 +134,7 @@ export default function CategoriesWheel({ onSelectServiceForQuote }) {
                 </div>
 
                 {/* Card Action */}
-                <div className="p-5 pt-0 border-t border-[#F2ECE1] mt-2">
+                <div className="p-5 pt-0 border-t border-[#F1F5F9] mt-2">
                   <button
                     onClick={() => onSelectServiceForQuote && onSelectServiceForQuote(cat.title)}
                     className="w-full min-h-[44px] pt-1 flex items-center justify-between text-xs font-bold text-[#B3261E] group-hover:text-[#5C200E] transition cursor-pointer"
