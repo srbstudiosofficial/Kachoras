@@ -107,7 +107,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
                 In-House Engineering Disciplines
               </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#111622] font-display">
-                Single-Contractor Capabilities
+                Complete Turnkey Construction Services
               </h2>
               <p className="text-xs sm:text-sm text-slate-600">
                 Turnkey civil construction, certified MEP engineering, and architectural fabrication under one licensed Dubai contractor.

@@ -102,7 +102,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
       {/* 1. Page Header */}
       <PageHeader 
         title="Our Contracting Disciplines"
-        subtitle="Single-Contractor Accountability: Civil, MEP, Aluminium & Fitout Engineered Under Dubai Trade License #578964"
+        subtitle="Complete Turnkey Construction Services: Civil, MEP, Aluminium & Fitout Engineered Under Dubai Trade License #578964"
         breadcrumb="Disciplines & Services"
         onNavigate={onNavigate}
       />

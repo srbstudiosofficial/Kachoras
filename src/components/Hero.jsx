@@ -128,7 +128,7 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
               
               <div className="flex items-center justify-between border-b border-white/10 pb-3">
                 <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#E0A96D]">
-                  Corporate Capabilities
+                  Capabilities Showcase
                 </span>
                 <span className="text-[10px] sm:text-[11px] font-mono text-slate-300 bg-white/10 px-2.5 py-0.5 rounded-full border border-white/10">
                   Dubai • 2006–2026
