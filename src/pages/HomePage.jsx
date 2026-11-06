@@ -116,7 +116,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
 
             <button
               onClick={() => onNavigate('services')}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-[#7A2E16] hover:text-[#63220E] transition py-3 px-6 rounded-xl border border-[#7A2E16]/30 hover:border-[#7A2E16] bg-white shadow-xs cursor-pointer shrink-0 min-h-[44px]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B3261E] hover:text-[#961F18] transition py-3 px-6 rounded-xl border border-[#B3261E]/30 hover:border-[#B3261E] bg-white shadow-xs cursor-pointer shrink-0 min-h-[44px]"
             >
               <span>View Full Technical Specifications</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
@@ -128,7 +128,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
             {coreDivisions.map((div, idx) => (
               <div 
                 key={idx}
-                className="bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-xs hover:border-[#7A2E16] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
+                className="bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-xs hover:border-[#B3261E] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
               >
                 {/* Visual Image Header */}
                 <div className="h-48 sm:h-56 relative overflow-hidden bg-slate-900">
@@ -169,10 +169,10 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
                     </div>
                     <button
                       onClick={() => onNavigate('services')}
-                      className="text-xs font-bold text-[#7A2E16] hover:underline flex items-center gap-1.5 cursor-pointer py-1"
+                      className="text-xs font-bold text-[#B3261E] hover:underline flex items-center gap-1.5 cursor-pointer py-1"
                     >
                       <span>Inspect Scope of Work</span>
-                      <ArrowRight className="w-3 h-3 text-[#7A2E16]" />
+                      <ArrowRight className="w-3 h-3 text-[#B3261E]" />
                     </button>
                   </div>
                 </div>
@@ -202,7 +202,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
 
             <button
               onClick={() => onNavigate('projects')}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-[#7A2E16] hover:text-[#63220E] transition py-3 px-6 rounded-xl border border-[#7A2E16]/30 hover:border-[#7A2E16] bg-[#FAF8F5] shadow-xs cursor-pointer shrink-0 min-h-[44px]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider text-[#B3261E] hover:text-[#961F18] transition py-3 px-6 rounded-xl border border-[#B3261E]/30 hover:border-[#B3261E] bg-[#FAF8F5] shadow-xs cursor-pointer shrink-0 min-h-[44px]"
             >
               <span>Explore All 20 Verified Works</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
@@ -215,7 +215,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
               <div
                 key={item.id}
                 onClick={() => onNavigate('project-detail', item.id)}
-                className="bg-[#FAF9F6] border border-[#E5DED3] rounded-2xl overflow-hidden shadow-xs hover:border-[#7A2E16] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer"
+                className="bg-[#FAF9F6] border border-[#E5DED3] rounded-2xl overflow-hidden shadow-xs hover:border-[#B3261E] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer"
               >
                 {/* Visual Image */}
                 <div className="h-56 sm:h-64 relative overflow-hidden bg-slate-900">
@@ -246,7 +246,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
                 {/* Card Content */}
                 <div className="p-6 space-y-3 flex-1 flex flex-col justify-between">
                   <div className="space-y-1.5">
-                    <h3 className="text-base sm:text-lg font-bold font-display text-[#111622] leading-snug group-hover:text-[#7A2E16] transition-colors">
+                    <h3 className="text-base sm:text-lg font-bold font-display text-[#111622] leading-snug group-hover:text-[#B3261E] transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-xs text-slate-600 leading-relaxed font-sans line-clamp-2">
@@ -254,7 +254,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs font-bold text-[#7A2E16]">
+                  <div className="pt-3 border-t border-[#F0EBE1] flex items-center justify-between text-xs font-bold text-[#B3261E]">
                     <span>View Handover Details</span>
                     <ArrowRight className="w-3.5 h-3.5 text-[#C59B27] group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -285,7 +285,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
             {consultantPartners.map((item, idx) => (
               <div 
                 key={idx}
-                className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5DED3] space-y-1.5 hover:border-[#7A2E16] transition shadow-xs"
+                className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5DED3] space-y-1.5 hover:border-[#B3261E] transition shadow-xs"
               >
                 <div className="text-[10px] font-mono text-amber-700 uppercase font-semibold">
                   {item.discipline}
@@ -326,7 +326,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
                   4 Core Disciplines
                 </span>
                 <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-[#E5DED3] text-[11px] sm:text-xs">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#7A2E16] shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#B3261E] shrink-0" />
                   Dedicated Handover Sheets
                 </span>
               </div>
@@ -334,7 +334,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
 
             <button
               onClick={() => onNavigate('projects')}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-[#7A2E16] hover:bg-[#63220E] transition py-3.5 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xs hover:shadow-md cursor-pointer shrink-0 min-h-[44px]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-[#B3261E] hover:bg-[#961F18] transition py-3.5 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xs hover:shadow-md cursor-pointer shrink-0 min-h-[44px]"
             >
               <span>View Projects Directory</span>
               <ArrowRight className="w-4 h-4 text-[#C59B27]" />

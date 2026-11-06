@@ -23,10 +23,10 @@ export default function VisionMissionSection() {
         <div className="grid md:grid-cols-2 gap-8 items-stretch">
           
           {/* Vision Column */}
-          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-[#E5DED3] shadow-sm hover:shadow-2xl hover:border-[#7A2E16] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between space-y-6 reveal-on-scroll reveal-left">
+          <div className="bg-white rounded-2xl p-8 sm:p-10 border border-[#E5DED3] shadow-sm hover:shadow-2xl hover:border-[#B3261E] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between space-y-6 reveal-on-scroll reveal-left">
             <div className="space-y-4">
               <div className="flex items-center justify-between border-b border-[#F0EBE1] pb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7A2E16]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">
                   Strategic Purpose
                 </span>
                 <span className="text-xs font-mono text-slate-400">01 / VISION</span>
@@ -36,7 +36,7 @@ export default function VisionMissionSection() {
                 Vision
               </h3>
 
-              <blockquote className="border-l-2 border-[#7A2E16] pl-5 py-2 text-slate-700 text-base leading-relaxed italic font-serif">
+              <blockquote className="border-l-2 border-[#B3261E] pl-5 py-2 text-slate-700 text-base leading-relaxed italic font-serif">
                 "To be the leading contracting company recognized for our commitment to quality, innovation, and sustainability, transforming the built environment while enhancing the communities we serve."
               </blockquote>
             </div>

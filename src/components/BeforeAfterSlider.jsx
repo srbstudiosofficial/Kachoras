@@ -90,7 +90,7 @@ export default function BeforeAfterSlider() {
                 }}
                 className={`px-4 py-2 rounded-lg text-xs font-bold transition cursor-pointer ${
                   activeCaseIndex === idx
-                    ? 'bg-[#7A2E16] text-white shadow-md'
+                    ? 'bg-[#B3261E] text-white shadow-md'
                     : 'text-white/60 hover:text-white'
                 }`}
               >
@@ -172,7 +172,7 @@ export default function BeforeAfterSlider() {
               className="absolute top-0 bottom-0 w-1 bg-[#C59B27] pointer-events-none shadow-[0_0_15px_rgba(197,155,39,0.8)]"
               style={{ left: `${sliderPosition}%` }}
             >
-              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-[#7A2E16] text-[#C59B27] flex items-center justify-center shadow-2xl border-2 border-white pointer-events-auto cursor-grab active:cursor-grabbing">
+              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-[#B3261E] text-[#C59B27] flex items-center justify-center shadow-2xl border-2 border-white pointer-events-auto cursor-grab active:cursor-grabbing">
                 <MoveHorizontal className="w-4 h-4 stroke-[2.5]" />
               </div>
             </div>

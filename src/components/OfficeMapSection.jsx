@@ -34,7 +34,7 @@ export default function OfficeMapSection() {
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Interactive Google Map Embed (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#7A2E16] transition-all duration-500 flex flex-col justify-between reveal-on-scroll reveal-left">
+          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 flex flex-col justify-between reveal-on-scroll reveal-left">
             <div className="p-5 border-b border-[#F0EBE1] flex items-center justify-between">
               <div>
                 <h3 className="text-base font-bold text-[#14171F] font-display">
@@ -46,7 +46,7 @@ export default function OfficeMapSection() {
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#7A2E16] hover:text-[#5C200E] bg-[#FAF8F5] px-3 py-1.5 rounded-lg border border-[#E5DED3] transition"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#B3261E] hover:text-[#5C200E] bg-[#FAF8F5] px-3 py-1.5 rounded-lg border border-[#E5DED3] transition"
               >
                 <span>Google Maps</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -75,11 +75,11 @@ export default function OfficeMapSection() {
           </div>
 
           {/* Logistics & Access Coordinates (5 cols) */}
-          <div className="lg:col-span-5 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#7A2E16] transition-all duration-500 flex flex-col justify-between reveal-on-scroll reveal-right">
+          <div className="lg:col-span-5 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 flex flex-col justify-between reveal-on-scroll reveal-right">
             
             <div className="space-y-6">
               <div className="border-b border-[#F0EBE1] pb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7A2E16]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">
                   Facility Coordinates
                 </span>
                 <h3 className="text-xl font-bold text-[#14171F] font-display mt-0.5">
@@ -89,7 +89,7 @@ export default function OfficeMapSection() {
 
               <div className="space-y-4 text-xs text-slate-600">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#E5DED3] flex items-center justify-center text-[#7A2E16] shrink-0 mt-0.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#E5DED3] flex items-center justify-center text-[#B3261E] shrink-0 mt-0.5">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
@@ -100,7 +100,7 @@ export default function OfficeMapSection() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#E5DED3] flex items-center justify-center text-[#7A2E16] shrink-0 mt-0.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#E5DED3] flex items-center justify-center text-[#B3261E] shrink-0 mt-0.5">
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
@@ -111,7 +111,7 @@ export default function OfficeMapSection() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#E5DED3] flex items-center justify-center text-[#7A2E16] shrink-0 mt-0.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#E5DED3] flex items-center justify-center text-[#B3261E] shrink-0 mt-0.5">
                     <Building2 className="w-4 h-4" />
                   </div>
                   <div>

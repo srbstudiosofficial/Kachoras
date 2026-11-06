@@ -81,11 +81,11 @@ export default function Testimonials() {
           {CONSULTANCY_RECORDS.map((item, idx) => (
             <div
               key={idx}
-              className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:border-[#7A2E16] transition-all space-y-4"
+              className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-xs hover:border-[#B3261E] transition-all space-y-4"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between border-b border-[#F0EBE1] pb-3">
-                  <span className="text-[11px] font-mono font-bold text-[#7A2E16] bg-[#7A2E16]/10 px-2 py-0.5 rounded">
+                  <span className="text-[11px] font-mono font-bold text-[#B3261E] bg-[#B3261E]/10 px-2 py-0.5 rounded">
                     {item.plotRef}
                   </span>
                   <span className="text-[11px] font-semibold text-slate-500">

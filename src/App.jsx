@@ -197,7 +197,7 @@ export default function App() {
 
   return (
     <CoreLayoutProvider>
-      <div className="min-h-screen bg-[#FBF9F5] text-[#1E293B] flex flex-col selection:bg-[#7A2E16] selection:text-white font-sans antialiased overflow-x-hidden">
+      <div className="min-h-screen bg-[#FBF9F5] text-[#1E293B] flex flex-col selection:bg-[#B3261E] selection:text-white font-sans antialiased overflow-x-hidden">
         
         {/* Fixed Luxury Navigation */}
         <Navbar 

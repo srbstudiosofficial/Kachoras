@@ -35,9 +35,9 @@ export default function ContactPage({ onNavigate, onOpenQuoteModal }) {
             
             <a 
               href={`tel:${COMPANY_INFO.phone}`}
-              className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] hover:border-[#7A2E16] transition group flex items-start gap-3.5"
+              className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] hover:border-[#B3261E] transition group flex items-start gap-3.5"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#7A2E16]/10 text-[#7A2E16] flex items-center justify-center shrink-0 group-hover:bg-[#7A2E16] group-hover:text-white transition">
+              <div className="w-10 h-10 rounded-xl bg-[#B3261E]/10 text-[#B3261E] flex items-center justify-center shrink-0 group-hover:bg-[#B3261E] group-hover:text-white transition">
                 <Phone className="w-5 h-5" />
               </div>
               <div className="space-y-0.5">
@@ -65,9 +65,9 @@ export default function ContactPage({ onNavigate, onOpenQuoteModal }) {
 
             <a 
               href={`mailto:${COMPANY_INFO.email}`}
-              className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] hover:border-[#7A2E16] transition group flex items-start gap-3.5"
+              className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] hover:border-[#B3261E] transition group flex items-start gap-3.5"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#7A2E16]/10 text-[#7A2E16] flex items-center justify-center shrink-0 group-hover:bg-[#7A2E16] group-hover:text-white transition">
+              <div className="w-10 h-10 rounded-xl bg-[#B3261E]/10 text-[#B3261E] flex items-center justify-center shrink-0 group-hover:bg-[#B3261E] group-hover:text-white transition">
                 <Mail className="w-5 h-5" />
               </div>
               <div className="space-y-0.5">
@@ -78,7 +78,7 @@ export default function ContactPage({ onNavigate, onOpenQuoteModal }) {
             </a>
 
             <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] flex items-start gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#C59B27]/15 text-[#7A2E16] flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-[#C59B27]/15 text-[#B3261E] flex items-center justify-center shrink-0">
                 <Clock className="w-5 h-5" />
               </div>
               <div className="space-y-0.5">

@@ -52,7 +52,7 @@ export default function LicensePage({ onNavigate, onOpenQuoteModal }) {
             <div className="flex flex-wrap items-center gap-3 shrink-0">
               <button
                 onClick={() => onNavigate('contact')}
-                className="px-6 py-3.5 bg-[#7A2E16] hover:bg-[#63220E] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md transition cursor-pointer flex items-center gap-2"
+                className="px-6 py-3.5 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md transition cursor-pointer flex items-center gap-2"
               >
                 <span>Request PQD Dossier</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />

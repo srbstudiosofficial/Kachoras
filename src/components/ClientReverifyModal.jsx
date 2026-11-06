@@ -112,7 +112,7 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in">
-      <div className="bg-[#FAF9F6] border-2 border-[#7A2E16] max-w-6xl w-full h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+      <div className="bg-[#FAF9F6] border-2 border-[#B3261E] max-w-6xl w-full h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         
         {/* Modal Header */}
         <div className="bg-[#14171F] text-white p-4 px-6 flex items-center justify-between border-b border-[#2D3748]">
@@ -143,7 +143,7 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
               onClick={() => setActiveTab(idx)}
               className={`px-3 py-2 rounded-lg font-semibold whitespace-nowrap transition flex items-center gap-1.5 ${
                 idx === activeTab
-                  ? 'bg-[#7A2E16] text-white shadow'
+                  ? 'bg-[#B3261E] text-white shadow'
                   : 'bg-[#FAF8F5] text-slate-700 hover:bg-[#F2ECE1] border border-[#E5DED3]'
               }`}
             >
@@ -160,14 +160,14 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
           <div className="lg:col-span-7 flex flex-col bg-white rounded-xl border border-[#E5DED3] p-3 shadow-sm">
             <div className="flex items-center justify-between pb-2 border-b border-[#E5DED3] text-xs font-semibold text-slate-700">
               <span className="flex items-center gap-1.5">
-                <Image className="w-4 h-4 text-[#7A2E16]" />
+                <Image className="w-4 h-4 text-[#B3261E]" />
                 Client Reference Screenshot
               </span>
               <a
                 href={current.screenshot}
                 target="_blank"
                 rel="noreferrer"
-                className="text-[11px] text-[#7A2E16] hover:underline flex items-center gap-1"
+                className="text-[11px] text-[#B3261E] hover:underline flex items-center gap-1"
               >
                 <span>Open Full Resolution</span>
                 <ExternalLink className="w-3 h-3" />
@@ -215,7 +215,7 @@ export default function ClientReverifyModal({ isOpen, onClose }) {
             <div className="pt-4 border-t border-[#E5DED3] flex items-center justify-between gap-3">
               <button
                 onClick={() => handleJump(current.targetId)}
-                className="flex-1 py-2.5 px-4 bg-[#7A2E16] hover:bg-[#652310] text-white text-xs font-bold rounded-xl shadow transition flex items-center justify-center gap-2"
+                className="flex-1 py-2.5 px-4 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold rounded-xl shadow transition flex items-center justify-center gap-2"
               >
                 <Eye className="w-4 h-4 text-amber-300" />
                 <span>Jump to this Section on Prototype</span>

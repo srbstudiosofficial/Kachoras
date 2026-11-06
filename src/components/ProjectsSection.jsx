@@ -71,8 +71,8 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
                 onClick={() => setFilter(cat.id)}
                 className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
                   isActive
-                    ? 'bg-[#7A2E16] text-white shadow-md'
-                    : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#F2ECE1] hover:text-[#7A2E16]'
+                    ? 'bg-[#B3261E] text-white shadow-md'
+                    : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#F2ECE1] hover:text-[#B3261E]'
                 }`}
               >
                 <span>{cat.label}</span>
@@ -91,7 +91,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
           {filteredProjects.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#7A2E16] transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-xs hover:shadow-lg hover:border-[#B3261E] transition-all duration-300 flex flex-col justify-between group"
             >
               <div 
                 className="cursor-pointer"
@@ -125,7 +125,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
 
                 {/* Body Details */}
                 <div className="p-6 space-y-3">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A2E16] block">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#B3261E] block">
                     {item.type}
                   </span>
 
@@ -161,7 +161,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
                       setSelectedProject(item);
                     }
                   }}
-                  className="w-full mt-3 py-2.5 px-4 bg-[#FAF8F5] hover:bg-[#7A2E16] hover:text-white border border-[#E5DED3] hover:border-[#7A2E16] rounded-xl text-xs font-bold text-slate-800 transition-colors flex items-center justify-center gap-2 cursor-pointer group-hover:bg-[#7A2E16] group-hover:text-white"
+                  className="w-full mt-3 py-2.5 px-4 bg-[#FAF8F5] hover:bg-[#B3261E] hover:text-white border border-[#E5DED3] hover:border-[#B3261E] rounded-xl text-xs font-bold text-slate-800 transition-colors flex items-center justify-center gap-2 cursor-pointer group-hover:bg-[#B3261E] group-hover:text-white"
                 >
                   <span>View Full Project Sheet</span>
                   <ArrowRight className="w-3.5 h-3.5" />

@@ -142,7 +142,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
             <div className="bg-[#FBF9F5] border border-[#E5DED3] p-4 sm:p-5 rounded-xl max-w-md mx-auto text-left space-y-2 text-xs">
               <div className="flex justify-between items-center text-[#64748B] border-b border-[#E5DED3] pb-2">
                 <span>Protocol Reference:</span>
-                <strong className="text-[#7A2E16] font-mono text-sm font-black">{referenceId}</strong>
+                <strong className="text-[#B3261E] font-mono text-sm font-black">{referenceId}</strong>
               </div>
               <div className="flex justify-between items-center text-[#475569]">
                 <span>Discipline:</span>
@@ -154,7 +154,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
               </div>
               <div className="flex justify-between items-center text-[#475569]">
                 <span>Contractor Lead:</span>
-                <span className="font-bold text-[#7A2E16]">Jose K. George (General Manager)</span>
+                <span className="font-bold text-[#B3261E]">Jose K. George (General Manager)</span>
               </div>
             </div>
 
@@ -189,7 +189,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                 href={`mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(`Kachoras RFQ Proposal [${referenceId}] - ${formData.name || 'Client'}`)}&body=${encodeURIComponent(
                   `Dear Kachoras Estimating Team,\n\nPlease find my official RFQ protocol:\n\nReference: ${referenceId}\nClient: ${formData.name}\nPhone: ${formData.phone}\nDiscipline: ${formData.category}\nEstimated Area: ${formData.sqft} sq.ft\nBudget: ${formData.budget || 'As per BOQ'}\nTimeline: ${formData.timeline}\nLocation: ${formData.location}\nPlot No: ${formData.plotNo || 'N/A'}\nDrawings Status: ${formData.hasBlueprints}\nAdditional Notes: ${formData.notes || 'N/A'}\n\nBest regards,\n${formData.name}`
                 )}`}
-                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-[#7A2E16] hover:bg-[#5C200E] text-white font-bold text-xs rounded-xl shadow-md transition min-h-[44px]"
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-[#B3261E] hover:bg-[#5C200E] text-white font-bold text-xs rounded-xl shadow-md transition min-h-[44px]"
               >
                 <Mail className="w-4 h-4" />
                 <span>Email Official Desk</span>
@@ -209,7 +209,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
           <div>
             <div className="border-b border-[#E5DED3] pb-4 space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7A2E16] bg-[#7A2E16]/10 px-3 py-0.5 rounded-full border border-[#7A2E16]/20">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E] bg-[#B3261E]/10 px-3 py-0.5 rounded-full border border-[#B3261E]/20">
                   Step {step} of 3
                 </span>
                 <span className="text-xs text-[#64748B] font-medium">• Dubai Municipality G+1 Contractor</span>
@@ -230,7 +230,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                     <select
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     >
                       <option value="Building Contracting (G+1 Villa / Majlis)">Building Contracting (G+1 Villa / Majlis)</option>
                       <option value="MEP & HVAC Works">MEP & HVAC Works</option>
@@ -248,7 +248,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="e.g. 6,500"
                         value={formData.sqft}
                         onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
 
@@ -257,7 +257,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                       <select
                         value={formData.timeline}
                         onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       >
                         <option value="Immediate (Next 30-60 Days)">Immediate (Next 30-60 Days)</option>
                         <option value="3 - 6 Months">3 – 6 Months</option>
@@ -271,7 +271,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                     <button
                       type="button"
                       onClick={() => setStep(2)}
-                      className="px-6 py-3.5 bg-[#7A2E16] hover:bg-[#5C200E] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-lg transition w-full sm:w-auto min-h-[44px]"
+                      className="px-6 py-3.5 bg-[#B3261E] hover:bg-[#5C200E] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-lg transition w-full sm:w-auto min-h-[44px]"
                     >
                       <span>Proceed to Plot Details</span>
                       <ArrowRight className="w-4 h-4" />
@@ -291,7 +291,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="e.g. 4317233"
                         value={formData.plotNo}
                         onChange={(e) => setFormData({ ...formData, plotNo: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
 
@@ -302,7 +302,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="e.g. Al Barsha, Wadi Al Shabak"
                         value={formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
                   </div>
@@ -318,7 +318,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="e.g. As per BOQ or enter amount"
                         value={formData.budget}
                         onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
 
@@ -327,7 +327,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                       <select
                         value={formData.hasBlueprints}
                         onChange={(e) => setFormData({ ...formData, hasBlueprints: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       >
                         <option value="Yes, full stamped drawings">Yes, full stamped drawings</option>
                         <option value="Under Review by Consultant">Under Review by Consultant</option>
@@ -348,7 +348,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                     <button
                       type="button"
                       onClick={() => setStep(3)}
-                      className="px-6 py-3.5 bg-[#7A2E16] hover:bg-[#5C200E] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-lg transition w-full sm:w-auto min-h-[44px]"
+                      className="px-6 py-3.5 bg-[#B3261E] hover:bg-[#5C200E] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-lg transition w-full sm:w-auto min-h-[44px]"
                     >
                       <span>Proceed to Contact Info</span>
                       <ArrowRight className="w-4 h-4" />
@@ -369,7 +369,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="e.g. Mr. Ahmed"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
 
@@ -380,7 +380,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="Company or Private"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
                   </div>
@@ -394,7 +394,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="name@domain.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
 
@@ -406,7 +406,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                         placeholder="+971-5X-XXXXXXX"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                        className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                       />
                     </div>
                   </div>
@@ -418,7 +418,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                       placeholder="e.g. Consultant: Croquis Engineering; Majlis with custom kitchen and guest bathroom."
                       value={formData.notes}
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl p-3 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
 
@@ -447,7 +447,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-8 py-3.5 bg-gradient-to-r from-[#7A2E16] via-[#8E341B] to-[#7A2E16] hover:brightness-110 text-white font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 shadow-lg transition w-full sm:w-auto min-h-[44px] disabled:opacity-50"
+                      className="px-8 py-3.5 bg-gradient-to-r from-[#B3261E] via-[#8E341B] to-[#B3261E] hover:brightness-110 text-white font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 shadow-lg transition w-full sm:w-auto min-h-[44px] disabled:opacity-50"
                     >
                       <span>{isSubmitting ? 'Transmitting Request...' : 'Transmit Proposal Request'}</span>
                     </button>

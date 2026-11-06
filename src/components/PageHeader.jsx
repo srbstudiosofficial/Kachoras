@@ -15,7 +15,7 @@ export default function PageHeader({ title, subtitle, breadcrumb, onNavigate }) 
       />
 
       {/* Subtle Ambient Glow */}
-      <div className="absolute top-1/4 right-10 w-96 h-96 bg-[#7A2E16]/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 right-10 w-96 h-96 bg-[#B3261E]/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-10 w-72 h-72 bg-[#C59B27]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">

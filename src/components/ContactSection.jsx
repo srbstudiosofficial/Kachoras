@@ -126,14 +126,14 @@ export default function ContactSection() {
           {/* Left Column: Official Contact Card (5 cols) */}
           <div className="lg:col-span-5 space-y-6 reveal-on-scroll reveal-left">
             
-            <div className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#7A2E16] transition-all duration-500">
+            <div className="bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500">
               <h3 className="text-xl font-black text-[#1E293B] font-display border-b border-[#E5DED3] pb-4">
                 Corporate Office Details
               </h3>
 
               <div className="space-y-5 text-xs sm:text-sm">
                 <div className="flex items-start gap-3.5 text-[#475569]">
-                  <div className="w-10 h-10 rounded-xl bg-[#7A2E16]/10 flex items-center justify-center text-[#7A2E16] shrink-0 mt-0.5">
+                  <div className="w-10 h-10 rounded-xl bg-[#B3261E]/10 flex items-center justify-center text-[#B3261E] shrink-0 mt-0.5">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
@@ -144,12 +144,12 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex items-start gap-3.5 text-[#475569]">
-                  <div className="w-10 h-10 rounded-xl bg-[#7A2E16]/10 flex items-center justify-center text-[#7A2E16] shrink-0 mt-0.5">
+                  <div className="w-10 h-10 rounded-xl bg-[#B3261E]/10 flex items-center justify-center text-[#B3261E] shrink-0 mt-0.5">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
                     <strong className="text-[#1E293B] block font-bold text-sm">Official Landline:</strong>
-                    <a href={`tel:${COMPANY_INFO.phone}`} className="text-[#7A2E16] font-bold hover:underline text-sm">
+                    <a href={`tel:${COMPANY_INFO.phone}`} className="text-[#B3261E] font-bold hover:underline text-sm">
                       {COMPANY_INFO.phone}
                     </a>
                     <span className="text-[#64748B] block text-xs mt-0.5">Fax: {COMPANY_INFO.fax} | Mobile: {COMPANY_INFO.mobile}</span>
@@ -157,12 +157,12 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex items-start gap-3.5 text-[#475569]">
-                  <div className="w-10 h-10 rounded-xl bg-[#7A2E16]/10 flex items-center justify-center text-[#7A2E16] shrink-0 mt-0.5">
+                  <div className="w-10 h-10 rounded-xl bg-[#B3261E]/10 flex items-center justify-center text-[#B3261E] shrink-0 mt-0.5">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
                     <strong className="text-[#1E293B] block font-bold text-sm">Official Email Desk:</strong>
-                    <a href={`mailto:${COMPANY_INFO.email}`} className="text-[#7A2E16] font-bold hover:underline text-sm">
+                    <a href={`mailto:${COMPANY_INFO.email}`} className="text-[#B3261E] font-bold hover:underline text-sm">
                       {COMPANY_INFO.email}
                     </a>
                   </div>
@@ -195,7 +195,7 @@ export default function ContactSection() {
 
               {/* License Quick Summary */}
               <div className="bg-[#FBF9F5] border border-[#E5DED3] p-4 rounded-xl space-y-2 text-xs">
-                <span className="font-bold text-[#7A2E16] block uppercase tracking-wider text-[11px]">
+                <span className="font-bold text-[#B3261E] block uppercase tracking-wider text-[11px]">
                   Government of Dubai License Verified
                 </span>
                 <div className="text-[#475569] space-y-1">
@@ -208,9 +208,9 @@ export default function ContactSection() {
             </div>
 
             {/* Quality Commitment Card */}
-            <div className="bg-[#7A2E16]/5 border border-[#7A2E16]/20 rounded-2xl p-6 space-y-3">
-              <div className="flex items-center gap-2 text-[#7A2E16] font-bold text-sm">
-                <ShieldCheck className="w-5 h-5 text-[#7A2E16]" />
+            <div className="bg-[#B3261E]/5 border border-[#B3261E]/20 rounded-2xl p-6 space-y-3">
+              <div className="flex items-center gap-2 text-[#B3261E] font-bold text-sm">
+                <ShieldCheck className="w-5 h-5 text-[#B3261E]" />
                 <span>Our Dubai Contracting Guarantee</span>
               </div>
               <ul className="text-xs text-[#475569] space-y-2 font-medium">
@@ -232,7 +232,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right Column: RFP & Bid Request Form (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:border-[#7A2E16] transition-all duration-500 reveal-on-scroll reveal-right">
+          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 reveal-on-scroll reveal-right">
             {isSubmitted ? (
               <div className="text-center py-12 px-4 space-y-5">
                 <div className="w-16 h-16 bg-emerald-500/10 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
@@ -242,7 +242,7 @@ export default function ContactSection() {
                   <span className="text-xs font-bold uppercase tracking-widest text-emerald-700">Inquiry Logged Successfully</span>
                   <h3 className="text-2xl font-black text-[#1E293B] font-display">Tender / RFP Transmitted!</h3>
                   {submissionRef && (
-                    <div className="inline-block font-mono text-xs font-bold text-[#7A2E16] bg-[#FAF8F5] px-3 py-1 rounded-lg border border-[#EFE9DF] mt-1">
+                    <div className="inline-block font-mono text-xs font-bold text-[#B3261E] bg-[#FAF8F5] px-3 py-1 rounded-lg border border-[#EFE9DF] mt-1">
                       Tracking Reference: {submissionRef}
                     </div>
                   )}
@@ -282,7 +282,7 @@ export default function ContactSection() {
                     href={`mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(`RFP Tender: ${formData.serviceType} - ${formData.name}`)}&body=${encodeURIComponent(
                       `Dear Kachoras Estimating Team,\n\nI would like to submit a project inquiry:\n\n• Name: ${formData.name}\n• Phone: ${formData.phone}\n• Email: ${formData.email}\n• Service: ${formData.serviceType}\n• Plot/Location: ${formData.plotNo || 'Dubai'}\n• Budget Range: ${formData.budgetRange}\n• Scope Details: ${formData.message || 'N/A'}\n${attachedFile ? `• Attached Document: ${attachedFile}\n` : ''}\nBest regards,\n${formData.name}`
                     )}`}
-                    className="flex items-center justify-center gap-2 py-3 px-4 bg-[#7A2E16] hover:bg-[#5C200E] text-white font-bold text-xs rounded-xl shadow-md transition"
+                    className="flex items-center justify-center gap-2 py-3 px-4 bg-[#B3261E] hover:bg-[#5C200E] text-white font-bold text-xs rounded-xl shadow-md transition"
                   >
                     <Mail className="w-4 h-4" />
                     <span>Send via Email Desk</span>
@@ -329,7 +329,7 @@ export default function ContactSection() {
                       placeholder="e.g. Mr. Khalifa Almas"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
 
@@ -341,7 +341,7 @@ export default function ContactSection() {
                       placeholder="+971-5X-XXXXXXX"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
                 </div>
@@ -356,7 +356,7 @@ export default function ContactSection() {
                       placeholder="client@domain.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
 
@@ -367,7 +367,7 @@ export default function ContactSection() {
                       placeholder="e.g. Plot No. 4317233, Al Barsha"
                       value={formData.plotNo}
                       onChange={(e) => setFormData({ ...formData, plotNo: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
                 </div>
@@ -379,7 +379,7 @@ export default function ContactSection() {
                     <select
                       value={formData.serviceType}
                       onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     >
                       <option value="Building Contracting (G+1 Villa / Majlis)">Building Contracting (G+1 Villa / Majlis)</option>
                       <option value="MEP & HVAC Engineering">MEP & HVAC Engineering</option>
@@ -401,7 +401,7 @@ export default function ContactSection() {
                       placeholder="e.g. As per Consultant BOQ / Tender drawings"
                       value={formData.budgetRange}
                       onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                      className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                     />
                   </div>
                 </div>
@@ -414,7 +414,7 @@ export default function ContactSection() {
                     placeholder="Provide details about consultant (e.g. Croquis, Al Manhal), required ground breaking date, Majlis requirements, etc."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#7A2E16] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#7A2E16]"
+                    className="w-full bg-[#FBF9F5] border border-[#CBD5E1] rounded-xl px-4 py-3 sm:py-2.5 text-base sm:text-sm text-[#1E293B] placeholder-[#94A3B8] focus:border-[#B3261E] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#B3261E]"
                   />
                 </div>
 
@@ -424,18 +424,18 @@ export default function ContactSection() {
                     <span>Attach Municipality Drawings / Blueprints & BOQ</span>
                     <span className="text-[11px] text-[#64748B] font-normal">Max 50MB (PDF, DWG, DXF, Images, ZIP)</span>
                   </label>
-                  <div className="relative border-2 border-dashed border-[#CBD5E1] hover:border-[#7A2E16] rounded-xl p-4 text-center cursor-pointer transition bg-[#FBF9F5]">
+                  <div className="relative border-2 border-dashed border-[#CBD5E1] hover:border-[#B3261E] rounded-xl p-4 text-center cursor-pointer transition bg-[#FBF9F5]">
                     <input
                       type="file"
                       accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg,.doc,.docx,.zip"
                       onChange={handleFileUpload}
                       className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                     />
-                    <UploadCloud className="w-6 h-6 text-[#7A2E16] mx-auto mb-1" />
+                    <UploadCloud className="w-6 h-6 text-[#B3261E] mx-auto mb-1" />
                     <div className="text-xs text-[#64748B]">
                       {attachedFile ? (
                         <div className="flex items-center justify-center gap-2">
-                          <span className="text-[#7A2E16] font-bold">
+                          <span className="text-[#B3261E] font-bold">
                             Attached: {attachedFile} {attachmentFile?.size ? `(${(attachmentFile.size / 1024 / 1024).toFixed(2)} MB)` : ''}
                           </span>
                           <button
@@ -472,7 +472,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 bg-gradient-to-r from-[#7A2E16] via-[#8E341B] to-[#7A2E16] hover:brightness-110 text-white font-black text-sm rounded-xl shadow-lg shadow-[#7A2E16]/25 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="w-full py-4 bg-gradient-to-r from-[#B3261E] via-[#8E341B] to-[#B3261E] hover:brightness-110 text-white font-black text-sm rounded-xl shadow-lg shadow-[#B3261E]/25 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <span>Transmitting to Estimating Desk...</span>

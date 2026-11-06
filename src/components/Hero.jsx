@@ -98,7 +98,7 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
               <button
                 onClick={onOpenQuoteModal}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl text-xs sm:text-sm font-bold tracking-wider uppercase text-white bg-[#7A2E16] hover:bg-[#8F351A] transition shadow-lg hover:shadow-xl cursor-pointer min-h-[44px] active:scale-98"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl text-xs sm:text-sm font-bold tracking-wider uppercase text-white bg-[#B3261E] hover:bg-[#8F351A] transition shadow-lg hover:shadow-xl cursor-pointer min-h-[44px] active:scale-98"
               >
                 <span>Request Project Proposal</span>
                 <ArrowRight className="w-4 h-4 text-[#C59B27]" />

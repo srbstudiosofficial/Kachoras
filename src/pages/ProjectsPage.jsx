@@ -30,7 +30,7 @@ export default function ProjectsPage({ onNavigate, onOpenQuoteModal }) {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             
             <div className="p-3.5 sm:p-5 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] space-y-1">
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#7A2E16]">Handed Over</span>
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#B3261E]">Handed Over</span>
               <div className="text-2xl sm:text-3xl font-black text-[#1E293B] font-mono">500+</div>
               <p className="text-[11px] sm:text-xs text-slate-600">Projects completed across the UAE since 2006</p>
             </div>
@@ -49,7 +49,7 @@ export default function ProjectsPage({ onNavigate, onOpenQuoteModal }) {
 
             <div className="p-3.5 sm:p-5 rounded-2xl bg-[#FAF8F5] border border-[#E5DED3] space-y-1">
               <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-700">Authority Compliance</span>
-              <div className="text-2xl sm:text-3xl font-black text-[#7A2E16] font-mono">100%</div>
+              <div className="text-2xl sm:text-3xl font-black text-[#B3261E] font-mono">100%</div>
               <p className="text-[11px] sm:text-xs text-slate-600">DM, DEWA, and Civil Defence standards</p>
             </div>
 

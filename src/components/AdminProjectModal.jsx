@@ -490,7 +490,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
         {/* Modal Header */}
         <div className="bg-[#14171F] text-white px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between border-b border-white/10 shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#7A2E16] border border-[#C59B27]/40 flex items-center justify-center text-[#C59B27]">
+            <div className="w-10 h-10 rounded-xl bg-[#B3261E] border border-[#C59B27]/40 flex items-center justify-center text-[#C59B27]">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
@@ -552,7 +552,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
           {!isAuthenticated ? (
             /* Authentication Screen */
             <div className="max-w-md mx-auto py-10 space-y-6 text-center">
-              <div className="w-16 h-16 rounded-2xl bg-[#7A2E16]/10 border border-[#7A2E16]/30 flex items-center justify-center text-[#7A2E16] mx-auto">
+              <div className="w-16 h-16 rounded-2xl bg-[#B3261E]/10 border border-[#B3261E]/30 flex items-center justify-center text-[#B3261E] mx-auto">
                 <Lock className="w-8 h-8" />
               </div>
 
@@ -568,14 +568,14 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
               {/* Direct Link Banner */}
               <div className="p-3.5 bg-amber-500/10 border border-amber-500/20 rounded-2xl text-left text-xs text-amber-900 space-y-1">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 font-bold text-[#7A2E16]">
+                  <div className="flex items-center gap-1.5 font-bold text-[#B3261E]">
                     <Link className="w-3.5 h-3.5" />
                     <span>Private Link-Only Access</span>
                   </div>
                   <button
                     type="button"
                     onClick={handleCopyAdminLink}
-                    className="text-[11px] font-bold text-[#7A2E16] hover:underline flex items-center gap-1 cursor-pointer"
+                    className="text-[11px] font-bold text-[#B3261E] hover:underline flex items-center gap-1 cursor-pointer"
                   >
                     {copiedLink ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
                     <span>{copiedLink ? 'Copied' : 'Copy Link'}</span>
@@ -602,7 +602,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         if (authError) setAuthError('');
                       }}
                       placeholder="Enter master passkey"
-                      className="w-full px-4 py-3 pr-11 bg-white rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] focus:ring-1 focus:ring-[#7A2E16] outline-none font-mono"
+                      className="w-full px-4 py-3 pr-11 bg-white rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#B3261E] focus:ring-1 focus:ring-[#B3261E] outline-none font-mono"
                       autoFocus
                     />
                     <button
@@ -624,7 +624,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-[#7A2E16] hover:bg-[#5C200E] text-white font-bold text-sm uppercase tracking-wider rounded-xl transition shadow-lg flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+                  className="w-full py-3.5 bg-[#B3261E] hover:bg-[#5C200E] text-white font-bold text-sm uppercase tracking-wider rounded-xl transition shadow-lg flex items-center justify-center gap-2 cursor-pointer active:scale-98"
                 >
                   <Unlock className="w-4 h-4" />
                   <span>Authenticate & Open Dashboard</span>
@@ -658,7 +658,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                     onClick={() => { setActiveTab('add'); handleResetForm(); }}
                     className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 ${
                       activeTab === 'add'
-                        ? 'bg-[#7A2E16] text-white shadow'
+                        ? 'bg-[#B3261E] text-white shadow'
                         : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#FAF8F5]'
                     }`}
                   >
@@ -670,7 +670,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                     onClick={() => { setActiveTab('inquiries'); refreshInquiriesList(); }}
                     className={`px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
                       activeTab === 'inquiries'
-                        ? 'bg-[#7A2E16] text-white shadow'
+                        ? 'bg-[#B3261E] text-white shadow'
                         : 'bg-white text-slate-700 border border-[#E5DED3] hover:bg-[#FAF8F5]'
                     }`}
                   >
@@ -732,7 +732,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                   <div className="bg-[#FAF8F5] border border-[#E5DED3] rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <Download className="w-4 h-4 text-[#7A2E16]" />
+                        <Download className="w-4 h-4 text-[#B3261E]" />
                         <h4 className="text-sm font-bold text-[#14171F]">Multi-Device Project Sync & Backup</h4>
                         <span className="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">
                           Device-to-Device Sharing
@@ -755,7 +755,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                       <button
                         type="button"
                         onClick={handleExportProjects}
-                        className="px-3.5 py-2 rounded-xl bg-white hover:bg-amber-50 text-[#7A2E16] border border-[#7A2E16]/30 text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer"
+                        className="px-3.5 py-2 rounded-xl bg-white hover:bg-amber-50 text-[#B3261E] border border-[#B3261E]/30 text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer"
                         title="Download backup file and copy JSON to clipboard"
                       >
                         <Download className="w-3.5 h-3.5" />
@@ -765,7 +765,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                       <button
                         type="button"
                         onClick={() => jsonImportInputRef.current?.click()}
-                        className="px-3.5 py-2 rounded-xl bg-[#7A2E16] hover:bg-[#5C200E] text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer"
+                        className="px-3.5 py-2 rounded-xl bg-[#B3261E] hover:bg-[#5C200E] text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer"
                         title="Select and import a JSON file"
                       >
                         <Upload className="w-3.5 h-3.5" />
@@ -793,7 +793,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         value={projectSearchQuery}
                         onChange={(e) => setProjectSearchQuery(e.target.value)}
                         placeholder="Search projects by title, plot number, client, consultant..."
-                        className="w-full pl-9 pr-7 py-2 text-xs rounded-xl border border-[#E5DED3] bg-[#FAF8F5] focus:bg-white focus:border-[#7A2E16] outline-none"
+                        className="w-full pl-9 pr-7 py-2 text-xs rounded-xl border border-[#E5DED3] bg-[#FAF8F5] focus:bg-white focus:border-[#B3261E] outline-none"
                       />
                       {projectSearchQuery && (
                         <button 
@@ -858,7 +858,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                       return (
                         <div 
                           key={proj.id}
-                          className="bg-white rounded-2xl border border-[#E5DED3] p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm hover:border-[#7A2E16] transition"
+                          className="bg-white rounded-2xl border border-[#E5DED3] p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm hover:border-[#B3261E] transition"
                         >
                           <div className="flex items-center gap-4">
                             <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
@@ -902,7 +902,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                           <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
                             <button
                               onClick={() => handleEditClick(proj)}
-                              className="px-3 py-1.5 rounded-lg border border-[#E5DED3] hover:border-[#7A2E16] text-slate-700 hover:text-[#7A2E16] text-xs font-bold transition flex items-center gap-1.5"
+                              className="px-3 py-1.5 rounded-lg border border-[#E5DED3] hover:border-[#B3261E] text-slate-700 hover:text-[#B3261E] text-xs font-bold transition flex items-center gap-1.5"
                             >
                               <Edit3 className="w-3.5 h-3.5" />
                               <span>Edit</span>
@@ -964,14 +964,14 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                             onClick={() => setFormData(prev => ({ ...prev, status: st.id }))}
                             className={`p-3 rounded-xl border text-left transition cursor-pointer flex flex-col justify-between ${
                               formData.status === st.id 
-                                ? 'border-[#7A2E16] bg-[#FAF8F5] ring-2 ring-[#7A2E16]/20' 
+                                ? 'border-[#B3261E] bg-[#FAF8F5] ring-2 ring-[#B3261E]/20' 
                                 : 'border-[#E5DED3] bg-white hover:bg-[#FAF8F5]'
                             }`}
                           >
                             <div className="flex items-center justify-between">
                               <span className="text-xs font-bold text-[#14171F]">{st.label}</span>
                               <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                                formData.status === st.id ? 'border-[#7A2E16] bg-[#7A2E16]' : 'border-slate-300'
+                                formData.status === st.id ? 'border-[#B3261E] bg-[#B3261E]' : 'border-slate-300'
                               }`}>
                                 {formData.status === st.id && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
                               </span>
@@ -994,7 +994,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                           value={formData.title}
                           onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
                           placeholder="e.g. G+1 Luxury Contemporary Villa & Majlis"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#B3261E] outline-none"
                         />
                       </div>
 
@@ -1005,7 +1005,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         <select
                           value={formData.category}
                           onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm bg-white focus:border-[#7A2E16] outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm bg-white focus:border-[#B3261E] outline-none"
                         >
                           {CATEGORY_OPTIONS.map((cat, i) => (
                             <option key={i} value={cat}>{cat}</option>
@@ -1026,7 +1026,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                           value={formData.timeline}
                           onChange={(e) => setFormData(prev => ({ ...prev, timeline: e.target.value }))}
                           placeholder="e.g. Commencing Q4 2026"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#B3261E] outline-none"
                         />
                       </div>
 
@@ -1039,7 +1039,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                           value={formData.year}
                           onChange={(e) => setFormData(prev => ({ ...prev, year: e.target.value }))}
                           placeholder="2026"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#B3261E] outline-none"
                         />
                       </div>
                     </div>
@@ -1055,7 +1055,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                           value={formData.location}
                           onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
                           placeholder="e.g. Nad Al Sheba 1, Dubai"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#B3261E] outline-none"
                         />
                       </div>
 
@@ -1068,7 +1068,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                           value={formData.plotNo}
                           onChange={(e) => setFormData(prev => ({ ...prev, plotNo: e.target.value }))}
                           placeholder="e.g. 6142891"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#B3261E] outline-none"
                         />
                       </div>
                     </div>
@@ -1084,7 +1084,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                           value={formData.client}
                           onChange={(e) => setFormData(prev => ({ ...prev, client: e.target.value }))}
                           placeholder="e.g. Private Client or Dubai Municipality"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#B3261E] outline-none"
                         />
                       </div>
 
@@ -1097,7 +1097,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                           value={formData.consultant}
                           onChange={(e) => setFormData(prev => ({ ...prev, consultant: e.target.value }))}
                           placeholder="e.g. Croquis Engineering Consultancy"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#B3261E] outline-none"
                         />
                       </div>
                     </div>
@@ -1112,7 +1112,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         value={formData.scope}
                         onChange={(e) => setFormData(prev => ({ ...prev, scope: e.target.value }))}
                         placeholder="Describe the structural work, MEP packages, architectural glazing, or municipal approvals involved in this project."
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#7A2E16] outline-none resize-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-[#E5DED3] text-base sm:text-sm focus:border-[#B3261E] outline-none resize-none"
                       />
                     </div>
 
@@ -1200,7 +1200,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                     <div className="bg-[#FAF8F5] border border-[#E5DED3] rounded-2xl p-4 sm:p-5 space-y-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <Eye className="w-4 h-4 text-[#7A2E16]" />
+                          <Eye className="w-4 h-4 text-[#B3261E]" />
                           <span className="text-xs font-bold uppercase tracking-wider text-[#14171F]">
                             Live Card Preview (How it appears on website)
                           </span>
@@ -1261,7 +1261,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
                       <button
                         type="submit"
-                        className="px-6 py-3 bg-[#7A2E16] hover:bg-[#5C200E] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition shadow-md flex items-center gap-2 cursor-pointer"
+                        className="px-6 py-3 bg-[#B3261E] hover:bg-[#5C200E] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition shadow-md flex items-center gap-2 cursor-pointer"
                       >
                         <Check className="w-4 h-4" />
                         <span>{editingProjectId ? 'Save Changes' : 'Publish Project'}</span>
@@ -1279,7 +1279,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                   <div className="bg-white rounded-2xl border border-[#E5DED3] p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                       <div className="flex items-center gap-2">
-                        <Inbox className="w-5 h-5 text-[#7A2E16]" />
+                        <Inbox className="w-5 h-5 text-[#B3261E]" />
                         <h4 className="text-xl font-bold font-display text-[#14171F]">
                           Client Tenders & Lead Inquiries
                         </h4>
@@ -1371,12 +1371,12 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         return (
                           <div
                             key={lead.id}
-                            className="bg-white rounded-2xl border border-[#E5DED3] p-5 sm:p-6 shadow-sm space-y-4 hover:border-[#7A2E16] transition"
+                            className="bg-white rounded-2xl border border-[#E5DED3] p-5 sm:p-6 shadow-sm space-y-4 hover:border-[#B3261E] transition"
                           >
                             {/* Card Header */}
                             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#F0EBE1] pb-3.5">
                               <div className="flex flex-wrap items-center gap-2.5">
-                                <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#FAF8F5] border border-[#E5DED3] text-[#7A2E16]">
+                                <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#FAF8F5] border border-[#E5DED3] text-[#B3261E]">
                                   {lead.referenceId}
                                 </span>
                                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${statusConfig.bg}`}>
@@ -1428,7 +1428,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
                               <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF]">
                                 <span className="text-slate-400 block text-[10px] uppercase font-semibold">Discipline Requested</span>
-                                <strong className="text-[#7A2E16] block text-sm mt-0.5">{lead.serviceType}</strong>
+                                <strong className="text-[#B3261E] block text-sm mt-0.5">{lead.serviceType}</strong>
                                 {lead.budgetRange && <span className="text-slate-600 block text-[11px]">Budget: {lead.budgetRange}</span>}
                               </div>
 
@@ -1450,7 +1450,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                             {lead.attachedFile && (
                               <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#E5DED3] flex items-center justify-between gap-3 text-xs">
                                 <div className="flex items-center gap-2 text-slate-700">
-                                  <FileText className="w-4 h-4 text-[#7A2E16] shrink-0" />
+                                  <FileText className="w-4 h-4 text-[#B3261E] shrink-0" />
                                   <div>
                                     <span className="font-bold block text-slate-900">
                                       Attached Drawing / BOQ: {typeof lead.attachedFile === 'string' ? lead.attachedFile : lead.attachedFile.name}
@@ -1468,7 +1468,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     download={lead.attachedFile.name || 'drawing'}
-                                    className="px-3 py-1.5 bg-[#7A2E16] hover:bg-[#5C200E] text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm shrink-0"
+                                    className="px-3 py-1.5 bg-[#B3261E] hover:bg-[#5C200E] text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm shrink-0"
                                   >
                                     <Download className="w-3.5 h-3.5" />
                                     <span>Download</span>
@@ -1508,7 +1508,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                                   href={`mailto:${lead.email}?subject=${encodeURIComponent(`Kachoras Contracting Inquiry [Ref: ${lead.referenceId}]`)}`}
                                   className="px-3.5 py-2 bg-white hover:bg-slate-50 border border-[#E5DED3] text-slate-800 rounded-xl text-xs font-bold transition flex items-center gap-1.5"
                                 >
-                                  <Mail className="w-3.5 h-3.5 text-[#7A2E16]" />
+                                  <Mail className="w-3.5 h-3.5 text-[#B3261E]" />
                                   <span>Email Client</span>
                                 </a>
                               )}
@@ -1570,7 +1570,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         value={newPasskey}
                         onChange={(e) => setNewPasskey(e.target.value)}
                         placeholder="Enter new passkey (min 4 characters)"
-                        className="px-4 py-2.5 rounded-xl border border-[#E5DED3] text-sm focus:border-[#7A2E16] outline-none flex-1 min-w-[220px]"
+                        className="px-4 py-2.5 rounded-xl border border-[#E5DED3] text-sm focus:border-[#B3261E] outline-none flex-1 min-w-[220px]"
                       />
                       <button
                         type="submit"
@@ -1585,7 +1585,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                   <div className="bg-white rounded-2xl border border-[#E5DED3] p-6 shadow-sm space-y-4">
                     <div className="border-b border-[#F0EBE1] pb-3 flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <Database className="w-4 h-4 text-[#7A2E16]" />
+                        <Database className="w-4 h-4 text-[#B3261E]" />
                         <h4 className="text-base font-bold font-display text-[#14171F]">
                           Live Cloud Server Backend API
                         </h4>
@@ -1612,11 +1612,11 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         value={cloudApiUrl}
                         onChange={(e) => setCloudApiUrl(e.target.value)}
                         placeholder="e.g. https://kachoras-backend.onrender.com"
-                        className="px-4 py-2.5 rounded-xl border border-[#E5DED3] text-sm focus:border-[#7A2E16] outline-none flex-1 min-w-[260px] font-mono"
+                        className="px-4 py-2.5 rounded-xl border border-[#E5DED3] text-sm focus:border-[#B3261E] outline-none flex-1 min-w-[260px] font-mono"
                       />
                       <button
                         type="submit"
-                        className="px-5 py-2.5 bg-[#7A2E16] hover:bg-[#5C200E] text-white rounded-xl text-xs font-bold transition cursor-pointer"
+                        className="px-5 py-2.5 bg-[#B3261E] hover:bg-[#5C200E] text-white rounded-xl text-xs font-bold transition cursor-pointer"
                       >
                         Connect Server
                       </button>
@@ -1655,7 +1655,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         value={firebaseConfigStr}
                         onChange={(e) => setFirebaseConfigStr(e.target.value)}
                         placeholder='{ "apiKey": "AIzaSy...", "projectId": "kachoras-73183", "storageBucket": "..." }'
-                        className="w-full px-3.5 py-2.5 font-mono text-xs rounded-xl border border-[#E5DED3] bg-[#FAF8F5] focus:border-[#7A2E16] outline-none"
+                        className="w-full px-3.5 py-2.5 font-mono text-xs rounded-xl border border-[#E5DED3] bg-[#FAF8F5] focus:border-[#B3261E] outline-none"
                       />
 
                       <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
@@ -1672,14 +1672,14 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                           }}
                           className="px-3.5 py-2 bg-[#FAF8F5] hover:bg-[#F0EBE1] border border-[#E5DED3] text-slate-700 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-1.5"
                         >
-                          <RefreshCw className="w-3.5 h-3.5 text-[#7A2E16]" />
+                          <RefreshCw className="w-3.5 h-3.5 text-[#B3261E]" />
                           <span>Force Cloud Re-sync</span>
                         </button>
 
                         <button
                           type="button"
                           onClick={handleSaveFirebaseConfig}
-                          className="px-4 py-2 bg-[#7A2E16] hover:bg-[#5C200E] text-white rounded-xl text-xs font-bold transition cursor-pointer"
+                          className="px-4 py-2 bg-[#B3261E] hover:bg-[#5C200E] text-white rounded-xl text-xs font-bold transition cursor-pointer"
                         >
                           Update Config
                         </button>
@@ -1691,7 +1691,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                   <div className="bg-white rounded-2xl border border-[#E5DED3] p-6 shadow-sm space-y-4">
                     <div className="border-b border-[#F0EBE1] pb-3">
                       <div className="flex items-center gap-2">
-                        <Mail className="w-4 h-4 text-[#7A2E16]" />
+                        <Mail className="w-4 h-4 text-[#B3261E]" />
                         <h4 className="text-base font-bold font-display text-[#14171F]">
                           Direct Email Lead Dispatch
                         </h4>
@@ -1704,7 +1704,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                     <div className="p-3 bg-[#FAF8F5] rounded-xl border border-[#EFE9DF] flex flex-wrap items-center justify-between gap-3">
                       <div className="space-y-0.5">
                         <span className="text-[10px] text-slate-400 uppercase font-bold">Primary Notification Email</span>
-                        <div className="font-mono text-sm font-bold text-[#7A2E16]">kachorasdubai@gmail.com</div>
+                        <div className="font-mono text-sm font-bold text-[#B3261E]">kachorasdubai@gmail.com</div>
                       </div>
                       <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded flex items-center gap-1">
                         <CheckCircle2 className="w-3 h-3 text-emerald-600" />

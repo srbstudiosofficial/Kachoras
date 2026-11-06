@@ -50,7 +50,7 @@ export default function Footer({ currentPage = 'home', onNavigate, onOpenQuoteMo
             <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={() => onOpenQuoteModal && onOpenQuoteModal()}
-                className="px-6 py-3.5 bg-[#7A2E16] hover:bg-[#63220E] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition cursor-pointer flex items-center gap-2 shadow-sm active:scale-98"
+                className="px-6 py-3.5 bg-[#B3261E] hover:bg-[#961F18] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition cursor-pointer flex items-center gap-2 shadow-sm active:scale-98"
               >
                 <span>ENQUIRY / RFQ</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />

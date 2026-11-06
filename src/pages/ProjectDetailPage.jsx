@@ -40,7 +40,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
         <p className="text-slate-600 mt-2">The requested engineering project could not be loaded.</p>
         <button
           onClick={() => onNavigate('projects')}
-          className="mt-6 px-6 py-2.5 bg-[#7A2E16] text-white rounded-xl font-bold text-xs uppercase tracking-wider cursor-pointer"
+          className="mt-6 px-6 py-2.5 bg-[#B3261E] text-white rounded-xl font-bold text-xs uppercase tracking-wider cursor-pointer"
         >
           Return to Projects Portfolio
         </button>
@@ -148,19 +148,19 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
           <nav className="flex items-center gap-2 text-xs text-slate-500 font-medium">
             <button 
               onClick={() => onNavigate('home')}
-              className="hover:text-[#7A2E16] transition cursor-pointer"
+              className="hover:text-[#B3261E] transition cursor-pointer"
             >
               Home
             </button>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
             <button 
               onClick={() => onNavigate('projects')}
-              className="hover:text-[#7A2E16] transition cursor-pointer"
+              className="hover:text-[#B3261E] transition cursor-pointer"
             >
               Projects Portfolio
             </button>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-            <span className="text-[#7A2E16] font-bold truncate max-w-[200px] sm:max-w-xs">
+            <span className="text-[#B3261E] font-bold truncate max-w-[200px] sm:max-w-xs">
               {project.title}
             </span>
           </nav>
@@ -169,7 +169,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
           <div className="flex items-center gap-2">
             <button
               onClick={() => onNavigate('projects')}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-[#CBD5E1] bg-white text-xs font-bold text-slate-700 hover:bg-[#F2ECE1] hover:text-[#7A2E16] transition cursor-pointer shadow-xs"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-[#CBD5E1] bg-white text-xs font-bold text-slate-700 hover:bg-[#F2ECE1] hover:text-[#B3261E] transition cursor-pointer shadow-xs"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back to All Projects</span>
@@ -204,7 +204,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
             {/* Top Badges */}
             <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#7A2E16] text-white text-xs font-bold shadow-md uppercase tracking-wider backdrop-blur-md">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#B3261E] text-white text-xs font-bold shadow-md uppercase tracking-wider backdrop-blur-md">
                   <Building2 className="w-3.5 h-3.5" />
                   <span>{project.category || 'Building Contracting'}</span>
                 </span>
@@ -261,7 +261,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
 
             <div className="space-y-1">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">Building Scope</span>
-              <p className="text-xs sm:text-sm font-bold text-[#7A2E16] flex items-center gap-1.5 font-mono">
+              <p className="text-xs sm:text-sm font-bold text-[#B3261E] flex items-center gap-1.5 font-mono">
                 <Award className="w-4 h-4 text-[#8B6D1B] shrink-0" />
                 <span>{project.type || 'G+1 Turnkey Scope'}</span>
               </p>
@@ -307,7 +307,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
             {/* Detailed Project Scope */}
             <div className="p-6 sm:p-8 bg-white rounded-3xl border border-[#E5DED3] shadow-xs space-y-4">
               <div className="flex items-center gap-2">
-                <HardHat className="w-5 h-5 text-[#7A2E16]" />
+                <HardHat className="w-5 h-5 text-[#B3261E]" />
                 <h2 className="text-lg sm:text-xl font-bold font-display text-[#111622]">
                   Completed Project Scope & Technical Execution
                 </h2>
@@ -350,7 +350,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
               <div className="space-y-2.5 pt-2">
                 {divisionInfo.services.map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E5DED3]">
-                    <CheckCircle2 className="w-4 h-4 text-[#7A2E16] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#B3261E] shrink-0 mt-0.5" />
                     <span className="text-xs sm:text-sm text-slate-800 leading-relaxed font-medium">{item}</span>
                   </div>
                 ))}
@@ -387,7 +387,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
                       });
                     }
                   }}
-                  className="w-full py-3.5 px-4 bg-[#7A2E16] hover:bg-[#8F371B] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3.5 px-4 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Request Project Quotation</span>
                   <ArrowRight className="w-4 h-4 text-[#C59B27]" />
@@ -432,14 +432,14 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
         <div className="p-6 bg-white rounded-3xl border border-[#E5DED3] shadow-xs flex flex-wrap items-center justify-between gap-4">
           <button
             onClick={() => onNavigate('project-detail', prevProject.id)}
-            className="flex items-center gap-3 text-left hover:text-[#7A2E16] transition group cursor-pointer max-w-sm"
+            className="flex items-center gap-3 text-left hover:text-[#B3261E] transition group cursor-pointer max-w-sm"
           >
-            <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] group-hover:bg-[#7A2E16] group-hover:text-white border border-[#E5DED3] flex items-center justify-center transition shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] group-hover:bg-[#B3261E] group-hover:text-white border border-[#E5DED3] flex items-center justify-center transition shrink-0">
               <ArrowLeft className="w-4 h-4" />
             </div>
             <div>
               <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">Previous Project</span>
-              <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#7A2E16] line-clamp-1">{prevProject.title}</p>
+              <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#B3261E] line-clamp-1">{prevProject.title}</p>
             </div>
           </button>
 
@@ -452,13 +452,13 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
 
           <button
             onClick={() => onNavigate('project-detail', nextProject.id)}
-            className="flex items-center gap-3 text-right hover:text-[#7A2E16] transition group cursor-pointer max-w-sm ml-auto"
+            className="flex items-center gap-3 text-right hover:text-[#B3261E] transition group cursor-pointer max-w-sm ml-auto"
           >
             <div>
               <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold block">Next Project</span>
-              <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#7A2E16] line-clamp-1">{nextProject.title}</p>
+              <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#B3261E] line-clamp-1">{nextProject.title}</p>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] group-hover:bg-[#7A2E16] group-hover:text-white border border-[#E5DED3] flex items-center justify-center transition shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] group-hover:bg-[#B3261E] group-hover:text-white border border-[#E5DED3] flex items-center justify-center transition shrink-0">
               <ArrowRight className="w-4 h-4" />
             </div>
           </button>
@@ -479,7 +479,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
                 <div
                   key={item.id}
                   onClick={() => onNavigate('project-detail', item.id)}
-                  className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-xs hover:shadow-md hover:border-[#7A2E16] transition-all cursor-pointer group flex flex-col justify-between"
+                  className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-xs hover:shadow-md hover:border-[#B3261E] transition-all cursor-pointer group flex flex-col justify-between"
                 >
                   <div>
                     <div className="h-44 overflow-hidden relative bg-slate-100">
@@ -501,7 +501,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
                         <MapPin className="w-3 h-3 text-[#C59B27]" />
                         <span>{item.location}</span>
                       </div>
-                      <h4 className="text-xs sm:text-sm font-bold font-display text-slate-900 line-clamp-1 group-hover:text-[#7A2E16]">
+                      <h4 className="text-xs sm:text-sm font-bold font-display text-slate-900 line-clamp-1 group-hover:text-[#B3261E]">
                         {item.title}
                       </h4>
                       <p className="text-[11px] text-slate-600 line-clamp-2">
@@ -511,7 +511,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
                   </div>
 
                   <div className="p-4 pt-0">
-                    <span className="text-xs font-bold text-[#7A2E16] flex items-center gap-1 group-hover:underline">
+                    <span className="text-xs font-bold text-[#B3261E] flex items-center gap-1 group-hover:underline">
                       <span>View Project Sheet</span>
                       <ArrowRight className="w-3 h-3" />
                     </span>

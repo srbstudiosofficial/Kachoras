@@ -99,7 +99,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
             {project.plotNo && (
               <div className="p-3.5 bg-[#FAF8F5] rounded-xl border border-[#E5DED3] space-y-0.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">DM Plot Number</span>
-                <p className="text-xs font-mono font-bold text-[#7A2E16]">
+                <p className="text-xs font-mono font-bold text-[#B3261E]">
                   Plot #{project.plotNo}
                 </p>
               </div>
@@ -136,7 +136,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
 
           {/* Full Scope Breakdown */}
           <div className="space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#7A2E16] block">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E] block">
               Contract Scope & Technical Execution
             </span>
             <p className="text-xs sm:text-sm text-slate-700 leading-relaxed bg-white p-4 rounded-xl border border-[#E5DED3]">
@@ -190,7 +190,7 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
                 });
               }
             }}
-            className="px-6 py-2.5 bg-[#7A2E16] hover:bg-[#63220E] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-sm flex items-center gap-2 cursor-pointer"
+            className="px-6 py-2.5 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-sm flex items-center gap-2 cursor-pointer"
           >
             <span>Inquire for Similar Project</span>
             <ArrowRight className="w-4 h-4 text-[#C59B27]" />

@@ -82,7 +82,7 @@ export default function CategoriesWheel({ onSelectServiceForQuote }) {
               <div
                 key={cat.id}
                 data-delay={idx * 150}
-                className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#7A2E16] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group reveal-on-scroll reveal-init shimmer-trigger"
+                className="bg-white rounded-2xl border border-[#E5DED3] overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#B3261E] hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group reveal-on-scroll reveal-init shimmer-trigger"
               >
                 <div>
                   {/* Discipline Photography */}
@@ -125,7 +125,7 @@ export default function CategoriesWheel({ onSelectServiceForQuote }) {
                     <ul className="space-y-1.5 pt-1 text-xs text-slate-700">
                       {cat.features.slice(0, 3).map((feat, fIdx) => (
                         <li key={fIdx} className="flex items-start gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#7A2E16] shrink-0 mt-1.5" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#B3261E] shrink-0 mt-1.5" />
                           <span className="leading-snug text-[11px] text-slate-600 font-medium">{feat}</span>
                         </li>
                       ))}
@@ -137,7 +137,7 @@ export default function CategoriesWheel({ onSelectServiceForQuote }) {
                 <div className="p-5 pt-0 border-t border-[#F2ECE1] mt-2">
                   <button
                     onClick={() => onSelectServiceForQuote && onSelectServiceForQuote(cat.title)}
-                    className="w-full min-h-[44px] pt-1 flex items-center justify-between text-xs font-bold text-[#7A2E16] group-hover:text-[#5C200E] transition cursor-pointer"
+                    className="w-full min-h-[44px] pt-1 flex items-center justify-between text-xs font-bold text-[#B3261E] group-hover:text-[#5C200E] transition cursor-pointer"
                   >
                     <span>Request Proposal</span>
                     <ArrowRight className="w-3.5 h-3.5 text-[#C59B27] group-hover:translate-x-1 transition-transform" />

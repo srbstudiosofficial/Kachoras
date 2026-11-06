@@ -31,12 +31,12 @@ export default function TradeLicenseSection() {
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Detailed Commercial License Record (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:border-[#7A2E16] transition-all duration-500 space-y-6 reveal-on-scroll reveal-left shimmer-trigger">
+          <div className="lg:col-span-7 bg-white border border-[#E5DED3] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 space-y-6 reveal-on-scroll reveal-left shimmer-trigger">
             
             {/* Header */}
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#F0EBE1] pb-5">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#7A2E16] block">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#B3261E] block">
                   Government of Dubai • Economy and Tourism (DET)
                 </span>
                 <h3 className="text-xl sm:text-2xl font-bold text-[#14171F] font-display mt-0.5">
@@ -48,7 +48,7 @@ export default function TradeLicenseSection() {
               </div>
               <div className="text-right bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF]">
                 <span className="text-[10px] text-slate-400 block font-semibold uppercase tracking-wider">License No.</span>
-                <span className="text-xl font-bold text-[#7A2E16] font-mono tracking-wider">{COMPANY_INFO.licenseNumber}</span>
+                <span className="text-xl font-bold text-[#B3261E] font-mono tracking-wider">{COMPANY_INFO.licenseNumber}</span>
               </div>
             </div>
 
@@ -60,7 +60,7 @@ export default function TradeLicenseSection() {
               </div>
               <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF]">
                 <span className="text-slate-400 block text-[10px] font-medium">Registration Date</span>
-                <span className="font-semibold text-[#7A2E16] mt-0.5 block">19 / 03 / 2006 (20 Yrs)</span>
+                <span className="font-semibold text-[#B3261E] mt-0.5 block">19 / 03 / 2006 (20 Yrs)</span>
               </div>
               <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF]">
                 <span className="text-slate-400 block text-[10px] font-medium">DM Contractor Grade</span>
@@ -88,7 +88,7 @@ export default function TradeLicenseSection() {
               <div className="grid sm:grid-cols-2 gap-2 text-xs">
                 {COMPANY_INFO.specialties.map((spec, i) => (
                   <div key={i} className="flex items-start gap-2 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#EFE9DF] text-slate-700">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#7A2E16] shrink-0 mt-1.5" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#B3261E] shrink-0 mt-1.5" />
                     <span className="leading-snug text-[11px] font-medium">{spec}</span>
                   </div>
                 ))}
@@ -120,7 +120,7 @@ export default function TradeLicenseSection() {
 
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#EFE9DF] text-center hover:bg-white transition">
-                  <div className="text-2xl font-bold text-[#7A2E16] font-display">
+                  <div className="text-2xl font-bold text-[#B3261E] font-display">
                     <AnimatedCounter target={20} suffix="+ Yrs" duration={1700} />
                   </div>
                   <div className="text-[10px] text-slate-500 font-medium mt-0.5">Continuous Standing</div>

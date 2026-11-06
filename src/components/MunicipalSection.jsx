@@ -62,7 +62,7 @@ export default function MunicipalSection() {
 
             <div className="grid grid-cols-2 gap-4 pt-2">
               <div className="bg-[#FAF8F5] p-4 rounded-xl border border-[#EFE9DF]">
-                <div className="text-2xl font-bold text-[#7A2E16] font-display">100%</div>
+                <div className="text-2xl font-bold text-[#B3261E] font-display">100%</div>
                 <div className="text-xs text-slate-500 font-medium mt-0.5">Municipal Inspection Pass Rate</div>
               </div>
               <div className="bg-[#FAF8F5] p-4 rounded-xl border border-[#EFE9DF]">

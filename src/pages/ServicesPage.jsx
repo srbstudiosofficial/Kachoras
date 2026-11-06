@@ -113,7 +113,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
           <div className="bg-white border border-[#E5DED3] rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-[#E5DED3] pb-6">
               <div className="space-y-1">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7A2E16]">The Kachoras Advantage</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">The Kachoras Advantage</span>
                 <h2 className="text-2xl sm:text-3xl font-black text-[#1E293B] font-display">
                   Why Turnkey In-House Execution Matters in Dubai
                 </h2>
@@ -155,7 +155,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-16">
           
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#7A2E16] bg-[#7A2E16]/10 px-3 py-1 rounded-full border border-[#7A2E16]/20">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E] bg-[#B3261E]/10 px-3 py-1 rounded-full border border-[#B3261E]/20">
               Technical Division Profiles
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-[#1E293B] font-display">
@@ -177,12 +177,12 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                   onClick={() => setSelectedDiscipline(index)}
                   className={`p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer flex flex-col justify-between min-h-[110px] ${
                     isActive 
-                      ? 'bg-[#7A2E16] text-white border-[#7A2E16] shadow-lg shadow-[#7A2E16]/20 -translate-y-1' 
+                      ? 'bg-[#B3261E] text-white border-[#B3261E] shadow-lg shadow-[#B3261E]/20 -translate-y-1' 
                       : 'bg-[#FAF8F5] text-slate-700 border-[#E5DED3] hover:bg-white hover:border-[#CBD5E1]'
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <IconComp className={`w-5 h-5 ${isActive ? 'text-[#C59B27]' : 'text-[#7A2E16]'}`} />
+                    <IconComp className={`w-5 h-5 ${isActive ? 'text-[#C59B27]' : 'text-[#B3261E]'}`} />
                     <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${
                       isActive ? 'bg-white/10 text-white' : 'bg-slate-200 text-slate-600'
                     }`}>
@@ -207,7 +207,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                   
                   <div className="lg:col-span-7 space-y-6">
                     <div className="space-y-2">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#7A2E16]/10 text-[#7A2E16] text-xs font-bold rounded-full border border-[#7A2E16]/20">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#B3261E]/10 text-[#B3261E] text-xs font-bold rounded-full border border-[#B3261E]/20">
                         <ActiveIcon className="w-3.5 h-3.5 text-[#C59B27]" />
                         <span>{activeItem.badge}</span>
                       </div>
@@ -236,7 +236,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                     <div className="pt-2 flex flex-wrap items-center gap-4">
                       <button
                         onClick={() => onSelectServiceForQuote && onSelectServiceForQuote(activeItem.title)}
-                        className="px-6 py-3 bg-[#7A2E16] hover:bg-[#63220E] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-md flex items-center gap-2 cursor-pointer"
+                        className="px-6 py-3 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-md flex items-center gap-2 cursor-pointer"
                       >
                         <span>Request Scope Quote / RFQ</span>
                         <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
@@ -273,7 +273,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                     )}
                     <div className="p-6 space-y-5">
                     <div className="border-b border-[#E5DED3] pb-3">
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#7A2E16]">Technical Compliance</span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">Technical Compliance</span>
                       <h4 className="text-base font-bold text-slate-900 mt-0.5">Statutory & Regulatory Matrix</h4>
                     </div>
 

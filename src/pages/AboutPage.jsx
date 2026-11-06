@@ -57,15 +57,15 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
               {/* Pillars */}
               <div className="grid sm:grid-cols-3 gap-4 pt-2">
                 <div className="p-4 rounded-xl bg-[#FBF9F5] border border-[#E5DED3] text-center space-y-1">
-                  <span className="text-2xl font-black text-[#7A2E16] font-display">2006</span>
+                  <span className="text-2xl font-black text-[#B3261E] font-display">2006</span>
                   <p className="text-xs text-slate-600 font-medium">Dubai Incorporation</p>
                 </div>
                 <div className="p-4 rounded-xl bg-[#FBF9F5] border border-[#E5DED3] text-center space-y-1">
-                  <span className="text-2xl font-black text-[#7A2E16] font-display">G+1</span>
+                  <span className="text-2xl font-black text-[#B3261E] font-display">G+1</span>
                   <p className="text-xs text-slate-600 font-medium">Municipality Approval</p>
                 </div>
                 <div className="p-4 rounded-xl bg-[#FBF9F5] border border-[#E5DED3] text-center space-y-1">
-                  <span className="text-2xl font-black text-[#7A2E16] font-display">500+</span>
+                  <span className="text-2xl font-black text-[#B3261E] font-display">500+</span>
                   <p className="text-xs text-slate-600 font-medium">Completed Projects and Works</p>
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
             {/* Right Card: Al Qusais HQ & Executive Profile */}
             <div className="lg:col-span-5 bg-[#FAF8F5] border border-[#E5DED3] p-8 rounded-3xl space-y-6 shadow-sm">
               <div className="border-b border-[#E5DED3] pb-4 space-y-1">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#7A2E16]">Corporate Governance</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">Corporate Governance</span>
                 <h3 className="text-xl font-black text-[#1E293B] font-display">Kachoras Electromechanical Contracting LLC</h3>
                 <p className="text-xs text-slate-600">Registered with Dubai Economy & Tourism and Dubai Municipality</p>
               </div>
@@ -90,7 +90,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-white rounded-xl border border-[#E5DED3]">
-                  <Building2 className="w-4 h-4 text-[#7A2E16] shrink-0 mt-0.5" />
+                  <Building2 className="w-4 h-4 text-[#B3261E] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-slate-900 font-bold">Dubai Municipality G+1 License</strong>
                     <span className="text-slate-600">Permitted for structural building contracting of Ground + 1 storey developments</span>
@@ -109,7 +109,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
               <div className="pt-2">
                 <button
                   onClick={() => onNavigate('license')}
-                  className="w-full py-3 bg-[#7A2E16] hover:bg-[#63220E] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <FileCheck2 className="w-4 h-4 text-[#C59B27]" />
                   <span>Inspect Official License Documents</span>
