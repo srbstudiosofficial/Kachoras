@@ -113,37 +113,37 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
           <div className="bg-white border border-[#E2E8F0] rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-[#E2E8F0] pb-6">
               <div className="space-y-1">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">The Kachoras Advantage</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">The Kachoras Advantage • Why Choose Our Turnkey Services?</span>
                 <h2 className="text-2xl sm:text-3xl font-black text-[#1E293B] font-display">
-                  Why Turnkey In-House Execution Matters in Dubai
+                  One Company, Complete Project Solutions
                 </h2>
               </div>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-200 text-xs font-bold shrink-0">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>Zero Subcontractor Finger-Pointing</span>
+                <span>Integrated In-House Execution</span>
               </div>
             </div>
 
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-4xl">
-              In conventional construction, clients hire separate contractors for civil structure, MEP ducting, and aluminium glazing. When delays or permit disputes occur, parties blame each other. At <strong>Kachoras</strong>, our in-house engineering divisions coordinate directly from day one, ensuring seamless DEWA approvals, synchronized concrete casting, and fixed-price completion.
+              Managing different contractors for construction, electrical, plumbing, and aluminium works can lead to delays, extra costs, and coordination problems. At <strong>Kachoras</strong>, our different teams work together to manage projects from start to finish. This helps improve coordination, maintain quality, control costs, and complete projects on time.
             </p>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
-                <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">01. Single Point of Contact</strong>
-                <p className="text-xs text-slate-600">One dedicated project manager and General Manager Jose K. George oversee your build.</p>
+              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1.5">
+                <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">01. One Point of Contact</strong>
+                <p className="text-xs text-slate-600 leading-relaxed">A dedicated project manager and management team coordinate all project activities, making communication easier for our clients.</p>
               </div>
-              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
-                <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">02. Synchronized DEWA / DM</strong>
-                <p className="text-xs text-slate-600">Electrical and plumbing sleeves are cast directly into RCC slabs without structural coring.</p>
+              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1.5">
+                <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">02. Better Project Coordination</strong>
+                <p className="text-xs text-slate-600 leading-relaxed">Our civil and MEP teams work together from the beginning to coordinate electrical, plumbing, and other service requirements during construction.</p>
               </div>
-              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
-                <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">03. In-House Glass & Steel</strong>
-                <p className="text-xs text-slate-600">Aluminium profiles and glass units fabricated in our Al Qusais workshop to exact site dimensions.</p>
+              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1.5">
+                <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">03. Aluminium & Glass Works</strong>
+                <p className="text-xs text-slate-600 leading-relaxed">Our aluminium and glass workshop in Al Qusais handles fabrication according to project requirements and site measurements.</p>
               </div>
-              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
-                <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">04. Cost & Schedule Predictability</strong>
-                <p className="text-xs text-slate-600">Eliminating third-party markups ensures competitive pricing and strict milestone handovers.</p>
+              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1.5">
+                <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">04. Cost & Time Management</strong>
+                <p className="text-xs text-slate-600 leading-relaxed">Direct coordination between our teams helps reduce unnecessary costs, avoid delays, and ensure smooth project completion and timely handover.</p>
               </div>
             </div>
           </div>
@@ -319,47 +319,63 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
           <div className="max-w-3xl space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B]">
-              Standard Operating Procedure
+              From Start to Final Handover
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111622] font-display">
-              Turnkey Construction & Handover Methodology
+              Our Construction Process
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Every project follows an institutional engineering roadmap synchronized with Dubai Municipality staged inspections, DEWA approvals, and Civil Defence certifications.
+              Every project is managed through four main stages to ensure proper coordination, quality workmanship, and compliance with applicable Dubai regulations.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-white p-6 rounded-2xl border border-[#E2E8F0] space-y-3">
               <span className="text-xs font-mono font-bold text-[#8B6D1B]">PHASE 01</span>
-              <h3 className="text-base font-bold text-[#111622] font-display">Substructure & Raft Foundations</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Geotechnical soil testing, site dewatering, mass excavation, heavy rebar cage layout, moisture membrane application, and high-strength concrete raft casting under certified third-party testing.
-              </p>
+              <h3 className="text-base font-bold text-[#111622] font-display">Foundation & Substructure</h3>
+              <ul className="text-xs text-slate-600 space-y-1.5 list-disc list-inside leading-relaxed">
+                <li>Soil testing and site preparation</li>
+                <li>Excavation and dewatering where required</li>
+                <li>Foundation reinforcement and steel fixing</li>
+                <li>Waterproofing and moisture protection</li>
+                <li>Concrete raft foundation and related works</li>
+              </ul>
             </div>
 
             <div className="bg-white p-6 rounded-2xl border border-[#E2E8F0] space-y-3">
               <span className="text-xs font-mono font-bold text-[#8B6D1B]">PHASE 02</span>
-              <h3 className="text-base font-bold text-[#111622] font-display">Superstructure & Thermal Masonry</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Reinforced concrete columns, post-tensioned floor and roof slabs, thermal AAC masonry blockwork, and structural alignment verification under direct Dubai Municipality site inspection protocols.
-              </p>
+              <h3 className="text-base font-bold text-[#111622] font-display">Structure & Blockwork</h3>
+              <ul className="text-xs text-slate-600 space-y-1.5 list-disc list-inside leading-relaxed">
+                <li>Reinforced concrete columns and beams</li>
+                <li>Concrete slabs and roof construction</li>
+                <li>Post-tensioned slabs where required</li>
+                <li>AAC blockwork and thermal insulation</li>
+                <li>Plastering and structural inspections</li>
+              </ul>
             </div>
 
             <div className="bg-white p-6 rounded-2xl border border-[#E2E8F0] space-y-3">
               <span className="text-xs font-mono font-bold text-[#8B6D1B]">PHASE 03</span>
-              <h3 className="text-base font-bold text-[#111622] font-display">Concurrent MEP & Glazing Fitout</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Sleeved slab conduits, DEWA main panel coordination, central ducted AC ductwork, fire suppression networks, and in-house fabricated thermal-break aluminium window and curtain wall installation.
-              </p>
+              <h3 className="text-base font-bold text-[#111622] font-display">MEP, Aluminium, Glass & Fit-Out</h3>
+              <ul className="text-xs text-slate-600 space-y-1.5 list-disc list-inside leading-relaxed">
+                <li>Electrical conduits and cable installations</li>
+                <li>Plumbing and drainage installations</li>
+                <li>Air-conditioning ductwork and equipment</li>
+                <li>Aluminium doors, windows, and curtain walls</li>
+                <li>Glass, kitchen cabinets, wardrobes & interior finishing</li>
+              </ul>
             </div>
 
             <div className="bg-white p-6 rounded-2xl border border-[#E2E8F0] space-y-3">
               <span className="text-xs font-mono font-bold text-[#8B6D1B]">PHASE 04</span>
-              <h3 className="text-base font-bold text-[#111622] font-display">Testing, DEWA Meter & BCC Handover</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Full Testing & Balancing (TAB) of HVAC, DEWA final meter installation, Civil Defence life-safety clearance, and issuance of the official Dubai Municipality Building Completion Certificate (BCC).
-              </p>
+              <h3 className="text-base font-bold text-[#111622] font-display">Testing & Final Handover</h3>
+              <ul className="text-xs text-slate-600 space-y-1.5 list-disc list-inside leading-relaxed">
+                <li>Testing & commissioning of electrical & plumbing</li>
+                <li>Air-conditioning testing and balancing</li>
+                <li>DEWA meter coordination and installation</li>
+                <li>Required Civil Defence inspections & approvals</li>
+                <li>Dubai Municipality BCC inspection & final handover</li>
+              </ul>
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@ export default function VisionMissionSection() {
             Vision & Mission
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Since 2006, Kachoras ElectroMechanical Contracting LLC has been guided by uncompromising engineering standards, strict adherence to applicable Dubai regulatory requirements, and transparent contracting relationships throughout the UAE. Our commitment to integrity, technical excellence, and accountability underpins every project we undertake.
+            Since 2006, Kachoras Electromechanical Contracting LLC has focused on quality construction, reliable engineering services, and professional project management. We follow applicable Dubai regulations and maintain honest and transparent relationships with our clients. Our work is guided by quality, safety, responsibility, and customer satisfaction.
           </p>
         </div>
 
@@ -37,7 +37,7 @@ export default function VisionMissionSection() {
               </h3>
 
               <blockquote className="border-l-2 border-[#B3261E] pl-5 py-2 text-slate-700 text-base leading-relaxed italic font-serif">
-                "To be the leading contracting company recognized for our commitment to quality, innovation, and sustainability, transforming the built environment while enhancing the communities we serve."
+                "To become a trusted contracting company in Dubai, known for quality work, modern solutions, and sustainable construction that benefits our clients and communities."
               </blockquote>
             </div>
 
@@ -62,7 +62,7 @@ export default function VisionMissionSection() {
               </h3>
 
               <blockquote className="border-l-2 border-[#C59B27] pl-5 py-2 text-slate-700 text-base leading-relaxed italic font-serif">
-                "To deliver exceptional construction services and engineering excellence that consistently exceed client expectations, guided by unwavering integrity, uncompromising safety standards, and experienced technical leadership."
+                "To provide reliable construction and engineering services that meet client expectations through quality workmanship, safe working practices, experienced staff, and professional service."
               </blockquote>
             </div>
 

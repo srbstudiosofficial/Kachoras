@@ -44,13 +44,16 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
 
               <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed">
                 <p>
-                  Established in Dubai in <strong>2006</strong>, Kachoras Electromechanical Contracting LLC was founded with a singular commitment: delivering uncompromised engineering quality for residential, commercial, and municipal clients across the UAE.
+                  Established in Dubai in <strong>2006</strong>, <strong>Kachoras Electromechanical Contracting LLC</strong> has built its experience in delivering construction, MEP, and maintenance works for residential, commercial, and government projects across Dubai.
                 </p>
                 <p>
-                  Under the stewardship of General Manager and Managing Director <strong>Jose K. George</strong>, the firm has expanded from specialized MEP works into a fully accredited <strong>Dubai Municipality G+1 Building Contractor (Commercial License #{COMPANY_INFO.licenseNumber})</strong>.
+                  Under the leadership of our General Manager <strong>Jose K. George</strong> and dedicated staff, the company has expanded its services from civil and MEP works to a wide range of construction and specialist services under <strong>Dubai Municipality G+1 Building License #{COMPANY_INFO.licenseNumber}</strong>.
                 </p>
                 <p>
-                  Unlike contracting firms that rely heavily on fragmented subcontractors, Kachoras maintains in-house execution across structural civil works, MEP installations, architectural aluminium and glass, and civil maintenance. This turnkey model guarantees that every project adheres to strict DEWA, Civil Defence, and Dubai Municipality standards without cost overruns or scheduling delays.
+                  Unlike companies that depend entirely on outside subcontractors, Kachoras handles several key works in-house, including structural construction, MEP installations, aluminium and glass fabrication, and civil maintenance.
+                </p>
+                <p>
+                  Our integrated approach helps us maintain quality, coordinate work efficiently, and complete projects in line with DEWA, Dubai Civil Defence, and Dubai Municipality requirements.
                 </p>
               </div>
 
