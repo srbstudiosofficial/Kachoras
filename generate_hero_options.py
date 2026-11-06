@@ -82,8 +82,7 @@ def get_nav_html():
           <a href="#disciplines" class="hover:text-[#B3261E] transition">Disciplines</a>
           <a href="#advantage" class="hover:text-[#B3261E] transition">Advantage</a>
           <a href="#process" class="hover:text-[#B3261E] transition">Construction Process</a>
-          <a href="#projects" class="hover:text-[#B3261E] transition">Projects</a>
-          <a href="#consultants" class="hover:text-[#B3261E] transition">Consultants</a>
+                    <a href="#consultants" class="hover:text-[#B3261E] transition">Consultants</a>
           <a href="#contact" class="hover:text-[#B3261E] transition">Contact & Tender</a>
         </nav>
 
@@ -322,85 +321,7 @@ def get_common_sections_html():
       </div>
     </section>
 
-    <!-- 4. DELIVERED LANDMARK WORKS -->
-    <section id="projects" class="py-16 sm:py-20 lg:py-24 bg-slate-50 border-b border-slate-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div class="space-y-3 max-w-2xl">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-[#B3261E] text-xs font-bold uppercase tracking-wider shadow-xs">
-              <span>Delivered Landmark Works</span>
-            </div>
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-950 tracking-tight">
-              A Proven Track Record of Dubai Municipality Certified Handovers
-            </h2>
-            <p class="text-sm text-slate-600">
-              Photographic documentation of our completed turnkey G+1 residential villas and specialized facade installations across Dubai.
-            </p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
-          <!-- Project 1 -->
-          <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-md hover:shadow-xl transition group">
-            <div class="relative h-64 overflow-hidden bg-slate-100">
-              <img src="{SHEHAB_B64}" alt="Villa Shehab" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
-              <div class="absolute top-3 left-3 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">
-                G+1 Residential Villa
-              </div>
-              <div class="absolute bottom-3 left-3 bg-[#B3261E] text-white text-xs font-bold px-3 py-1 rounded-lg">
-                Plot 423-1407 • Al Warqaa Third
-              </div>
-            </div>
-            <div class="p-6 space-y-2">
-              <h3 class="text-lg font-bold text-slate-900">Residential G+1 Luxury Villa</h3>
-              <p class="text-xs text-slate-600">
-                Turnkey civil structure, MEP execution, high-performance double glazing, and luxury interior finishes certified by Dubai Municipality.
-              </p>
-            </div>
-          </div>
-
-          <!-- Project 2 -->
-          <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-md hover:shadow-xl transition group">
-            <div class="relative h-64 overflow-hidden bg-slate-100">
-              <img src="{ALBANNAY_B64}" alt="Villa Al Bannay" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
-              <div class="absolute top-3 left-3 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">
-                G+1 Residential Villa
-              </div>
-              <div class="absolute bottom-3 left-3 bg-[#B3261E] text-white text-xs font-bold px-3 py-1 rounded-lg">
-                Plot 424-7036 • Al Warqaa Fourth
-              </div>
-            </div>
-            <div class="p-6 space-y-2">
-              <h3 class="text-lg font-bold text-slate-900">Villa Al Bannay Turnkey Handover</h3>
-              <p class="text-xs text-slate-600">
-                RCC structural skeleton, HVAC ducting, in-house aluminium doors, thermal insulated glass, and full municipality sign-off.
-              </p>
-            </div>
-          </div>
-
-          <!-- Project 3 -->
-          <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-md hover:shadow-xl transition group">
-            <div class="relative h-64 overflow-hidden bg-slate-100">
-              <img src="{GLAZING_B64}" alt="Travertine Glazing" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
-              <div class="absolute top-3 left-3 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">
-                Aluminium & Glass
-              </div>
-              <div class="absolute bottom-3 left-3 bg-emerald-700 text-white text-xs font-bold px-3 py-1 rounded-lg">
-                Al Qusais Facility Fabrication
-              </div>
-            </div>
-            <div class="p-6 space-y-2">
-              <h3 class="text-lg font-bold text-slate-900">Architectural Facade & Structural Glazing</h3>
-              <p class="text-xs text-slate-600">
-                Precision aluminium profile cutting, tempered acoustic glass fabrication, and on-site crane installation for premium villas.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
+    
 
     <!-- 5. APPROVED CONSULTANT ENGINEERING PARTNERS -->
     <section id="consultants" class="py-14 sm:py-20 bg-white border-b border-slate-200">
@@ -509,8 +430,7 @@ def get_common_sections_html():
             <a href="#disciplines" class="hover:text-white transition">Disciplines</a>
             <a href="#advantage" class="hover:text-white transition">Advantage</a>
             <a href="#process" class="hover:text-white transition">Process</a>
-            <a href="#projects" class="hover:text-white transition">Projects</a>
-            <a href="#consultants" class="hover:text-white transition">Consultants</a>
+                        <a href="#consultants" class="hover:text-white transition">Consultants</a>
           </div>
         </div>
 
