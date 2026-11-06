@@ -632,10 +632,6 @@ def get_current_hero():
               <a href="#disciplines" class="px-5 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition">
                 Our Disciplines
               </a>
-              <a href="#projects" class="px-4 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#E0A96D] hover:text-white transition flex items-center gap-1.5">
-                <span>View Portfolio</span>
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-              </a>
             </div>
           </div>
 
@@ -759,10 +755,6 @@ def get_option1_hero():
               </a>
               <a href="#disciplines" class="px-5 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 transition shadow-sm">
                 Our Disciplines
-              </a>
-              <a href="#projects" class="px-4 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#B3261E] hover:underline transition flex items-center gap-1.5">
-                <span>View Portfolio</span>
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
               </a>
             </div>
           </div>
@@ -1008,8 +1000,8 @@ def get_option3_hero():
                 <span>Request Project Proposal</span>
                 <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
               </a>
-              <a href="#projects" class="px-5 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 transition shadow-sm">
-                Explore Portfolio
+              <a href="#disciplines" class="px-5 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 transition shadow-sm">
+                Our Disciplines
               </a>
             </div>
           </div>

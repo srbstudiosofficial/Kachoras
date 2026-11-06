@@ -110,14 +110,6 @@ export default function Hero({ onOpenQuoteModal, onNavigate }) {
               >
                 <span>Our Disciplines</span>
               </button>
-
-              <button
-                onClick={() => onNavigate('projects')}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs sm:text-sm font-bold tracking-wider uppercase text-[#E0A96D] hover:text-white transition cursor-pointer min-h-[44px]"
-              >
-                <span>View Portfolio</span>
-                <ArrowRight className="w-4 h-4 text-[#C59B27]" />
-              </button>
             </div>
 
           </div>
