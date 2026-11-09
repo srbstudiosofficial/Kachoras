@@ -51,7 +51,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
                       تأسست شركة <strong>كاشوراس للمقاولات الكهروميكانيكية ش.ذ.م.م</strong> في إمارة دبي عام <strong>2006</strong>، وبنت سجلاً حافلاً بالثقة في تنفيذ مشاريع البناء، الأعمال الكهروميكانيكية، وأعمال الصيانة للمشاريع السكنية والتجارية والحكومية في كافة أنحاء دبي.
                     </p>
                     <p>
-                      تحت قيادة المدير العام <strong>خوسيه كيه. جورج</strong> وفريق العمل الهندسي المتخصص، طورت الشركة خدماتها لتشمل حلول المقاولات الشاملة بموجب <strong>رخصة بلدية دبي لمقاولات المباني فئة أرضي + أول (G+1) رقم {COMPANY_INFO.licenseNumber}</strong>.
+                      بفضل فريق العمل الهندسي المتخصص والإدارة المتفانية، طورت الشركة خدماتها لتشمل حلول المقاولات الشاملة بموجب <strong>رخصة بلدية دبي لمقاولات المباني فئة أرضي + أول (G+1) رقم {COMPANY_INFO.licenseNumber}</strong>.
                     </p>
                     <p>
                       خلافاً للشركات التي تعتمد كلياً على مقاولي الباطن، تتميز كاشوراس بتنفيذ كافة الأعمال الحيوية ذاتياً من خلال كوادرها وورشها المتخصصة في البناء، التمديدات الكهروميكانيكية، وتصنيع الألمنيوم والزجاج.
@@ -66,7 +66,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
                       Established in Dubai in <strong>2006</strong>, <strong>Kachoras Electromechanical Contracting LLC</strong> has built its experience in delivering construction, MEP, and maintenance works for residential, commercial, and government projects across Dubai.
                     </p>
                     <p>
-                      Under the leadership of our General Manager <strong>Jose K. George</strong> and dedicated staff, the company has expanded its services from civil and MEP works to a wide range of construction and specialist services under <strong>Dubai Municipality G+1 Building License #{COMPANY_INFO.licenseNumber}</strong>.
+                      With a dedicated team of experienced engineers and technical staff, the company has expanded its services from civil and MEP works to a wide range of construction and specialist services under <strong>Dubai Municipality G+1 Building License #{COMPANY_INFO.licenseNumber}</strong>.
                     </p>
                     <p>
                       Unlike companies that depend entirely on outside subcontractors, Kachoras handles several key works in-house, including structural construction, MEP installations, aluminium and glass fabrication, and civil maintenance.
@@ -117,7 +117,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
                   <Building2 className="w-4 h-4 text-[#B3261E] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-slate-900 font-bold">Dubai Municipality G+1 License</strong>
-                    <span className="text-slate-600">Permitted for structural building contracting of Ground + 1 storey developments</span>
+                    <span className="text-slate-600">Permitted for building contracting of Ground + 1 storey developments</span>
                   </div>
                 </div>
 

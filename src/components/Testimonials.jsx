@@ -4,7 +4,6 @@ import {
   MapPin, 
   ShieldCheck, 
   FileCheck2,
-  CheckCircle2,
   UserCheck
 } from 'lucide-react';
 
@@ -66,9 +65,6 @@ export default function Testimonials() {
         
         {/* Header */}
         <div className="max-w-3xl space-y-3">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B]">
-            Consultant Coordination & Execution Record
-          </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111622] font-display">
             Approved Consultant Engineering
           </h2>
@@ -111,12 +107,6 @@ export default function Testimonials() {
                 </div>
               </div>
 
-              <div className="pt-2">
-                <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-slate-500 bg-slate-50 px-2.5 py-1 rounded-md border border-slate-100">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                  Direct Consultant Supervision & BCC Verified
-                </span>
-              </div>
             </div>
           ))}
         </div>
