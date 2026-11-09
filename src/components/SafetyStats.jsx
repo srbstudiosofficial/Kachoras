@@ -71,7 +71,7 @@ export default function SafetyStats() {
           </div>
 
           <div className="bg-[#1A202C] border border-[#C59B27]/40 rounded-2xl p-6 sm:p-8 text-center space-y-2 relative overflow-hidden">
-            <div className="text-4xl sm:text-5xl font-black text-[#C59B27] font-display">18+</div>
+            <div className="text-4xl sm:text-5xl font-black text-[#C59B27] font-display">20+</div>
             <div className="text-base font-bold text-white">Years in Dubai</div>
             <p className="text-xs text-white/60 max-w-xs mx-auto">
               Continuous operational presence in Dubai without regulatory penalties or suspension.

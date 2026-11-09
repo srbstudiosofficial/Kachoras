@@ -26,15 +26,15 @@ const DISCIPLINE_ASSETS = {
   },
   aluminium: {
     tag: 'Aluminium & Glass Fabrication',
-    image: './assets/real-projects/completed-aluminum-travertine-glazing.jpg',
-    webp: './assets/real-projects/completed-aluminum-travertine-glazing.jpg',
+    image: './assets/aluminium.jpg',
+    webp: './assets/aluminium.webp',
     details: 'Manufactured at our Al Qusais B-25 fabrication workshop: curtain walls, structural glazing, and thermal-break systems.'
   },
   maintenance: {
     tag: 'Dubai Civic & Maintenance',
     // Internal villa picture as requested
-    image: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg',
-    webp: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg',
+    image: './assets/civic.jpg',
+    webp: './assets/civic.webp',
     details: 'Municipal civic contracts, hydraulic valve chambers, public park infrastructure, and commercial refurbishment.'
   },
   kitchen_wardrobes: {
@@ -45,8 +45,8 @@ const DISCIPLINE_ASSETS = {
   },
   gypsum_works: {
     tag: 'Decorative Ceilings & Partitions',
-    image: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg',
-    webp: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg',
+    image: './assets/civic.jpg',
+    webp: './assets/civic.webp',
     details: 'Intricate classical Arabian and modern false ceilings, concealed LED ambient lighting troughs, GRC decorative screens, and acoustic partitions.'
   }
 };

@@ -124,6 +124,8 @@ export default function Hero({ onNavigate, onOpenQuoteModal }) {
                 <img 
                   src="./assets/villa.jpg" 
                   alt="Building Construction" 
+                  loading="eager" 
+                  decoding="async" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5 sm:p-3">
@@ -138,6 +140,8 @@ export default function Hero({ onNavigate, onOpenQuoteModal }) {
                 <img 
                   src="./assets/mep.jpg" 
                   alt="MEP" 
+                  loading="eager" 
+                  decoding="async" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5 sm:p-3">
@@ -152,6 +156,8 @@ export default function Hero({ onNavigate, onOpenQuoteModal }) {
                 <img 
                   src="./assets/aluminium.jpg" 
                   alt="Aluminum & Glass" 
+                  loading="eager" 
+                  decoding="async" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5 sm:p-3">
@@ -166,6 +172,8 @@ export default function Hero({ onNavigate, onOpenQuoteModal }) {
                 <img 
                   src="./assets/civic.jpg" 
                   alt="General Maintenance" 
+                  loading="eager" 
+                  decoding="async" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5 sm:p-3">

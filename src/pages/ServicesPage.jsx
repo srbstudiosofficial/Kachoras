@@ -74,8 +74,8 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
       ],
       compliance: 'Dubai Green Building Standards & Estidama Glazing Safety Codes',
       typicalTimeline: 'Fabricated in-house to synchronize with site finishes',
-      image: './assets/real-projects/completed-aluminum-travertine-glazing.jpg',
-      imageCaption: 'Al Qusais Workshop Double-Glazed Curtain Wall & Entryway'
+      image: './assets/aluminium.jpg',
+      imageCaption: 'Manufacturing & Installation of Aluminium Doors, Windows, Glass & Pergolas'
     },
     {
       id: 'maintenance',
@@ -93,8 +93,8 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
       ],
       compliance: 'Dubai Municipality Health & Safety Standards',
       typicalTimeline: 'Scheduled maintenance programs & emergency support',
-      image: './assets/real-projects/completed-maintenance-majlis-alabdulla-376-1176.jpg',
-      imageCaption: 'Royal Majlis & Decorative Gypsum Maintenance (Al Barsha, Plot 376-1176)'
+      image: './assets/civic.jpg',
+      imageCaption: 'Approved General Maintenance, Renovation & Interior Finishing'
     }
   ];
 
@@ -267,6 +267,8 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                           src={activeItem.image}
                           alt={activeItem.title}
                           className="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
                         <div className="absolute bottom-3 left-4 right-4 text-white">

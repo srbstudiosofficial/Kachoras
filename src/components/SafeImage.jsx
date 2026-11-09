@@ -82,6 +82,7 @@ export default function SafeImage({
         src={currentSrc}
         alt={alt}
         loading="lazy"
+        decoding="async"
         onLoad={() => setIsLoaded(true)}
         onError={handleImageError}
         className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
