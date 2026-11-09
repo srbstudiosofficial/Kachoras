@@ -13,7 +13,7 @@ import {
 } from './firebaseSync';
 
 // LocalStorage Keys
-const STORAGE_KEY_PROJECTS = 'kachoras_custom_projects_v5';
+const STORAGE_KEY_PROJECTS = 'kachoras_custom_projects_v6';
 const STORAGE_KEY_FIREBASE = 'kachoras_firebase_config_v1';
 const STORAGE_KEY_AUTH = 'kachoras_admin_auth_v1';
 
@@ -21,7 +21,7 @@ const STORAGE_KEY_AUTH = 'kachoras_admin_auth_v1';
 export const INITIAL_FEATURED_PROJECTS = [
   {
     "id": "REAL-CP-ALBANNAY",
-    "title": "Turnkey Classical G+1 Villa",
+    "title": "G+1 Villa and Service Block",
     "client": "Mariam Hussain Redha Hassan Albannay",
     "consultant": "Al Manhal Engineering Consultants",
     "category": "Luxury G+1 Villa",
@@ -39,7 +39,7 @@ export const INITIAL_FEATURED_PROJECTS = [
   },
   {
     "id": "REAL-CP-ALSAFFAR",
-    "title": "Contemporary Minimalist G+1 Villa",
+    "title": "G+1 Villa and Service Block",
     "client": "Hussain Abdullateef Baqer AlSaffar",
     "consultant": "Al Majal Engineering Consultants",
     "category": "Luxury G+1 Villa",
@@ -76,8 +76,8 @@ export const INITIAL_FEATURED_PROJECTS = [
   {
     "id": "P-VILLA-KABIE",
     "title": "Royal G+1 Villa",
-    "client": "Private Client",
-    "consultant": "Engineering Consultancy Services",
+    "client": "Suad Salman Jabour Mahmood Al Kabie",
+    "consultant": "Gulf Engineering Consultants",
     "category": "Luxury G+1 Villa",
     "categoryFilter": "villas",
     "type": "Royal G+1 Villa",
@@ -93,9 +93,9 @@ export const INITIAL_FEATURED_PROJECTS = [
   },
   {
     "id": "P-VILLA-ZAROONI",
-    "title": "Modern Architectural G+1 Villa",
-    "client": "Private Client",
-    "consultant": "Al Majal Engineering Consultants",
+    "title": "Modern G+1 Villa",
+    "client": "Fareed Ali Hassan AlZarooni",
+    "consultant": "Gulf Engineering Consultants",
     "category": "Luxury G+1 Villa",
     "categoryFilter": "villas",
     "type": "Luxury G+1 Villa",
@@ -351,7 +351,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "category": "Civil & MEP Works",
     "categoryFilter": "civic_mep",
     "type": "Civil & MEP Works",
-    "status": "upcoming",
+    "status": "completed",
     "location": "Shooroq Irrigation Hub, Mirdif, Dubai",
     "plotNo": "Shooroq Irrigation Hub",
     "year": "2024",
@@ -369,7 +369,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "category": "Maintenance and MEP Works",
     "categoryFilter": "civic_mep",
     "type": "Maintenance and MEP Works",
-    "status": "upcoming",
+    "status": "completed",
     "location": "Al Quoz 3, Dubai",
     "plotNo": "368-0412",
     "year": "2024",

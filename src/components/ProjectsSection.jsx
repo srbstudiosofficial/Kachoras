@@ -302,22 +302,33 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
 
                 {/* Body Content */}
                 <div className="p-5 sm:p-6 space-y-4 flex-1 flex flex-col justify-between">
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs text-slate-500 pb-2 border-b border-slate-100">
-                      <span>{language === 'ar' ? 'رقم الأرض:' : 'Plot Number:'}</span>
-                      <strong className="text-slate-800 font-mono">{project.plotNo || 'N/A'}</strong>
-                    </div>
-
+                  <div className="space-y-2.5">
                     {project.client && (
-                      <div className="flex items-center justify-between text-xs text-slate-500 pb-2 border-b border-slate-100">
-                        <span>{language === 'ar' ? 'المالك / العميل:' : 'Client:'}</span>
-                        <span className="text-slate-800 font-medium text-right line-clamp-1 max-w-[65%]">{project.client}</span>
+                      <div className="flex items-start justify-between text-xs text-slate-500 pb-2 border-b border-slate-100 gap-2">
+                        <span className="shrink-0">{language === 'ar' ? 'العميل:' : 'Client:'}</span>
+                        <span className="text-slate-800 font-medium text-right line-clamp-1 max-w-[70%]">{project.client}</span>
                       </div>
                     )}
 
-                    <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed pt-1">
-                      {project.scope}
-                    </p>
+                    {project.consultant && (
+                      <div className="flex items-start justify-between text-xs text-slate-500 pb-2 border-b border-slate-100 gap-2">
+                        <span className="shrink-0">{language === 'ar' ? 'الاستشاري:' : 'Consultant:'}</span>
+                        <span className="text-slate-800 font-medium text-right line-clamp-1 max-w-[70%]">{project.consultant}</span>
+                      </div>
+                    )}
+
+                    {project.categoryFilter !== 'villas' && project.plotNo && (
+                      <div className="flex items-center justify-between text-xs text-slate-500 pb-2 border-b border-slate-100">
+                        <span>{language === 'ar' ? 'رقم الأرض:' : 'Plot Number:'}</span>
+                        <strong className="text-slate-800 font-mono">{project.plotNo}</strong>
+                      </div>
+                    )}
+
+                    {project.categoryFilter !== 'villas' && project.scope && (
+                      <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed pt-1">
+                        {project.scope}
+                      </p>
+                    )}
                   </div>
 
                   <div className="pt-3 border-t border-[#E2E8F0] flex items-center justify-between">
@@ -328,7 +339,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
                       }}
                       className="text-xs font-bold text-[#B3261E] hover:underline flex items-center gap-1 cursor-pointer py-1"
                     >
-                      <span>{language === 'ar' ? 'عرض المواصفات الهندسية' : 'View Specifications'}</span>
+                      <span>{language === 'ar' ? 'عرض المواصفات الهندسية' : 'View Full Project Sheet'}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                     
