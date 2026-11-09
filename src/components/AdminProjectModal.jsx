@@ -1186,57 +1186,67 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                                 {item.status !== 'archived' && (
                                   <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/70 space-y-1">
                                     <span className="text-[10px] uppercase font-bold text-slate-400 block">Contact Actions</span>
-                                    <div className="flex items-center gap-3.5 pt-0.5 flex-wrap">
-                                      {item.phone && (
-                                        <a
-                                          href={`https://wa.me/${item.phone.replace(/[^0-9]/g, '')}`}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-[11px] font-bold text-emerald-700 border border-emerald-200/80 rounded-lg transition flex items-center gap-1.5"
-                                          title="Chat on WhatsApp"
-                                        >
-                                          <MessageSquare className="w-3.5 h-3.5" />
-                                          <span>WhatsApp</span>
-                                        </a>
-                                      )}
-                                      {item.email && (
-                                        <div className="flex items-center gap-1.5">
-                                          <a
-                                            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(item.email)}&su=${encodeURIComponent(`Kachoras RFQ Response [${item.referenceId || 'Tender'}]`)}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="px-2.5 py-1 bg-red-50 hover:bg-red-100 text-[11px] font-bold text-[#B3261E] border border-red-200/80 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
-                                            title={`Compose email to ${item.email} in Gmail`}
-                                          >
-                                            <Mail className="w-3.5 h-3.5" />
-                                            <span>Email (Gmail)</span>
-                                          </a>
-                                          <button
-                                            type="button"
-                                            onClick={async () => {
-                                              try {
-                                                await navigator.clipboard.writeText(item.email);
-                                                setCopiedEmailId(item.id);
-                                                setTimeout(() => setCopiedEmailId(null), 2000);
-                                              } catch (e) {
-                                                window.location.href = `mailto:${item.email}?subject=Kachoras RFQ Response`;
-                                              }
-                                            }}
-                                            className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 transition text-[10px] font-mono cursor-pointer flex items-center gap-1"
-                                            title={`Copy email address: ${item.email}`}
-                                          >
-                                            {copiedEmailId === item.id ? (
-                                              <span className="text-emerald-700 font-bold">Copied!</span>
-                                            ) : (
-                                              <>
-                                                <Copy className="w-3 h-3 text-slate-500" />
-                                                <span>Copy</span>
-                                              </>
-                                            )}
-                                          </button>
+                                    {(() => {
+                                      const emailSubject = `Kachoras Electromechanical Contracting - RFQ Response [${item.referenceId || 'Tender'}]`;
+                                      const emailBody = `Dear ${item.name || 'Valued Client'},\n\nThank you for contacting Kachoras Electromechanical Contracting LLC.\n\nWe have received your inquiry (Ref: ${item.referenceId || 'Tender'}):\n• Discipline Scope: ${item.serviceType || 'General Contracting'}\n• Location: ${item.location || 'Dubai, UAE'} ${item.plotNo ? `(Plot #${item.plotNo})` : ''}\n• Budget Indicator: ${item.budgetRange || 'AED Contract Scope'}\n\nClient Scope & Requirements:\n"${item.message || 'Project specifications and drawings under review.'}"\n\nOur engineering estimation team is currently reviewing your project requirements and approved drawings. We would be pleased to coordinate a technical consultation or site inspection at your convenience.\n\nBest regards,\nKachoras Electromechanical Contracting LLC\nDubai Municipality Approved G+1 Contractor (Lic #578964)\nOffice B-25, Al Qusais Ind. 1, Dubai, UAE\nTel: +971 4 267 8856 | Mob: +971 50 679 2404\nEmail: info@kachoras.com | kachorasdubai@gmail.com`;
+                                      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(item.email || '')}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                                      const waMsg = `Hello ${item.name || 'Client'}, this is Kachoras Electromechanical Contracting LLC regarding your inquiry (${item.referenceId || 'Tender'}). We have reviewed your request for ${item.serviceType || 'construction services'} and would like to coordinate.`;
+                                      const waUrl = `https://wa.me/${(item.phone || '').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(waMsg)}`;
+
+                                      return (
+                                        <div className="flex items-center gap-3.5 pt-0.5 flex-wrap">
+                                          {item.phone && (
+                                            <a
+                                              href={waUrl}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-[11px] font-bold text-emerald-700 border border-emerald-200/80 rounded-lg transition flex items-center gap-1.5"
+                                              title="Chat on WhatsApp with pre-drafted greeting"
+                                            >
+                                              <MessageSquare className="w-3.5 h-3.5" />
+                                              <span>WhatsApp</span>
+                                            </a>
+                                          )}
+                                          {item.email && (
+                                            <div className="flex items-center gap-1.5">
+                                              <a
+                                                href={gmailUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="px-2.5 py-1 bg-red-50 hover:bg-red-100 text-[11px] font-bold text-[#B3261E] border border-red-200/80 rounded-lg transition flex items-center gap-1.5 cursor-pointer shadow-xs"
+                                                title={`Compose email to ${item.email} with pre-filled RFQ response`}
+                                              >
+                                                <Mail className="w-3.5 h-3.5" />
+                                                <span>Email (Gmail)</span>
+                                              </a>
+                                              <button
+                                                type="button"
+                                                onClick={async () => {
+                                                  try {
+                                                    await navigator.clipboard.writeText(item.email);
+                                                    setCopiedEmailId(item.id);
+                                                    setTimeout(() => setCopiedEmailId(null), 2000);
+                                                  } catch (e) {
+                                                    window.location.href = `mailto:${item.email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                                                  }
+                                                }}
+                                                className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 transition text-[10px] font-mono cursor-pointer flex items-center gap-1"
+                                                title={`Copy email address: ${item.email}`}
+                                              >
+                                                {copiedEmailId === item.id ? (
+                                                  <span className="text-emerald-700 font-bold">Copied!</span>
+                                                ) : (
+                                                  <>
+                                                    <Copy className="w-3 h-3 text-slate-500" />
+                                                    <span>Copy</span>
+                                                  </>
+                                                )}
+                                              </button>
+                                            </div>
+                                          )}
                                         </div>
-                                      )}
-                                    </div>
+                                      );
+                                    })()}
                                   </div>
                                 )}
                               </div>
