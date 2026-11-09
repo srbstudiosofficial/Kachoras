@@ -164,9 +164,14 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <strong className="text-[#1E293B] block font-bold text-sm">Official Email Desk:</strong>
-                    <a href={`mailto:${COMPANY_INFO.email}`} className="text-[#B3261E] font-bold hover:underline text-sm">
-                      {COMPANY_INFO.email}
-                    </a>
+                    <div className="flex flex-col gap-0.5 mt-0.5">
+                      <a href={`mailto:${COMPANY_INFO.email}`} className="text-[#B3261E] font-bold hover:underline text-sm font-mono">
+                        {COMPANY_INFO.email}
+                      </a>
+                      <a href="mailto:info@kachoras.com" className="text-[#B3261E] font-bold hover:underline text-sm font-mono">
+                        info@kachoras.com
+                      </a>
+                    </div>
                   </div>
                 </div>
 

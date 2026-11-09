@@ -176,11 +176,16 @@ export default function Footer({ currentPage = 'home', onNavigate, onOpenQuoteMo
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span>Mob: <strong className="text-white font-mono">{COMPANY_INFO.mobile}</strong></span>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-[#C59B27] shrink-0" />
-                <a href={`mailto:${COMPANY_INFO.email}`} className="text-slate-200 hover:text-white hover:underline font-mono">
-                  {COMPANY_INFO.email}
-                </a>
+              <div className="flex items-start gap-2">
+                <Mail className="w-3.5 h-3.5 text-[#C59B27] shrink-0 mt-0.5" />
+                <div className="flex flex-col space-y-0.5 text-xs">
+                  <a href={`mailto:${COMPANY_INFO.email}`} className="text-slate-200 hover:text-white hover:underline font-mono">
+                    {COMPANY_INFO.email}
+                  </a>
+                  <a href="mailto:info@kachoras.com" className="text-slate-200 hover:text-white hover:underline font-mono">
+                    info@kachoras.com
+                  </a>
+                </div>
               </div>
               
               <div className="pt-2 border-t border-white/10 text-[11px] text-slate-400 space-y-1">

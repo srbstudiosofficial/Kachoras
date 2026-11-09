@@ -12,6 +12,7 @@ export const COMPANY_INFO = {
   whatsappDisplay: "+971 56 506 6904",
   email: "kachorasdubai@gmail.com",
   secondaryEmail: "info@kachoras.com",
+  officialEmails: ["kachorasdubai@gmail.com", "info@kachoras.com"],
   poBox: "123397, Dubai, U.A.E.",
   address: "B25, Bin Sougat Warehouse Complex, Al Qusais Industrial Area 1, Dubai, U.A.E.",
   locationDisplay: "B25, Bin Sougat Warehouse Complex, Al Qusais Industrial Area 1, Dubai, U.A.E.",

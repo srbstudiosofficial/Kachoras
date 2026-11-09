@@ -63,19 +63,23 @@ export default function ContactPage({ onNavigate, onOpenQuoteModal }) {
               </div>
             </a>
 
-            <a 
-              href={`mailto:${COMPANY_INFO.email}`}
+            <div 
               className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#B3261E] transition group flex items-start gap-3.5"
             >
               <div className="w-10 h-10 rounded-xl bg-[#B3261E]/10 text-[#B3261E] flex items-center justify-center shrink-0 group-hover:bg-[#B3261E] group-hover:text-white transition">
                 <Mail className="w-5 h-5" />
               </div>
               <div className="space-y-0.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Estimating Desk Email</span>
-                <strong className="block text-xs font-bold text-slate-900 break-all">{COMPANY_INFO.email}</strong>
-                <p className="text-[11px] text-slate-500">Drawings & Tender Docs</p>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Official Email Desk</span>
+                <a href={`mailto:${COMPANY_INFO.email}`} className="block text-xs font-bold text-slate-900 hover:text-[#B3261E] font-mono break-all">
+                  {COMPANY_INFO.email}
+                </a>
+                <a href="mailto:info@kachoras.com" className="block text-xs font-bold text-slate-900 hover:text-[#B3261E] font-mono break-all">
+                  info@kachoras.com
+                </a>
+                <p className="text-[11px] text-slate-500 pt-0.5">Drawings & Tender Docs</p>
               </div>
-            </a>
+            </div>
 
             <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-start gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-[#C59B27]/15 text-[#B3261E] flex items-center justify-center shrink-0">
