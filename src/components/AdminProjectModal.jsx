@@ -761,7 +761,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                     }`}
                   >
                     <Plus className="w-3.5 h-3.5 text-amber-200" />
-                    <span>+ Upload Project</span>
+                    <span>+ New Project</span>
                   </button>
 
 
@@ -805,34 +805,11 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                       </p>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-                      <button
-                        onClick={() => { setActiveTab('inquiries'); refreshInquiriesList(); }}
-                        className="px-4 py-2.5 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow flex items-center gap-2 cursor-pointer"
-                        title="View customer inquiries & RFQs"
-                      >
-                        <Inbox className="w-4 h-4 text-[#C59B27]" />
-                        <span>Inquiries ({inquiries.filter(i => i.status === 'new').length} New)</span>
-                      </button>
-
-                      <button
-                        onClick={() => { setActiveTab('list'); }}
-                        className="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl border border-white/20 transition flex items-center gap-2 cursor-pointer"
-                        title="Manage, edit, or update existing projects"
-                      >
-                        <Edit3 className="w-4 h-4 text-[#C59B27]" />
-                        <span>Project Editor</span>
-                      </button>
-
-                      <button
-                        onClick={() => { setActiveTab('add'); handleResetForm(); }}
-                        className="px-4 py-2.5 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow flex items-center gap-2 cursor-pointer"
-                      >
-                        <Plus className="w-4 h-4 text-amber-200" />
-                        <span>New Project</span>
-                      </button>
-
-                      
+                    <div className="flex items-center gap-3 shrink-0">
+                      <div className="px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-right">
+                        <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Statutory Approval</div>
+                        <div className="text-xs font-bold text-[#C59B27]">Dubai Municipality G+1 #578964</div>
+                      </div>
                     </div>
                   </div>
 
