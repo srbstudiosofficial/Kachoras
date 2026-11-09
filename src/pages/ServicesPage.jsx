@@ -42,7 +42,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
     },
     {
       id: 'mep',
-      title: 'MEP & HVAC Engineering Works',
+      title: 'MEP',
       badge: 'DEWA & Dubai Civil Defence Compliant',
       icon: Cpu,
       tagline: 'Complete mechanical, electrical, and plumbing (MEP) services, covering all stages from installation to testing and commissioning.',
@@ -61,7 +61,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
     },
     {
       id: 'aluminium',
-      title: 'Architectural Aluminum and Glass',
+      title: 'Aluminum and Glass',
       badge: 'Custom Workshop Fabrication in Al Qusais',
       icon: ShieldCheck,
       tagline: 'Manufacturing and installation of aluminium doors, windows, skylights, pergolas, glass, and mirrors.',
@@ -254,7 +254,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                         onClick={() => onNavigate('contact')}
                         className="px-5 py-3 bg-white hover:bg-slate-50 text-slate-800 text-xs font-bold rounded-xl border border-[#CBD5E1] transition cursor-pointer"
                       >
-                        <span>Send Blueprints to Estimating Desk</span>
+                        <span>Send Drawings and Specifications to Estimating Desk</span>
                       </button>
                     </div>
                   </div>
