@@ -55,7 +55,7 @@ export default function LicensePage({ onNavigate, onOpenQuoteModal }) {
                 onClick={() => onNavigate('contact')}
                 className="px-6 py-3.5 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md transition cursor-pointer flex items-center gap-2 shrink-0 self-start md:self-auto"
               >
-                <span>Request PQD Dossier</span>
+                <span>Request PQD</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
               </button>
             </div>
@@ -75,7 +75,7 @@ export default function LicensePage({ onNavigate, onOpenQuoteModal }) {
                     downloadUrl: "./assets/dubai-commercial-license-578964.pdf",
                     downloadLabel: "Download License PDF"
                   },
-                  { num: "02", title: "Dubai Municipality G+1 Approval Certificate", desc: "Unlimited Building Contracting G+1 accreditation & statutory engineer records" },
+                  { num: "02", title: "Dubai Municipality G+1 Approval Certificate", desc: "Building Contracting G+1 accreditation & statutory engineer records" },
                   { num: "03", title: "Dubai Chamber Membership Certificate", desc: "Active DCCI corporate membership #169651 in good standing" },
                   { num: "04", title: "Company Registration Documents", desc: "Official establishment card, civil defense, and MOHRE compliance dossiers" },
                   { num: "05", title: "Completed Project List", desc: "Audited delivery logs across luxury residential, commercial, and municipal sites" },
