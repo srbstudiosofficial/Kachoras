@@ -175,7 +175,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
   // Inquiries & Leads state
   const [inquiries, setInquiries] = useState([]);
-  const [inquiryFilter, setInquiryFilter] = useState('all');
+  const [inquiryFilter, setInquiryFilter] = useState('new');
   const [copiedLink, setCopiedLink] = useState(false);
   const [projectSearchQuery, setProjectSearchQuery] = useState('');
   const [projectListFilter, setProjectListFilter] = useState('all');
@@ -237,7 +237,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
             `Budget Range: ${targetLead.budgetRange || 'AED Contract Scope'}`,
             'Statutory: Dubai Municipality G+1 Approved'
           ],
-          image: '/assets/images/image1.jpeg'
+          image: './assets/villa.jpg'
         };
 
         // 1. Add to local projects
@@ -264,6 +264,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
       // 4. Remove inquiry from active list as requested
       const updatedInquiries = await deleteInquiryOnServer(id);
       setInquiries(updatedInquiries);
+      alert('Inquiry Approved! Directly added to Upcoming Projects in your portfolio.');
       return;
     }
 
@@ -271,6 +272,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
       // Remove inquiry from active list as requested
       const updatedInquiries = await deleteInquiryOnServer(id);
       setInquiries(updatedInquiries);
+      alert('Inquiry Approved! Directly added to Upcoming Projects in your portfolio.');
       return;
     }
 
@@ -1075,12 +1077,11 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                       </div>
                     </div>
 
-                    {/* Filter Tabs */}
+                    {/* Filter Tabs (New, Contacted, Archived) */}
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-xs font-bold text-slate-500 mr-1">Filter:</span>
+                      <span className="text-xs font-bold text-slate-500 mr-1">Inbox:</span>
                       {[
-                        { id: 'all', label: 'All Inquiries', count: inquiries.length },
-                        { id: 'new', label: 'New / Unread', count: inquiries.filter(i => i.status === 'new').length, highlight: true },
+                        { id: 'new', label: 'New Inquiries', count: inquiries.filter(i => i.status === 'new' || !i.status).length, highlight: true },
                         { id: 'contacted', label: 'Contacted', count: inquiries.filter(i => i.status === 'contacted').length },
                         { id: 'archived', label: 'Archived', count: inquiries.filter(i => i.status === 'archived').length }
                       ].map((tab) => (
@@ -1110,8 +1111,10 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                   {/* List of Inquiries */}
                   {(() => {
                     const filtered = inquiries.filter(i => {
-                      if (inquiryFilter === 'all') return true;
-                      return i.status === inquiryFilter;
+                      if (inquiryFilter === 'new') return i.status === 'new' || !i.status;
+                      if (inquiryFilter === 'contacted') return i.status === 'contacted';
+                      if (inquiryFilter === 'archived') return i.status === 'archived';
+                      return true;
                     });
 
                     if (filtered.length === 0) {
@@ -1120,21 +1123,16 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                           <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
                             <Inbox className="w-6 h-6" />
                           </div>
-                          <h5 className="text-sm font-bold text-slate-800">No Inquiries Found</h5>
+                          <h5 className="text-sm font-bold text-slate-800">
+                            {inquiryFilter === 'new' ? 'No New Inquiries' : inquiryFilter === 'contacted' ? 'No Contacted Inquiries' : 'No Archived Inquiries'}
+                          </h5>
                           <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                            {inquiryFilter !== 'all' 
-                              ? `There are no inquiries currently marked as "${inquiryFilter}".`
-                              : 'When potential clients submit tender RFQs or quote requests on the website, they will appear here in real time.'}
+                            {inquiryFilter === 'new' 
+                              ? 'All incoming RFQs and quotes have been addressed or contacted. New inquiries submitted via the website will arrive here.'
+                              : inquiryFilter === 'contacted'
+                              ? 'When you mark a new inquiry as Contacted, it moves directly into this folder.'
+                              : 'When you archive an inquiry, it is preserved here.'}
                           </p>
-                          {inquiryFilter !== 'all' && (
-                            <button
-                              type="button"
-                              onClick={() => setInquiryFilter('all')}
-                              className="text-xs font-bold text-[#B3261E] hover:underline"
-                            >
-                              Show All Inquiries
-                            </button>
-                          )}
                         </div>
                       );
                     }
@@ -1284,10 +1282,10 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                                     type="button"
                                     onClick={() => handleStatusChange(item.id, 'approved')}
                                     className="px-3.5 py-1.5 rounded-lg bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-xs"
-                                    title="Award and convert lead to an Upcoming 2026 Project in the portfolio"
+                                    title="Approve this inquiry and convert directly into an Upcoming 2026 Project in the portfolio"
                                   >
                                     <Sparkles className="w-3.5 h-3.5 text-amber-200" />
-                                    <span>Award & Convert to Project</span>
+                                    <span>Approve & Convert to Project</span>
                                   </button>
 
                                   <button
