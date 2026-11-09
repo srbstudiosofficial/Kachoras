@@ -6,7 +6,6 @@ import {
   Building, 
   ExternalLink,
   Maximize2,
-  Download,
   X,
   BadgeCheck,
   QrCode
@@ -34,7 +33,7 @@ export default function TradeLicenseSection() {
           </p>
         </div>
 
-        {/* Top Feature: Official Visual License Certificate Showcase */}
+        {/* Unified Official Commercial License Certificate Showcase */}
         <div className="mb-10 bg-gradient-to-br from-slate-50 via-white to-amber-50/30 border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             
@@ -74,9 +73,9 @@ export default function TradeLicenseSection() {
               </div>
             </div>
 
-            {/* Document Details & Verification Actions (7 cols) */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="space-y-3">
+            {/* Document Details & Fast Facts (7 cols) */}
+            <div className="lg:col-span-7 space-y-5">
+              <div className="space-y-2">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold">
                   <BadgeCheck className="w-4 h-4 text-emerald-600" />
                   <span>Official Government of Dubai Certified e-Document</span>
@@ -107,40 +106,32 @@ export default function TradeLicenseSection() {
                   <span className="font-mono font-bold text-slate-900 text-sm">169651</span>
                 </div>
                 <div className="p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
-                  <span className="text-[10px] text-slate-400 font-semibold uppercase block">Issue Date</span>
-                  <span className="font-semibold text-slate-900 text-xs">19/03/2006</span>
-                </div>
-                <div className="p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
-                  <span className="text-[10px] text-slate-400 font-semibold uppercase block">Expiry Date</span>
-                  <span className="font-semibold text-emerald-700 text-xs">18/03/2027</span>
+                  <span className="text-[10px] text-slate-400 font-semibold uppercase block">Legal Form</span>
+                  <span className="font-semibold text-slate-900 text-xs">Limited Liability (LLC)</span>
                 </div>
                 <div className="p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
                   <span className="text-[10px] text-slate-400 font-semibold uppercase block">DM Accreditation</span>
                   <span className="font-semibold text-[#B3261E] text-xs">G+1 Approved</span>
                 </div>
+                <div className="p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
+                  <span className="text-[10px] text-slate-400 font-semibold uppercase block">Validity & Status</span>
+                  <span className="font-semibold text-emerald-700 text-xs">Active & Verified</span>
+                </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(true)}
-                  className="px-5 py-3 rounded-xl bg-[#14171F] hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider transition shadow-sm flex items-center gap-2 cursor-pointer"
-                >
-                  <Maximize2 className="w-3.5 h-3.5 text-[#C59B27]" />
-                  <span>View Full License Image</span>
-                </button>
-
-                <a
-                  href="./assets/dubai-commercial-license-578964.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download="Kachoras_Commercial_License_578964.pdf"
-                  className="px-5 py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 text-xs font-bold uppercase tracking-wider transition shadow-2xs flex items-center gap-2"
-                >
-                  <Download className="w-3.5 h-3.5 text-[#B3261E]" />
-                  <span>Download Certified PDF</span>
-                </a>
+              {/* Licensed Commercial Activities List */}
+              <div className="space-y-2 pt-2 border-t border-slate-200">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-800 block">
+                  Licensed Commercial Activities
+                </span>
+                <div className="grid sm:grid-cols-2 gap-2 text-xs">
+                  {COMPANY_INFO.specialties.map((spec, i) => (
+                    <div key={i} className="flex items-start gap-2 bg-white p-2.5 rounded-lg border border-slate-200 text-slate-700 shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#B3261E] shrink-0 mt-1.5" />
+                      <span className="leading-snug text-[11px] font-medium">{spec}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
             </div>
@@ -148,112 +139,38 @@ export default function TradeLicenseSection() {
           </div>
         </div>
 
-        {/* Certificate Card Grid */}
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+        {/* Institutional Accreditation & Tender Cards Grid */}
+        <div className="grid md:grid-cols-2 gap-6 items-stretch">
           
-          {/* Detailed Commercial License Record (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 space-y-6 reveal-on-scroll reveal-left shimmer-trigger">
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-7 shadow-sm hover:shadow-xl hover:border-[#C59B27] transition-all duration-300 space-y-4">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#8B6D1B]">
+              Statutory Approvals
+            </span>
             
-            {/* Header */}
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#E2E8F0] pb-5">
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#B3261E] block">
-                  Government of Dubai • Economy and Tourism (DET)
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-[#14171F] font-display mt-0.5">
-                  Commercial License (رخصة تجارية)
-                </h3>
-                <span className="text-xs text-slate-500 font-arabic mt-0.5 block">
-                  كاشوراس للمقاولات الكهروميكانيكية ش.ذ.م.م
-                </span>
+            <h3 className="text-xl font-bold text-[#14171F] font-display">
+              Certified Dubai Municipality Building Contractor
+            </h3>
+
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+              Kachoras Electromechanical Contracting LLC maintains continuous active registration with the Dubai Municipality, General Directorate of Civil Defense, and Dubai Electricity and Water Authority (DEWA).
+            </p>
+
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0] text-center hover:bg-white transition">
+                <div className="text-2xl font-bold text-[#B3261E] font-display">
+                  <AnimatedCounter target={20} suffix="+ Yrs" duration={1700} />
+                </div>
+                <div className="text-[10px] text-slate-500 font-medium mt-0.5">Continuous Standing</div>
               </div>
-              <div className="text-right bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
-                <span className="text-[10px] text-slate-400 block font-semibold uppercase tracking-wider">License No.</span>
-                <span className="text-xl font-bold text-[#B3261E] font-mono tracking-wider">{COMPANY_INFO.licenseNumber}</span>
+              <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0] text-center hover:bg-white transition">
+                <div className="text-2xl font-bold text-emerald-800 font-display">G+1</div>
+                <div className="text-[10px] text-slate-500 font-medium mt-0.5">Contractor License</div>
               </div>
             </div>
-
-            {/* License Metadata Matrix */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
-              <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
-                <span className="text-slate-400 block text-[10px] font-medium">Legal Form</span>
-                <span className="font-semibold text-slate-900 mt-0.5 block">Limited Liability (LLC)</span>
-              </div>
-              <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
-                <span className="text-slate-400 block text-[10px] font-medium">Registration Date</span>
-                <span className="font-semibold text-[#B3261E] mt-0.5 block">19 / 03 / 2006 (20 Yrs)</span>
-              </div>
-              <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
-                <span className="text-slate-400 block text-[10px] font-medium">DM Contractor Grade</span>
-                <span className="font-semibold text-emerald-800 mt-0.5 block">G+1 Approved</span>
-              </div>
-              <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
-                <span className="text-slate-400 block text-[10px] font-medium">D&B D-U-N-S®</span>
-                <span className="font-semibold text-slate-900 mt-0.5 block font-mono">{COMPANY_INFO.dunsNumber}</span>
-              </div>
-              <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
-                <span className="text-slate-400 block text-[10px] font-medium">DCCI Membership</span>
-                <span className="font-semibold text-slate-900 mt-0.5 block font-mono">No. {COMPANY_INFO.dcciNo}</span>
-              </div>
-              <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
-                <span className="text-slate-400 block text-[10px] font-medium">Commercial Register</span>
-                <span className="font-semibold text-slate-900 mt-0.5 block font-mono">No. {COMPANY_INFO.registerNo}</span>
-              </div>
-            </div>
-
-            {/* Approved Activities List */}
-            <div className="space-y-2 pt-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-800 block">
-                Licensed Commercial Activities
-              </span>
-              <div className="grid sm:grid-cols-2 gap-2 text-xs">
-                {COMPANY_INFO.specialties.map((spec, i) => (
-                  <div key={i} className="flex items-start gap-2 bg-[#F8FAFC] p-2.5 rounded-lg border border-[#E2E8F0] text-slate-700">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#B3261E] shrink-0 mt-1.5" />
-                    <span className="leading-snug text-[11px] font-medium">{spec}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="pt-3 border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
-              <span>General Manager: <strong className="text-slate-800 font-semibold">Jose K. George</strong></span>
-              <span className="text-[11px] font-mono text-emerald-800 font-medium">Dubai Municipality Verified</span>
-            </div>
-
           </div>
 
-          {/* Institutional Accreditation Summary (5 cols) */}
-          <div className="lg:col-span-5 space-y-5 flex flex-col justify-between reveal-on-scroll reveal-right">
-            
-            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-7 shadow-sm hover:shadow-2xl hover:border-[#C59B27] transition-all duration-500 space-y-4 shimmer-trigger">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#8B6D1B]">
-                Statutory Approvals
-              </span>
-              
-              <h3 className="text-xl font-bold text-[#14171F] font-display">
-                Certified Dubai Municipality Building Contractor
-              </h3>
-
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                Kachoras Electromechanical Contracting LLC maintains continuous active registration with the Dubai Municipality, General Directorate of Civil Defense, and Dubai Electricity and Water Authority (DEWA).
-              </p>
-
-              <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0] text-center hover:bg-white transition">
-                  <div className="text-2xl font-bold text-[#B3261E] font-display">
-                    <AnimatedCounter target={20} suffix="+ Yrs" duration={1700} />
-                  </div>
-                  <div className="text-[10px] text-slate-500 font-medium mt-0.5">Continuous Standing</div>
-                </div>
-                <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0] text-center hover:bg-white transition">
-                  <div className="text-2xl font-bold text-emerald-800 font-display">G+1</div>
-                  <div className="text-[10px] text-slate-500 font-medium mt-0.5">Contractor License</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#14171F] text-white rounded-2xl p-7 shadow-sm space-y-3">
+          <div className="bg-[#14171F] text-white rounded-2xl p-7 shadow-sm space-y-3 flex flex-col justify-between">
+            <div className="space-y-3">
               <span className="text-[10px] uppercase font-bold tracking-widest text-[#C59B27] block">
                 Official Tender Submissions
               </span>
@@ -263,17 +180,16 @@ export default function TradeLicenseSection() {
               <p className="text-xs text-white/70 leading-relaxed">
                 Send consultant-approved Croquis, structural drawings, and BOQ files for comprehensive contractor pricing under strict UAE commercial non-disclosure practices.
               </p>
-              <div className="pt-2">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-2 text-xs font-bold text-[#C59B27] hover:text-white transition"
-                >
-                  <span>Go to Tender Submission Form</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
             </div>
-
+            <div className="pt-2">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#C59B27] hover:text-white transition"
+              >
+                <span>Go to Tender Submission Form</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
 
         </div>
@@ -298,26 +214,14 @@ export default function TradeLicenseSection() {
                   Government of Dubai • Commercial License #578964
                 </span>
               </div>
-              <div className="flex items-center gap-3">
-                <a
-                  href="./assets/dubai-commercial-license-578964.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download="Kachoras_Commercial_License_578964.pdf"
-                  className="text-xs font-bold text-[#B3261E] hover:underline flex items-center gap-1"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Download PDF</span>
-                </a>
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="p-1 rounded-lg hover:bg-slate-200 text-slate-600 transition"
-                  aria-label="Close"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="p-1 rounded-lg hover:bg-slate-200 text-slate-600 transition"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </div>
 
             {/* Modal Body with Full High-Res Document */}
