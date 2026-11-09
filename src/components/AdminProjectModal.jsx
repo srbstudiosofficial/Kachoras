@@ -176,6 +176,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   // Inquiries & Leads state
   const [inquiries, setInquiries] = useState(() => getStoredInquiries());
   const [inquiryFilter, setInquiryFilter] = useState('new');
+  const [copiedEmailId, setCopiedEmailId] = useState(null);
   const [copiedLink, setCopiedLink] = useState(false);
   const [projectSearchQuery, setProjectSearchQuery] = useState('');
   const [projectListFilter, setProjectListFilter] = useState('all');
@@ -1199,14 +1200,41 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                                         </a>
                                       )}
                                       {item.email && (
-                                        <a
-                                          href={`mailto:${item.email}?subject=Kachoras RFQ Response [${item.referenceId || 'Tender'}]`}
-                                          className="px-2.5 py-1 bg-red-50 hover:bg-red-100 text-[11px] font-bold text-[#B3261E] border border-red-200/80 rounded-lg transition flex items-center gap-1.5"
-                                          title="Email Client"
-                                        >
-                                          <Mail className="w-3.5 h-3.5" />
-                                          <span>Email</span>
-                                        </a>
+                                        <div className="flex items-center gap-1.5">
+                                          <a
+                                            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(item.email)}&su=${encodeURIComponent(`Kachoras RFQ Response [${item.referenceId || 'Tender'}]`)}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="px-2.5 py-1 bg-red-50 hover:bg-red-100 text-[11px] font-bold text-[#B3261E] border border-red-200/80 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
+                                            title={`Compose email to ${item.email} in Gmail`}
+                                          >
+                                            <Mail className="w-3.5 h-3.5" />
+                                            <span>Email (Gmail)</span>
+                                          </a>
+                                          <button
+                                            type="button"
+                                            onClick={async () => {
+                                              try {
+                                                await navigator.clipboard.writeText(item.email);
+                                                setCopiedEmailId(item.id);
+                                                setTimeout(() => setCopiedEmailId(null), 2000);
+                                              } catch (e) {
+                                                window.location.href = `mailto:${item.email}?subject=Kachoras RFQ Response`;
+                                              }
+                                            }}
+                                            className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 transition text-[10px] font-mono cursor-pointer flex items-center gap-1"
+                                            title={`Copy email address: ${item.email}`}
+                                          >
+                                            {copiedEmailId === item.id ? (
+                                              <span className="text-emerald-700 font-bold">Copied!</span>
+                                            ) : (
+                                              <>
+                                                <Copy className="w-3 h-3 text-slate-500" />
+                                                <span>Copy</span>
+                                              </>
+                                            )}
+                                          </button>
+                                        </div>
                                       )}
                                     </div>
                                   </div>
