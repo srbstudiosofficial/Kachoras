@@ -3,6 +3,8 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./hero-options/**/*.html",
+    "./generate_hero_options.py",
   ],
   theme: {
     extend: {

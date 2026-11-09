@@ -3,11 +3,11 @@ import { Target, Compass, Award, ShieldCheck, CheckCircle2 } from 'lucide-react'
 
 export default function VisionMissionSection() {
   return (
-    <section id="vision" className="py-24 bg-white border-y border-[#E2E8F0] relative overflow-hidden">
+    <section id="vision" className="py-10 sm:py-14 bg-white border-y border-[#E2E8F0] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3 reveal-on-scroll reveal-init">
+        <div className="max-w-3xl mb-6 sm:mb-8 space-y-2 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
             Institutional Values & Governance
           </span>

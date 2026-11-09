@@ -60,8 +60,8 @@ const CONSULTANCY_RECORDS = [
 
 export default function Testimonials() {
   return (
-    <section id="consultants" className="py-20 sm:py-24 bg-white border-t border-[#E2E8F0]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
+    <section id="consultants" className="py-10 sm:py-14 bg-white border-t border-[#E2E8F0]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-6 sm:space-y-8">
         
         {/* Header */}
         <div className="max-w-3xl space-y-3">

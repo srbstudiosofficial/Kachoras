@@ -15,14 +15,16 @@ import {
   FileCheck2
 } from 'lucide-react';
 import { CORE_CATEGORIES, COMPANY_INFO } from '../data/mockData';
+import { useLanguage } from '../core/LanguageContext';
 
 export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectServiceForQuote }) {
+  const { language, isRTL } = useLanguage();
   const [selectedDiscipline, setSelectedDiscipline] = useState(0);
 
   const detailedDisciplines = [
     {
       id: 'building',
-      title: 'G+1 Licensed Construction',
+      title: 'Building Construction',
       badge: 'Dubai Municipality G+1 Approved',
       icon: Building2,
       tagline: 'Complete construction services from foundations to final handover of keys in compliance with Dubai Municipality standards.',
@@ -54,12 +56,12 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
       ],
       compliance: 'DEWA Electrical Standards & Dubai Civil Defence Fire Safety Regulations',
       typicalTimeline: 'Integrated concurrently with civil construction',
-      image: './assets/real-projects/completed-aluminum-flag-villa.jpg',
+      image: './assets/mep.jpg',
       imageCaption: 'DEWA Integrated Electromechanical Substation & Infrastructure'
     },
     {
       id: 'aluminium',
-      title: 'Architectural Aluminium & Glass Works',
+      title: 'Architectural Aluminum and Glass',
       badge: 'Custom Workshop Fabrication in Al Qusais',
       icon: ShieldCheck,
       tagline: 'Manufacturing and installation of aluminium doors, windows, skylights, pergolas, glass, and mirrors.',
@@ -77,7 +79,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
     },
     {
       id: 'maintenance',
-      title: 'Civil Maintenance & Fit-out Works',
+      title: 'General Maintenance & Fit-out',
       badge: 'Approved Dubai Municipality, MBRHE & EIB Contractor',
       icon: Hammer,
       tagline: 'Approved contractor for Dubai Municipality General Maintenance Department, MBRHE, and EIB for renovation and finishing.',
@@ -108,24 +110,30 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
       />
 
       {/* 2. The Turnkey Advantage Banner */}
-      <section className="py-16 bg-white border-b border-[#E2E8F0]">
+      <section className="py-8 sm:py-10 bg-white border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="bg-white border border-[#E2E8F0] rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-[#E2E8F0] pb-6">
               <div className="space-y-1">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">The Kachoras Advantage • Why Choose Our Turnkey Services?</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">
+                  {language === 'ar' ? 'ميزة كاشوراس • لماذا تختار خدماتنا المتكاملة على المفتاح؟' : 'The Kachoras Advantage • Why Choose Our Turnkey Services?'}
+                </span>
                 <h2 className="text-2xl sm:text-3xl font-black text-[#1E293B] font-display">
-                  One Company, Complete Project Solutions
+                  {language === 'ar' ? 'شركة واحدة، حلول هندسية متكاملة' : 'One Company, Complete Project Solutions'}
                 </h2>
               </div>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-200 text-xs font-bold shrink-0">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>Integrated In-House Execution</span>
+                <span>{language === 'ar' ? 'تنفيذ داخلي متكامل 100%' : 'Integrated In-House Execution'}</span>
               </div>
             </div>
 
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-4xl">
-              Managing different contractors for construction, electrical, plumbing, and aluminium works can lead to delays, extra costs, and coordination problems. At <strong>Kachoras</strong>, our different teams work together to manage projects from start to finish. This helps improve coordination, maintain quality, control costs, and complete projects on time.
+              {language === 'ar' ? (
+                <>إدارة مقاولين متعددين للأعمال الإنشائية والكهرباء والسباكة والألمنيوم تؤدي غالباً إلى تأخيرات وتكاليف إضافية ومشاكل في التنسيق. في <strong>كاشوراس</strong>، تعمل فرقنا المتخصصة معاً لإدارة المشاريع من البداية وحتى التسليم النهائي، مما يضمن أعلى درجات التنسيق والجودة وضبط الميزانية والالتزام بالمواعيد المحددة.</>
+              ) : (
+                <>Managing different contractors for construction, electrical, plumbing, and aluminium works can lead to delays, extra costs, and coordination problems. At <strong>Kachoras</strong>, our different teams work together to manage projects from start to finish. This helps improve coordination, maintain quality, control costs, and complete projects on time.</>
+              )}
             </p>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
@@ -138,7 +146,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                 <p className="text-xs text-slate-600 leading-relaxed">Our civil and MEP teams work together from the beginning to coordinate electrical, plumbing, and other service requirements during construction.</p>
               </div>
               <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1.5">
-                <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">03. Aluminium & Glass Works</strong>
+                <strong className="block text-slate-900 font-bold text-xs uppercase tracking-wider">03. Aluminum and Glass</strong>
                 <p className="text-xs text-slate-600 leading-relaxed">Our aluminium and glass workshop in Al Qusais handles fabrication according to project requirements and site measurements.</p>
               </div>
               <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1.5">
@@ -151,18 +159,18 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
       </section>
 
       {/* 3. Deep-Dive Section for Each Discipline */}
-      <section className="py-20 bg-white border-b border-[#E2E8F0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-16">
+      <section className="py-10 sm:py-12 bg-white border-b border-[#E2E8F0]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-8 sm:space-y-10">
           
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E] bg-[#B3261E]/10 px-3 py-1 rounded-full border border-[#B3261E]/20">
-              Technical Division Profiles
+              {language === 'ar' ? 'ملفات الأقسام الفنية' : 'Technical Division Profiles'}
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-[#1E293B] font-display">
-              Comprehensive Scope Across 4 Contracting Divisions
+              {language === 'ar' ? 'نطاق عمل متكامل عبر 4 قطاعات مقاولات رئيسية' : 'Comprehensive Scope Across 4 Contracting Divisions'}
             </h2>
             <p className="text-sm text-slate-600">
-              Select any division below to inspect engineering capabilities, compliance standards, and request technical specifications.
+              {language === 'ar' ? 'اختر أي قطاع أدناه للاطلاع على القدرات الهندسية، معايير الامتثال، وطلب المواصفات الفنية.' : 'Select any division below to inspect engineering capabilities, compliance standards, and request technical specifications.'}
             </p>
           </div>
 
@@ -315,8 +323,8 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
       </section>
 
       {/* 4. Turnkey Construction Methodology & Quality Assurance Matrix */}
-      <section className="py-20 sm:py-24 bg-white border-b border-[#E2E8F0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
+      <section className="py-10 sm:py-14 bg-white border-b border-[#E2E8F0]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-6 sm:space-y-8">
           <div className="max-w-3xl space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B]">
               From Start to Final Handover

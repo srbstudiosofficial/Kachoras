@@ -93,7 +93,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
       };
     } else if (isAluminium) {
       return {
-        division: "Architectural Aluminium & Glass Works",
+        division: "Architectural Aluminum and Glass",
         subheading: "Direct Custom Fabrication at Our Al Qusais B-25 Industrial Facility",
         services: [
           "Structural aluminium curtain walls and argon-filled double-glazed insulated units (IGU)",
@@ -138,7 +138,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
   };
 
   return (
-    <div className="bg-white text-[#1E293B] min-h-screen py-8 sm:py-12">
+    <div className="bg-white text-[#1E293B] min-h-screen pt-32 sm:pt-36 pb-8 sm:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-8">
         
         {/* 1. Breadcrumbs & Top Navigation Bar */}

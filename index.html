@@ -47,48 +47,104 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" href="./fonts/JUST-Sans-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href="./fonts/Manrope-VariableFont.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@500;600;700;800;900&family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
-    <!-- Structured Data: LocalBusiness & GeneralContractor -->
+        <!-- Structured Data: LocalBusiness, GeneralContractor & Dubai Municipality Authority Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "GeneralContractor",
-      "name": "Kachoras Electromechanical Contracting LLC",
-      "alternateName": "كاشوراس للمقاولات الكهروميكانيكية ش.ذ.م.م",
-      "image": "https://srbstudiosofficial.github.io/Kachoras/kachoras-facade-logo.jpg",
-      "logo": "https://srbstudiosofficial.github.io/Kachoras/logo.svg",
-      "@id": "https://srbstudiosofficial.github.io/Kachoras/#business",
-      "url": "https://srbstudiosofficial.github.io/Kachoras/",
-      "telephone": "+971-4-2390946",
-      "priceRange": "AED 500,000 - AED 25,000,000",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Warehouse No. B-25, Bin Sougat Warehouse Complex, Al Qusais Industrial Area 1",
-        "addressLocality": "Dubai",
-        "postalCode": "123397",
-        "addressCountry": "AE"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 25.2818,
-        "longitude": 55.3789
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Saturday",
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday"
-        ],
-        "opens": "07:30",
-        "closes": "18:00"
-      },
-      "sameAs": [
-        "https://wa.me/971565066904"
+      "@graph": [
+        {
+          "@type": ["GeneralContractor", "HomeAndConstructionBusiness"],
+          "@id": "https://kachoras.netlify.app/#organization",
+          "name": "Kachoras Electromechanical Contracting LLC",
+          "alternateName": [
+            "كاشوراس للمقاولات الكهروميكانيكية ش.ذ.م.م",
+            "Kachoras Contracting LLC",
+            "Kachoras Dubai"
+          ],
+          "url": "https://kachoras.netlify.app/",
+          "logo": "https://kachoras.netlify.app/favicon.svg",
+          "image": "https://kachoras.netlify.app/og-preview-v2.jpg",
+          "description": "Dubai Municipality Approved G+1 Contractor (License #578964, DCCI #95293). Established in 2006 in Dubai. Specializing in luxury turnkey G+1 residential and commercial villas, traditional Arabian majlis pavilions, architectural aluminium and glazing fabrication, and certified MEP engineering.",
+          "foundingDate": "2006",
+          "founder": {
+            "@type": "Person",
+            "name": "Jose K. George",
+            "jobTitle": "General Manager & Engineering Director"
+          },
+          "telephone": "+971-4-2390946",
+          "faxNumber": "+971-4-2582778",
+          "email": "kachorasdubai@gmail.com",
+          "priceRange": "AED 250,000 - AED 15,000,000",
+          "currenciesAccepted": "AED",
+          "paymentAccepted": "Cash, Bank Transfer, Cheque",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Warehouse B-25, Bin Sougat Warehouse Complex, Al Qusais Industrial Area 1",
+            "addressLocality": "Al Qusais",
+            "addressRegion": "Dubai",
+            "postalCode": "123397",
+            "postOfficeBoxNumber": "P.O. Box 123397",
+            "addressCountry": "AE"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 25.2818,
+            "longitude": 55.3789
+          },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=Bin+Sougat+Warehouse+Complex,+Al+Qusais+Industrial+Area+1,+Dubai",
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "Dubai"
+            },
+            {
+              "@type": "Country",
+              "name": "United Arab Emirates"
+            }
+          ],
+          "knowsAbout": [
+            "Dubai Municipality G+1 Villa Construction",
+            "RCC Structural Framing and Foundations",
+            "Architectural Aluminium and Glass Fabrication",
+            "Turnkey Majlis Construction",
+            "DEWA Certified MEP Engineering",
+            "HVAC Chiller and Ducted Split Installation",
+            "Building Completion Certificate (BCC) Statutory Clearance"
+          ],
+          "license": "Dubai Municipality Approved G+1 Contractor (Commercial License #578964)",
+          "memberOf": {
+            "@type": "Organization",
+            "name": "Dubai Chamber of Commerce & Industry (DCCI #95293)"
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "07:00",
+              "closes": "16:00"
+            }
+          ],
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+971-4-2390946",
+              "contactType": "customer service",
+              "areaServed": "AE",
+              "availableLanguage": ["English", "Arabic", "Hindi", "Malayalam"]
+            },
+            {
+              "@type": "ContactPoint",
+              "telephone": "+971-56-5066904",
+              "contactType": "technical estimation desk",
+              "contactOption": "WhatsApp"
+            }
+          ],
+          "sameAs": [
+            "https://wa.me/971565066904"
+          ]
+        }
       ]
     }
     </script>

@@ -82,7 +82,7 @@ const SECTIONS = [
     checks: [
       { label: 'Section Header', value: 'Tenders & Technical Submissions: Request an Official Tender Proposal' },
       { label: 'Office Details', value: 'B25 Bin Sougat, Al Qusais 1 | Tel: 04-2390946 | Fax: 04-2582778 | Mobile: +971-55-5585079' },
-      { label: 'Working Hours', value: 'Saturday – Thursday: 7:30 AM – 6:00 PM | Friday Closed' },
+      { label: 'Working Hours', value: 'Monday – Saturday: 7:00 AM – 4:00 PM | Sunday Closed (Emergency site teams on call)' },
       { label: 'Licenses & Ratings', value: 'Commercial License #578964 | DM G+1 Contractor | D-U-N-S #561419908' },
       { label: 'Form Placeholders', value: 'Client: Mr. Khalifa Almas | Plot No: 4317233, Al Barsha | Budget: Optional/As per BOQ' },
       { label: 'Attachment Uploader', value: 'Max 50MB (PDF, CAD DWG/DXF, Images, ZIP)' },

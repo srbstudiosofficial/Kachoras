@@ -25,11 +25,11 @@ export default function Services({ onSelectServiceForQuote }) {
   const [activeModalService, setActiveModalService] = useState(null);
 
   return (
-    <section id="services" className="py-24 bg-[#0B0F17] relative">
+    <section id="services" className="py-10 sm:py-14 bg-[#0B0F17] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
               <span>Core Business Sectors • Turnkey Solutions</span>

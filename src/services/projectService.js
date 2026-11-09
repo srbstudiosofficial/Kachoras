@@ -133,7 +133,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "client": "Ibrahim Tariq Abdulla Asad Seraj",
     "consultant": "In-House Engineering",
     "category": "Maintenance of Villa",
-    "categoryFilter": "civic",
+    "categoryFilter": "civic_mep",
     "type": "Maintenance of Villa",
     "status": "completed",
     "location": "Al Warqaa Second, Dubai",
@@ -351,7 +351,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "category": "Civil & MEP Works",
     "categoryFilter": "civic_mep",
     "type": "Civil & MEP Works",
-    "status": "completed",
+    "status": "upcoming",
     "location": "Shooroq Irrigation Hub, Mirdif, Dubai",
     "plotNo": "Shooroq Irrigation Hub",
     "year": "2024",
@@ -369,7 +369,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "category": "Maintenance and MEP Works",
     "categoryFilter": "civic_mep",
     "type": "Maintenance and MEP Works",
-    "status": "completed",
+    "status": "upcoming",
     "location": "Al Quoz 3, Dubai",
     "plotNo": "368-0412",
     "year": "2024",
@@ -448,8 +448,14 @@ export function saveLocalProjects(projects) {
  * Get unified list of projects (Pre-seeded + Custom Owner Uploads)
  */
 export function getAllProjects() {
-  // Always serve clean authentic verified projects without stale overrides
-  return INITIAL_FEATURED_PROJECTS;
+  const custom = getLocalProjects();
+  if (!custom || !Array.isArray(custom) || custom.length === 0) {
+    return INITIAL_FEATURED_PROJECTS;
+  }
+  // Projects in custom (new or edited) take precedence over pre-seeded initial list
+  const customIdMap = new Map(custom.map(p => [p.id, p]));
+  const remainingInitial = INITIAL_FEATURED_PROJECTS.filter(p => !customIdMap.has(p.id));
+  return [...custom, ...remainingInitial];
 }
 
 /**

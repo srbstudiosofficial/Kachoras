@@ -14,11 +14,11 @@ export default function OfficeMapSection() {
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Bin Sougat Warehouse Complex, Al Qusais Industrial Area 1, Dubai")}`;
 
   return (
-    <section id="location" className="py-24 bg-[#F8FAFC] relative border-t border-[#E2E8F0]">
+    <section id="location" className="py-14 sm:py-20 bg-[#F8FAFC] relative border-t border-[#E2E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3 reveal-on-scroll reveal-init">
+        <div className="max-w-3xl mb-6 sm:mb-8 space-y-2 ">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
             Headquarters & Fabrication Workshop
           </span>
@@ -34,7 +34,7 @@ export default function OfficeMapSection() {
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Interactive Google Map Embed (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 flex flex-col justify-between reveal-on-scroll reveal-left">
+          <div className="lg:col-span-7 bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 flex flex-col justify-between ">
             <div className="p-5 border-b border-[#E2E8F0] flex items-center justify-between">
               <div>
                 <h3 className="text-base font-bold text-[#14171F] font-display">
@@ -54,7 +54,7 @@ export default function OfficeMapSection() {
             </div>
 
             {/* Clean Map Iframe Embed */}
-            <div className="relative h-80 sm:h-96 w-full bg-[#E2E8F0]">
+            <div className="relative h-80 sm:h-[420px] w-full bg-[#E2E8F0] min-h-[300px]">
               <iframe
                 title="Kachoras Office Location Map"
                 src="https://maps.google.com/maps?q=25.2818,55.3789&hl=en&z=15&output=embed"
@@ -75,7 +75,7 @@ export default function OfficeMapSection() {
           </div>
 
           {/* Logistics & Access Coordinates (5 cols) */}
-          <div className="lg:col-span-5 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 flex flex-col justify-between reveal-on-scroll reveal-right">
+          <div className="lg:col-span-5 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 flex flex-col justify-between ">
             
             <div className="space-y-6">
               <div className="border-b border-[#E2E8F0] pb-4">
@@ -105,7 +105,7 @@ export default function OfficeMapSection() {
                   </div>
                   <div>
                     <strong className="text-slate-900 block font-semibold text-sm">Operating Hours:</strong>
-                    <span className="block mt-0.5">Saturday – Thursday: 7:30 AM – 6:00 PM</span>
+                    <span className="block mt-0.5">Monday – Saturday: 7:00 AM – 4:00 PM</span>
                     <span className="text-slate-400 block mt-0.5 text-[11px]">Friday: Closed (Site emergency teams on call)</span>
                   </div>
                 </div>

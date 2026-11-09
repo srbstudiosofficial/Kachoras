@@ -32,7 +32,13 @@ import {
   Copy,
   Link,
   Sparkles,
-  Search
+  Search,
+  BarChart3,
+  TrendingUp,
+  Building2,
+  Layers,
+  ArrowRight,
+  Activity
 } from 'lucide-react';
 import { 
   getAllProjects, 
@@ -76,7 +82,7 @@ import {
 
 const CATEGORY_OPTIONS = [
   "Building Contracting",
-  "MEP Works & Engineering",
+  "MEP",
   "Aluminium & Glass Fabrication",
   "Dubai Civic & Maintenance"
 ];
@@ -98,7 +104,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   const [passkeyInput, setPasskeyInput] = useState('');
   const [showPasskey, setShowPasskey] = useState(false);
   const [authError, setAuthError] = useState('');
-  const [activeTab, setActiveTab] = useState('list'); // 'list' | 'add' | 'settings'
+  const [activeTab, setActiveTab] = useState('dashboard'); // 'list' | 'add' | 'settings'
 
   // Projects state
   const [projects, setProjects] = useState([]);
@@ -127,6 +133,41 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   const [serverOnline, setServerOnline] = useState(false);
 
   const [newPasskey, setNewPasskey] = useState('');
+  const [notificationEmail, setNotificationEmail] = useState(() => {
+    try {
+      const cfg = getEmailConfig();
+      return cfg?.notificationEmail || cfg?.email || 'kachorasdubai@gmail.com';
+    } catch (e) {
+      return 'kachorasdubai@gmail.com';
+    }
+  });
+  const [emailSavedNotice, setEmailSavedNotice] = useState(false);
+
+  const handleSaveNotificationEmail = (e) => {
+    e.preventDefault();
+    const clean = (notificationEmail || '').trim();
+    if (!clean || !clean.includes('@') || !clean.includes('.')) {
+      setSettingsNotice('Please enter a valid email address.');
+      setTimeout(() => setSettingsNotice(''), 3000);
+      return;
+    }
+    const currentCfg = getEmailConfig() || {};
+    saveEmailConfig({ ...currentCfg, notificationEmail: clean });
+    setEmailSavedNotice(true);
+    setSettingsNotice(`Lead notification email updated to: ${clean}`);
+    setTimeout(() => {
+      setEmailSavedNotice(false);
+      setSettingsNotice('');
+    }, 4000);
+  };
+
+  const handleResetNotificationEmail = () => {
+    const currentCfg = getEmailConfig() || {};
+    saveEmailConfig({ ...currentCfg, notificationEmail: 'kachorasdubai@gmail.com' });
+    setNotificationEmail('kachorasdubai@gmail.com');
+    setSettingsNotice('Notification email restored to factory default: kachorasdubai@gmail.com');
+    setTimeout(() => setSettingsNotice(''), 4000);
+  };
   const [settingsNotice, setSettingsNotice] = useState('');
   const [firebaseConfigStr, setFirebaseConfigStr] = useState('');
   const [cloudApiUrl, setCloudApiUrl] = useState(getApiBaseUrl());
@@ -173,6 +214,66 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
   
   const handleStatusChange = async (id, newStatus) => {
+    if (newStatus === 'approved') {
+      const targetLead = inquiries.find(i => i.id === id);
+      if (targetLead) {
+        const projectCategory = 
+          targetLead.serviceType?.toLowerCase().includes('villa') ? 'villas' :
+          targetLead.serviceType?.toLowerCase().includes('majlis') ? 'majlis' :
+          targetLead.serviceType?.toLowerCase().includes('aluminium') || targetLead.serviceType?.toLowerCase().includes('glass') ? 'aluminium' : 'civic_mep';
+
+        const upcomingProjectData = {
+          title: targetLead.projectType || targetLead.serviceType || `${targetLead.name} Residence`,
+          category: targetLead.serviceType || 'Civil & Electromechanical Construction',
+          categoryFilter: projectCategory,
+          status: 'upcoming',
+          location: targetLead.location || 'Dubai, UAE',
+          plotNo: targetLead.plotNo || `Tender Ref: ${targetLead.referenceId}`,
+          contractor: 'Kachoras Electromechanical Contracting LLC',
+          scope: targetLead.message || `Client contract awarded to Kachoras LLC for ${targetLead.serviceType || 'turnkey construction'}.`,
+          specs: [
+            `Client: ${targetLead.name}`,
+            `Contact: ${targetLead.phone || targetLead.email || 'Verified Inbound'}`,
+            `Budget Range: ${targetLead.budgetRange || 'AED Contract Scope'}`,
+            'Statutory: Dubai Municipality G+1 Approved'
+          ],
+          image: '/assets/images/image1.jpeg'
+        };
+
+        // 1. Add to local projects
+        addProject(upcomingProjectData);
+
+        // 2. Sync to server if running
+        try {
+          if (typeof addProjectToServer === 'function') {
+            await addProjectToServer(upcomingProjectData, null);
+          }
+        } catch (e) {
+          console.warn('Server project creation fallback to local:', e);
+        }
+
+        // 3. Immediately refresh projects state in modal and parent
+        const updatedProjects = getAllProjects();
+        setProjects(updatedProjects);
+        if (onProjectsChanged) {
+          onProjectsChanged(updatedProjects);
+        }
+        window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+      }
+
+      // 4. Remove inquiry from active list as requested
+      const updatedInquiries = await deleteInquiryOnServer(id);
+      setInquiries(updatedInquiries);
+      return;
+    }
+
+    if (newStatus === 'rejected') {
+      // Remove inquiry from active list as requested
+      const updatedInquiries = await deleteInquiryOnServer(id);
+      setInquiries(updatedInquiries);
+      return;
+    }
+
     const updated = await updateInquiryStatusOnServer(id, newStatus);
     setInquiries(updated);
   };
@@ -332,6 +433,17 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
     setFormSuccessMessage('');
   };
 
+  const handleQuickStatusChange = async (projectId, newStatus) => {
+    try {
+      const proj = projects.find(p => p.id === projectId);
+      await updateProjectOnServer(projectId, { ...(proj || {}), status: newStatus });
+      await refreshProjectsList();
+      window.dispatchEvent(new CustomEvent('kachoras_projects_updated'));
+    } catch (err) {
+      console.warn('Quick project status change failed:', err);
+    }
+  };
+
   const handleDeleteClick = async (id) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       await deleteProjectOnServer(id);
@@ -483,7 +595,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 animate-fadeIn">
       <div 
-        className="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl border border-[#E2E8F0] overflow-hidden my-auto max-h-[92vh] flex flex-col"
+        className="relative w-[96vw] max-w-[1440px] bg-white rounded-3xl shadow-2xl border border-[#E2E8F0] overflow-hidden my-auto min-h-[88vh] max-h-[95vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         
@@ -499,36 +611,14 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-400/20 text-[#C59B27] border border-[#C59B27]/30 uppercase">
                   Project Manager
                 </span>
-                {isFirebaseActive() ? (
-                  <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    Firebase Cloud Sync
-                  </span>
-                ) : serverOnline ? (
-                  <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    Live DB Connected
-                  </span>
-                ) : (
-                  <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-white/10 text-white/60">
-                    Local Device Mode
-                  </span>
-                )}
+
               </div>
               <p className="text-xs text-white/60">Upload upcoming tenders and finished projects directly</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={handleCopyAdminLink}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-medium text-amber-300 transition cursor-pointer"
-              title="Copy secret link for direct access"
-            >
-              {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-amber-300" />}
-              <span>{copiedLink ? 'Link Copied!' : 'Copy Direct Link (#admin)'}</span>
-            </button>
+
             {isAuthenticated && (
               <button
                 onClick={handleLogout}
@@ -643,15 +733,27 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E2E8F0] pb-4">
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => { setActiveTab('list'); handleResetForm(); }}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 ${
-                      activeTab === 'list'
-                        ? 'bg-[#14171F] text-white'
+                    onClick={() => { setActiveTab('dashboard'); }}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
+                      activeTab === 'dashboard'
+                        ? 'bg-[#14171F] text-white shadow'
                         : 'bg-white text-slate-700 border border-[#E2E8F0] hover:bg-[#F8FAFC]'
                     }`}
                   >
-                    <Eye className="w-3.5 h-3.5 text-[#C59B27]" />
-                    <span>All Projects ({projects.length})</span>
+                    <BarChart3 className="w-3.5 h-3.5 text-[#C59B27]" />
+                    <span>Executive Dashboard</span>
+                  </button>
+
+                  <button
+                    onClick={() => { setActiveTab('list'); handleResetForm(); }}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
+                      activeTab === 'list'
+                        ? 'bg-[#14171F] text-white shadow'
+                        : 'bg-white text-slate-700 border border-[#E2E8F0] hover:bg-[#F8FAFC]'
+                    }`}
+                  >
+                    <Edit3 className="w-3.5 h-3.5 text-[#C59B27]" />
+                    <span>Project Editor ({projects.length})</span>
                   </button>
 
                   <button
@@ -666,20 +768,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                     <span>+ Upload Project</span>
                   </button>
 
-                  <button
-                    onClick={() => { setActiveTab('inquiries'); refreshInquiriesList(); }}
-                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
-                      activeTab === 'inquiries'
-                        ? 'bg-[#B3261E] text-white shadow'
-                        : 'bg-white text-slate-700 border border-[#E2E8F0] hover:bg-[#F8FAFC]'
-                    }`}
-                  >
-                    <Inbox className="w-3.5 h-3.5 text-amber-200" />
-                    <span>Inquiries ({inquiries.length})</span>
-                    {inquiries.filter(i => i.status === 'new').length > 0 && (
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    )}
-                  </button>
+
 
                   <button
                     onClick={() => setActiveTab('settings')}
@@ -690,7 +779,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                     }`}
                   >
                     <Database className="w-3.5 h-3.5 text-[#C59B27]" />
-                    <span>Settings & Cloud</span>
+                    <span>Settings & Security</span>
                   </button>
                 </div>
 
@@ -698,6 +787,241 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                   Status: <span className="text-emerald-700 font-bold">● Active Session</span>
                 </div>
               </div>
+
+              {/* TAB 0: Executive Analytics & Operations Dashboard */}
+              {activeTab === 'dashboard' && (
+                <div className="space-y-6 text-left">
+                  
+                  {/* Executive Welcome & Live Ops Status */}
+                  <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#141824] via-[#1A2030] to-[#141824] text-white border border-[#232938] shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#C59B27]">
+                          Kachoras Operations & Control Portal • Executive Suite
+                        </span>
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
+                        Executive Overview & Lead Intelligence
+                      </h3>
+                      <p className="text-xs text-white/70 max-w-xl">
+                        Real-time telemetry on customer RFQs, active G+1 villa tenders, portfolio handovers, and statutory Dubai Municipality compliance.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                      <button
+                        onClick={() => { setActiveTab('list'); }}
+                        className="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl border border-white/20 transition flex items-center gap-2 cursor-pointer"
+                        title="Manage, edit, or update existing projects"
+                      >
+                        <Edit3 className="w-4 h-4 text-[#C59B27]" />
+                        <span>Project Editor</span>
+                      </button>
+
+                      <button
+                        onClick={() => { setActiveTab('add'); handleResetForm(); }}
+                        className="px-4 py-2.5 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow flex items-center gap-2 cursor-pointer"
+                      >
+                        <Plus className="w-4 h-4 text-amber-200" />
+                        <span>New Project</span>
+                      </button>
+
+                      
+                    </div>
+                  </div>
+
+                  {/* Two-Column Analytics: Discipline Distribution & Lead Status Breakdown */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    {/* Left: Discipline Progress & Portfolio Breakdown (7 Cols) */}
+                    <div className="lg:col-span-7 bg-white p-5 sm:p-6 rounded-2xl border border-[#E2E8F0] shadow-xs space-y-5">
+                      <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
+                        <div className="flex items-center gap-2">
+                          <Layers className="w-4 h-4 text-[#B3261E]" />
+                          <h4 className="text-sm font-bold text-slate-900">Discipline Portfolio Distribution</h4>
+                        </div>
+                        <button
+                          onClick={() => setActiveTab('list')}
+                          className="text-xs font-bold text-[#B3261E] hover:underline flex items-center gap-1 cursor-pointer"
+                        >
+                          <span>Manage Projects</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+
+                      <div className="space-y-4">
+                        {[
+                          { 
+                            name: "Architectural Aluminum and Glass", 
+                            count: projects.filter(p => p.categoryFilter === 'aluminium').length,
+                            total: projects.length,
+                            color: "bg-[#8B6D1B]",
+                            percent: Math.round((projects.filter(p => p.categoryFilter === 'aluminium').length / (projects.length || 1)) * 100)
+                          },
+                          { 
+                            name: "General Maintenance & Fit-out", 
+                            count: projects.filter(p => p.categoryFilter === 'civic_mep' || p.categoryFilter === 'civic').length,
+                            total: projects.length,
+                            color: "bg-[#B3261E]",
+                            percent: Math.round((projects.filter(p => p.categoryFilter === 'civic_mep' || p.categoryFilter === 'civic').length / (projects.length || 1)) * 100)
+                          },
+                          { 
+                            name: "Luxury G+1 Residential Villas", 
+                            count: projects.filter(p => p.categoryFilter === 'villas').length,
+                            total: projects.length,
+                            color: "bg-indigo-600",
+                            percent: Math.round((projects.filter(p => p.categoryFilter === 'villas').length / (projects.length || 1)) * 100)
+                          },
+                          { 
+                            name: "Royal Majlis & Traditional Pavilions", 
+                            count: projects.filter(p => p.categoryFilter === 'majlis').length,
+                            total: projects.length,
+                            color: "bg-emerald-600",
+                            percent: Math.round((projects.filter(p => p.categoryFilter === 'majlis').length / (projects.length || 1)) * 100)
+                          }
+                        ].map((disc, idx) => (
+                          <div key={idx} className="space-y-1.5">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="font-semibold text-slate-800">{disc.name}</span>
+                              <span className="font-mono text-slate-500 font-bold">{disc.count} projects ({disc.percent}%)</span>
+                            </div>
+                            <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                              <div className={`h-full rounded-full ${disc.color}`} style={{ width: `${disc.percent}%` }} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 flex items-center justify-between">
+                        <span>Total Audited Delivery: <strong>{projects.length} Handover Projects</strong></span>
+                        <span className="text-emerald-700 font-bold">100% In-House Supervision</span>
+                      </div>
+                    </div>
+
+                    {/* Right: Project Status Matrix & Direct Controls (5 Cols) */}
+                    <div className="lg:col-span-5 bg-white p-5 sm:p-6 rounded-2xl border border-[#E2E8F0] shadow-xs space-y-5 flex flex-col justify-between">
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
+                          <div className="flex items-center gap-2">
+                            <Activity className="w-4 h-4 text-emerald-600" />
+                            <h4 className="text-sm font-bold text-slate-900">Project Status Distribution</h4>
+                          </div>
+                          <span className="text-[11px] font-mono text-slate-500 font-bold">{projects.length} Total</span>
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-2.5 text-center">
+                          <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200">
+                            <div className="text-xl font-bold font-display text-emerald-800">
+                              {projects.filter(p => p.status === 'completed' || !p.status || p.status.includes('completed')).length}
+                            </div>
+                            <div className="text-[10px] uppercase font-bold text-emerald-700 mt-0.5">Completed</div>
+                          </div>
+
+                          <div className="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                            <div className="text-xl font-bold font-display text-amber-800">
+                              {projects.filter(p => p.status === 'upcoming' || p.status === 'ongoing' || p.status.includes('execution')).length}
+                            </div>
+                            <div className="text-[10px] uppercase font-bold text-amber-700 mt-0.5">Upcoming</div>
+                          </div>
+
+                          <div className="p-3 bg-indigo-50 rounded-xl border border-indigo-200">
+                            <div className="text-xl font-bold font-display text-indigo-800">
+                              {projects.filter(p => p.isCustom).length}
+                            </div>
+                            <div className="text-[10px] uppercase font-bold text-indigo-700 mt-0.5">Custom</div>
+                          </div>
+                        </div>
+
+                        <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-1">
+                          <div className="font-bold text-slate-800">Fast Status Management</div>
+                          <p className="text-[11px] leading-relaxed">
+                            Click 'Project Editor' above to change any project between <strong>Upcoming 2026</strong>, <strong>Under Construction</strong>, or <strong>Completed Handover</strong> in 1 click.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="pt-3 border-t border-[#E2E8F0] flex items-center gap-2">
+                        <button
+                          onClick={() => { setActiveTab('list'); }}
+                          className="w-full py-2.5 bg-[#B3261E] hover:bg-[#961F18] text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                        >
+                          <Edit3 className="w-3.5 h-3.5 text-white" />
+                          <span>Open Project Editor ({projects.length})</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Project Editor & Status Manager Stream (Executive Direct Access) */}
+                  <div className="bg-white p-5 sm:p-6 rounded-2xl border border-[#E2E8F0] shadow-xs space-y-4">
+                    <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
+                      <div className="flex items-center gap-2">
+                        <Edit3 className="w-4 h-4 text-[#B3261E]" />
+                        <h4 className="text-sm font-bold text-slate-900">Project Editor & Status Control</h4>
+                      </div>
+                      <button
+                        onClick={() => setActiveTab('list')}
+                        className="text-xs font-bold text-[#B3261E] hover:underline flex items-center gap-1 cursor-pointer"
+                      >
+                        <span>Open Full Project Editor ({projects.length})</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+
+                    <div className="space-y-3">
+                      {projects.slice(0, 4).map((proj) => (
+                        <div
+                          key={proj.id}
+                          className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-[#B3261E]/40 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-lg overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
+                              <img src={proj.image || './assets/villa.jpg'} alt={proj.title} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="space-y-0.5">
+                              <div className="flex items-center gap-2">
+                                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                                  {proj.category}
+                                </span>
+                                {proj.plotNo && (
+                                  <span className="text-[10px] font-mono text-slate-400">Plot #{proj.plotNo}</span>
+                                )}
+                              </div>
+                              <h5 className="text-xs sm:text-sm font-bold text-slate-900 line-clamp-1">{proj.title}</h5>
+                              <p className="text-[11px] text-slate-500">{proj.location || 'Dubai, UAE'}</p>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                            {/* Fast Status Switch Dropdown */}
+                            <select
+                              value={proj.status || 'completed'}
+                              onChange={(e) => handleQuickStatusChange(proj.id, e.target.value)}
+                              className="px-2 py-1 text-xs font-bold rounded-lg border border-[#E2E8F0] bg-white text-slate-800 outline-none cursor-pointer hover:border-[#B3261E]"
+                              title="Update Status"
+                            >
+                              <option value="upcoming">Upcoming 2026</option>
+                              <option value="ongoing">Under Construction</option>
+                              <option value="completed">Completed Handover</option>
+                            </select>
+
+                            <button
+                              onClick={() => handleEditClick(proj)}
+                              className="px-3 py-1 bg-white hover:bg-[#B3261E] hover:text-white border border-[#E2E8F0] hover:border-[#B3261E] rounded-lg text-xs font-bold text-slate-700 transition flex items-center gap-1 cursor-pointer"
+                              title="Edit all details"
+                            >
+                              <Edit3 className="w-3.5 h-3.5" />
+                              <span>Edit</span>
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              )}
 
               {/* TAB 1: Projects List Overview */}
               {activeTab === 'list' && (
@@ -728,62 +1052,6 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                     </div>
                   </div>
 
-                  {/* Multi-Device Data Sync & Export/Import Bar */}
-                  <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <Download className="w-4 h-4 text-[#B3261E]" />
-                        <h4 className="text-sm font-bold text-[#14171F]">Multi-Device Project Sync & Backup</h4>
-                        <span className="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">
-                          Device-to-Device Sharing
-                        </span>
-                      </div>
-                      <p className="text-xs text-slate-500 max-w-xl leading-relaxed">
-                        If projects were added on the client's phone or another browser, click <strong>"Export Projects"</strong> on that device to download or copy the data, then click <strong>"Import Projects"</strong> here to sync them immediately.
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-2 shrink-0">
-                      <input 
-                        type="file" 
-                        ref={jsonImportInputRef} 
-                        onChange={handleImportFileSelect} 
-                        accept=".json,application/json" 
-                        className="hidden" 
-                      />
-
-                      <button
-                        type="button"
-                        onClick={handleExportProjects}
-                        className="px-3.5 py-2 rounded-xl bg-white hover:bg-amber-50 text-[#B3261E] border border-[#B3261E]/30 text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer"
-                        title="Download backup file and copy JSON to clipboard"
-                      >
-                        <Download className="w-3.5 h-3.5" />
-                        <span>Export Projects</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => jsonImportInputRef.current?.click()}
-                        className="px-3.5 py-2 rounded-xl bg-[#B3261E] hover:bg-[#5C200E] text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm cursor-pointer"
-                        title="Select and import a JSON file"
-                      >
-                        <Upload className="w-3.5 h-3.5" />
-                        <span>Import JSON File</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={handlePasteImportPrompt}
-                        className="px-3 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 text-xs font-semibold transition cursor-pointer"
-                        title="Paste exported code directly"
-                      >
-                        Paste Code
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Project Cards Table */}
                   {/* Search and Category Filter Bar */}
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white p-3.5 rounded-2xl border border-[#E2E8F0] shadow-xs">
                     <div className="relative flex-1">
@@ -899,13 +1167,26 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+                          <div className="flex flex-wrap items-center gap-2 self-end sm:self-center shrink-0">
+                            {/* Inline Quick Status Selector */}
+                            <select
+                              value={proj.status || 'completed'}
+                              onChange={(e) => handleQuickStatusChange(proj.id, e.target.value)}
+                              className="px-2.5 py-1.5 text-xs font-bold rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] text-slate-700 outline-none cursor-pointer hover:border-[#B3261E] transition"
+                              title="Change project status immediately"
+                            >
+                              <option value="upcoming">Upcoming 2026</option>
+                              <option value="ongoing">Under Construction</option>
+                              <option value="completed">Completed Handover</option>
+                            </select>
+
                             <button
                               onClick={() => handleEditClick(proj)}
-                              className="px-3 py-1.5 rounded-lg border border-[#E2E8F0] hover:border-[#B3261E] text-slate-700 hover:text-[#B3261E] text-xs font-bold transition flex items-center gap-1.5"
+                              className="px-3 py-1.5 rounded-lg border border-[#E2E8F0] hover:border-[#B3261E] bg-white text-slate-700 hover:text-[#B3261E] text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                              title="Edit all project details"
                             >
                               <Edit3 className="w-3.5 h-3.5" />
-                              <span>Edit</span>
+                              <span>Edit Details</span>
                             </button>
 
                             {proj.isCustom && (
@@ -1272,264 +1553,6 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                 </div>
               )}
 
-              {/* TAB: Client Inquiries & Tenders */}
-              {activeTab === 'inquiries' && (
-                <div className="space-y-5">
-                  {/* Inquiries Header */}
-                  <div className="bg-white rounded-2xl border border-[#E2E8F0] p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <Inbox className="w-5 h-5 text-[#B3261E]" />
-                        <h4 className="text-xl font-bold font-display text-[#14171F]">
-                          Client Tenders & Lead Inquiries
-                        </h4>
-                      </div>
-                      <p className="text-xs text-slate-500 mt-1">
-                        Forwarded automatically to <strong>kachorasdubai@gmail.com</strong> and archived in your executive portal.
-                      </p>
-                    </div>
-
-                    <div className="flex items-center gap-2 self-start sm:self-auto">
-                      <button
-                        onClick={exportInquiriesToCSV}
-                        className="px-3.5 py-2 bg-white hover:bg-slate-50 border border-[#E2E8F0] text-slate-700 text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-sm cursor-pointer"
-                        title="Download Leads to CSV Spreadsheet"
-                      >
-                        <Download className="w-3.5 h-3.5 text-[#C59B27]" />
-                        <span>Export CSV / Excel</span>
-                      </button>
-
-                      <button
-                        onClick={refreshInquiriesList}
-                        className="p-2 bg-white hover:bg-slate-50 border border-[#E2E8F0] text-slate-600 rounded-xl transition cursor-pointer"
-                        title="Refresh List"
-                      >
-                        <RefreshCw className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Filter Pills */}
-                  <div className="flex flex-wrap items-center gap-2">
-                    <button
-                      onClick={() => setInquiryFilter('all')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
-                        inquiryFilter === 'all'
-                          ? 'bg-[#14171F] text-white'
-                          : 'bg-white text-slate-600 border border-[#E2E8F0] hover:bg-slate-50'
-                      }`}
-                    >
-                      All Inquiries ({inquiries.length})
-                    </button>
-                    <button
-                      onClick={() => setInquiryFilter('new')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
-                        inquiryFilter === 'new'
-                          ? 'bg-emerald-700 text-white'
-                          : 'bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-50'
-                      }`}
-                    >
-                      <span>New Leads</span>
-                      <span className="font-mono text-[10px] bg-white/20 px-1 rounded">
-                        {inquiries.filter(i => i.status === 'new').length}
-                      </span>
-                    </button>
-                    <button
-                      onClick={() => setInquiryFilter('contacted')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
-                        inquiryFilter === 'contacted'
-                          ? 'bg-blue-700 text-white'
-                          : 'bg-white text-slate-600 border border-[#E2E8F0] hover:bg-slate-50'
-                      }`}
-                    >
-                      Contacted ({inquiries.filter(i => i.status === 'contacted').length})
-                    </button>
-                    <button
-                      onClick={() => setInquiryFilter('archived')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
-                        inquiryFilter === 'archived'
-                          ? 'bg-slate-700 text-white'
-                          : 'bg-white text-slate-600 border border-[#E2E8F0] hover:bg-slate-50'
-                      }`}
-                    >
-                      Archived ({inquiries.filter(i => i.status === 'archived').length})
-                    </button>
-                  </div>
-
-                  {/* Inquiries Cards List */}
-                  <div className="space-y-3.5">
-                    {inquiries
-                      .filter(i => inquiryFilter === 'all' ? true : i.status === inquiryFilter)
-                      .map((lead) => {
-                        const statusConfig = 
-                          lead.status === 'new'
-                            ? { bg: 'bg-emerald-50 text-emerald-800 border-emerald-200', label: 'New Lead' }
-                            : lead.status === 'contacted'
-                            ? { bg: 'bg-blue-50 text-blue-800 border-blue-200', label: 'Contacted' }
-                            : { bg: 'bg-slate-100 text-slate-600 border-slate-200', label: 'Archived' };
-
-                        return (
-                          <div
-                            key={lead.id}
-                            className="bg-white rounded-2xl border border-[#E2E8F0] p-5 sm:p-6 shadow-sm space-y-4 hover:border-[#B3261E] transition"
-                          >
-                            {/* Card Header */}
-                            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E2E8F0] pb-3.5">
-                              <div className="flex flex-wrap items-center gap-2.5">
-                                <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#F8FAFC] border border-[#E2E8F0] text-[#B3261E]">
-                                  {lead.referenceId}
-                                </span>
-                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${statusConfig.bg}`}>
-                                  {statusConfig.label}
-                                </span>
-                                {lead.syncStatus === 'local_only' ? (
-                                  <span className="text-[9px] bg-amber-100 text-amber-800 border border-amber-300 px-1.5 py-0.5 rounded font-bold">
-                                    Offline Cache
-                                  </span>
-                                ) : (
-                                  <span className="text-[9px] bg-emerald-100 text-emerald-800 border border-emerald-300 px-1.5 py-0.5 rounded font-bold">
-                                    Cloud Synced
-                                  </span>
-                                )}
-                                <span className="text-[11px] text-slate-400">
-                                  {new Date(lead.timestamp).toLocaleString()}
-                                </span>
-                              </div>
-
-                              {/* Status Toggle Dropdown */}
-                              <div className="flex items-center gap-2">
-                                <select
-                                  value={lead.status}
-                                  onChange={(e) => handleStatusChange(lead.id, e.target.value)}
-                                  className="text-xs bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg px-2.5 py-1 text-slate-700 outline-none font-semibold cursor-pointer"
-                                >
-                                  <option value="new">Mark: New</option>
-                                  <option value="contacted">Mark: Contacted</option>
-                                  <option value="archived">Mark: Archived</option>
-                                </select>
-
-                                <button
-                                  onClick={() => handleDeleteInquiry(lead.id)}
-                                  className="p-1.5 rounded-lg border border-rose-200 text-rose-500 hover:bg-rose-50 transition cursor-pointer"
-                                  title="Delete record"
-                                >
-                                  <Trash2 className="w-3.5 h-3.5" />
-                                </button>
-                              </div>
-                            </div>
-
-                            {/* Client & Scope Matrix */}
-                            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
-                              <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
-                                <span className="text-slate-400 block text-[10px] uppercase font-semibold">Client / Company</span>
-                                <strong className="text-slate-900 block text-sm mt-0.5">{lead.name}</strong>
-                                {lead.company && <span className="text-slate-500 block text-[11px]">{lead.company}</span>}
-                              </div>
-
-                              <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
-                                <span className="text-slate-400 block text-[10px] uppercase font-semibold">Discipline Requested</span>
-                                <strong className="text-[#B3261E] block text-sm mt-0.5">{lead.serviceType}</strong>
-                                {lead.budgetRange && <span className="text-slate-600 block text-[11px]">Budget: {lead.budgetRange}</span>}
-                              </div>
-
-                              <div className="bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
-                                <span className="text-slate-400 block text-[10px] uppercase font-semibold">Location / Plot</span>
-                                <strong className="text-slate-900 block text-sm mt-0.5">{lead.location}</strong>
-                                {lead.plotNo && <span className="text-emerald-800 font-mono block text-[11px]">Plot #{lead.plotNo}</span>}
-                              </div>
-                            </div>
-
-                            {/* Notes / Message */}
-                            {lead.message && (
-                              <div className="p-3.5 bg-white rounded-xl border border-[#E2E8F0] text-xs text-slate-700 leading-relaxed font-normal">
-                                <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Client Scope Notes:</span>
-                                {lead.message}
-                              </div>
-                            )}
-
-                            {lead.attachedFile && (
-                              <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] flex items-center justify-between gap-3 text-xs">
-                                <div className="flex items-center gap-2 text-slate-700">
-                                  <FileText className="w-4 h-4 text-[#B3261E] shrink-0" />
-                                  <div>
-                                    <span className="font-bold block text-slate-900">
-                                      Attached Drawing / BOQ: {typeof lead.attachedFile === 'string' ? lead.attachedFile : lead.attachedFile.name}
-                                    </span>
-                                    {lead.attachedFile.size && (
-                                      <span className="text-[10px] text-slate-500 font-mono">
-                                        {(lead.attachedFile.size / 1024 / 1024).toFixed(2)} MB
-                                      </span>
-                                    )}
-                                  </div>
-                                </div>
-                                {lead.attachedFile.url && (
-                                  <a
-                                    href={lead.attachedFile.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    download={lead.attachedFile.name || 'drawing'}
-                                    className="px-3 py-1.5 bg-[#B3261E] hover:bg-[#5C200E] text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm shrink-0"
-                                  >
-                                    <Download className="w-3.5 h-3.5" />
-                                    <span>Download</span>
-                                  </a>
-                                )}
-                              </div>
-                            )}
-
-                            {/* Direct Communication Buttons */}
-                            <div className="pt-2 flex flex-wrap items-center gap-2">
-                              {lead.phone && (
-                                <a
-                                  href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-                                    `Hello ${lead.name}, this is Jose K. George from Kachoras Electromechanical Contracting LLC Dubai regarding your project inquiry [Ref: ${lead.referenceId}].`
-                                  )}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm"
-                                >
-                                  <MessageSquare className="w-3.5 h-3.5" />
-                                  <span>WhatsApp Client</span>
-                                </a>
-                              )}
-
-                              {lead.phone && (
-                                <a
-                                  href={`tel:${lead.phone}`}
-                                  className="px-3.5 py-2 bg-[#14171F] hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5"
-                                >
-                                  <Phone className="w-3.5 h-3.5 text-[#C59B27]" />
-                                  <span>Call ({lead.phone})</span>
-                                </a>
-                              )}
-
-                              {lead.email && (
-                                <a
-                                  href={`mailto:${lead.email}?subject=${encodeURIComponent(`Kachoras Contracting Inquiry [Ref: ${lead.referenceId}]`)}`}
-                                  className="px-3.5 py-2 bg-white hover:bg-slate-50 border border-[#E2E8F0] text-slate-800 rounded-xl text-xs font-bold transition flex items-center gap-1.5"
-                                >
-                                  <Mail className="w-3.5 h-3.5 text-[#B3261E]" />
-                                  <span>Email Client</span>
-                                </a>
-                              )}
-                            </div>
-
-                          </div>
-                        );
-                      })}
-
-                    {inquiries.filter(i => inquiryFilter === 'all' ? true : i.status === inquiryFilter).length === 0 && (
-                      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-10 text-center space-y-2 text-slate-500">
-                        <Inbox className="w-8 h-8 text-slate-400 mx-auto" />
-                        <h5 className="font-bold text-slate-700 text-sm">No Inquiries In This Tab</h5>
-                        <p className="text-xs">Incoming tenders submitted by clients on the website will be listed here.</p>
-                      </div>
-                    )}
-                  </div>
-
-                </div>
-              )}
-
               {/* TAB 4: Cloud Sync & Settings */}
               {activeTab === 'settings' && (
                 <div className="space-y-6">
@@ -1581,112 +1604,6 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                     </form>
                   </div>
 
-                  {/* Live Cloud Backend API Endpoint (Render / Node.js) */}
-                  <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 shadow-sm space-y-4">
-                    <div className="border-b border-[#E2E8F0] pb-3 flex flex-wrap items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
-                        <Database className="w-4 h-4 text-[#B3261E]" />
-                        <h4 className="text-base font-bold font-display text-[#14171F]">
-                          Live Cloud Server Backend API
-                        </h4>
-                      </div>
-                      {serverOnline ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                          Connected Live
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-600">
-                          Local Browser Storage Mode
-                        </span>
-                      )}
-                    </div>
-
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      To connect your live Express/Render backend server so projects sync automatically across all clients and visitors, enter your backend server URL below:
-                    </p>
-
-                    <form onSubmit={handleSaveCloudApiUrl} className="flex flex-wrap gap-2.5">
-                      <input
-                        type="url"
-                        value={cloudApiUrl}
-                        onChange={(e) => setCloudApiUrl(e.target.value)}
-                        placeholder="e.g. https://kachoras-backend.onrender.com"
-                        className="px-4 py-2.5 rounded-xl border border-[#E2E8F0] text-sm focus:border-[#B3261E] outline-none flex-1 min-w-[260px] font-mono"
-                      />
-                      <button
-                        type="submit"
-                        className="px-5 py-2.5 bg-[#B3261E] hover:bg-[#5C200E] text-white rounded-xl text-xs font-bold transition cursor-pointer"
-                      >
-                        Connect Server
-                      </button>
-                    </form>
-                  </div>
-
-                  {/* Firebase Real-Time Cloud Sync */}
-                  <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 shadow-sm space-y-4">
-                    <div className="border-b border-[#E2E8F0] pb-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Database className="w-4 h-4 text-[#C59B27]" />
-                          <h4 className="text-base font-bold font-display text-[#14171F]">
-                            Global Cloud Database Sync (Google Firebase)
-                          </h4>
-                        </div>
-                        {isFirebaseActive() && (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                            Live Sync Active
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs text-slate-500 mt-1">
-                        Connected to Cloud Firestore project <strong>kachoras-73183</strong>. Every project added, edited, or deleted on any device immediately synchronizes across all visitors and smartphones globally.
-                      </p>
-                    </div>
-
-                    <div className="space-y-3">
-                      <p className="text-xs text-slate-600 leading-relaxed">
-                        Active Web App Firebase configuration:
-                      </p>
-
-                      <textarea
-                        rows={5}
-                        value={firebaseConfigStr}
-                        onChange={(e) => setFirebaseConfigStr(e.target.value)}
-                        placeholder='{ "apiKey": "AIzaSy...", "projectId": "kachoras-73183", "storageBucket": "..." }'
-                        className="w-full px-3.5 py-2.5 font-mono text-xs rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] focus:border-[#B3261E] outline-none"
-                      />
-
-                      <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-                        <button
-                          type="button"
-                          onClick={async () => {
-                            setSettingsNotice('Synchronizing local projects & inquiries with Cloud Firestore...');
-                            await syncLocalProjectsToCloud();
-                            await syncLocalInquiriesToCloud();
-                            await refreshProjectsList();
-                            await refreshInquiriesList();
-                            setSettingsNotice('Cloud synchronization complete! All records unified.');
-                            setTimeout(() => setSettingsNotice(''), 4000);
-                          }}
-                          className="px-3.5 py-2 bg-[#F8FAFC] hover:bg-[#E2E8F0] border border-[#E2E8F0] text-slate-700 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-1.5"
-                        >
-                          <RefreshCw className="w-3.5 h-3.5 text-[#B3261E]" />
-                          <span>Force Cloud Re-sync</span>
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={handleSaveFirebaseConfig}
-                          className="px-4 py-2 bg-[#B3261E] hover:bg-[#5C200E] text-white rounded-xl text-xs font-bold transition cursor-pointer"
-                        >
-                          Update Config
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
                   {/* Email Forwarding Configuration Info */}
                   <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 shadow-sm space-y-4">
                     <div className="border-b border-[#E2E8F0] pb-3">
@@ -1701,19 +1618,51 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                       </p>
                     </div>
 
-                    <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3">
-                      <div className="space-y-0.5">
-                        <span className="text-[10px] text-slate-400 uppercase font-bold">Primary Notification Email</span>
-                        <div className="font-mono text-sm font-bold text-[#B3261E]">kachorasdubai@gmail.com</div>
+                    <form onSubmit={handleSaveNotificationEmail} className="space-y-3">
+                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                        <div className="relative flex-1">
+                          <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                          <input
+                            type="email"
+                            value={notificationEmail}
+                            onChange={(e) => setNotificationEmail(e.target.value)}
+                            placeholder="Enter notification email (e.g. yourname@company.com)"
+                            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E2E8F0] text-sm font-mono text-slate-800 bg-[#F8FAFC] focus:bg-white focus:border-[#B3261E] outline-none shadow-2xs"
+                            required
+                          />
+                        </div>
+                        <button
+                          type="submit"
+                          className="px-5 py-2.5 bg-[#B3261E] hover:bg-[#961F18] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition shadow-xs flex items-center justify-center gap-2 cursor-pointer shrink-0"
+                        >
+                          <Check className="w-4 h-4" />
+                          <span>Save Email</span>
+                        </button>
                       </div>
-                      <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded flex items-center gap-1">
-                        <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                        <span>Active Dispatch</span>
-                      </span>
-                    </div>
 
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      Every tender RFP submitted by a client is simultaneously dispatched to <strong>kachorasdubai@gmail.com</strong> and archived in your <strong>Inquiries ({inquiries.length})</strong> tab for complete backup and record keeping.
+                      <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs text-slate-500">
+                        <div className="flex items-center gap-2">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            <span>Active Destination: {notificationEmail}</span>
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (window.confirm('Reset notification email back to default (kachorasdubai@gmail.com)?')) {
+                              handleResetNotificationEmail();
+                            }
+                          }}
+                          className="text-xs text-slate-400 hover:text-slate-700 underline cursor-pointer"
+                        >
+                          Reset to kachorasdubai@gmail.com
+                        </button>
+                      </div>
+                    </form>
+
+                    <p className="text-xs text-slate-500 leading-relaxed pt-1 border-t border-slate-100">
+                      Every tender RFP submitted by a client is dispatched directly to <strong>{notificationEmail}</strong> and simultaneously saved in your <strong>Inquiries ({inquiries.length})</strong> tab for complete archival and record keeping.
                     </p>
                   </div>
 

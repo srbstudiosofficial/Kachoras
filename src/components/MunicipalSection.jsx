@@ -9,11 +9,11 @@ import { DUBAI_MUNICIPALITY_PROJECTS } from '../data/mockData';
 
 export default function MunicipalSection() {
   return (
-    <section id="municipal" className="py-24 bg-white relative border-t border-[#E2E8F0]">
+    <section id="municipal" className="py-10 sm:py-14 bg-white relative border-t border-[#E2E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3 reveal-on-scroll reveal-init">
+        <div className="max-w-3xl mb-6 sm:mb-8 space-y-2 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-emerald-800 block">
             Government Framework • Civic Infrastructure
           </span>
@@ -29,10 +29,10 @@ export default function MunicipalSection() {
         <div className="mb-14 bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 grid lg:grid-cols-12 items-center reveal-on-scroll reveal-init shimmer-trigger">
           <div className="lg:col-span-6 relative h-72 sm:h-80 lg:h-full min-h-[320px] overflow-hidden group">
             <picture className="w-full h-full block">
-              <source srcSet="./assets/real-projects/p363-nuaimi-villa-elevation.jpg" type="image/webp" />
+              <source srcSet="./assets/dubai-municipality.webp" type="image/webp" />
               <img 
-                src="./assets/real-projects/p363-nuaimi-villa-elevation.jpg" 
-                alt="Dubai Municipality Civic Project Specimen" 
+                src="./assets/dubai-municipality.jpg" 
+                alt="Dubai Municipality Government & Public Infrastructure Works" 
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="lazy"
                 decoding="async"

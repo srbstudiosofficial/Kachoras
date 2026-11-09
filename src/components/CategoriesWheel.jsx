@@ -53,11 +53,11 @@ const DISCIPLINE_ASSETS = {
 
 export default function CategoriesWheel({ onSelectServiceForQuote }) {
   return (
-    <section id="services" className="py-24 bg-[#F8FAFC] relative border-t border-[#E2E8F0]">
+    <section id="services" className="py-10 sm:py-14 bg-[#F8FAFC] relative border-t border-[#E2E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3 reveal-on-scroll reveal-init">
+        <div className="max-w-3xl mb-6 sm:mb-8 space-y-2 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
             Capabilities & Contracting Scope
           </span>

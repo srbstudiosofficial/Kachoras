@@ -15,8 +15,10 @@ import {
   FileCheck2
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
+import { useLanguage } from '../core/LanguageContext';
 
 export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
+  const { language, isRTL } = useLanguage();
   return (
     <div className="space-y-0">
       
@@ -29,32 +31,51 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
       />
 
       {/* 2. Executive Leadership & Company Heritage */}
-      <section className="py-20 bg-white border-b border-[#E2E8F0]">
+      <section className="py-10 sm:py-12 bg-white border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-7 space-y-6">
               <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
-                Executive Leadership & Company Heritage
+                {language === 'ar' ? 'القيادة التنفيذية وعراقة الشركة' : 'Executive Leadership & Company Heritage'}
               </span>
 
               <h2 className="text-3xl sm:text-4xl font-black text-[#1E293B] font-display tracking-tight leading-tight">
-                Over 20 Years of Experience in Construction and Engineering
+                {language === 'ar' ? 'أكثر من 20 عاماً من الخبرة في المقاولات والهندسة الإنشائية' : 'Over 20 Years of Experience in Construction and Engineering'}
               </h2>
 
               <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed">
-                <p>
-                  Established in Dubai in <strong>2006</strong>, <strong>Kachoras Electromechanical Contracting LLC</strong> has built its experience in delivering construction, MEP, and maintenance works for residential, commercial, and government projects across Dubai.
-                </p>
-                <p>
-                  Under the leadership of our General Manager <strong>Jose K. George</strong> and dedicated staff, the company has expanded its services from civil and MEP works to a wide range of construction and specialist services under <strong>Dubai Municipality G+1 Building License #{COMPANY_INFO.licenseNumber}</strong>.
-                </p>
-                <p>
-                  Unlike companies that depend entirely on outside subcontractors, Kachoras handles several key works in-house, including structural construction, MEP installations, aluminium and glass fabrication, and civil maintenance.
-                </p>
-                <p>
-                  Our integrated approach helps us maintain quality, coordinate work efficiently, and complete projects in line with DEWA, Dubai Civil Defence, and Dubai Municipality requirements.
-                </p>
+                {language === 'ar' ? (
+                  <>
+                    <p>
+                      تأسست شركة <strong>كاشوراس للمقاولات الكهروميكانيكية ش.ذ.م.م</strong> في إمارة دبي عام <strong>2006</strong>، وبنت سجلاً حافلاً بالثقة في تنفيذ مشاريع البناء، الأعمال الكهروميكانيكية، وأعمال الصيانة للمشاريع السكنية والتجارية والحكومية في كافة أنحاء دبي.
+                    </p>
+                    <p>
+                      تحت قيادة المدير العام <strong>خوسيه كيه. جورج</strong> وفريق العمل الهندسي المتخصص، طورت الشركة خدماتها لتشمل حلول المقاولات الشاملة بموجب <strong>رخصة بلدية دبي لمقاولات المباني فئة أرضي + أول (G+1) رقم {COMPANY_INFO.licenseNumber}</strong>.
+                    </p>
+                    <p>
+                      خلافاً للشركات التي تعتمد كلياً على مقاولي الباطن، تتميز كاشوراس بتنفيذ كافة الأعمال الحيوية ذاتياً من خلال كوادرها وورشها المتخصصة في البناء، التمديدات الكهروميكانيكية، وتصنيع الألمنيوم والزجاج.
+                    </p>
+                    <p>
+                      يضمن هذا النهج المتكامل الحفاظ على أعلى معايير الجودة، وسرعة التنسيق، والالتزام الصارم بمتطلبات بلدية دبي، وهيئة كهرباء ومياه دبي (DEWA)، والدفاع المدني.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p>
+                      Established in Dubai in <strong>2006</strong>, <strong>Kachoras Electromechanical Contracting LLC</strong> has built its experience in delivering construction, MEP, and maintenance works for residential, commercial, and government projects across Dubai.
+                    </p>
+                    <p>
+                      Under the leadership of our General Manager <strong>Jose K. George</strong> and dedicated staff, the company has expanded its services from civil and MEP works to a wide range of construction and specialist services under <strong>Dubai Municipality G+1 Building License #{COMPANY_INFO.licenseNumber}</strong>.
+                    </p>
+                    <p>
+                      Unlike companies that depend entirely on outside subcontractors, Kachoras handles several key works in-house, including structural construction, MEP installations, aluminium and glass fabrication, and civil maintenance.
+                    </p>
+                    <p>
+                      Our integrated approach helps us maintain quality, coordinate work efficiently, and complete projects in line with DEWA, Dubai Civil Defence, and Dubai Municipality requirements.
+                    </p>
+                  </>
+                )}
               </div>
 
               {/* Pillars */}

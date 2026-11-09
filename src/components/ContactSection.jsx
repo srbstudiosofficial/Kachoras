@@ -15,8 +15,10 @@ import {
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 import { submitInquiry } from '../services/inquiryService';
+import { useLanguage } from '../core/LanguageContext';
 
 export default function ContactSection() {
+  const { language, isRTL } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -105,19 +107,19 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-white relative border-t border-[#E2E8F0]">
+    <section id="contact" className="py-10 sm:py-14 bg-white relative border-t border-[#E2E8F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3 reveal-on-scroll reveal-init">
+        <div className="max-w-3xl mb-6 sm:mb-8 space-y-2 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
-            Tenders & Technical Submissions
+            {language === 'ar' ? 'المناقصات والتقديمات الفنية' : 'Tenders & Technical Submissions'}
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
-            Request an Official Tender Proposal
+            {language === 'ar' ? 'طلب عرض أسعار ومناقصة رسمية' : 'Request an Official Tender Proposal'}
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Submit your plot drawings, villa floorplans, or MEP scope for evaluation by our engineering managers in Al Qusais. Direct response provided within 24 business hours.
+            {language === 'ar' ? 'أرسل مخططات الأرض أو فيلتك السكنية أو نطاق الأعمال الكهروميكانيكية لتقييمها من قبل مهندسينا في القصيص. يتم الرد خلال 24 ساعة عمل.' : 'Submit your plot drawings, villa floorplans, or MEP scope for evaluation by our engineering managers in Al Qusais. Direct response provided within 24 business hours.'}
           </p>
         </div>
 
@@ -128,7 +130,7 @@ export default function ContactSection() {
             
             <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500">
               <h3 className="text-xl font-black text-[#1E293B] font-display border-b border-[#E2E8F0] pb-4">
-                Corporate Office Details
+                {language === 'ar' ? 'بيانات المقر الرئيسي للمجموعة' : 'Corporate Office Details'}
               </h3>
 
               <div className="space-y-5 text-xs sm:text-sm">
@@ -174,8 +176,8 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <strong className="text-[#1E293B] block font-bold text-sm">Working Hours:</strong>
-                    <span className="block">Saturday – Thursday: 7:30 AM – 6:00 PM</span>
-                    <span className="block text-[#64748B] text-xs mt-0.5 font-medium">Friday Closed • Emergency site teams on call</span>
+                    <span className="block font-medium text-slate-800">Monday – Saturday: 7:00 AM – 4:00 PM</span>
+                    <span className="block text-[#64748B] text-xs mt-0.5 font-medium">Sunday Closed • Emergency site teams on call</span>
                   </div>
                 </div>
               </div>
@@ -384,7 +386,7 @@ export default function ContactSection() {
                       <option value="Building Contracting (G+1 Villa / Majlis)">Building Contracting (G+1 Villa / Majlis)</option>
                       <option value="MEP & HVAC Engineering">MEP & HVAC Engineering</option>
                       <option value="Aluminium and Glass Works">Aluminium and Glass Works</option>
-                      <option value="Civil Maintenance & Fit-out">Civil Maintenance & Fit-out</option>
+                      <option value="General Maintenance & Fit-out">General Maintenance & Fit-out</option>
                       <option value="Kitchen Cabinets & Wardrobes">Kitchen Cabinets & Wardrobes</option>
                       <option value="Gypsum Decoration Works">Gypsum Decoration Works</option>
                       <option value="Dubai Municipality Civic Projects">Dubai Municipality Civic Projects</option>

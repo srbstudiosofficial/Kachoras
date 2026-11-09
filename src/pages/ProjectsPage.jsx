@@ -1,6 +1,7 @@
 import React from 'react';
 import PageHeader from '../components/PageHeader';
 import ProjectsSection from '../components/ProjectsSection';
+import { useLanguage } from '../core/LanguageContext';
 import { 
   Building2, 
   ShieldCheck, 
@@ -13,6 +14,7 @@ import {
 } from 'lucide-react';
 
 export default function ProjectsPage({ onNavigate, onOpenQuoteModal }) {
+  const { language } = useLanguage();
   return (
     <div className="space-y-0">
       
@@ -30,27 +32,27 @@ export default function ProjectsPage({ onNavigate, onOpenQuoteModal }) {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             
             <div className="p-3.5 sm:p-5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#B3261E]">Handed Over</span>
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#B3261E]">{language === 'ar' ? 'تم تسليمها' : 'Handed Over'}</span>
               <div className="text-2xl sm:text-3xl font-black text-[#1E293B] font-mono">500+</div>
-              <p className="text-[11px] sm:text-xs text-slate-600">Projects completed across the UAE since 2006</p>
+              <p className="text-[11px] sm:text-xs text-slate-600">{language === 'ar' ? 'مشروعاً تم إنجازه بنجاح في دبي منذ عام 2006' : 'Projects completed across the UAE since 2006'}</p>
             </div>
 
             <div className="p-3.5 sm:p-5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-emerald-700">Track Record</span>
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-emerald-700">{language === 'ar' ? 'الخبرة المعتمدة' : 'Track Record'}</span>
               <div className="text-2xl sm:text-3xl font-black text-emerald-700 font-mono">20+ Yrs</div>
-              <p className="text-[11px] sm:text-xs text-slate-600">Trusted engineering in Dubai under Jose K. George</p>
+              <p className="text-[11px] sm:text-xs text-slate-600">{language === 'ar' ? 'ريادة هندسية في دبي بإشراف خوسيه كيه. جورج' : 'Trusted engineering in Dubai under Jose K. George'}</p>
             </div>
 
             <div className="p-3.5 sm:p-5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#8B6D1B]">Authority Rating</span>
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#8B6D1B]">{language === 'ar' ? 'تصنيف البلدية' : 'Authority Rating'}</span>
               <div className="text-2xl sm:text-3xl font-black text-[#1E293B] font-display">G+1</div>
-              <p className="text-[11px] sm:text-xs text-slate-600">Dubai Municipality licensed structural contractor</p>
+              <p className="text-[11px] sm:text-xs text-slate-600">{language === 'ar' ? 'مقاول معتمد للأعمال الإنشائية من بلدية دبي' : 'Dubai Municipality licensed structural contractor'}</p>
             </div>
 
             <div className="p-3.5 sm:p-5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-1">
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-700">Authority Compliance</span>
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-700">{language === 'ar' ? 'الامتثال للجهات الحكومية' : 'Authority Compliance'}</span>
               <div className="text-2xl sm:text-3xl font-black text-[#B3261E] font-mono">100%</div>
-              <p className="text-[11px] sm:text-xs text-slate-600">DM, DEWA, and Civil Defence standards</p>
+              <p className="text-[11px] sm:text-xs text-slate-600">{language === 'ar' ? 'مطابق لمعايير بلدية دبي وهيئة كهرباء دبي والدفاع المدني' : 'DM, DEWA, and Civil Defence standards'}</p>
             </div>
 
           </div>

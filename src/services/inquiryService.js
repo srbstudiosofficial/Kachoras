@@ -291,10 +291,9 @@ export function exportInquiriesToCSV() {
  * Uses Web3Forms or Formspree API endpoint
  */
 async function sendEmailNotification(inquiry) {
-  const targetEmail = COMPANY_INFO.email || 'kachorasdubai@gmail.com';
-  
-  // Custom configured access key or public Web3Forms integration
+  // Custom configured access key or custom notification email
   const customConfig = getEmailConfig();
+  const targetEmail = customConfig?.notificationEmail || customConfig?.email || COMPANY_INFO.email || 'kachorasdubai@gmail.com';
   const accessKey = customConfig?.accessKey || 'e35c249a-761e-450a-9d62-97b5e135b3e2'; // Web3Forms standard public endpoint
 
   const emailBody = {

@@ -40,7 +40,7 @@ export const COMPANY_INFO = {
 export const CORE_CATEGORIES = [
   {
     id: "construction",
-    title: "G+1 Licensed Construction",
+    title: "Building Construction",
     subtitle: "Complete construction services from foundations to final handover",
     icon: "Building2",
     description: "Complete construction services from foundations to final handover of keys in compliance with Dubai Municipality regulations and engineering standards. Accredited for turnkey luxury G+1 residential and commercial villas and buildings.",
@@ -52,11 +52,11 @@ export const CORE_CATEGORIES = [
       "Dubai Municipality inspections, permits, and Building Completion Certificates (BCC)"
     ],
     deliverables: [],
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+    image: "./assets/villa.jpg"
   },
   {
     id: "mep",
-    title: "MEP Works & Engineering",
+    title: "MEP",
     subtitle: "Electrical, Plumbing & Air-Conditioning (HVAC) Works",
     icon: "Cpu",
     description: "Complete mechanical, electrical, and plumbing (MEP) services, covering all stages from installation to testing and commissioning. Approved subcontractor for leading AC brands including Carrier, O General, Trane, Daikin, and Super General.",
@@ -68,11 +68,11 @@ export const CORE_CATEGORIES = [
       "DEWA electrical coordination and municipal approvals"
     ],
     deliverables: [],
-    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80"
+    image: "./assets/mep.jpg"
   },
   {
     id: "aluminum_glass",
-    title: "Aluminium & Glass Works",
+    title: "Aluminum and Glass",
     subtitle: "Manufacturing & Installation at In-House Al Qusais Workshop",
     icon: "ShieldCheck",
     description: "Manufacturing and installation of aluminium doors, windows, skylights, pergolas, glass and mirrors fabricated at our dedicated Al Qusais facility.",
@@ -84,11 +84,11 @@ export const CORE_CATEGORIES = [
       "Aluminium pergolas, canopies, skylights and louvers"
     ],
     deliverables: [],
-    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80"
+    image: "./assets/aluminium.jpg"
   },
   {
     id: "maintenance",
-    title: "Civil Maintenance & Fit-out Works",
+    title: "General Maintenance & Fit-out",
     subtitle: "Building Maintenance, Renovation & Interior Finishing",
     icon: "Hammer",
     description: "Approved contractor for Dubai Municipality General Maintenance Department, MBRHE, and EIB, providing building maintenance, renovation, and interior finishing services. Our services include decorative gypsum ceilings, custom-made kitchen cabinets, wardrobes, and general building maintenance.",
@@ -100,7 +100,7 @@ export const CORE_CATEGORIES = [
       "Annual Maintenance Contracts (AMC) and emergency repair support"
     ],
     deliverables: [],
-    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80"
+    image: "./assets/civic.jpg"
   }
 ];
 
@@ -228,7 +228,7 @@ export const COMPLETED_PROJECTS_VILLAS = [
     type: "G+1 Villa",
     category: "Private Luxury Villas",
     status: "Completed & Handed Over",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+    image: "./assets/villa.jpg"
   },
   {
     id: "V3",
@@ -317,7 +317,7 @@ export const DUBAI_MUNICIPALITY_PROJECTS = [
     scope: "Roadside Boundary Wall Civil Construction",
     category: "Government Civic Works",
     status: "Completed & Certified",
-    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80"
+    image: "./assets/aluminium.jpg"
   },
   {
     id: "DM3",
@@ -329,7 +329,7 @@ export const DUBAI_MUNICIPALITY_PROJECTS = [
     scope: "Public Health Facility Maintenance & Special Painting",
     category: "Government Civic Works",
     status: "Completed & Certified",
-    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80"
+    image: "./assets/civic.jpg"
   },
   {
     id: "DM4",
@@ -390,7 +390,7 @@ export const ONGOING_PROJECTS = [
     plotNo: "6716536",
     type: "Proposed Majlis Block & Villa Modification",
     status: "Active Execution",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+    image: "./assets/villa.jpg"
   },
   {
     id: "OG2",

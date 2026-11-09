@@ -43,11 +43,11 @@ export default function SafetyStats() {
   ];
 
   return (
-    <section id="safety" className="py-20 bg-[#121620] text-white relative border-t border-[#232A38]">
+    <section id="safety" className="py-10 sm:py-12 bg-[#121620] text-white relative border-t border-[#232A38]">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 space-y-2">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Uncompromising Jobsite Safety & Risk Management</span>
@@ -61,7 +61,7 @@ export default function SafetyStats() {
         </div>
 
         {/* Big Safety Metrics Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           <div className="bg-[#1A202C] border border-emerald-500/30 rounded-2xl p-6 sm:p-8 text-center space-y-2 relative overflow-hidden">
             <div className="text-4xl sm:text-5xl font-black text-emerald-400 font-display">Zero</div>
             <div className="text-base font-bold text-white">Lost-Time Incidents</div>

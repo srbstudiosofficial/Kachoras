@@ -6,15 +6,18 @@ import {
   Menu, 
   X, 
   MessageSquare, 
-  ShieldCheck 
+  ShieldCheck,
+  Globe
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 import KachorasLogo from './KachorasLogo';
 import { useCoreLayout } from '../core/runtimeContext';
+import { useLanguage } from '../core/LanguageContext';
 
 export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteModal }) {
   try { useCoreLayout(); } catch (err) { return null; }
 
+  const { language, toggleLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -27,12 +30,12 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteMo
   }, []);
 
   const navItems = [
-    { id: 'home', label: 'Home', href: '/' },
-    { id: 'about', label: 'About Us', href: '/about' },
-    { id: 'services', label: 'Disciplines', href: '/services' },
-    { id: 'projects', label: 'Projects', href: '/projects' },
-    { id: 'license', label: 'License & Compliance', href: '/license' },
-    { id: 'contact', label: 'Contact & Tender', href: '/contact' }
+    { id: 'home', label: t('nav_home', 'Home'), href: '/' },
+    { id: 'about', label: t('nav_about', 'About Us'), href: '/about' },
+    { id: 'services', label: t('nav_services', 'Disciplines'), href: '/services' },
+    { id: 'projects', label: t('nav_projects', 'Projects'), href: '/projects' },
+    { id: 'license', label: t('nav_license', 'License & Compliance'), href: '/license' },
+    { id: 'contact', label: t('nav_contact', 'Contact & Tender'), href: '/contact' }
   ];
 
   const handleNavClick = (e, pageId) => {
@@ -126,19 +129,39 @@ export default function Navbar({ currentPage = 'home', onNavigate, onOpenQuoteMo
             })}
           </div>
 
-          {/* Action CTA */}
+          {/* Action CTA & Bilingual Switcher */}
           <div className="hidden md:flex items-center space-x-3">
+            {/* Arabic / English Toggle */}
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 hover:border-[#B3261E] bg-[#F8FAFC] hover:bg-white text-xs font-bold text-slate-800 transition cursor-pointer shadow-2xs"
+              title={language === 'en' ? 'التحويل إلى اللغة العربية' : 'Switch to English'}
+            >
+              <Globe className="w-3.5 h-3.5 text-[#B3261E]" />
+              <span className="font-semibold">{language === 'en' ? 'العربية' : 'English'}</span>
+            </button>
+
             <button
               onClick={() => onOpenQuoteModal()}
               className="flex items-center gap-2 text-xs font-bold bg-[#B3261E] hover:bg-[#961F18] text-white px-5 py-2.5 rounded-xl shadow-xs transition-all cursor-pointer"
             >
-              <span>ENQUIRY / RFQ</span>
+              <span>{t('nav_rfq', 'ENQUIRY / RFQ')}</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#C59B27] group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
 
-          {/* Mobile Menu Button & Quick RFQ */}
+          {/* Mobile Menu Button, Quick RFQ & Language Toggle */}
           <div className="flex items-center space-x-2 lg:hidden shrink-0">
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="px-2.5 py-1.5 rounded-lg border border-slate-200 bg-[#F8FAFC] text-[11px] font-bold text-slate-800 flex items-center gap-1 cursor-pointer min-h-[38px]"
+              title="Toggle Language"
+            >
+              <Globe className="w-3 h-3 text-[#B3261E]" />
+              <span>{language === 'en' ? 'عربي' : 'EN'}</span>
+            </button>
             <button
               onClick={() => onOpenQuoteModal()}
               className="text-xs font-bold bg-[#B3261E] text-white px-3 py-2 rounded-lg shrink-0 min-h-[38px] flex items-center justify-center shadow-sm active:scale-95 transition"

@@ -215,7 +215,7 @@ export default function QuoteModal({ isOpen, onClose, initialData }) {
                 <span className="text-xs text-[#64748B] font-medium">• Dubai Municipality G+1 Contractor</span>
               </div>
               <h3 className="text-2xl font-black text-[#1E293B] font-display">
-                Request Official Project Proposal / RFP
+                Quick Contracting Enquiry & Quotation (RFQ)
               </h3>
             </div>
 

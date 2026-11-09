@@ -11,6 +11,7 @@ import ContactPage from './pages/ContactPage';
 import QuoteModal from './components/QuoteModal';
 import AdminProjectModal from './components/AdminProjectModal';
 import CoreLayoutProvider from './components/CoreLayoutProvider';
+import { LanguageProvider } from './core/LanguageContext';
 import { subscribeCloudProjects, syncLocalProjectsToCloud, syncLocalInquiriesToCloud } from './services/firebaseSync';
 import { saveLocalProjects } from './services/projectService';
 import { useScrollReveal } from './hooks/useScrollReveal';
@@ -23,6 +24,26 @@ const PAGE_TITLES = {
   'project-detail': 'Project Details & Specifications | Kachoras Electromechanical Contracting LLC',
   license: 'Trade License #578964 & Municipal Approvals | Kachoras Contracting',
   contact: 'Contact Estimating Desk & Headquarters | Kachoras Contracting'
+};
+
+const checkIsAdminUrl = () => {
+  if (typeof window === 'undefined') return false;
+  const hash = (window.location.hash || '').toLowerCase();
+  const search = (window.location.search || '').toLowerCase();
+  const pathname = (window.location.pathname || '').toLowerCase().replace(/\/+$/, '');
+  const pathParts = pathname.split('/').filter(Boolean);
+  
+  return (
+    hash === '#admin' || 
+    hash === '#owner' || 
+    hash === '#portal' || 
+    hash === '#dashboard' ||
+    search.includes('admin') || 
+    search.includes('owner') ||
+    pathParts.includes('admin') ||
+    pathname.endsWith('/admin') ||
+    pathname === 'admin'
+  );
 };
 
 const resolvePageFromLocation = () => {
@@ -65,7 +86,7 @@ export default function App() {
   const currentProjectId = route.projectId;
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [quoteInitialData, setQuoteInitialData] = useState(null);
-  const [adminModalOpen, setAdminModalOpen] = useState(false);
+  const [adminModalOpen, setAdminModalOpen] = useState(() => checkIsAdminUrl());
 
   // Synchronize document title with active page
   useEffect(() => {
@@ -97,20 +118,7 @@ export default function App() {
   // Link-Only Trigger: Opens owner portal via /admin, #admin, #portal, ?admin
   useEffect(() => {
     const checkAdminTrigger = () => {
-      const hash = (window.location.hash || '').toLowerCase();
-      const search = (window.location.search || '').toLowerCase();
-      const pathname = (window.location.pathname || '').toLowerCase();
-
-      if (
-        hash === '#admin' || 
-        hash === '#owner' || 
-        hash === '#portal' || 
-        hash === '#dashboard' ||
-        search.includes('admin') || 
-        search.includes('owner') ||
-        pathname.endsWith('/admin') ||
-        pathname.endsWith('/owner')
-      ) {
+      if (checkIsAdminUrl()) {
         setAdminModalOpen(true);
       }
     };
@@ -185,6 +193,8 @@ export default function App() {
     const hash = window.location.hash.toLowerCase();
     if (hash === '#admin' || hash === '#owner' || hash === '#portal') {
       window.history.replaceState(null, '', window.location.pathname);
+    } else if (checkIsAdminUrl()) {
+      window.history.replaceState(null, '', '/');
     }
   };
 
@@ -196,7 +206,8 @@ export default function App() {
   };
 
   return (
-    <CoreLayoutProvider>
+    <LanguageProvider>
+      <CoreLayoutProvider>
       <div className="min-h-screen bg-white text-[#1E293B] flex flex-col selection:bg-[#B3261E] selection:text-white font-sans antialiased overflow-x-hidden">
         
         {/* Fixed Luxury Navigation */}
@@ -282,6 +293,7 @@ export default function App() {
         />
 
       </div>
-    </CoreLayoutProvider>
+      </CoreLayoutProvider>
+    </LanguageProvider>
   );
 }
