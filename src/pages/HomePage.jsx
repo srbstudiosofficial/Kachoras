@@ -125,9 +125,6 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#E2E8F0] pb-6">
             <div className="space-y-2 max-w-2xl">
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B6D1B]">
-                {language === 'ar' ? 'التخصصات الهندسية المعتمدة' : 'In-House Engineering Disciplines'}
-              </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#111622] font-display">
                 {language === 'ar' ? 'خدمات المقاولات المتكاملة والتسليم على المفتاح' : 'Complete Turnkey Construction Services'}
               </h2>
