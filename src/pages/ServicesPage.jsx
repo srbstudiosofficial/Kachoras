@@ -304,15 +304,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                       </div>
                     </div>
 
-                    <div className="pt-2">
-                      <button
-                        onClick={() => onOpenQuoteModal && onOpenQuoteModal({ category: activeItem.title })}
-                        className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition flex items-center justify-center gap-2 cursor-pointer"
-                      >
-                        <span>Calculate Cost for this Division</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
-                      </button>
-                    </div>
+
                     </div>
                   </div>
 
