@@ -174,7 +174,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   const jsonImportInputRef = useRef(null);
 
   // Inquiries & Leads state
-  const [inquiries, setInquiries] = useState([]);
+  const [inquiries, setInquiries] = useState(() => getStoredInquiries());
   const [inquiryFilter, setInquiryFilter] = useState('new');
   const [copiedLink, setCopiedLink] = useState(false);
   const [projectSearchQuery, setProjectSearchQuery] = useState('');
@@ -268,13 +268,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
       return;
     }
 
-    if (newStatus === 'rejected') {
-      // Remove inquiry from active list as requested
-      const updatedInquiries = await deleteInquiryOnServer(id);
-      setInquiries(updatedInquiries);
-      alert('Inquiry Approved! Directly added to Upcoming Projects in your portfolio.');
-      return;
-    }
+
 
     const updated = await updateInquiryStatusOnServer(id, newStatus);
     setInquiries(updated);
@@ -1133,6 +1127,35 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                               ? 'When you mark a new inquiry as Contacted, it moves directly into this folder.'
                               : 'When you archive an inquiry, it is preserved here.'}
                           </p>
+                          {inquiryFilter === 'new' && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const demoLead = {
+                                  id: `LEAD-${Date.now()}`,
+                                  referenceId: "KCH-7842-RFQ",
+                                  name: "Sultan Al Suwaidi",
+                                  company: "Private Villa Owner",
+                                  email: "sultan.suwaidi@example.ae",
+                                  phone: "+971 50 442 8192",
+                                  location: "Nad Al Sheba 2, Dubai",
+                                  plotNo: "614-9821",
+                                  serviceType: "Luxury G+1 Residential Villa",
+                                  budgetRange: "AED 3,200,000",
+                                  message: "We have consultant approved architectural drawings for a 6,500 sq.ft G+1 contemporary villa and detached majlis block. Seeking contractor tender pricing and municipal mobilization schedule.",
+                                  timestamp: new Date().toISOString(),
+                                  status: "new"
+                                };
+                                const updated = [demoLead, ...inquiries];
+                                localStorage.setItem('kachoras_leads_v1', JSON.stringify(updated));
+                                setInquiries(updated);
+                              }}
+                              className="mt-2 px-4 py-2 bg-[#B3261E] hover:bg-[#961F18] text-white text-xs font-bold rounded-xl transition inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
+                            >
+                              <Plus className="w-3.5 h-3.5" />
+                              <span>+ Load Sample Inbound RFQ for Testing</span>
+                            </button>
+                          )}
                         </div>
                       );
                     }

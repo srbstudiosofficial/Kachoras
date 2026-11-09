@@ -36,6 +36,21 @@ const SEED_INQUIRIES = [
     message: "Requesting quotation for double glazed thermal-break curtain walls and frameless architectural sliding systems for commercial office retrofit.",
     timestamp: new Date(Date.now() - 86400000 * 1.5).toISOString(), // 1.5 days ago
     status: "contacted"
+  },
+  {
+    id: "LEAD-103",
+    referenceId: "KCH-4912-RFQ",
+    name: "Rashid Al Falasi",
+    company: "Falasi Holdings",
+    email: "falasi.investments@example.ae",
+    phone: "+971 52 388 1904",
+    location: "Al Khawaneej 1, Dubai",
+    plotNo: "2810447",
+    serviceType: "Air-Conditioning & MEP Systems",
+    budgetRange: "AED 680,000",
+    message: "Full HVAC ducting overhaul and chiller plant installation for compound villas.",
+    timestamp: new Date(Date.now() - 86400000 * 4).toISOString(),
+    status: "archived"
   }
 ];
 
@@ -51,6 +66,10 @@ export function getStoredInquiries() {
       return SEED_INQUIRIES;
     }
     const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length === 0) {
+      localStorage.setItem(STORAGE_KEY_INQUIRIES, JSON.stringify(SEED_INQUIRIES));
+      return SEED_INQUIRIES;
+    }
     return Array.isArray(parsed) ? parsed : [];
   } catch (err) {
     console.error('Error reading inquiries:', err);
