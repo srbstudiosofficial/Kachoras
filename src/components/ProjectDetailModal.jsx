@@ -23,7 +23,7 @@ export default function ProjectDetailModal({ project, isOpen = true, onClose, on
     ? { bg: 'bg-indigo-600/90 text-white', label: 'Upcoming Tender (2026)', icon: Sparkles }
     : isOngoing
     ? { bg: 'bg-amber-600/90 text-white', label: 'Active Under Construction', icon: Clock }
-    : { bg: 'bg-emerald-700/90 text-white', label: 'Handed Over & BCC Certified', icon: CheckCircle2 };
+    : { bg: 'bg-emerald-700/90 text-white', label: 'Completed Project', icon: CheckCircle2 };
 
   const BadgeIcon = badgeConfig.icon;
 
@@ -66,11 +66,7 @@ export default function ProjectDetailModal({ project, isOpen = true, onClose, on
               <span>{badgeConfig.label}</span>
             </span>
 
-            {project.timeline && (
-              <span className="font-mono text-xs font-bold text-white bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/20">
-                {project.timeline}
-              </span>
-            )}
+            
           </div>
 
           <div className="absolute bottom-4 left-4 right-4 text-white">

@@ -209,10 +209,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
                   <span>{project.category || 'Building Contracting'}</span>
                 </span>
 
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-white/20 text-white text-xs font-mono font-bold backdrop-blur-md">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>{project.timeline || 'Handed Over & DM Certified'}</span>
-                </span>
+
               </div>
 
               {project.plotNo && (

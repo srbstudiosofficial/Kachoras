@@ -343,10 +343,6 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
                       <span>{language === 'ar' ? 'عرض المواصفات الهندسية' : 'View Full Project Sheet'}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
-                    
-                    <span className="text-[11px] font-medium text-slate-500">
-                      {project.timeline || 'Dubai Municipality'}
-                    </span>
                   </div>
                 </div>
               </div>
