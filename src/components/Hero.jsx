@@ -21,7 +21,7 @@ export default function Hero({ onNavigate, onOpenQuoteModal }) {
   const { language, t, isRTL } = useLanguage();
 
   const handleProposalClick = () => {
-    if (onOpenQuoteModal) onOpenQuoteModal();
+    if (onNavigate) onNavigate('contact');
   };
 
   const handleExploreClick = () => {

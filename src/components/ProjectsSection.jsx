@@ -359,9 +359,11 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
       {/* Interactive Project Detail Modal */}
       {selectedProject && (
         <ProjectDetailModal 
+          isOpen={true}
           project={selectedProject} 
           onClose={() => setSelectedProject(null)} 
           onOpenQuoteModal={onOpenQuoteModal}
+          onNavigate={onNavigate}
         />
       )}
     </section>

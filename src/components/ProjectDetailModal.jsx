@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import SafeImage from './SafeImage';
 
-export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuoteModal }) {
+export default function ProjectDetailModal({ project, isOpen = true, onClose, onOpenQuoteModal, onNavigate }) {
   if (!isOpen || !project) return null;
 
   const isUpcoming = project.status === 'upcoming';
@@ -173,12 +173,26 @@ export default function ProjectDetailModal({ project, isOpen, onClose, onOpenQuo
 
         {/* Footer Actions */}
         <div className="p-4 sm:p-6 bg-[#F8FAFC] border-t border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3 shrink-0">
-          <button
-            onClick={onClose}
-            className="px-5 py-2.5 rounded-xl border border-[#CBD5E1] text-xs font-bold text-slate-700 hover:bg-white transition cursor-pointer"
-          >
-            Close Sheet
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onClose}
+              className="px-5 py-2.5 rounded-xl border border-[#CBD5E1] text-xs font-bold text-slate-700 hover:bg-white transition cursor-pointer"
+            >
+              Close Sheet
+            </button>
+            {onNavigate && (
+              <button
+                onClick={() => {
+                  onClose();
+                  onNavigate('project-detail', project.id);
+                }}
+                className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-sm"
+              >
+                <span>Full Page View</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#C59B27]" />
+              </button>
+            )}
+          </div>
 
           <button
             onClick={() => {
