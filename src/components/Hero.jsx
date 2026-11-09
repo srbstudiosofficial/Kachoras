@@ -128,8 +128,7 @@ export default function Hero({ onNavigate, onOpenQuoteModal }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5 sm:p-3">
                   <div className="text-white">
-                    <span className="text-[9px] font-bold uppercase tracking-wider text-amber-300 block">Civil & RCC</span>
-                    <span className="text-xs font-bold">Building Construction</span>
+                    <span className="text-xs sm:text-sm font-bold">Building Construction</span>
                   </div>
                 </div>
               </div>
@@ -143,8 +142,7 @@ export default function Hero({ onNavigate, onOpenQuoteModal }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5 sm:p-3">
                   <div className="text-white">
-                    <span className="text-[9px] font-bold uppercase tracking-wider text-blue-300 block">HVAC, Electrical & Plumbing</span>
-                    <span className="text-xs font-bold">MEP</span>
+                    <span className="text-xs sm:text-sm font-bold">MEP</span>
                   </div>
                 </div>
               </div>
@@ -158,8 +156,7 @@ export default function Hero({ onNavigate, onOpenQuoteModal }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5 sm:p-3">
                   <div className="text-white">
-                    <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-300 block">Al Qusais Facility</span>
-                    <span className="text-xs font-bold">Aluminum & Glass</span>
+                    <span className="text-xs sm:text-sm font-bold">Aluminum & Glass</span>
                   </div>
                 </div>
               </div>
@@ -173,8 +170,7 @@ export default function Hero({ onNavigate, onOpenQuoteModal }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5 sm:p-3">
                   <div className="text-white">
-                    <span className="text-[9px] font-bold uppercase tracking-wider text-amber-300 block">Fit-out & Renovation</span>
-                    <span className="text-xs font-bold">General Maintenance</span>
+                    <span className="text-xs sm:text-sm font-bold">General Maintenance</span>
                   </div>
                 </div>
               </div>

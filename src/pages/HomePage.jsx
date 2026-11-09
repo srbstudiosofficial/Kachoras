@@ -174,10 +174,7 @@ export default function HomePage({ onNavigate, onOpenQuoteModal }) {
                   </div>
 
                   <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <span className="text-[11px] font-semibold text-[#E0A96D] uppercase tracking-wider block">
-                      {div.subtitle}
-                    </span>
-                    <h3 className="text-lg sm:text-xl font-bold font-display text-white mt-0.5">
+                    <h3 className="text-lg sm:text-xl font-bold font-display text-white">
                       {div.title}
                     </h3>
                   </div>
