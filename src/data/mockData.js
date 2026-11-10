@@ -30,7 +30,7 @@ export const COMPANY_INFO = {
     "Building Construction",
     "MEP",
     "Fit-out",
-    "Aluminium & Glass",
+    "Aluminium and Glass",
     "HVAC and Air-Conditioning Works",
     "Gypsum Decorations and Interior Works",
     "General Maintenance",

@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   MapPin, 
   Navigation, 
-  Building2, 
   ExternalLink, 
   Phone, 
   Clock, 
@@ -19,11 +18,8 @@ export default function OfficeMapSection() {
         
         {/* Section Header */}
         <div className="max-w-3xl mb-6 sm:mb-8 space-y-2 ">
-          <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
-            Headquarters & Fabrication Workshop
-          </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
-            Office & Fabrication Facility
+            Office Location
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
             Strategically located in Al Qusais Industrial Area 1 inside Bin Sougat Warehouse Complex, with direct access to Damascus Street, Doha Road, and key Dubai arterial highways.
@@ -79,11 +75,8 @@ export default function OfficeMapSection() {
             
             <div className="space-y-6">
               <div className="border-b border-[#E2E8F0] pb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#B3261E]">
-                  Facility Coordinates
-                </span>
-                <h3 className="text-xl font-bold text-[#14171F] font-display mt-0.5">
-                  Al Qusais Operational Hub
+                <h3 className="text-xl font-bold text-[#14171F] font-display">
+                  Our Office
                 </h3>
               </div>
 
@@ -107,16 +100,6 @@ export default function OfficeMapSection() {
                     <strong className="text-slate-900 block font-semibold text-sm">Operating Hours:</strong>
                     <span className="block mt-0.5">Monday – Saturday: 7:00 AM – 4:00 PM</span>
                     <span className="text-slate-400 block mt-0.5 text-[11px]">Friday: Closed (Site emergency teams on call)</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center text-[#B3261E] shrink-0 mt-0.5">
-                    <Building2 className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block font-semibold text-sm">Fabrication Capacity:</strong>
-                    <span className="block mt-0.5">Dedicated aluminium, glass curtain wall & joinery fabrication plant in Warehouse B-25.</span>
                   </div>
                 </div>
               </div>
