@@ -27,13 +27,13 @@ export const COMPANY_INFO = {
   activeProjectsCount: "Active 2026 Operations",
   workingHours: "Monday – Saturday: 7:00 AM – 4:00 PM | Sunday Closed (Emergency site teams on call)",
   specialties: [
-    "G+1 Residential Villa Construction",
-    "Electromechanical Equipment Installation & Maintenance",
-    "Electrical Installation Works",
-    "Aluminium Doors and Windows Manufacturing & Installation",
+    "Building Construction",
+    "MEP",
+    "Fit-out",
+    "Aluminium & Glass",
     "HVAC and Air-Conditioning Works",
     "Gypsum Decorations and Interior Works",
-    "GRC Works",
+    "General Maintenance",
     "Kitchen Cabinets and Wardrobes"
   ]
 };
