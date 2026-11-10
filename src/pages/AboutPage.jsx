@@ -35,10 +35,6 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-7 space-y-6">
-              <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
-                {language === 'ar' ? 'القيادة التنفيذية وعراقة الشركة' : 'Executive Leadership & Company Heritage'}
-              </span>
-
               <h2 className="text-3xl sm:text-4xl font-black text-[#1E293B] font-display tracking-tight leading-tight">
                 {language === 'ar' ? 'أكثر من 20 عاماً من الخبرة في المقاولات والهندسة الإنشائية' : 'Over 20 Years of Experience in Construction and Engineering'}
               </h2>
