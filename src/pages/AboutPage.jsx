@@ -24,8 +24,7 @@ export default function AboutPage({ onNavigate, onOpenQuoteModal }) {
       
             {/* 1. Page Header */}
       <PageHeader 
-        title="About Kachoras Contracting"
-        subtitle="20+ Years of Structural & Electromechanical Excellence Across the Emirate of Dubai (2006–2026)"
+        title="About Kachoras"
         breadcrumb="About Us"
         onNavigate={onNavigate}
       />

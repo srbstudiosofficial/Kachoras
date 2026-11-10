@@ -29,7 +29,7 @@ export default function Hero({ onNavigate, onOpenQuoteModal }) {
   };
 
   return (
-    <section className="relative overflow-hidden pt-6 sm:pt-8 md:pt-12 pb-12 sm:pb-16 bg-white border-b border-slate-200">
+    <section className="relative overflow-hidden pt-[108px] sm:pt-[92px] lg:pt-[92px] pb-10 sm:pb-14 bg-white border-b border-slate-200">
       
       {/* Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
@@ -40,10 +40,14 @@ export default function Hero({ onNavigate, onOpenQuoteModal }) {
           {/* Left Column (6 Cols): Official Corporate Presentation */}
           <div className="lg:col-span-6 space-y-4 sm:space-y-6 text-left">
             
-            {/* Accreditation Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold">
-              <MapPin className="w-3.5 h-3.5 text-[#B3261E]" />
-              <span>Location: Al Qusais Ind 1, Dubai</span>
+            {/* Location Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold shadow-2xs">
+              <MapPin className="w-3.5 h-3.5 text-[#B3261E] shrink-0" />
+              <span>
+                {language === 'ar'
+                  ? 'الموقع: القصيص الصناعية 1، دبي'
+                  : 'Location: Al Qusais Industrial Area 1, Dubai'}
+              </span>
             </div>
 
             {/* Arabic Legal Headline */}

@@ -9,7 +9,7 @@ export default function PageHeader({ title, subtitle, breadcrumb, onNavigate }) 
   const getArabicTitle = (t) => {
     if (!t) return t;
     const lower = t.toLowerCase();
-    if (lower.includes('about')) return 'عن كاشوراس للمقاولات';
+    if (lower.includes('about')) return 'عن كاشوراس';
     if (lower.includes('project') && lower.includes('portfolio')) return 'سجل المشاريع الهندسية والمنجزات';
     if (lower.includes('project') && lower.includes('detail')) return 'تفاصيل ومواصفات المشروع';
     if (lower.includes('discipline') || lower.includes('service') || lower.includes('capabilit')) return 'التخصصات والقدرات الهندسية المعتمدة';
