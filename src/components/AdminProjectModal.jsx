@@ -79,6 +79,7 @@ import {
   updateInquiryStatusOnServer,
   deleteInquiryOnServer
 } from '../services/inquiryService';
+import { usePortalFeedback } from './PortalFeedback';
 
 const CATEGORY_OPTIONS = [
   "Building Contracting",
@@ -100,6 +101,7 @@ const PRESET_IMAGES = [
 ];
 
 export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }) {
+  const { confirmAction, promptAction, toast, PortalFeedbackUI } = usePortalFeedback();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passkeyInput, setPasskeyInput] = useState('');
   const [showPasskey, setShowPasskey] = useState(false);
@@ -265,7 +267,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
       // 4. Remove inquiry from active list as requested
       const updatedInquiries = await deleteInquiryOnServer(id);
       setInquiries(updatedInquiries);
-      alert('Inquiry Approved! Directly added to Upcoming Projects in your portfolio.');
+      toast.success('Inquiry Approved', 'Directly added to Upcoming Projects in your portfolio.');
       return;
     }
 
@@ -276,10 +278,25 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   };
 
   const handleDeleteInquiry = async (id) => {
-    if (window.confirm('Are you sure you want to delete this lead record?')) {
-      const updated = await deleteInquiryOnServer(id);
-      setInquiries(updated);
-    }
+    const targetLead = inquiries.find(i => i.id === id);
+    const confirmed = await confirmAction({
+      title: 'Delete Lead Record?',
+      eyebrow: 'Inquiry & RFQ Inbox',
+      tone: 'danger',
+      message: 'This will permanently remove the client inquiry record from the Owner Portal.',
+      subjectTitle: targetLead?.name || 'Lead Record',
+      subjectMeta: [targetLead?.referenceId ? `#${targetLead.referenceId}` : null, targetLead?.company].filter(Boolean).join(' • '),
+      confirmLabel: 'Delete Record',
+      cancelLabel: 'Cancel'
+    });
+    if (!confirmed) return;
+
+    const updated = await deleteInquiryOnServer(id);
+    setInquiries(updated);
+    toast.success(
+      'Lead Record Deleted',
+      targetLead?.name ? `Removed inquiry from ${targetLead.name}.` : 'Lead record permanently removed.'
+    );
   };
 
   // Load projects on open or tab change
@@ -383,7 +400,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
       setImagePreview(compressedDataUrl);
       setFormData(prev => ({ ...prev, image: compressedDataUrl }));
     } catch (err) {
-      alert('Error processing photo: ' + err.message);
+      toast.error('Photo Processing Failed', err.message);
     } finally {
       setIsCompressing(false);
     }
@@ -442,16 +459,31 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   };
 
   const handleDeleteClick = async (id) => {
-    if (window.confirm('Are you sure you want to delete this project?')) {
-      await deleteProjectOnServer(id);
-      await refreshProjectsList();
-    }
+    const targetProject = projects.find(p => p.id === id);
+    const confirmed = await confirmAction({
+      title: 'Delete Project?',
+      eyebrow: 'Project Portfolio Editor',
+      tone: 'danger',
+      message: 'This will remove the project from your active portfolio showcase.',
+      subjectTitle: targetProject?.title || 'Project Record',
+      subjectMeta: [targetProject?.category, targetProject?.location].filter(Boolean).join(' • '),
+      confirmLabel: 'Delete Project',
+      cancelLabel: 'Cancel'
+    });
+    if (!confirmed) return;
+
+    await deleteProjectOnServer(id);
+    await refreshProjectsList();
+    toast.success(
+      'Project Deleted',
+      targetProject?.title ? `Removed "${targetProject.title}".` : 'Project removed from portfolio.'
+    );
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (!formData.title.trim()) {
-      alert('Please enter a project title');
+      toast.warning('Project Title Required', 'Please enter a project title before saving.');
       return;
     }
 
@@ -490,7 +522,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
       setNewPasskey('');
       setTimeout(() => setSettingsNotice(''), 3000);
     } catch (err) {
-      alert(err.message);
+      toast.error('Passkey Update Failed', err.message);
     }
   };
 
@@ -507,7 +539,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
       }
       setTimeout(() => setSettingsNotice(''), 3000);
     } catch (err) {
-      alert('Invalid JSON format: ' + err.message);
+      toast.error('Invalid JSON Format', err.message);
     }
   };
 
@@ -527,12 +559,18 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
       // Also copy to clipboard for quick WhatsApp / chat sharing
       navigator.clipboard?.writeText(jsonStr).then(() => {
-        alert('Projects exported successfully! The file has been downloaded, and the JSON data was also copied to your clipboard so you can paste it into WhatsApp or email.');
+        toast.success(
+          'Projects Exported & Copied',
+          'Backup JSON file downloaded and copied to your clipboard for quick sharing.'
+        );
       }).catch(() => {
-        alert('Projects exported successfully! The backup JSON file has been downloaded.');
+        toast.success(
+          'Projects Exported',
+          'The backup JSON file has been downloaded.'
+        );
       });
     } catch (err) {
-      alert('Error exporting projects: ' + err.message);
+      toast.error('Export Failed', err.message);
     }
   };
 
@@ -546,13 +584,16 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
         const content = event.target.result;
         const res = importProjectsJSON(content);
         if (res.success) {
-          alert(`Successfully imported ${res.count} project(s)! Total active projects: ${res.total}`);
+          toast.success(
+            'Projects Imported',
+            `Imported ${res.count} project(s). Total active projects: ${res.total}.`
+          );
           await refreshProjectsList();
         } else {
-          alert('Import failed: ' + res.error);
+          toast.error('Import Failed', res.error);
         }
       } catch (err) {
-        alert('Failed to read JSON file: ' + err.message);
+        toast.error('Failed to Read JSON File', err.message);
       }
     };
     reader.readAsText(file);
@@ -560,15 +601,28 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   };
 
   const handlePasteImportPrompt = async () => {
-    const pasted = window.prompt('Paste the project JSON code exported from the other device/browser:');
+    const pasted = await promptAction({
+      title: 'Import Projects JSON',
+      eyebrow: 'Portfolio Backup Restore',
+      tone: 'info',
+      icon: 'json',
+      multiline: true,
+      message: 'Paste the project JSON backup exported from your other device or browser.',
+      placeholder: '[{ "title": "...", "category": "..." }]',
+      confirmLabel: 'Import Projects',
+      cancelLabel: 'Cancel'
+    });
     if (!pasted || !pasted.trim()) return;
 
     const res = importProjectsJSON(pasted.trim());
     if (res.success) {
-      alert(`Successfully imported ${res.count} project(s)! Total active projects: ${res.total}`);
+      toast.success(
+        'Projects Imported',
+        `Imported ${res.count} project(s). Total active projects: ${res.total}.`
+      );
       await refreshProjectsList();
     } else {
-      alert('Import failed: ' + res.error);
+      toast.error('Import Failed', res.error);
     }
   };
 
@@ -587,9 +641,10 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
     setTimeout(() => setSettingsNotice(''), 4000);
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) return PortalFeedbackUI;
 
   return (
+    <>
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 animate-fadeIn">
       <div 
         className="relative w-[96vw] max-w-[1440px] bg-white rounded-3xl shadow-2xl border border-[#E2E8F0] overflow-hidden my-auto min-h-[88vh] max-h-[95vh] flex flex-col"
@@ -1748,14 +1803,26 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
                             <button
                               type="button"
-                              onClick={() => {
-                                const url = window.prompt("Enter direct image URL:", formData.image);
-                                if (url) {
-                                  setImagePreview(url);
-                                  setFormData(prev => ({ ...prev, image: url }));
+                              onClick={async () => {
+                                const url = await promptAction({
+                                  title: 'Project Cover Image URL',
+                                  eyebrow: 'Media Attachment',
+                                  tone: 'info',
+                                  icon: 'link',
+                                  message: 'Enter a direct image URL to preview and attach to this project.',
+                                  defaultValue: formData.image,
+                                  placeholder: 'https://example.com/project-photo.jpg',
+                                  confirmLabel: 'Apply URL',
+                                  cancelLabel: 'Cancel'
+                                });
+                                if (url && url.trim()) {
+                                  const cleanUrl = url.trim();
+                                  setImagePreview(cleanUrl);
+                                  setFormData(prev => ({ ...prev, image: cleanUrl }));
+                                  toast.info('Image URL Applied', 'Cover preview updated from URL.');
                                 }
                               }}
-                              className="px-3 py-2.5 bg-white border border-[#E2E8F0] text-slate-700 rounded-xl text-xs font-semibold hover:bg-slate-50 transition"
+                              className="px-3 py-2.5 bg-white border border-[#E2E8F0] text-slate-700 rounded-xl text-xs font-semibold hover:bg-slate-50 transition cursor-pointer"
                             >
                               Paste Image URL
                             </button>
@@ -1884,8 +1951,17 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                       </div>
                       <button
                         type="button"
-                        onClick={() => {
-                          if (window.confirm('Are you sure you want to restore the master passkey to factory default?')) {
+                        onClick={async () => {
+                          const confirmed = await confirmAction({
+                            title: 'Restore Default Master Passkey?',
+                            eyebrow: 'Portal Security',
+                            tone: 'warning',
+                            icon: 'reset',
+                            message: 'Are you sure you want to restore the Owner Portal master passkey back to the factory default?',
+                            confirmLabel: 'Restore Default',
+                            cancelLabel: 'Cancel'
+                          });
+                          if (confirmed) {
                             handleResetPasskeyClick();
                           }
                         }}
@@ -1957,8 +2033,18 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
                         </div>
                         <button
                           type="button"
-                          onClick={() => {
-                            if (window.confirm('Reset notification email back to default (kachorasdubai@gmail.com)?')) {
+                          onClick={async () => {
+                            const confirmed = await confirmAction({
+                              title: 'Reset Notification Email?',
+                              eyebrow: 'Email Dispatch Settings',
+                              tone: 'warning',
+                              icon: 'reset',
+                              message: 'Restore incoming lead notifications back to the default company email address.',
+                              subjectTitle: 'kachorasdubai@gmail.com',
+                              confirmLabel: 'Reset Email',
+                              cancelLabel: 'Cancel'
+                            });
+                            if (confirmed) {
                               handleResetNotificationEmail();
                             }
                           }}
@@ -1984,5 +2070,7 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
 
       </div>
     </div>
+    {PortalFeedbackUI}
+    </>
   );
 }
