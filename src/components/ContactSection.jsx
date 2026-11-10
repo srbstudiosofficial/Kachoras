@@ -394,7 +394,7 @@ export default function ContactSection() {
                       <option value="General Maintenance & Fit-out">General Maintenance & Fit-out</option>
                       <option value="Kitchen Cabinets & Wardrobes">Kitchen Cabinets & Wardrobes</option>
                       <option value="Gypsum Decoration Works">Gypsum Decoration Works</option>
-                      <option value="Dubai Municipality Civic Projects">Dubai Municipality Civic Projects</option>
+                      <option value="Dubai Municipality Civil Projects">Dubai Municipality Civil Projects</option>
                     </select>
                   </div>
 

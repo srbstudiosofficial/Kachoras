@@ -334,7 +334,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "categoryFilter": "civic_mep",
     "type": "Civil & MEP Works",
     "status": "completed",
-    "location": "Hatta Civic Sector, Dubai",
+    "location": "Hatta Civil Sector, Dubai",
     "plotNo": "8912682",
     "year": "2025",
     "timeline": "DM Handover & BCC Issued",

@@ -122,7 +122,7 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-sans">
               {language === 'ar' 
                 ? 'استعرض مشاريعنا في دبي المعتمدة من بلدية دبي: فلل سكنية فئة G+1، مجالس تقليدية، واجهات الألمنيوم والزجاج، والأعمال المدنية والكهروميكانيكية.' 
-                : 'Explore our portfolio of Dubai Municipality-approved G+1 luxury villas, traditional Arabian majlis pavilions, in-house architectural aluminium, and civic works.'}
+                : 'Explore our portfolio of Dubai Municipality-approved G+1 luxury villas, traditional Arabian majlis pavilions, in-house architectural aluminium, and civil works.'}
             </p>
           </div>
         )}

@@ -66,7 +66,7 @@ const SECTIONS = [
     targetId: 'municipal',
     screenshot: './client-screenshots/05-municipal-works.png',
     checks: [
-      { label: 'Top Split Banner', value: 'Normal realistic civic works photo with DM General Maintenance Dept tag' },
+      { label: 'Top Split Banner', value: 'Normal realistic civil works photo with DM General Maintenance Dept tag' },
       { label: 'Headline', value: 'Executing Public Infrastructure Across Dubai & Hatta' },
       { label: 'Inspection Metric', value: '100% Municipal Inspection Pass Rate' },
       { label: 'Delivered Metric', value: '7+ Contracts Delivered Public Facilities' },

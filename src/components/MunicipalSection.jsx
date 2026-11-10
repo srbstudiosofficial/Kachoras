@@ -15,17 +15,17 @@ export default function MunicipalSection() {
         {/* Section Header */}
         <div className="max-w-3xl mb-6 sm:mb-8 space-y-2 reveal-on-scroll reveal-init">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-emerald-800 block">
-            Government Framework • Civic Infrastructure
+            Government Framework • Civil Infrastructure
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
-            Dubai Municipality Civic Works
+            Dubai Municipality Civil Works
           </h2>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Appointed by the <strong>Dubai Municipality General Maintenance Department</strong> to execute public health centers, municipal parks, hydraulic installations, and civic infrastructure across Dubai and Hatta.
+            Appointed by the <strong>Dubai Municipality General Maintenance Department</strong> to execute public health centers, municipal parks, hydraulic installations, and civil infrastructure across Dubai and Hatta.
           </p>
         </div>
 
-        {/* Feature Split Banner: Civic Building Render & Credentials */}
+        {/* Feature Split Banner: Civil Building Render & Credentials */}
         <div className="mb-14 bg-white border border-[#E2E8F0] rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 grid lg:grid-cols-12 items-center reveal-on-scroll reveal-init shimmer-trigger">
           <div className="lg:col-span-6 relative h-72 sm:h-80 lg:h-full min-h-[320px] overflow-hidden group">
             <picture className="w-full h-full block">
@@ -49,7 +49,7 @@ export default function MunicipalSection() {
 
           <div className="lg:col-span-6 p-8 sm:p-10 space-y-5">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
-              Civic Infrastructure Department
+              Civil Infrastructure Department
             </span>
             
             <h3 className="text-2xl sm:text-3xl font-bold text-[#14171F] font-display leading-tight">
@@ -57,7 +57,7 @@ export default function MunicipalSection() {
             </h3>
 
             <p className="text-sm text-slate-600 leading-relaxed font-normal">
-              From specialized foundation pours for civic sculpture installations in Al Barsha Pond Park to municipal veterinary clinics in Hatta and underground hydraulic chambers in Mirdif, Kachoras is trusted by Dubai Municipality engineers for rigorous safety and code compliance.
+              From specialized foundation pours for civil sculpture installations in Al Barsha Pond Park to municipal veterinary clinics in Hatta and underground hydraulic chambers in Mirdif, Kachoras is trusted by Dubai Municipality engineers for rigorous safety and code compliance.
             </p>
 
             <div className="grid grid-cols-2 gap-4 pt-2">

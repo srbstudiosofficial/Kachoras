@@ -84,7 +84,7 @@ const CATEGORY_OPTIONS = [
   "Building Contracting",
   "MEP",
   "Aluminium & Glass Fabrication",
-  "Dubai Civic & Maintenance"
+  "Dubai Civil & Maintenance"
 ];
 
 const PRESET_IMAGES = [

@@ -97,7 +97,7 @@ export const CORE_CATEGORIES = [
       "Decorative gypsum ceilings, false ceilings, and ambient cove lighting",
       "Custom-made modular kitchen cabinets and wardrobes",
       "Tile, marble, porcelain flooring, waterproofing and structural crack repairs",
-      "Dubai Municipality civic facilities, clinics, and public infrastructure works",
+      "Dubai Municipality civil facilities, clinics, and public infrastructure works",
       "Annual Maintenance Contracts (AMC) and emergency repair support"
     ],
     deliverables: [],
@@ -304,7 +304,7 @@ export const DUBAI_MUNICIPALITY_PROJECTS = [
     location: "Hatta, Dubai",
     plotNo: "8912682",
     scope: "Veterinary Clinics Construction & Modifications",
-    category: "Government Civic Works",
+    category: "Government Civil Works",
     status: "Completed & Certified",
     image: "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f3?auto=format&fit=crop&w=1200&q=80"
   },
@@ -316,7 +316,7 @@ export const DUBAI_MUNICIPALITY_PROJECTS = [
     location: "Hatta, Dubai",
     plotNo: "8911938",
     scope: "Roadside Boundary Wall Civil Construction",
-    category: "Government Civic Works",
+    category: "Government Civil Works",
     status: "Completed & Certified",
     image: "./assets/aluminium.jpg"
   },
@@ -328,7 +328,7 @@ export const DUBAI_MUNICIPALITY_PROJECTS = [
     location: "Al Quoz, Dubai",
     plotNo: "Al Quoz Facility",
     scope: "Public Health Facility Maintenance & Special Painting",
-    category: "Government Civic Works",
+    category: "Government Civil Works",
     status: "Completed & Certified",
     image: "./assets/civic.jpg"
   },
@@ -340,7 +340,7 @@ export const DUBAI_MUNICIPALITY_PROJECTS = [
     location: "Shooroq, Mirdif, Dubai",
     plotNo: "Shooroq Irrigation Hub",
     scope: "Civil Underground Valve Chamber & Hydraulic MEP",
-    category: "Government Civic Works",
+    category: "Government Civil Works",
     status: "Completed & Certified",
     image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80"
   },
@@ -352,7 +352,7 @@ export const DUBAI_MUNICIPALITY_PROJECTS = [
     location: "Safa Park & Mushrif Park, Dubai",
     plotNo: "Public Parks Sector",
     scope: "Electrical Cable Conduits & Speaker Mast Installation",
-    category: "Government Civic Works",
+    category: "Government Civil Works",
     status: "Completed & Certified",
     image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80"
   },
@@ -362,9 +362,9 @@ export const DUBAI_MUNICIPALITY_PROJECTS = [
     consultant: "Dubai Municipality General Maintenance Department",
     projectDetails: "Construction of foundations and installation of sculpture at Al Barsha and Al Nahda pond parks",
     location: "Al Barsha & Al Nahda Pond Parks, Dubai",
-    plotNo: "Pond Parks Civic Sector",
+    plotNo: "Pond Parks Civil Sector",
     scope: "Reinforced Concrete Foundation Pours & Public Sculptures",
-    category: "Government Civic Works",
+    category: "Government Civil Works",
     status: "Completed & Certified",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
   },
@@ -376,7 +376,7 @@ export const DUBAI_MUNICIPALITY_PROJECTS = [
     location: "Al Qusais, Dubai",
     plotNo: "Cattle Market Complex",
     scope: "Modifications, Maintenance & Painting Works",
-    category: "Government Civic Works",
+    category: "Government Civil Works",
     status: "Completed & Certified",
     image: "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80"
   }

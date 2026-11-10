@@ -36,7 +36,7 @@ const getAssetForProject = (type = '', plotNo = '') => {
   if (t.includes('curtain') || t.includes('aluminium') || t.includes('glass')) {
     return './assets/real-projects/completed-aluminum-flag-villa.jpg';
   }
-  if (t.includes('civic') || t.includes('municipality')) {
+  if (t.includes('civil') || t.includes('civic') || t.includes('municipality')) {
     return './assets/real-projects/completed-maintenance-abdulrahman-422-0322.jpg';
   }
   if (t.includes('mep')) {

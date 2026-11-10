@@ -31,11 +31,11 @@ const DISCIPLINE_ASSETS = {
     details: 'Manufactured at our Al Qusais B-25 fabrication workshop: curtain walls, structural glazing, and thermal-break systems.'
   },
   maintenance: {
-    tag: 'Dubai Civic & Maintenance',
+    tag: 'Dubai Civil & Maintenance',
     // Internal villa picture as requested
     image: './assets/civic.jpg',
     webp: './assets/civic.webp',
-    details: 'Municipal civic contracts, hydraulic valve chambers, public park infrastructure, and commercial refurbishment.'
+    details: 'Municipal civil contracts, hydraulic valve chambers, public park infrastructure, and commercial refurbishment.'
   },
   kitchen_wardrobes: {
     tag: 'Custom Joinery & Millwork',
