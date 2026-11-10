@@ -228,7 +228,7 @@ export const INITIAL_FEATURED_PROJECTS = [
     "status": "completed",
     "location": "Dubai Residential Sector",
     "plotNo": "Residential Sector",
-    "year": "2024",
+    "year": "2025",
     "timeline": "Fabricated & Installed",
     "scope": "Custom geometric aluminium profiles with frameless panoramic corner glass joints, pergolas, and concealed motorized hardware.",
     "image": "./assets/real-projects/completed-aluminum-contemporary-geometric.jpg",
