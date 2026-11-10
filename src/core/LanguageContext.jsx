@@ -21,7 +21,7 @@ export const TRANSLATIONS = {
     submit_tender: 'Submit Tender / RFQ',
 
     // Page Headers
-    header_about_title: 'About Kachoras Contracting',
+    header_about_title: 'About Kachoras',
     header_about_sub: '20+ Years of Structural & Electromechanical Excellence Across Dubai (2006–2026)',
     header_services_title: 'Contracting Disciplines & Capabilities',
     header_services_sub: 'In-House Turnkey Construction, Electromechanical Engineering & Architectural Aluminium',

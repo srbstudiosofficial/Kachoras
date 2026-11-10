@@ -73,7 +73,7 @@ export default function ProjectDetailPage({ projectId, onNavigate, onOpenQuoteMo
           "Soil excavation, dewatering, and complete site preparation",
           "Reinforced concrete raft foundations and substructure works",
           "Concrete superstructure, structural columns, beams, and post-tensioned slabs",
-          "AAC blockwork and high-efficiency thermal insulation as per Dubai regulations",
+          "Blockwork and high-efficiency thermal insulation as per Dubai regulations",
           "Plastering, masonry, residential majlis wings, and perimeter boundary walls",
           "Dubai Municipality statutory inspections, permits, and Building Completion Certificate (BCC)"
         ]

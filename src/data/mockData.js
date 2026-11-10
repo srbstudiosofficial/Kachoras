@@ -48,7 +48,7 @@ export const CORE_CATEGORIES = [
     features: [
       "Soil excavation, foundation and substructure works",
       "Reinforced concrete structure and superstructure works",
-      "AAC blockwork and thermal insulation as per Dubai regulations",
+      "Blockwork and thermal insulation as per Dubai regulations",
       "Residential villas, Majlis extensions, and boundary walls",
       "Dubai Municipality inspections, permits, and Building Completion Certificates (BCC)"
     ],
