@@ -12,8 +12,14 @@ import QuoteModal from './components/QuoteModal';
 import AdminProjectModal from './components/AdminProjectModal';
 import CoreLayoutProvider from './components/CoreLayoutProvider';
 import { LanguageProvider } from './core/LanguageContext';
-import { subscribeCloudProjects, syncLocalProjectsToCloud, syncLocalInquiriesToCloud } from './services/firebaseSync';
+import {
+  subscribeCloudProjects,
+  subscribeCloudInquiries,
+  syncLocalProjectsToCloud,
+  syncLocalInquiriesToCloud
+} from './services/firebaseSync';
 import { saveLocalProjects } from './services/projectService';
+import { mergeRemoteInquiries } from './services/inquiryService';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 const PAGE_TITLES = {
@@ -149,7 +155,10 @@ export default function App() {
         }
       });
 
-      unsubscribeInquiries = subscribeCloudInquiries(() => {});
+      unsubscribeInquiries = subscribeCloudInquiries((cloudInquiries) => {
+        mergeRemoteInquiries(cloudInquiries);
+        window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
+      });
 
       syncLocalProjectsToCloud().catch(() => {});
       syncLocalInquiriesToCloud().catch(() => {});

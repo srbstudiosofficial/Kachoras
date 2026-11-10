@@ -321,20 +321,28 @@ export default function AdminProjectModal({ isOpen, onClose, onProjectsChanged }
   };
 
   useEffect(() => {
-    if (isOpen) {
-      checkServerHealth().then(res => setServerOnline(res.online));
-      // Check if session remember token is active
-      const sessionAuth = sessionStorage.getItem('kachoras_admin_session');
-      if (sessionAuth === 'true') {
-        setIsAuthenticated(true);
-      }
-      refreshProjectsList();
-      refreshInquiriesList();
-      const fbConfig = getStoredFirebaseConfig();
-      if (fbConfig) {
-        setFirebaseConfigStr(JSON.stringify(fbConfig, null, 2));
-      }
+    if (!isOpen) return undefined;
+
+    checkServerHealth().then(res => setServerOnline(res.online));
+    // Check if session remember token is active
+    const sessionAuth = sessionStorage.getItem('kachoras_admin_session');
+    if (sessionAuth === 'true') {
+      setIsAuthenticated(true);
     }
+    refreshProjectsList();
+    refreshInquiriesList();
+    const fbConfig = getStoredFirebaseConfig();
+    if (fbConfig) {
+      setFirebaseConfigStr(JSON.stringify(fbConfig, null, 2));
+    }
+
+    const handleInquiriesSync = () => {
+      setInquiries(getStoredInquiries());
+    };
+    window.addEventListener('kachoras_inquiries_updated', handleInquiriesSync);
+    return () => {
+      window.removeEventListener('kachoras_inquiries_updated', handleInquiriesSync);
+    };
   }, [isOpen]);
 
   const handleLogin = async (e) => {

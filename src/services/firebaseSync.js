@@ -16,6 +16,18 @@ import {
 } from 'firebase/storage';
 
 const STORAGE_KEY_FIREBASE = 'kachoras_firebase_config_v1';
+const STORAGE_KEY_DELETED_INQUIRIES = 'kachoras_deleted_leads_v1';
+const SEED_INQUIRY_IDS = new Set(['LEAD-101', 'LEAD-102', 'LEAD-103']);
+
+function getDeletedLeadIdSet() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_DELETED_INQUIRIES);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return new Set(Array.isArray(parsed) ? parsed : []);
+  } catch {
+    return new Set();
+  }
+}
 
 /**
  * Official Default Firebase Configuration for Kachoras Electromechanical Contracting LLC
@@ -164,19 +176,37 @@ export async function syncLocalInquiriesToCloud() {
   if (!db) return;
 
   try {
+    const deletedSet = getDeletedLeadIdSet();
+    const inquiriesCol = collection(db, 'inquiries');
+    const snapshot = await getDocs(inquiriesCol);
+    const cloudIds = new Set();
+    const cloudDeletes = [];
+
+    snapshot.forEach(docSnap => {
+      if (deletedSet.has(docSnap.id)) {
+        cloudDeletes.push(deleteDoc(doc(db, 'inquiries', docSnap.id)).catch(() => {}));
+      } else {
+        cloudIds.add(docSnap.id);
+      }
+    });
+    if (cloudDeletes.length > 0) {
+      await Promise.all(cloudDeletes);
+    }
+
     const raw = localStorage.getItem('kachoras_leads_v1');
     if (!raw) return;
     const localInquiries = JSON.parse(raw);
     if (!Array.isArray(localInquiries) || localInquiries.length === 0) return;
 
-    const inquiriesCol = collection(db, 'inquiries');
-    const snapshot = await getDocs(inquiriesCol);
-    const cloudIds = new Set();
-    snapshot.forEach(docSnap => cloudIds.add(docSnap.id));
-
     let updated = false;
     for (const inq of localInquiries) {
-      if (inq && inq.id && !cloudIds.has(inq.id)) {
+      if (
+        inq &&
+        inq.id &&
+        !SEED_INQUIRY_IDS.has(inq.id) &&
+        !deletedSet.has(inq.id) &&
+        !cloudIds.has(inq.id)
+      ) {
         console.log('Syncing offline lead to Firestore cloud:', inq.referenceId || inq.id);
         await saveCloudInquiry({ ...inq, syncStatus: 'synced' });
         inq.syncStatus = 'synced';
@@ -337,9 +367,12 @@ export function subscribeCloudInquiries(onUpdate) {
   try {
     const inquiriesCol = collection(db, 'inquiries');
     unsubscribeInquiries = onSnapshot(inquiriesCol, (snapshot) => {
+      const deletedSet = getDeletedLeadIdSet();
       const liveInquiries = [];
       snapshot.forEach(docSnap => {
-        liveInquiries.push({ id: docSnap.id, ...docSnap.data() });
+        if (!deletedSet.has(docSnap.id)) {
+          liveInquiries.push({ id: docSnap.id, ...docSnap.data() });
+        }
       });
 
       liveInquiries.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
@@ -355,6 +388,66 @@ export function subscribeCloudInquiries(onUpdate) {
   } catch (err) {
     console.error('Error attaching Firestore inquiries listener:', err);
     return null;
+  }
+}
+
+/**
+ * Fetch all active client inquiries from Cloud Firestore (excluding deleted IDs)
+ */
+export async function fetchCloudInquiries() {
+  const db = getFirebaseDb();
+  if (!db) return null;
+
+  try {
+    const deletedSet = getDeletedLeadIdSet();
+    const snapshot = await getDocs(collection(db, 'inquiries'));
+    const liveInquiries = [];
+    snapshot.forEach(docSnap => {
+      if (!deletedSet.has(docSnap.id)) {
+        liveInquiries.push({ id: docSnap.id, ...docSnap.data() });
+      }
+    });
+    liveInquiries.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+    return liveInquiries;
+  } catch (err) {
+    console.warn('Failed to fetch inquiries from Firestore:', err);
+    return null;
+  }
+}
+
+/**
+ * Update client inquiry status in Cloud Firestore
+ */
+export async function updateCloudInquiryStatus(inquiryId, status) {
+  const db = getFirebaseDb();
+  if (!db || !inquiryId) return false;
+
+  try {
+    await setDoc(
+      doc(db, 'inquiries', inquiryId),
+      { status, updatedAt: new Date().toISOString() },
+      { merge: true }
+    );
+    return true;
+  } catch (err) {
+    console.warn('Failed to update inquiry status in Firestore:', err);
+    return false;
+  }
+}
+
+/**
+ * Delete client inquiry permanently from Cloud Firestore
+ */
+export async function deleteCloudInquiry(inquiryId) {
+  const db = getFirebaseDb();
+  if (!db || !inquiryId) return false;
+
+  try {
+    await deleteDoc(doc(db, 'inquiries', inquiryId));
+    return true;
+  } catch (err) {
+    console.warn('Failed to delete inquiry from Firestore:', err);
+    return false;
   }
 }
 

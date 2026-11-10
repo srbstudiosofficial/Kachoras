@@ -1,8 +1,17 @@
 import { COMPANY_INFO } from '../data/mockData';
-import { isFirebaseActive, saveCloudInquiry, uploadInquiryAttachment } from './firebaseSync';
+import {
+  isFirebaseActive,
+  saveCloudInquiry,
+  uploadInquiryAttachment,
+  fetchCloudInquiries,
+  deleteCloudInquiry,
+  updateCloudInquiryStatus
+} from './firebaseSync';
 import { getApiBaseUrl } from './projectService';
 
 const STORAGE_KEY_INQUIRIES = 'kachoras_leads_v1';
+const STORAGE_KEY_INQUIRIES_SEEDED = 'kachoras_leads_seeded_v1';
+const STORAGE_KEY_DELETED_INQUIRIES = 'kachoras_deleted_leads_v1';
 const STORAGE_KEY_EMAIL_CONFIG = 'kachoras_email_config_v1';
 
 // Seed sample/demonstration inquiries so the portal inbox isn't blank on first open
@@ -54,23 +63,53 @@ const SEED_INQUIRIES = [
   }
 ];
 
+export function getDeletedInquiryIds() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_DELETED_INQUIRIES);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return new Set(Array.isArray(parsed) ? parsed : []);
+  } catch {
+    return new Set();
+  }
+}
+
+function recordDeletedInquiryId(id) {
+  if (!id) return;
+  try {
+    const set = getDeletedInquiryIds();
+    set.add(id);
+    localStorage.setItem(STORAGE_KEY_DELETED_INQUIRIES, JSON.stringify([...set]));
+    localStorage.setItem(STORAGE_KEY_INQUIRIES_SEEDED, 'true');
+  } catch (err) {
+    console.warn('Unable to record deleted inquiry ID:', err);
+  }
+}
+
 /**
- * Retrieve all inquiries/leads from LocalStorage
+ * Retrieve all inquiries/leads from LocalStorage without re-seeding deleted samples
  */
 export function getStoredInquiries() {
   try {
+    const deletedIds = getDeletedInquiryIds();
     const raw = localStorage.getItem(STORAGE_KEY_INQUIRIES);
-    if (!raw) {
-      // First time initialization with initial seed leads
-      localStorage.setItem(STORAGE_KEY_INQUIRIES, JSON.stringify(SEED_INQUIRIES));
-      return SEED_INQUIRIES;
+    const alreadySeeded = localStorage.getItem(STORAGE_KEY_INQUIRIES_SEEDED) === 'true';
+
+    if (raw === null) {
+      if (!alreadySeeded) {
+        const initial = SEED_INQUIRIES.filter(item => !deletedIds.has(item.id));
+        localStorage.setItem(STORAGE_KEY_INQUIRIES, JSON.stringify(initial));
+        localStorage.setItem(STORAGE_KEY_INQUIRIES_SEEDED, 'true');
+        return initial;
+      }
+      return [];
     }
+
     const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed) && parsed.length === 0) {
-      localStorage.setItem(STORAGE_KEY_INQUIRIES, JSON.stringify(SEED_INQUIRIES));
-      return SEED_INQUIRIES;
+    if (!alreadySeeded) {
+      localStorage.setItem(STORAGE_KEY_INQUIRIES_SEEDED, 'true');
     }
-    return Array.isArray(parsed) ? parsed : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(item => item && item.id && !deletedIds.has(item.id));
   } catch (err) {
     console.error('Error reading inquiries:', err);
     return [];
@@ -82,10 +121,30 @@ export function getStoredInquiries() {
  */
 export function saveStoredInquiries(inquiries) {
   try {
+    localStorage.setItem(STORAGE_KEY_INQUIRIES_SEEDED, 'true');
     localStorage.setItem(STORAGE_KEY_INQUIRIES, JSON.stringify(inquiries));
   } catch (err) {
     console.error('Error saving inquiries:', err);
   }
+}
+
+/**
+ * Merge remote inquiries with unsynced local leads while respecting deletions
+ */
+export function mergeRemoteInquiries(remoteInquiries = []) {
+  const deletedIds = getDeletedInquiryIds();
+  const safeRemote = (Array.isArray(remoteInquiries) ? remoteInquiries : [])
+    .filter(item => item && item.id && !deletedIds.has(item.id));
+
+  const remoteIds = new Set(safeRemote.map(item => item.id));
+  const localOnly = getStoredInquiries().filter(
+    item => !remoteIds.has(item.id) && item.syncStatus !== 'synced'
+  );
+
+  const merged = [...safeRemote, ...localOnly];
+  merged.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+  saveStoredInquiries(merged);
+  return merged;
 }
 
 const STORAGE_KEY_AUTH = 'kachoras_admin_auth_v1';
@@ -262,9 +321,10 @@ export function updateInquiryStatus(id, newStatus) {
 }
 
 /**
- * Delete an inquiry
+ * Delete an inquiry locally and record its ID so samples/deleted items never return
  */
 export function deleteInquiry(id) {
+  recordDeletedInquiryId(id);
   const existing = getStoredInquiries();
   const updated = existing.filter(item => item.id !== id);
   saveStoredInquiries(updated);
@@ -372,18 +432,30 @@ export function saveEmailConfig(config) {
 export async function fetchServerInquiries() {
   const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
 
+  if (isFirebaseActive()) {
+    try {
+      const cloudData = await fetchCloudInquiries();
+      if (Array.isArray(cloudData)) {
+        return mergeRemoteInquiries(cloudData);
+      }
+    } catch (err) {
+      console.info('Firestore inquiries fetch skipped:', err);
+    }
+  }
+
   try {
-    const res = await fetch('/api/admin/inquiries', {
+    const base = getApiBaseUrl();
+    const res = await fetch(`${base}/api/admin/inquiries`, {
       headers: {
         'x-admin-passkey': passkey
       }
     });
 
-    if (res.ok) {
+    const contentType = res.headers.get('content-type') || '';
+    if (res.ok && contentType.includes('application/json')) {
       const data = await res.json();
       if (Array.isArray(data)) {
-        saveStoredInquiries(data);
-        return data;
+        return mergeRemoteInquiries(data);
       }
     }
   } catch (err) {
@@ -395,9 +467,16 @@ export async function fetchServerInquiries() {
 
 export async function updateInquiryStatusOnServer(id, newStatus) {
   const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
+  const updated = updateInquiryStatus(id, newStatus);
+  window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
+
+  if (isFirebaseActive()) {
+    await updateCloudInquiryStatus(id, newStatus);
+  }
 
   try {
-    const res = await fetch(`/api/admin/inquiries/${id}`, {
+    const base = getApiBaseUrl();
+    await fetch(`${base}/api/admin/inquiries/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -405,45 +484,33 @@ export async function updateInquiryStatusOnServer(id, newStatus) {
       },
       body: JSON.stringify({ status: newStatus })
     });
-
-    if (res.ok) {
-      const data = await res.json();
-      if (data && data.inquiry) {
-        updateInquiryStatus(id, newStatus);
-        window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
-        return getStoredInquiries();
-      }
-    }
   } catch (err) {
     console.warn('Server inquiry status update failed, updating locally:', err);
   }
 
-  const updated = updateInquiryStatus(id, newStatus);
-  window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
   return updated;
 }
 
 export async function deleteInquiryOnServer(id) {
   const passkey = localStorage.getItem(STORAGE_KEY_AUTH) || DEFAULT_PASSKEY;
+  const updated = deleteInquiry(id);
+  window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
+
+  if (isFirebaseActive()) {
+    await deleteCloudInquiry(id);
+  }
 
   try {
-    const res = await fetch(`/api/admin/inquiries/${id}`, {
+    const base = getApiBaseUrl();
+    await fetch(`${base}/api/admin/inquiries/${id}`, {
       method: 'DELETE',
       headers: {
         'x-admin-passkey': passkey
       }
     });
-
-    if (res.ok) {
-      const updated = deleteInquiry(id);
-      window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
-      return updated;
-    }
   } catch (err) {
-    console.warn('Server inquiry deletion failed, removing locally:', err);
+    console.warn('Server inquiry deletion skipped/failed, kept removed locally:', err);
   }
 
-  const updated = deleteInquiry(id);
-  window.dispatchEvent(new CustomEvent('kachoras_inquiries_updated'));
   return updated;
 }
