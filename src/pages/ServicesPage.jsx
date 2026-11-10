@@ -31,12 +31,12 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
       scope: [
         'Soil excavation, site preparation, and foundation substructure works',
         'Reinforced concrete structure and superstructure works',
-        'AAC blockwork and thermal insulation as per applicable Dubai requirements',
+        'Blockwork and thermal insulation as per applicable Dubai requirements',
         'Residential villas, Majlis extensions, service blocks, and boundary walls',
         'Dubai Municipality inspections, statutory permits, and Building Completion Certificates (BCC)'
       ],
       compliance: 'Dubai Building Code & Dubai Municipality Structural Safety Regulations',
-      typicalTimeline: '8 – 14 Months (Turnkey Structure to Handover)',
+      typicalTimeline: '8 Months to 14 Months (Depending on Project Size and Scope)',
       image: './assets/real-projects/completed-construction-albannay-424-7036.jpg',
       imageCaption: 'G+1 Classical Villa Execution (Al Warqaa Fourth, Plot 424-7036)'
     },
@@ -351,7 +351,7 @@ export default function ServicesPage({ onNavigate, onOpenQuoteModal, onSelectSer
                 <li>Reinforced concrete columns and beams</li>
                 <li>Concrete slabs and roof construction</li>
                 <li>Post-tensioned slabs where required</li>
-                <li>AAC blockwork and thermal insulation</li>
+                <li>Blockwork and thermal insulation</li>
                 <li>Plastering and structural inspections</li>
               </ul>
             </div>
