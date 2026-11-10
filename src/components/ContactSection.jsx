@@ -112,9 +112,6 @@ export default function ContactSection() {
         
         {/* Section Header */}
         <div className="max-w-3xl mb-6 sm:mb-8 space-y-2 reveal-on-scroll reveal-init">
-          <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#8B6D1B] block">
-            {language === 'ar' ? 'المناقصات والتقديمات الفنية' : 'Tenders & Technical Submissions'}
-          </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#14171F] font-display">
             {language === 'ar' ? 'طلب عرض أسعار ومناقصة رسمية' : 'Request an Official Tender Proposal'}
           </h2>
@@ -123,12 +120,12 @@ export default function ContactSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-10 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           
-          {/* Left Column: Official Contact Card (5 cols) */}
-          <div className="lg:col-span-5 space-y-6 reveal-on-scroll reveal-left">
+          {/* Left Column: Official Contact Card (Equal Width & Height) */}
+          <div className="flex flex-col justify-between gap-6 h-full reveal-on-scroll reveal-left">
             
-            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500">
+            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 flex-1 flex flex-col justify-between">
               <h3 className="text-xl font-black text-[#1E293B] font-display border-b border-[#E2E8F0] pb-4">
                 {language === 'ar' ? 'بيانات المقر الرئيسي للمجموعة' : 'Corporate Office Details'}
               </h3>
@@ -238,8 +235,8 @@ export default function ContactSection() {
 
           </div>
 
-          {/* Right Column: RFP & Bid Request Form (7 cols) */}
-          <div className="lg:col-span-7 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 reveal-on-scroll reveal-right">
+          {/* Right Column: RFP & Bid Request Form (Equal Width & Height) */}
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 h-full flex flex-col justify-between reveal-on-scroll reveal-right">
             {isSubmitted ? (
               <div className="text-center py-12 px-4 space-y-5">
                 <div className="w-16 h-16 bg-emerald-500/10 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
@@ -320,8 +317,9 @@ export default function ContactSection() {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="border-b border-[#E2E8F0] pb-4">
+              <form onSubmit={handleSubmit} className="space-y-5 h-full flex flex-col justify-between">
+                <div className="space-y-5">
+                  <div className="border-b border-[#E2E8F0] pb-4">
                   <h3 className="text-xl font-black text-[#1E293B] font-display">Submit RFP / Villa Tender</h3>
                   <p className="text-xs text-[#64748B] mt-1 font-medium">Direct routing to General Manager Jose K. George and engineering managers.</p>
                 </div>
@@ -464,36 +462,40 @@ export default function ContactSection() {
                   </div>
                 </div>
 
-                {/* Error Banner */}
-                {submitError && (
-                  <div className="p-3.5 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 flex items-start gap-2.5">
-                    <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="block font-bold">Submission Notice:</strong>
-                      <span>{submitError}</span>
+                </div>
+
+                <div className="space-y-3 pt-2">
+                  {/* Error Banner */}
+                  {submitError && (
+                    <div className="p-3.5 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 flex items-start gap-2.5">
+                      <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="block font-bold">Submission Notice:</strong>
+                        <span>{submitError}</span>
+                      </div>
                     </div>
-                  </div>
-                )}
-
-                {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-4 bg-gradient-to-r from-[#B3261E] via-[#8E341B] to-[#B3261E] hover:brightness-110 text-white font-black text-sm rounded-xl shadow-lg shadow-[#B3261E]/25 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-                >
-                  {isSubmitting ? (
-                    <span>Transmitting to Estimating Desk...</span>
-                  ) : (
-                    <>
-                      <span>Submit RFP to Kachoras Estimating Desk</span>
-                      <Send className="w-4 h-4 stroke-[2.5]" />
-                    </>
                   )}
-                </button>
 
-                <p className="text-[11px] text-[#64748B] text-center font-medium">
-                  All drawings are reviewed confidentially under UAE commercial non-disclosure practices.
-                </p>
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-4 bg-gradient-to-r from-[#B3261E] via-[#8E341B] to-[#B3261E] hover:brightness-110 text-white font-black text-sm rounded-xl shadow-lg shadow-[#B3261E]/25 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <span>Transmitting to Estimating Desk...</span>
+                    ) : (
+                      <>
+                        <span>Submit RFP to Kachoras Estimating Desk</span>
+                        <Send className="w-4 h-4 stroke-[2.5]" />
+                      </>
+                    )}
+                  </button>
+
+                  <p className="text-[11px] text-[#64748B] text-center font-medium">
+                    All drawings are reviewed confidentially under UAE commercial non-disclosure practices.
+                  </p>
+                </div>
               </form>
             )}
           </div>
