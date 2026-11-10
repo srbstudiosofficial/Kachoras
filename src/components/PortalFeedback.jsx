@@ -187,7 +187,7 @@ export function usePortalFeedback() {
 
       {toasts.length > 0 && (
         <div
-          className="fixed top-5 right-5 z-[130] flex flex-col gap-2.5 w-[calc(100vw-2rem)] max-w-sm pointer-events-none"
+          className="fixed bottom-5 right-5 z-[130] flex flex-col gap-2.5 w-[calc(100vw-2rem)] max-w-sm pointer-events-none"
           aria-live="polite"
         >
           {toasts.map((item) => {
