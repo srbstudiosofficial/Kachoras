@@ -53,12 +53,11 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
       if (isProjectUpcoming(p)) return false;
     }
 
-    // B. Sort / Discipline Filter: Luxury Villa | Majlis | Aluminium | Civic
+    // B. Sort / Discipline Filter: Villas | Aluminium | General Maintenance
     if (disciplineFilter !== 'all') {
       if (disciplineFilter === 'villas' && p.categoryFilter !== 'villas') return false;
-      if (disciplineFilter === 'majlis' && p.categoryFilter !== 'majlis') return false;
       if (disciplineFilter === 'aluminium' && p.categoryFilter !== 'aluminium') return false;
-      if (disciplineFilter === 'civic' && (p.categoryFilter !== 'civic' && p.categoryFilter !== 'civic_mep')) return false;
+      if (disciplineFilter === 'civic' && (p.categoryFilter !== 'civic' && p.categoryFilter !== 'civic_mep' && p.categoryFilter !== 'majlis')) return false;
     }
 
     // C. Search query filter
@@ -99,13 +98,12 @@ export default function ProjectsSection({ onNavigate, onOpenQuoteModal, hideHead
     }
   ];
 
-  // The 4 Discipline Sort categories requested: Luxury Villa, Majlis, Aluminium, Civic
+  // Filter Discipline Categories: Villas, Aluminium, General Maintenance
   const sortCategories = [
     { id: 'all', label: language === 'ar' ? 'جميع التصنيفات' : 'All Disciplines' },
-    { id: 'villas', label: language === 'ar' ? 'فلل فاخرة' : 'Luxury Villa' },
-    { id: 'majlis', label: language === 'ar' ? 'مجالس' : 'Majlis' },
+    { id: 'villas', label: language === 'ar' ? 'الفلل' : 'Villas' },
     { id: 'aluminium', label: language === 'ar' ? 'ألمنيوم' : 'Aluminium' },
-    { id: 'civic', label: language === 'ar' ? 'صيانة مدنية' : 'Civic' }
+    { id: 'civic', label: language === 'ar' ? 'الصيانة العامة' : 'General Maintenance' }
   ];
 
   return (
