@@ -339,27 +339,9 @@ export const INITIAL_FEATURED_PROJECTS = [
     "year": "2025",
     "timeline": "DM Handover & BCC Issued",
     "scope": "Maintenance, modification, and clinical facility construction for Dubai Municipality Veterinary Services in Hatta.",
-    "image": "./assets/real-projects/p373-alsayegh-elevation.jpg",
+    "image": "./assets/real-projects/hatta-veterinary-clinic.jpg",
     "isCustom": false,
     "createdAt": "2024-10-15T00:00:00.000Z"
-  },
-  {
-    "id": "REAL-CP-DM-SHOOROQ",
-    "title": "Construction of Irrigation chambers and Related MEP Works",
-    "client": "Dubai Municipality / Civic Maintenance",
-    "consultant": "DM General Maintenance Dept",
-    "category": "Civil & MEP Works",
-    "categoryFilter": "civic_mep",
-    "type": "Civil & MEP Works",
-    "status": "completed",
-    "location": "Shooroq Irrigation Hub, Mirdif, Dubai",
-    "plotNo": "Shooroq Irrigation Hub",
-    "year": "2024",
-    "timeline": "DM Handover & Commissioned",
-    "scope": "Civil construction of heavy reinforced underground valve chambers, hydraulic pump connections, and automated irrigation conduits.",
-    "image": "./assets/real-projects/construction-site-progress-03.jpg",
-    "isCustom": false,
-    "createdAt": "2024-10-25T00:00:00.000Z"
   },
   {
     "id": "REAL-CP-QUOZ-TOWNHOUSE",
