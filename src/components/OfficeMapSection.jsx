@@ -50,7 +50,7 @@ export default function OfficeMapSection() {
             </div>
 
             {/* Clean Map Iframe Embed */}
-            <div className="relative h-80 sm:h-[420px] w-full bg-[#E2E8F0] min-h-[300px]">
+            <div className="relative h-64 sm:h-[310px] w-full bg-[#E2E8F0]">
               <iframe
                 title="Kachoras Office Location Map"
                 src="https://maps.google.com/maps?q=25.2818,55.3789&hl=en&z=15&output=embed"
@@ -71,35 +71,35 @@ export default function OfficeMapSection() {
           </div>
 
           {/* Logistics & Access Coordinates (5 cols) */}
-          <div className="lg:col-span-5 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 flex flex-col justify-between ">
+          <div className="lg:col-span-5 bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 space-y-5 shadow-sm hover:shadow-2xl hover:border-[#B3261E] transition-all duration-500 flex flex-col justify-between ">
             
-            <div className="space-y-6">
-              <div className="border-b border-[#E2E8F0] pb-4">
+            <div className="space-y-4">
+              <div className="border-b border-[#E2E8F0] pb-3.5">
                 <h3 className="text-xl font-bold text-[#14171F] font-display">
                   Our Office
                 </h3>
               </div>
 
-              <div className="space-y-4 text-xs text-slate-600">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center text-[#B3261E] shrink-0 mt-0.5">
+              <div className="grid grid-cols-1 gap-3.5 text-xs text-slate-600">
+                <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+                  <div className="w-9 h-9 rounded-lg bg-white border border-[#E2E8F0] flex items-center justify-center text-[#B3261E] shrink-0">
                     <MapPin className="w-4 h-4" />
                   </div>
-                  <div>
-                    <strong className="text-slate-900 block font-semibold text-sm">Physical Address:</strong>
-                    <span className="leading-relaxed block mt-0.5">{COMPANY_INFO.address}</span>
-                    <span className="text-slate-400 block mt-0.5 text-[11px]">P.O. Box: {COMPANY_INFO.poBox}</span>
+                  <div className="space-y-0.5">
+                    <strong className="text-slate-900 block font-semibold text-sm">Physical Address</strong>
+                    <span className="leading-relaxed block text-xs text-slate-700">{COMPANY_INFO.address}</span>
+                    <span className="text-slate-500 block text-[11px] font-mono">P.O. Box: {COMPANY_INFO.poBox}</span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center text-[#B3261E] shrink-0 mt-0.5">
+                <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+                  <div className="w-9 h-9 rounded-lg bg-white border border-[#E2E8F0] flex items-center justify-center text-[#B3261E] shrink-0">
                     <Clock className="w-4 h-4" />
                   </div>
-                  <div>
-                    <strong className="text-slate-900 block font-semibold text-sm">Operating Hours:</strong>
-                    <span className="block mt-0.5">Monday – Saturday: 7:00 AM – 4:00 PM</span>
-                    <span className="text-slate-400 block mt-0.5 text-[11px]">Friday: Closed (Site emergency teams on call)</span>
+                  <div className="space-y-0.5">
+                    <strong className="text-slate-900 block font-semibold text-sm">Operating Hours</strong>
+                    <span className="block text-xs text-slate-700 font-medium">Monday – Saturday: 7:00 AM – 4:00 PM</span>
+                    <span className="text-slate-500 block text-[11px]">Friday: Closed (Site emergency teams on call)</span>
                   </div>
                 </div>
               </div>
