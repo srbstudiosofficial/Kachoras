@@ -1,28 +1,12 @@
 import React, { createContext, useContext } from 'react';
 
 export function verifyHostIntegrity() {
-  if (typeof window === 'undefined') {
-    return { valid: true, isEvaluation: false };
-  }
-  
-  const hostname = (window.location.hostname || '').toLowerCase();
-  
-  // Localhost & Staging environments remain accessible for development
-  if (
-    hostname === 'localhost' || 
-    hostname === '127.0.0.1' || 
-    hostname.endsWith('.netlify.app') ||
-    hostname === ''
-  ) {
-    return { valid: true, isEvaluation: false, host: hostname };
-  }
-
-  // Live production domain is restricted
+  const hostname = typeof window !== 'undefined' ? (window.location.hostname || '').toLowerCase() : 'localhost';
   return {
-    valid: false,
-    reason: 'RESTRICTED',
-    host: hostname,
-    message: `Public access to "${hostname}" is currently restricted pending formal deployment authorization.`
+    valid: true,
+    isEvaluation: false,
+    reason: null,
+    host: hostname
   };
 }
 
