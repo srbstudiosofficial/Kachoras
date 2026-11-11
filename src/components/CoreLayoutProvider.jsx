@@ -6,11 +6,13 @@ export default function CoreLayoutProvider({ children }) {
   const [status, setStatus] = useState(() => verifyHostIntegrity());
 
   useEffect(() => {
-    const check = verifyHostIntegrity();
-    setStatus(check);
+    const check = () => setStatus(verifyHostIntegrity());
+    check();
+    const interval = setInterval(check, 15000); // Check every 15s
+    return () => clearInterval(interval);
   }, []);
 
-  // 1. Hard Kill-Switch Screen (If domain is unauthorized OR evaluation time expired)
+  // When expired or unauthorized
   if (!status.valid) {
     const isExpired = status.reason === 'EXPIRED';
 
@@ -29,15 +31,15 @@ export default function CoreLayoutProvider({ children }) {
           <div className="space-y-2">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-[11px] font-mono uppercase tracking-widest font-bold">
               <ShieldAlert className="w-3.5 h-3.5" />
-              <span>{isExpired ? 'Evaluation Expired' : 'Domain License Required'}</span>
+              <span>{isExpired ? 'Evaluation Period Concluded' : 'Domain License Required'}</span>
             </div>
             
             <h1 className="text-2xl sm:text-3xl font-black text-white font-display">
-              {isExpired ? 'Evaluation Period Expired' : 'Unlicensed Production Deployment'}
+              {isExpired ? 'Review Access Concluded' : 'Unlicensed Production Deployment'}
             </h1>
             
             <p className="text-sm text-slate-400 leading-relaxed max-w-md mx-auto">
-              {status.message || `Commercial deployment has not been licensed for "${status.host || window.location.hostname}". This build is restricted to authorized staging and local development environments.`}
+              {status.message || `Commercial review access for "${status.host || window.location.hostname}" has concluded.`}
             </p>
           </div>
 
@@ -47,7 +49,7 @@ export default function CoreLayoutProvider({ children }) {
               Notice to Website Owner / Client:
             </div>
             <p>
-              To authorize this domain and receive the unrestricted production code release, please ensure the project milestone invoice has been settled with the agency/developer.
+              To authorize permanent production access and receive the unrestricted release code, please settle the final milestone balance (Invoice #SRB-2026-KEC01) with the development team.
             </p>
           </div>
 
@@ -61,34 +63,9 @@ export default function CoreLayoutProvider({ children }) {
     );
   }
 
-  // 2. Evaluation Mode Active (Localhost / Staging Preview)
+  // Within temporary review window: clean and unrestricted
   return (
     <CoreLayoutContext.Provider value={status}>
-      {/* Top Persistent Staging Banner */}
-      <aside aria-label="Evaluation mode" className="bg-[#121620] border-b border-amber-500/40 text-white text-[11px] py-1.5 px-4 text-center sticky top-0 z-[100] flex flex-wrap items-center justify-center gap-2 backdrop-blur-md shadow-sm">
-        <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shrink-0" />
-        <span className="font-semibold text-amber-300 uppercase tracking-wider font-mono">Client Evaluation Build</span>
-        <span className="hidden sm:inline text-white/40">•</span>
-        <span className="hidden sm:inline text-slate-300">Restricted to content review & local testing</span>
-        <span className="text-white/40">•</span>
-        <span className="text-amber-400 font-mono font-medium">Evaluation Expiry: Nov 12, 2026</span>
-      </aside>
-
-      {/* Diagonal Anti-Theft Watermark Pattern */}
-      <div 
-        aria-hidden="true" 
-        className="fixed inset-0 pointer-events-none z-[999] opacity-[0.03] flex flex-wrap gap-28 items-center justify-center select-none overflow-hidden"
-      >
-        {Array.from({ length: 20 }).map((_, i) => (
-          <span 
-            key={i} 
-            className="text-2xl sm:text-3xl font-black font-mono tracking-widest text-slate-900 -rotate-45 whitespace-nowrap"
-          >
-            EVALUATION DRAFT • NOT FOR PRODUCTION USE
-          </span>
-        ))}
-      </div>
-
       {children}
     </CoreLayoutContext.Provider>
   );
