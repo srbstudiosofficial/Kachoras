@@ -28,7 +28,7 @@ export default function LicensePage({ onNavigate, onOpenQuoteModal }) {
       />
 
       {/* 2. Official Trade License Section (includes visual Commercial License Document) */}
-      <TradeLicenseSection />
+      <TradeLicenseSection onNavigate={onNavigate} onOpenQuoteModal={onOpenQuoteModal} />
 
       {/* 3. Dubai Municipality Civil Works & Public Contracts */}
       <MunicipalSection />

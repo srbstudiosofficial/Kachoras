@@ -8,12 +8,13 @@ import {
   Maximize2,
   X,
   BadgeCheck,
-  QrCode
+  QrCode,
+  ArrowRight
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/mockData';
 import AnimatedCounter from './AnimatedCounter';
 
-export default function TradeLicenseSection() {
+export default function TradeLicenseSection({ onNavigate, onOpenQuoteModal }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -183,13 +184,20 @@ export default function TradeLicenseSection() {
               </p>
             </div>
             <div className="pt-2">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#C59B27] hover:text-white transition"
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof onNavigate === 'function') {
+                    onNavigate('contact');
+                  } else {
+                    window.location.href = '/contact';
+                  }
+                }}
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#C59B27] hover:text-white transition cursor-pointer"
               >
                 <span>Go to Tender Submission Form</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
 
