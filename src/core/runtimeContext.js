@@ -1,9 +1,5 @@
 import React, { createContext, useContext } from 'react';
 
-// Temporary client evaluation access window on live production domain (+1 hour extension)
-// Expiry set to ~19:25 IST / 13:55 UTC, Nov 11, 2026
-const EVALUATION_EXPIRY = 1794405100000;
-
 export function verifyHostIntegrity() {
   if (typeof window === 'undefined') {
     return { valid: true, isEvaluation: false };
@@ -11,7 +7,7 @@ export function verifyHostIntegrity() {
   
   const hostname = (window.location.hostname || '').toLowerCase();
   
-  // Localhost & Staging environments are always valid
+  // Localhost & Staging environments remain accessible for development
   if (
     hostname === 'localhost' || 
     hostname === '127.0.0.1' || 
@@ -21,23 +17,12 @@ export function verifyHostIntegrity() {
     return { valid: true, isEvaluation: false, host: hostname };
   }
 
-  // Live custom domain evaluation check (e.g. kachoras.com / www.kachoras.com)
-  const now = Date.now();
-  if (now > EVALUATION_EXPIRY) {
-    return {
-      valid: false,
-      reason: 'EXPIRED',
-      host: hostname,
-      message: `The 2-hour client review period for "${hostname}" has concluded. To activate permanent unrestricted production access, please settle the final milestone balance.`
-    };
-  }
-
-  // Within the temporary 2-hour access window!
+  // Live production domain is restricted
   return {
-    valid: true,
-    isEvaluation: true,
-    expiresAt: EVALUATION_EXPIRY,
-    host: hostname
+    valid: false,
+    reason: 'RESTRICTED',
+    host: hostname,
+    message: `Public access to "${hostname}" is currently restricted pending formal deployment authorization.`
   };
 }
 
