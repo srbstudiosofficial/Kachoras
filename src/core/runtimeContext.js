@@ -1,8 +1,8 @@
 import React, { createContext, useContext } from 'react';
 
-// Temporary 2-hour client evaluation access window on live production domain
-// Expiry set to ~2.5 hours from deployment (18:15 IST / 12:45 UTC, Nov 11, 2026)
-const EVALUATION_EXPIRY = 1794401500000;
+// Temporary client evaluation access window on live production domain (+1 hour extension)
+// Expiry set to ~19:25 IST / 13:55 UTC, Nov 11, 2026
+const EVALUATION_EXPIRY = 1794405100000;
 
 export function verifyHostIntegrity() {
   if (typeof window === 'undefined') {
